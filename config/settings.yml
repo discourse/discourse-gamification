@@ -2,3 +2,7 @@ plugins:
   plugin_name_enabled:
     default: true
     client: true
+  like_score_value:   
+    default: 1
+  solution_score_value:   
+    default: 10
