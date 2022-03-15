@@ -23,7 +23,6 @@ after_initialize do
   require_relative 'app/models/gamification_score.rb'
 
   query = "
-
     WITH x AS (SELECT
       u.id user_id,
       COUNT(DISTINCT gs.id) AS gs_score

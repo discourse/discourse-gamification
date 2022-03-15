@@ -2,13 +2,9 @@ class CreateGamificationScoreTable < ActiveRecord::Migration[6.1]
   def change
     create_table :gamification_scores do |t|
 
-      t.integer :user_id, null: false
-      t.datetime :date, null: false
+      t.integer :user_id, null: false, index: { unique: true }
+      t.datetime :date, null: false, index: true, default: -> { 'CURRENT_TIMESTAMP' }
       t.integer :score, null: false
-      t.timestamps
     end
-
-    add_index :gamification_scores, :user_id
-    add_index :gamification_scores, :date
   end
 end
