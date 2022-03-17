@@ -1,9 +1,9 @@
 class AddScoreToDirectoryItems < ActiveRecord::Migration[6.1]
   def up
-    add_column :directory_items, :score, :integer, default: 0
+    add_column :directory_items, :gamification_score, :integer, default: 0
   end
 
   def down
-    remove_column :directory_items, :score
+    remove_column :directory_items, :gamification_score
   end
 end

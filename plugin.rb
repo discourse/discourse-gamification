@@ -30,17 +30,16 @@ after_initialize do
     ON di.user_id = gs.user_id AND COALESCE(gs.date, :since) > :since
     WHERE di.user_id = gs.user_id
     AND di.period_type = :period_type
-    AND di.score <> gs.score
+    AND di.gamification_score <> gs.score
   "
 
   if respond_to?(:add_directory_column)
-    add_directory_column("score", query: query)
+    add_directory_column("gamification_score", query: query)
   end
 
   add_to_serializer(:user_card, :gamification_score, false) do
     DiscourseGamification::GamificationScore
-      .find_by(user_id: object.id)
-      .score
+      .find_by(user_id: object.id)&.score
   end
 end
 
