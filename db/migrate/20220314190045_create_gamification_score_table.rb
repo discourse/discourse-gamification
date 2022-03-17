@@ -8,5 +8,6 @@ class CreateGamificationScoreTable < ActiveRecord::Migration[6.1]
     end
     
     add_index :gamification_scores, [:user_id, :date], unique: true
+    add_index :gamification_scores, :date
   end
 end
