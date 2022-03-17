@@ -21,20 +21,10 @@ after_initialize do
   end
 
   require_relative 'app/models/gamification_score.rb'
-
-  query = "
-    UPDATE directory_items
-    SET score = gs.score 
-    FROM directory_items di
-    INNER JOIN gamification_scores gs
-    ON di.user_id = gs.user_id AND COALESCE(gs.date, :since) > :since
-    WHERE di.user_id = gs.user_id
-    AND di.period_type = :period_type
-    AND di.gamification_score <> gs.score
-  "
+  require_relative 'lib/gamification_score_query.rb'
 
   if respond_to?(:add_directory_column)
-    add_directory_column("gamification_score", query: query)
+    add_directory_column("gamification_score", query: DiscourseGamification::GamificationScoreQuery.directory_query)
   end
 
   add_to_serializer(:user_card, :gamification_score, false) do
