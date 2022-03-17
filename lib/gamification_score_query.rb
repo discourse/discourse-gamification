@@ -4,7 +4,7 @@ class DiscourseGamification::GamificationScoreQuery
   def self.directory_query
     "
       UPDATE directory_items
-      SET score = gs.score 
+      SET gamification_score = gs.score 
       FROM directory_items di
       INNER JOIN gamification_scores gs
       ON di.user_id = gs.user_id AND COALESCE(gs.date, :since) > :since
