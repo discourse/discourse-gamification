@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class DiscourseGamification::GamificationScore < ::ActiveRecord::Base
-  attr_reader :user_id, :day, :score
   self.table_name = 'gamification_scores'
 
   def self.calculate_scores(for_date: Date.today)

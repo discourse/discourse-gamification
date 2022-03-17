@@ -1,4 +1,3 @@
 {{#if model.gamification_score}}
-  {{discourse-score label="user.followers.label" total=model.gamification_score context="profile"}}
+  {{gamification-score label="discourse_gamification.score" total=model.gamification_score context="profile"}}
 {{/if}}
-
