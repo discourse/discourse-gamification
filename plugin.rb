@@ -23,27 +23,24 @@ after_initialize do
   require_relative 'app/models/gamification_score.rb'
 
   query = "
-    WITH x AS (SELECT
-      u.id user_id,
-      COUNT(DISTINCT gs.id) AS gs_score
-      FROM users AS u
-      LEFT OUTER JOIN gamification_scores AS gs ON gs.user_id = u.id AND COALESCE(gs.date, :since) > :since
-      WHERE u.active
-        AND u.silenced_till IS NULL
-        AND u.id > 0
-      GROUP BY u.id
-    )
-    UPDATE directory_items di SET
-      score = gs_score
-    FROM x
-    WHERE x.user_id = di.user_id
+    UPDATE directory_items
+    SET score = gs.score 
+    FROM directory_items di
+    INNER JOIN gamification_scores gs
+    ON di.user_id = gs.user_id AND COALESCE(gs.date, :since) > :since
+    WHERE di.user_id = gs.user_id
     AND di.period_type = :period_type
-    AND di.score <> gs_score
+    AND di.score <> gs.score
   "
 
   if respond_to?(:add_directory_column)
     add_directory_column("score", query: query)
   end
-end
 
+  add_to_serializer(:user_card, :gamification_score, false) do
+    DiscourseGamification::GamificationScore
+      .find_by(user_id: object.id)
+      .score
+  end
+end
 
