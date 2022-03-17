@@ -1,3 +1,8 @@
 {{#if model.gamification_score}}
-  {{gamification-score label="discourse_gamification.score" total=model.gamification_score context="profile"}}
+  <dt>
+    {{i18n "discourse_gamification.score"}}
+  </dt>
+  <dd>
+    {{model.gamification_score}}
+  </dd>
 {{/if}}
