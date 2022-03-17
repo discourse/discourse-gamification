@@ -21,7 +21,7 @@ after_initialize do
   end
 
   require_relative 'app/models/gamification_score.rb'
-  require_relative 'lib/gamification_score_query.rb'
+  require_relative 'lib/directory_integration.rb'
 
   if respond_to?(:add_directory_column)
     add_directory_column("gamification_score", query: DiscourseGamification::DirectoryIntegration.query)
