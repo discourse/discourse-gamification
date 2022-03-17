@@ -2,15 +2,28 @@
 class DiscourseGamification::DirectoryIntegration
 
   def self.query
-    "
-      UPDATE directory_items
-      SET gamification_score = gs.score 
-      FROM directory_items di
-      INNER JOIN gamification_scores gs
-      ON di.user_id = gs.user_id AND COALESCE(gs.date, :since) > :since
-      WHERE di.user_id = gs.user_id
-      AND di.period_type = :period_type
-      AND di.gamification_score <> gs.score
-    "
+    <<~SQL
+      WITH total_score AS (
+        SELECT
+          user_id,
+          SUM(score) AS score
+        FROM
+          gamification_scores
+        WHERE
+          date >= :since
+        GROUP BY
+          1
+      )
+      UPDATE
+        directory_items
+      SET
+        gamification_score = total_score.score
+      FROM
+        total_score
+      WHERE
+        total_score.user_id = directory_items.user_id AND
+        directory_items.period_type = :period_type AND
+        total_score.score != directory_items.gamification_score
+    SQL
   end
 end
