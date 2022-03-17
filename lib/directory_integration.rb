@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-class DiscourseGamification::GamificationScoreQuery
+class DiscourseGamification::DirectoryIntegration
 
-  def self.directory_query
+  def self.query
     "
       UPDATE directory_items
       SET gamification_score = gs.score 

@@ -24,7 +24,7 @@ after_initialize do
   require_relative 'lib/gamification_score_query.rb'
 
   if respond_to?(:add_directory_column)
-    add_directory_column("gamification_score", query: DiscourseGamification::GamificationScoreQuery.directory_query)
+    add_directory_column("gamification_score", query: DiscourseGamification::DirectoryIntegration.query)
   end
 
   add_to_serializer(:user_card, :gamification_score, false) do
