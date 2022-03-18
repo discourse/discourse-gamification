@@ -1,5 +1,5 @@
 plugins:
-  plugin_name_enabled:
+  discourse_gamification_enabled:
     default: true
     client: true
   like_score_value:   

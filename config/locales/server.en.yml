@@ -1,5 +1,6 @@
 en:
   site_settings:
+    discourse_gamification_enabled: "Enable the Discourse Gamification Plugin"
     like_score_value: "The value of the cheer awarded when a user recieves a like"
     solution_score_value: "The value of the cheer awarded when a user's post is marked as a solution"
   score: "Cheers"
