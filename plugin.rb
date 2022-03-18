@@ -8,7 +8,7 @@
 # required_version: 2.7.0
 # transpile_js: true
 
-enabled_site_setting :plugin_name_enabled
+enabled_site_setting :discourse_gamification_enabled
 
 after_initialize do
   module ::DiscourseGamification
