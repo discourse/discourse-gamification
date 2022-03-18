@@ -13,17 +13,26 @@ class DiscourseGamification::DirectoryIntegration
           date >= :since
         GROUP BY
           1
+      ), scored_directory AS (
+        SELECT
+          total_score.user_id,
+          COALESCE(total_score.score, 0) AS score
+        FROM
+          total_score
+        RIGHT JOIN
+          directory_items ON directory_items.period_type = :period_type AND
+          total_score.user_id = directory_items.user_id
       )
       UPDATE
         directory_items
       SET
-        gamification_score = total_score.score
+        gamification_score = scored_directory.score
       FROM
-        total_score
+        scored_directory
       WHERE
-        total_score.user_id = directory_items.user_id AND
+        scored_directory.user_id = directory_items.user_id AND
         directory_items.period_type = :period_type AND
-        total_score.score != directory_items.gamification_score
+        scored_directory.score != directory_items.gamification_score
     SQL
   end
 end
