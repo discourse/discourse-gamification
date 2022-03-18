@@ -4,7 +4,7 @@ module Jobs
   class UpdateScoresForToday < ::Jobs::Scheduled
     every 5.minutes
 
-    def execute
+    def execute(args = nil)
       DiscourseGamification::GamificationScore.calculate_scores
     end
   end
