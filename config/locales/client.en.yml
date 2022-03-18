@@ -1,4 +1,3 @@
 en:
   js:
-    discourse_gamification:
-      score: "Cheers" 
+    gamification_score: "Cheers"
