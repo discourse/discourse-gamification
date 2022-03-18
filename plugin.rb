@@ -32,4 +32,3 @@ after_initialize do
       .find_by(user_id: object.id)&.score
   end
 end
-
