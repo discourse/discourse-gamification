@@ -22,6 +22,8 @@ after_initialize do
 
   require_relative 'app/models/gamification_score.rb'
   require_relative 'lib/directory_integration.rb'
+  require_relative 'jobs/scheduled/update_scores_for_today.rb'
+  require_relative 'jobs/scheduled/update_scores_for_ten_days.rb'
 
   if respond_to?(:add_directory_column)
     add_directory_column("gamification_score", query: DiscourseGamification::DirectoryIntegration.query)
