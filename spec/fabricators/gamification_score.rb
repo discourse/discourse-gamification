@@ -5,4 +5,3 @@ Fabricator(:gamification_score, from: ::DiscourseGamification::GamificationScore
   score { 1 }
   date { Date.today }
 end
-
