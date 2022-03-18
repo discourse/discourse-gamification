@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Jobs
-  class ::DiscourseGamification::UpdateScoresForTenDays < ::Jobs::Scheduled
+  class UpdateScoresForTenDays < ::Jobs::Scheduled
     every 1.day
 
     def execute
