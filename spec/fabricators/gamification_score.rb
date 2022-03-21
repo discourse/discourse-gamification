@@ -2,6 +2,6 @@
 
 Fabricator(:gamification_score, from: ::DiscourseGamification::GamificationScore) do
   user_id { Fabricate(:user).id }
-  score { 1 }
+  score { 0 }
   date { Date.today }
 end
