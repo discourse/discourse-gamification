@@ -4,12 +4,12 @@ class DiscourseGamification::GamificationScore < ::ActiveRecord::Base
   self.table_name = 'gamification_scores'
 
   def self.enabled_scorables
-    DiscourseGamification::Scorable.subclasses.filter{_1.enabled?}
+    DiscourseGamification::Scorable.subclasses.filter { _1.enabled? }
   end
 
   def self.scorables_queries
     enabled_scorables
-      .map{ "( #{_1.query} )" }
+      .map { "( #{_1.query} )" }
       .join(' UNION ALL ')
   end
 

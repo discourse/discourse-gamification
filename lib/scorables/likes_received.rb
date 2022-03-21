@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 module DiscourseGamification
   class LikesReceived < Scorable
-  
+
     def self.score_multiplier
       SiteSetting.like_score_value
     end
