@@ -22,6 +22,9 @@ after_initialize do
 
   require_relative 'app/models/gamification_score.rb'
   require_relative 'lib/directory_integration.rb'
+  require_relative 'lib/scorables/scorable.rb'
+  require_relative 'lib/scorables/likes_received.rb'
+  require_relative 'lib/scorables/solutions.rb'
   require_relative 'jobs/scheduled/update_scores_for_today.rb'
   require_relative 'jobs/scheduled/update_scores_for_ten_days.rb'
 
