@@ -33,24 +33,29 @@ acceptance(
 );
 
 acceptance(
-  "Discourse Gamification | User Profile | Show Gamification Score",
+  "Discourse Gamification | User Metadata | Show Gamification Score",
   function (needs) {
     needs.user();
     needs.pretender((server, helper) => {
-      const profileResponse = cloneJSON(
-        fixturesByUrl["/u/charlie/summary.json"]
-      );
-      profileResponse.user_summary.gamification_score = 10;
+      const userResponse = cloneJSON(fixturesByUrl["/u/charlie.json"]);
+      userResponse.user.gamification_score = 10;
 
-      server.get("/u/charlie/summary.json", () =>
-        helper.response(profileResponse)
-      );
+      server.get("/u/charlie.json", () => helper.response(userResponse));
     });
 
     test("user profile gamification score - score is present", async function (assert) {
       await visit("/u/charlie/summary");
 
-      // find summary value here
+      assert.ok(
+        exists(".user-profile-secondary-outlet.gamification-score"),
+        "score is present"
+      );
+      assert.ok(
+        query(
+          ".user-profile-secondary-outlet.gamification-score"
+        ).innerText.includes("10"),
+        "user metadata has gamification score"
+      );
     });
   }
 );
