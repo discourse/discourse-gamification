@@ -6,3 +6,5 @@ plugins:
     default: 1
   solution_score_value:   
     default: 10
+  user_invited_score_value:   
+    default: 10
