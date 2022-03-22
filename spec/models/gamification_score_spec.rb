@@ -10,11 +10,6 @@ describe ::DiscourseGamification::GamificationScore do
   let!(:gamification_score) { Fabricate(:gamification_score, user_id: user.id) }
   let!(:gamification_score_2) { Fabricate(:gamification_score, user_id: user_2.id, date: 2.days.ago) }
 
-  it "has correct site setting default values" do
-    expect(SiteSetting.like_score_value).to eq(1)
-    expect(SiteSetting.solution_score_value).to eq(10)
-  end
-
   describe "#calculate_scores" do
     let!(:user_liked) { Fabricate(:post_action, user: user, post: post) }
 
