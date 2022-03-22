@@ -20,8 +20,6 @@ RSpec.shared_examples "Scorable Type" do
       DiscourseGamification::GamificationScore.calculate_scores
       expect(DiscourseGamification::GamificationScore.find_by(user_id: user_2.id).score).to eq(0)
     end
-
-    DiscourseGamification::GamificationScore.destroy_all
   end
 end
 
