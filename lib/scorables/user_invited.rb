@@ -12,7 +12,7 @@ module DiscourseGamification
         SELECT
           inv.invited_by_id AS user_id,
           date_trunc('day', inv.created_at) AS date,
-          COUNT(inv.redemption_count) * #{score_multiplier} AS points
+          SUM(inv.redemption_count * #{score_multiplier}) AS points
         FROM
           invites AS inv
         WHERE
