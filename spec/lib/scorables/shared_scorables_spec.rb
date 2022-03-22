@@ -31,3 +31,28 @@ RSpec.describe ::DiscourseGamification::LikesReceived do
     let(:class_action_fabricator) { Fabricate(:post_action, user: user, post: post) }
   end
 end
+
+RSpec.describe ::DiscourseGamification::UserInvited do
+  it_behaves_like "Scorable Type" do 
+    before do 
+      stub_request(
+        :get,
+        "http://local.hub:3000/api/customers/-1/account?access_token&admin_count=0&moderator_count=0"
+      ).with(
+        headers: {
+          'Accept'=>'application/json, application/vnd.discoursehub.v1',
+          'Host'=>'local.hub:3000',
+          'Referer'=>'http://test.localhost'
+        }
+      ).to_return(status: 200, body: "", headers: {})
+    end
+
+    let(:class_action_fabricator) do
+      Fabricate(:invite, invited_by: user) do
+        after_create do 
+          self.update(redemption_count: 1)         
+        end
+      end 
+    end
+  end
+end
