@@ -8,3 +8,5 @@ plugins:
     default: 10
   user_invited_score_value:   
     default: 10
+  time_read_score_value:   
+    default: 1

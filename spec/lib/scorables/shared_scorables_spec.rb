@@ -54,3 +54,9 @@ RSpec.describe ::DiscourseGamification::UserInvited do
     end
   end
 end
+
+RSpec.describe ::DiscourseGamification::TimeRead do
+  it_behaves_like "Scorable Type" do
+    let(:class_action_fabricator) { UserVisit.create(user_id: user.id, time_read: 60, visited_at: Date.today) }
+  end
+end
