@@ -9,4 +9,5 @@ en:
     post_read_score_value: "The value of the cheer awarded for every five posts a user reads"
     topic_created_score_value: "The value of the cheer awarded when a user creates a topic"
     post_created_score_value: "The value of the cheer awarded when a user creates a post"
+    day_visited_score_value: "The value of the cheer awarded for every day a user visits the site"
   score: "Cheers"

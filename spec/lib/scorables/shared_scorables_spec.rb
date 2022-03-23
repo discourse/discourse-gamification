@@ -28,7 +28,7 @@ RSpec.describe ::DiscourseGamification::LikeReceived do
   it_behaves_like "Scorable Type" do
     let(:post) { Fabricate(:post, user: user) }
     let(:class_action_fabricator) { Fabricate(:post_action, user: user, post: post) }
-    # expect score to be 8 becuase of 1 point for like received, 5 points for topic, 2 points for post
+    # expect score to be 8 because of 1 point for like received, 5 points for topic, 2 points for post
     let(:expected_score) { 8 }
   end
 end
@@ -37,7 +37,7 @@ RSpec.describe ::DiscourseGamification::LikeGiven do
   it_behaves_like "Scorable Type" do
     let(:post) { Fabricate(:post, user: user) }
     let(:class_action_fabricator) { Fabricate(:post_action, user: user, post: post, post_action_type_id: 1) }
-    # expect score to be 8 becuase of 1 point for like given, 5 points for topic, 2 points for post
+    # expect score to be 8 because of 1 point for like given, 5 points for topic, 2 points for post
     let(:expected_score) { 8 }
   end
 end
@@ -70,12 +70,22 @@ end
 RSpec.describe ::DiscourseGamification::TimeRead do
   it_behaves_like "Scorable Type" do
     let(:class_action_fabricator) { UserVisit.create(user_id: user.id, time_read: 60, visited_at: Date.today) }
+    # expect score to be 2 because of 1 point for time read, 1 point for day visited
+    let(:expected_score) { 2 }
   end
 end
 
 RSpec.describe ::DiscourseGamification::PostRead do
   it_behaves_like "Scorable Type" do
     let(:class_action_fabricator) { UserVisit.create(user_id: user.id, posts_read: 5, visited_at: Date.today) }
+    # expect score to be 2 because of 1 point for post read, 1 point for day visited
+    let(:expected_score) { 2 }
+  end
+end
+
+RSpec.describe ::DiscourseGamification::DayVisited do
+  it_behaves_like "Scorable Type" do
+    let(:class_action_fabricator) { UserVisit.create(user_id: user.id, visited_at: Date.today) }
   end
 end
 
@@ -88,8 +98,7 @@ end
 RSpec.describe ::DiscourseGamification::PostCreated do
   it_behaves_like "Scorable Type" do
     let(:class_action_fabricator) { Fabricate(:post, user: user) }
-    # expect score to be 7 becuase of 5 points for topic, 2 points for post
+    # expect score to be 7 because of 5 points for topic, 2 points for post
     let(:expected_score) { 7 }
   end
 end
-

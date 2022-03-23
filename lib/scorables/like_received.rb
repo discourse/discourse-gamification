@@ -20,7 +20,7 @@ module DiscourseGamification
           post_action_type_id = 2 AND
           pa.created_at >= :since
         GROUP BY
-        1, 2
+          1, 2
       SQL
     end
   end

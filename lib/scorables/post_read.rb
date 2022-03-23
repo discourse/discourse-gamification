@@ -19,7 +19,7 @@ module DiscourseGamification
           uv.visited_at >= :since AND
           uv.posts_read >= 5
         GROUP BY
-        1, 2
+          1, 2
       SQL
     end
   end

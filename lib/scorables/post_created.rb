@@ -18,7 +18,7 @@ module DiscourseGamification
         WHERE
           p.created_at >= :since
         GROUP BY
-        1, 2
+          1, 2
       SQL
     end
   end
