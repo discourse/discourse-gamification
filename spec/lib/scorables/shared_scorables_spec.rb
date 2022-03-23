@@ -24,12 +24,21 @@ RSpec.shared_examples "Scorable Type" do
   end
 end
 
-RSpec.describe ::DiscourseGamification::LikesReceived do
+RSpec.describe ::DiscourseGamification::LikeReceived do
   it_behaves_like "Scorable Type" do
     let(:post) { Fabricate(:post, user: user) }
     let(:class_action_fabricator) { Fabricate(:post_action, user: user, post: post) }
-    # expect score to be 6 becuase of 1 point for like, 5 points for topic being created
-    let(:expected_score) { 6 }
+    # expect score to be 8 becuase of 1 point for like received, 5 points for topic, 2 points for post
+    let(:expected_score) { 8 }
+  end
+end
+
+RSpec.describe ::DiscourseGamification::LikeGiven do
+  it_behaves_like "Scorable Type" do
+    let(:post) { Fabricate(:post, user: user) }
+    let(:class_action_fabricator) { Fabricate(:post_action, user: user, post: post, post_action_type_id: 1) }
+    # expect score to be 8 becuase of 1 point for like given, 5 points for topic, 2 points for post
+    let(:expected_score) { 8 }
   end
 end
 
@@ -75,3 +84,12 @@ RSpec.describe ::DiscourseGamification::TopicCreated do
     let(:class_action_fabricator) { Fabricate(:topic, user: user) }
   end
 end
+
+RSpec.describe ::DiscourseGamification::PostCreated do
+  it_behaves_like "Scorable Type" do
+    let(:class_action_fabricator) { Fabricate(:post, user: user) }
+    # expect score to be 7 becuase of 5 points for topic, 2 points for post
+    let(:expected_score) { 7 }
+  end
+end
+
