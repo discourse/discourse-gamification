@@ -31,6 +31,7 @@ after_initialize do
   require_relative 'lib/scorables/post_read.rb'
   require_relative 'lib/scorables/topic_created.rb'
   require_relative 'lib/scorables/post_created.rb'
+  require_relative 'lib/scorables/flag_created.rb'
   require_relative 'lib/scorables/day_visited.rb'
   require_relative 'jobs/scheduled/update_scores_for_today.rb'
   require_relative 'jobs/scheduled/update_scores_for_ten_days.rb'
