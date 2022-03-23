@@ -102,3 +102,15 @@ RSpec.describe ::DiscourseGamification::PostCreated do
     let(:expected_score) { 7 }
   end
 end
+
+RSpec.describe ::DiscourseGamification::FlagCreated do
+  it_behaves_like "Scorable Type" do
+    let(:class_action_fabricator) do 
+      Fabricate(:reviewable, created_by: user) do 
+        after_create do
+          self.update(status: 1)
+        end
+      end
+    end
+  end
+end
