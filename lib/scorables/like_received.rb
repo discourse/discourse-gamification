@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 module DiscourseGamification
-  class LikesReceived < Scorable
+  class LikeReceived < Scorable
 
     def self.score_multiplier
-      SiteSetting.like_score_value
+      SiteSetting.like_received_score_value
     end
 
     def self.query
@@ -20,7 +20,7 @@ module DiscourseGamification
           post_action_type_id = 2 AND
           pa.created_at >= :since
         GROUP BY
-        1, 2
+          1, 2
       SQL
     end
   end

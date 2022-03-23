@@ -19,7 +19,7 @@ module DiscourseGamification
           inv.created_at >= :since AND
           inv.redemption_count > 0
         GROUP BY
-        1, 2
+          1, 2
       SQL
     end
   end
