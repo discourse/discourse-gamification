@@ -17,7 +17,7 @@ module DiscourseGamification
           reviewables AS r
         WHERE
           created_at >= :since AND
-          status = 1 
+          status = 1#{' '}
         GROUP BY
           1, 2
       SQL
