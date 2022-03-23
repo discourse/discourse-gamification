@@ -27,6 +27,8 @@ after_initialize do
   require_relative 'lib/scorables/user_invited.rb'
   require_relative 'lib/scorables/solutions.rb'
   require_relative 'lib/scorables/time_read.rb'
+  require_relative 'lib/scorables/post_read.rb'
+  require_relative 'lib/scorables/topic_created.rb'
   require_relative 'jobs/scheduled/update_scores_for_today.rb'
   require_relative 'jobs/scheduled/update_scores_for_ten_days.rb'
 

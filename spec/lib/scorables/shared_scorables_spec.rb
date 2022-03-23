@@ -5,6 +5,7 @@ RSpec.shared_examples "Scorable Type" do
   let(:user_2) { Fabricate(:user) }
   let!(:gamification_score) { Fabricate(:gamification_score, user_id: user.id) }
   let!(:gamification_score_2) { Fabricate(:gamification_score, user_id: user_2.id, date: 2.days.ago) }
+  let(:expected_score) { described_class.score_multiplier }
 
   describe "updates gamification score" do
     let!(:create_score) { class_action_fabricator }
@@ -12,7 +13,7 @@ RSpec.shared_examples "Scorable Type" do
     it "#{described_class} updates scores for today" do
       expect(DiscourseGamification::GamificationScore.find_by(user_id: user.id).score).to eq(0)
       DiscourseGamification::GamificationScore.calculate_scores
-      expect(DiscourseGamification::GamificationScore.find_by(user_id: user.id).score).to eq(described_class.score_multiplier)
+      expect(DiscourseGamification::GamificationScore.find_by(user_id: user.id).score).to eq(expected_score)
     end
 
     it "#{described_class} does not update scores for records with dates older than since_date" do
@@ -27,6 +28,8 @@ RSpec.describe ::DiscourseGamification::LikesReceived do
   it_behaves_like "Scorable Type" do
     let(:post) { Fabricate(:post, user: user) }
     let(:class_action_fabricator) { Fabricate(:post_action, user: user, post: post) }
+    # expect score to be 6 becuase of 1 point for like, 5 points for topic being created
+    let(:expected_score) { 6 }
   end
 end
 
@@ -58,5 +61,17 @@ end
 RSpec.describe ::DiscourseGamification::TimeRead do
   it_behaves_like "Scorable Type" do
     let(:class_action_fabricator) { UserVisit.create(user_id: user.id, time_read: 60, visited_at: Date.today) }
+  end
+end
+
+RSpec.describe ::DiscourseGamification::PostRead do
+  it_behaves_like "Scorable Type" do
+    let(:class_action_fabricator) { UserVisit.create(user_id: user.id, posts_read: 5, visited_at: Date.today) }
+  end
+end
+
+RSpec.describe ::DiscourseGamification::TopicCreated do
+  it_behaves_like "Scorable Type" do
+    let(:class_action_fabricator) { Fabricate(:topic, user: user) }
   end
 end

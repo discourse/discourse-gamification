@@ -5,4 +5,6 @@ en:
     solution_score_value: "The value of the cheer awarded when a user's post is marked as a solution"
     user_invited_score_value: "The value of the cheer awarded when a user has an invite redeemed"
     time_read_score_value: "The value of the cheer awarded for every one hour of time spent reading"
+    post_read_score_value: "The value of the cheer awarded for every five posts a user reads"
+    topic_created_score_value: "The value of the cheer awarded when a user creates a topic"
   score: "Cheers"
