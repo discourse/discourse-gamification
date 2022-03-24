@@ -7,6 +7,14 @@ module DiscourseGamification
       SiteSetting.topic_created_score_value
     end
 
+    def self.category_filter
+      return '' if scorable_category_list.empty?
+
+      <<~SQL
+        AND t.category_id IN (#{scorable_category_list})
+      SQL
+    end
+
     def self.query
       <<~SQL
         SELECT
@@ -17,6 +25,7 @@ module DiscourseGamification
           topics AS t
         WHERE
           t.created_at >= :since
+          #{category_filter}
         GROUP BY
           1, 2
       SQL

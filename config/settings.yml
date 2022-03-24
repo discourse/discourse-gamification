@@ -2,6 +2,9 @@ plugins:
   discourse_gamification_enabled:
     default: true
     client: true
+  scorable_categories:
+    type: category_list
+    default: ""
   like_received_score_value:   
     default: 1
   like_given_score_value:   

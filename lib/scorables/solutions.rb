@@ -6,6 +6,14 @@ module DiscourseGamification
       SiteSetting.solution_score_value
     end
 
+    def self.category_filter
+      return '' if scorable_category_list.empty?
+
+      <<~SQL
+        AND topics.category_id IN (#{scorable_category_list})
+      SQL
+    end
+
     def self.query
       <<~SQL
         SELECT
@@ -16,6 +24,7 @@ module DiscourseGamification
           topic_custom_fields
         INNER JOIN topics
           ON topic_custom_fields.topic_id = topics.id
+          #{category_filter}
         INNER JOIN posts
           ON posts.id = topic_custom_fields.value::INTEGER
         WHERE

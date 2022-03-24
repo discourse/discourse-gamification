@@ -24,9 +24,46 @@ RSpec.shared_examples "Scorable Type" do
   end
 end
 
+RSpec.shared_examples "Category Scoped Scorable Type" do
+
+  let(:user) { Fabricate(:user) }
+  let(:user_2) { Fabricate(:user) }
+  let(:category_allowed) { Fabricate(:category) }
+  let(:category_not_allowed) { Fabricate(:category) }
+  let!(:gamification_score) { Fabricate(:gamification_score, user_id: user.id) }
+  let!(:gamification_score_2) { Fabricate(:gamification_score, user_id: user_2.id, date: 2.days.ago) }
+  let(:expected_score) { described_class.score_multiplier }
+
+  describe "updates gamification score" do
+    let!(:create_score) { class_action_fabricator }
+
+    it "#{described_class} updates scores for action in the category configured" do
+      expect(DiscourseGamification::GamificationScore.find_by(user_id: user.id).score).to eq(0)
+      SiteSetting.scorable_categories = category_allowed.id.to_s
+      DiscourseGamification::GamificationScore.calculate_scores
+      expect(DiscourseGamification::GamificationScore.find_by(user_id: user.id).score).to eq(expected_score)
+    end
+
+    it "#{described_class} doesn't updates scores for action in the category configured" do
+      expect(DiscourseGamification::GamificationScore.find_by(user_id: user_2.id).score).to eq(0)
+      SiteSetting.scorable_categories = category_not_allowed.id.to_s
+      DiscourseGamification::GamificationScore.calculate_scores
+      expect(DiscourseGamification::GamificationScore.find_by(user_id: user_2.id).score).to eq(0)
+    end
+  end
+end
+
 RSpec.describe ::DiscourseGamification::LikeReceived do
   it_behaves_like "Scorable Type" do
     let(:post) { Fabricate(:post, user: user) }
+    let(:class_action_fabricator) { Fabricate(:post_action, user: user, post: post) }
+    # expect score to be 8 because of 1 point for like received, 5 points for topic, 2 points for post
+    let(:expected_score) { 8 }
+  end
+
+  it_behaves_like "Category Scoped Scorable Type" do
+    let(:topic) { Fabricate(:topic, user: user, category: category_allowed) }
+    let(:post) { Fabricate(:post, user: user, topic: topic) }
     let(:class_action_fabricator) { Fabricate(:post_action, user: user, post: post) }
     # expect score to be 8 because of 1 point for like received, 5 points for topic, 2 points for post
     let(:expected_score) { 8 }
@@ -38,6 +75,14 @@ RSpec.describe ::DiscourseGamification::LikeGiven do
     let(:post) { Fabricate(:post, user: user) }
     let(:class_action_fabricator) { Fabricate(:post_action, user: user, post: post, post_action_type_id: 1) }
     # expect score to be 8 because of 1 point for like given, 5 points for topic, 2 points for post
+    let(:expected_score) { 8 }
+  end
+
+  it_behaves_like "Category Scoped Scorable Type" do
+    let(:topic) { Fabricate(:topic, user: user, category: category_allowed) }
+    let(:post) { Fabricate(:post, user: user, topic: topic) }
+    let(:class_action_fabricator) { Fabricate(:post_action, user: user, post: post, post_action_type_id: 1) }
+    # expect score to be 8 because of 1 point for like received, 5 points for topic, 2 points for post
     let(:expected_score) { 8 }
   end
 end
@@ -93,11 +138,20 @@ RSpec.describe ::DiscourseGamification::TopicCreated do
   it_behaves_like "Scorable Type" do
     let(:class_action_fabricator) { Fabricate(:topic, user: user) }
   end
+  it_behaves_like "Category Scoped Scorable Type" do
+    let(:class_action_fabricator) { Fabricate(:topic, user: user, category: category_allowed) }
+  end
 end
 
 RSpec.describe ::DiscourseGamification::PostCreated do
   it_behaves_like "Scorable Type" do
     let(:class_action_fabricator) { Fabricate(:post, user: user) }
+    # expect score to be 7 because of 5 points for topic, 2 points for post
+    let(:expected_score) { 7 }
+  end
+  it_behaves_like "Category Scoped Scorable Type" do
+    let(:topic) { Fabricate(:topic, user: user, category: category_allowed) }
+    let(:class_action_fabricator) { Fabricate(:post, topic: topic, user: user) }
     # expect score to be 7 because of 5 points for topic, 2 points for post
     let(:expected_score) { 7 }
   end

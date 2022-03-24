@@ -7,6 +7,16 @@ module DiscourseGamification
       SiteSetting.post_created_score_value
     end
 
+    def self.category_filter
+      return '' if scorable_category_list.empty?
+
+      <<~SQL
+        INNER JOIN topics
+          ON p.topic_id = topics.id AND
+          topics.category_id IN (#{scorable_category_list})
+      SQL
+    end
+
     def self.query
       <<~SQL
         SELECT
@@ -15,6 +25,7 @@ module DiscourseGamification
           COUNT(*) * #{score_multiplier} AS points
         FROM
           posts AS p
+        #{category_filter}
         WHERE
           p.created_at >= :since
         GROUP BY
