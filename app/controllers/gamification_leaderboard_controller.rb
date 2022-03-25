@@ -3,8 +3,7 @@
 class DiscourseGamification::GamificationLeaderboardController < ::ApplicationController
 
   def respond
-    scores = DiscourseGamification::GamificationLeaderboard.scores_for(params[:leaderboard_name])
-    puts scores.inspect
-    render_serialized(scores, GamificationScoreSerializer, root: false)
+    users = DiscourseGamification::GamificationLeaderboard.scores_for(params[:leaderboard_name])
+    render json: users.to_json
   end
 end
