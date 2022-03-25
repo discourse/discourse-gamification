@@ -1,0 +1,19 @@
+<div>
+  <h1>{{model.leaderboardName}}</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model as |s|}}
+        <tr>
+          <td>{{s.username}}</td>
+          <td>{{s.total_score}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

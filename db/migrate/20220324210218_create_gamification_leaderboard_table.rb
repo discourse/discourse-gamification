@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateGamificationLeaderboardTable < ActiveRecord::Migration[6.1]
   def change
     create_table :gamification_leaderboards do |t|
