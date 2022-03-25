@@ -3,6 +3,8 @@
 class DiscourseGamification::GamificationScore < ::ActiveRecord::Base
   self.table_name = 'gamification_scores'
 
+  belongs_to :user
+
   def self.enabled_scorables
     DiscourseGamification::Scorable.subclasses.filter { _1.enabled? }
   end

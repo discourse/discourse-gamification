@@ -1,6 +1,3 @@
 import DiscourseRoute from "discourse/routes/discourse";
 
-export default DiscourseRoute.extend({
-  model() {
-  },
-});
+export default DiscourseRoute.extend({});

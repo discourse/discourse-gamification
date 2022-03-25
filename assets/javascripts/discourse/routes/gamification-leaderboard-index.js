@@ -3,8 +3,8 @@ import { ajax } from "discourse/lib/ajax";
 
 export default DiscourseRoute.extend({
   model(params) {
-    params.leaderboardName ||= "default";
-
+    // return default leaderboard for the index route
+    params.leaderboardName = "default";
     return ajax(`/leaderboard/${params.leaderboardName}`).then((model) => {
       model.leaderboardName = params.leaderboardName
       return model;

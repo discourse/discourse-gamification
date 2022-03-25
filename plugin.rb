@@ -23,6 +23,7 @@ after_initialize do
   require_relative 'app/models/gamification_score.rb'
   require_relative 'app/models/gamification_leaderboard.rb'
   require_relative 'app/controllers/gamification_leaderboard_controller.rb'
+  require_relative 'app/serializers/gamification_score_serializer.rb'
   require_relative 'lib/directory_integration.rb'
   require_relative 'lib/scorables/scorable.rb'
   require_relative 'lib/scorables/like_received.rb'

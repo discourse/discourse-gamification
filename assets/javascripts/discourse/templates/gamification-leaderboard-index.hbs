@@ -10,11 +10,10 @@
     <tbody>
       {{#each model as |s|}}
         <tr>
-          <td>{{s.user_id}}</td>
+          <td>{{s.user.username}}</td>
           <td>{{s.score}}</td>
         </tr>
       {{/each}}
     </tbody>
   </table>
 </div>
-
