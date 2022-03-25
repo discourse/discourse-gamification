@@ -5,8 +5,8 @@ import { get } from "@ember/object";
 export default DiscourseRoute.extend({
   model(params) {
     return ajax(`/leaderboard/${params.leaderboardName}`).then((scores) => {
-      scores.leaderboardName = params.leaderboardName
-      return scores
+      scores.leaderboardName = params.leaderboardName;
+      return scores;
     });
   },
 });

@@ -6,7 +6,7 @@ export default DiscourseRoute.extend({
     // return default leaderboard for the index route
     params.leaderboardName = "default";
     return ajax(`/leaderboard/${params.leaderboardName}`).then((model) => {
-      model.leaderboardName = params.leaderboardName
+      model.leaderboardName = params.leaderboardName;
       return model;
     });
   },
