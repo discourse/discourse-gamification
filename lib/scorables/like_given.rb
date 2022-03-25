@@ -6,6 +6,16 @@ module DiscourseGamification
       SiteSetting.like_given_score_value
     end
 
+    def self.category_filter
+      return '' if scorable_category_list.empty?
+
+      <<~SQL
+        INNER JOIN topics
+          ON p.topic_id = topics.id AND
+          topics.category_id IN (#{scorable_category_list})
+      SQL
+    end
+
     def self.query
       <<~SQL
         SELECT
@@ -16,6 +26,7 @@ module DiscourseGamification
           post_actions AS pa
         INNER JOIN posts AS p
           ON p.id = pa.post_id
+        #{category_filter}
         WHERE
           post_action_type_id = 1 AND
           pa.created_at >= :since
