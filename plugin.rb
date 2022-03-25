@@ -56,4 +56,6 @@ after_initialize do
   Discourse::Application.routes.append do
     mount ::DiscourseGamification::Engine, at: '/leaderboard'
   end
+
+  SeedFu.fixture_paths << Rails.root.join("plugins", "discourse-gamification", "db", "fixtures").to_s
 end
