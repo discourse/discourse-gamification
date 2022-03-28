@@ -6,9 +6,6 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
 
   def self.scores_for(leaderboard_name)
     leaderboard_name ||= DEFAULT_LEADERBOARD
-    p leaderboard_name
-    p leaderboard_name
-    p leaderboard_name
     leaderboard = self.find_by(name: leaderboard_name)
     leaderboard.to_date ||= Date.today
 
