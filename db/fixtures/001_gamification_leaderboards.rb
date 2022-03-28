@@ -1,3 +1,8 @@
 # frozen_string_literal: true
 
-GamificationSeeder.new.execute if !Rails.env.test?
+return if Rails.env.test? || DiscourseGamification::GamificationLeaderboard.find_by(name: "Global Leaderboard")
+
+DiscourseGamification::GamificationLeaderboard.seed(:name) do |leaderboard|
+  leaderboard.name = "Global Leaderbaord"
+  leaderboard.created_by_id = Discourse.system_user.id
+end
