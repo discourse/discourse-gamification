@@ -21,6 +21,9 @@ after_initialize do
   end
 
   require_relative 'app/models/gamification_score.rb'
+  require_relative 'app/models/gamification_leaderboard.rb'
+  require_relative 'app/controllers/gamification_leaderboard_controller.rb'
+  require_relative 'app/serializers/user_score_serializer.rb'
   require_relative 'lib/directory_integration.rb'
   require_relative 'lib/scorables/scorable.rb'
   require_relative 'lib/scorables/like_received.rb'
@@ -44,4 +47,15 @@ after_initialize do
     DiscourseGamification::GamificationScore
       .find_by(user_id: object.id)&.score
   end
+
+  DiscourseGamification::Engine.routes.draw do
+    get '/' => 'gamification_leaderboard#respond'
+    get '/:leaderboard_name' => 'gamification_leaderboard#respond'
+  end
+
+  Discourse::Application.routes.append do
+    mount ::DiscourseGamification::Engine, at: '/leaderboard'
+  end
+
+  SeedFu.fixture_paths << Rails.root.join("plugins", "discourse-gamification", "db", "fixtures").to_s
 end
