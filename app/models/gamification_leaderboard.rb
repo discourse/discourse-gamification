@@ -11,9 +11,9 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
 
     join_sql = "LEFT OUTER JOIN gamification_scores ON gamification_scores.user_id = users.id"
     sum_sql  = "SUM(COALESCE(gamification_scores.score, 0)) as total_score"
-    users = User.joins(join_sql)
+    users = User.real.joins(join_sql)
     users = users.where("gamification_scores.date BETWEEN ? AND ?", leaderboard.from_date, leaderboard.to_date) if leaderboard.from_date.present?
-    users = users.select("users.id, users.username, users.uploaded_avatar_id, #{sum_sql}").group("users.id")
+    users = users.select("users.id, users.username, users.uploaded_avatar_id, #{sum_sql}").group("users.id").order(total_score: :desc)
     users
   end
 end

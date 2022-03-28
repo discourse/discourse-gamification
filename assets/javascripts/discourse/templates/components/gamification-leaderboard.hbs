@@ -2,15 +2,22 @@
   <h1>{{model.leaderboardName}}</h1>
   <table>
     <thead>
-      <tr>
+      <tr class="leaderboard-header">
         <th>User</th>
         <th>Score</th>
       </tr>
     </thead>
     <tbody>
       {{#each model as |s|}}
-        <tr>
-          <td>{{s.username}}</td>
+        <tr class="leaderboard-row">
+          <td>
+            <div class="leaderboard-user-avatar">
+              <div role="button" class="leaderboard-user-avatar-container clickable" data-user-card={{s.username}}>
+                {{avatar s imageSize="small"}}
+                {{s.username}}
+              </div>
+            </div>
+          </td>
           <td>{{s.total_score}}</td>
         </tr>
       {{/each}}

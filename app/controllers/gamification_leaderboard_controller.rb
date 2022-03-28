@@ -4,6 +4,6 @@ class DiscourseGamification::GamificationLeaderboardController < ::ApplicationCo
 
   def respond
     users = DiscourseGamification::GamificationLeaderboard.scores_for(params[:leaderboard_name])
-    render json: users.to_json
+    render_serialized(users, UserScoreSerializer)
   end
 end
