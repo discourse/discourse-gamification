@@ -24,6 +24,7 @@ module DiscourseGamification
         FROM
           topics AS t
         WHERE
+          t.deleted_at IS NULL AND
           t.created_at >= :since
           #{category_filter}
         GROUP BY

@@ -27,6 +27,8 @@ module DiscourseGamification
           posts AS p
         #{category_filter}
         WHERE
+          p.deleted_at IS NULL AND
+          p.wiki IS FALSE AND
           p.created_at >= :since
         GROUP BY
           1, 2

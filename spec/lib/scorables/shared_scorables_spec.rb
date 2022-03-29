@@ -6,9 +6,13 @@ RSpec.shared_examples "Scorable Type" do
   let!(:gamification_score) { Fabricate(:gamification_score, user_id: user.id) }
   let!(:gamification_score_2) { Fabricate(:gamification_score, user_id: user_2.id, date: 2.days.ago) }
   let(:expected_score) { described_class.score_multiplier }
+  let(:class_action_fabricator_for_deleted_object) { nil }
+  let(:class_action_fabricator_for_wiki) { nil }
 
   describe "updates gamification score" do
     let!(:create_score) { class_action_fabricator }
+    let!(:create_score_for_deleted_object) { class_action_fabricator_for_deleted_object }
+    let!(:create_score_for_wiki) { class_action_fabricator_for_wiki }
 
     it "#{described_class} updates scores for today" do
       expect(DiscourseGamification::GamificationScore.find_by(user_id: user.id).score).to eq(0)
@@ -57,6 +61,12 @@ RSpec.describe ::DiscourseGamification::LikeReceived do
   it_behaves_like "Scorable Type" do
     let(:post) { Fabricate(:post, user: user) }
     let(:class_action_fabricator) { Fabricate(:post_action, user: user, post: post) }
+
+    # don't count deleted post towards score
+    let(:deleted_topic) { Fabricate(:deleted_topic, user: user) }
+    let(:post_2) { Fabricate(:post, topic: deleted_topic, user: user, deleted_at: Time.now) }
+    let(:class_action_fabricator_for_deleted_object) { Fabricate(:post_action, user: user, post: post_2) }
+
     # expect score to be 8 because of 1 point for like received, 5 points for topic, 2 points for post
     let(:expected_score) { 8 }
   end
@@ -74,6 +84,12 @@ RSpec.describe ::DiscourseGamification::LikeGiven do
   it_behaves_like "Scorable Type" do
     let(:post) { Fabricate(:post, user: user) }
     let(:class_action_fabricator) { Fabricate(:post_action, user: user, post: post, post_action_type_id: 1) }
+
+    # don't count deleted post towards score
+    let(:deleted_topic) { Fabricate(:deleted_topic, user: user) }
+    let(:post_2) { Fabricate(:post, topic: deleted_topic, user: user, deleted_at: Time.now) }
+    let(:class_action_fabricator_for_deleted_object) { Fabricate(:post_action, user: user, post: post_2, post_action_type_id: 1) }
+
     # expect score to be 8 because of 1 point for like given, 5 points for topic, 2 points for post
     let(:expected_score) { 8 }
   end
@@ -137,6 +153,9 @@ end
 RSpec.describe ::DiscourseGamification::TopicCreated do
   it_behaves_like "Scorable Type" do
     let(:class_action_fabricator) { Fabricate(:topic, user: user) }
+
+    # don't count deleted topic towards score
+    let(:class_action_fabricator_for_deleted_object) { Fabricate(:deleted_topic, user: user) }
   end
   it_behaves_like "Category Scoped Scorable Type" do
     let(:class_action_fabricator) { Fabricate(:topic, user: user, category: category_allowed) }
@@ -146,6 +165,19 @@ end
 RSpec.describe ::DiscourseGamification::PostCreated do
   it_behaves_like "Scorable Type" do
     let(:class_action_fabricator) { Fabricate(:post, user: user) }
+
+    # don't count deleted post towards score
+    let(:deleted_topic) { Fabricate(:deleted_topic, user: user) }
+    let(:post_2) { Fabricate(:post, topic: deleted_topic, user: user, deleted_at: Time.now) }
+    let(:class_action_fabricator_for_deleted_object) { Fabricate(:post_action, user: user, post: post_2, post_action_type_id: 1) }
+
+    # don't count wiki post towards score
+    let(:class_action_fabricator_for_wiki) do
+      Fabricate(:post, topic: deleted_topic, user: user) do
+        wiki { true }
+      end
+    end
+
     # expect score to be 7 because of 5 points for topic, 2 points for post
     let(:expected_score) { 7 }
   end
