@@ -28,6 +28,8 @@ module DiscourseGamification
           ON p.id = pa.post_id
         #{category_filter}
         WHERE
+          p.deleted_at IS NULL AND
+          p.wiki IS FALSE AND
           post_action_type_id = 2 AND
           pa.created_at >= :since
         GROUP BY
