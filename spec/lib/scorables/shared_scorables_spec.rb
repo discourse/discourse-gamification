@@ -7,10 +7,12 @@ RSpec.shared_examples "Scorable Type" do
   let!(:gamification_score_2) { Fabricate(:gamification_score, user_id: user_2.id, date: 2.days.ago) }
   let(:expected_score) { described_class.score_multiplier }
   let(:class_action_fabricator_for_deleted_object) { nil }
+  let(:class_action_fabricator_for_wiki) { nil }
 
   describe "updates gamification score" do
     let!(:create_score) { class_action_fabricator }
     let!(:create_score_for_deleted_object) { class_action_fabricator_for_deleted_object }
+    let!(:create_score_for_wiki) { class_action_fabricator_for_wiki }
 
     it "#{described_class} updates scores for today" do
       expect(DiscourseGamification::GamificationScore.find_by(user_id: user.id).score).to eq(0)
@@ -168,6 +170,13 @@ RSpec.describe ::DiscourseGamification::PostCreated do
     let(:deleted_topic) { Fabricate(:deleted_topic, user: user) }
     let(:post_2) { Fabricate(:post, topic: deleted_topic, user: user, deleted_at: Time.now) }
     let(:class_action_fabricator_for_deleted_object) { Fabricate(:post_action, user: user, post: post_2, post_action_type_id: 1) }
+
+    # don't count wiki post towards score
+    let(:class_action_fabricator_for_wiki) do
+      Fabricate(:post, topic: deleted_topic, user: user) do
+        wiki { true }
+      end
+    end
 
     # expect score to be 7 because of 5 points for topic, 2 points for post
     let(:expected_score) { 7 }

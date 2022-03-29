@@ -28,6 +28,8 @@ module DiscourseGamification
         INNER JOIN posts
           ON posts.id = topic_custom_fields.value::INTEGER
         WHERE
+          posts.deleted_at IS NULL AND
+          topics.deleted_at IS NULL AND
           topic_custom_fields.name = 'accepted_answer_post_id' AND
           topic_custom_fields.updated_at >= :since
         GROUP BY
