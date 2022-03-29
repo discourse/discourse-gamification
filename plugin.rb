@@ -22,6 +22,7 @@ after_initialize do
 
   require_relative 'app/models/gamification_score.rb'
   require_relative 'app/models/gamification_leaderboard.rb'
+  require_relative 'app/controllers/admin/admin_gamification_leaderboard_controller.rb'
   require_relative 'app/controllers/gamification_leaderboard_controller.rb'
   require_relative 'app/serializers/user_score_serializer.rb'
   require_relative 'lib/directory_integration.rb'
@@ -55,6 +56,10 @@ after_initialize do
 
   Discourse::Application.routes.append do
     mount ::DiscourseGamification::Engine, at: '/leaderboard'
+    get '/admin/plugins/gamification' => 'discourse_gamification/admin_gamification_leaderboard#index', constraints: StaffConstraint.new
+    # post '/admin/plugins/gamification/hooks' => 'discourse_gamification/gamification_leaderboard#create', constraints: StaffConstraint.new
+    # put '/admin/plugins/gamification/hooks/:incoming_gamification_webhook_id' => 'discourse_gamification/gamification_leaderboard#update', constraints: StaffConstraint.new
+    # delete '/admin/plugins/gamification/hooks/:incoming_gamification_webhook_id' => 'discourse_gamification/gamification_leaderboard#destroy', constraints: StaffConstraint.new
   end
 
   SeedFu.fixture_paths << Rails.root.join("plugins", "discourse-gamification", "db", "fixtures").to_s

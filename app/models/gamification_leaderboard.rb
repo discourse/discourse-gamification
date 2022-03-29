@@ -4,6 +4,9 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
   self.table_name = 'gamification_leaderboards'
   DEFAULT_LEADERBOARD = "Global Leaderboard"
 
+  validates :name, exclusion: { in: %w(new),
+    message: "%{value} is reserved." }
+
   def self.scores_for(leaderboard_name)
     leaderboard_name ||= DEFAULT_LEADERBOARD
     leaderboard = self.find_by(name: leaderboard_name)
