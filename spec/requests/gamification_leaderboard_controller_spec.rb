@@ -9,7 +9,7 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
   let!(:leaderboard) { Fabricate(:gamification_leaderboard, name: DiscourseGamification::GamificationLeaderboard::DEFAULT_LEADERBOARD, created_by_id: user.id) }
   let!(:leaderboard_2) { Fabricate(:gamification_leaderboard, name: "test", created_by_id: user.id, from_date: 3.days.ago, to_date: 1.day.ago) }
 
-  before do 
+  before do
     DiscourseGamification::GamificationScore.calculate_scores(since_date: 10.days.ago)
   end
 
