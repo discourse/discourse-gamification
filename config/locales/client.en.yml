@@ -1,3 +1,6 @@
 en:
   js:
-    gamification_score: "Cheers"
+    gamification:
+      score: "Cheers"
+      admin:
+        title: "Gamification"

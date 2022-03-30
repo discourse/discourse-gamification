@@ -20,6 +20,9 @@ after_initialize do
     isolate_namespace DiscourseGamification
   end
 
+  # route: /admin/plugins/chat
+  add_admin_route 'gamification.admin.title', 'gamification'
+
   require_relative 'app/models/gamification_score.rb'
   require_relative 'app/models/gamification_leaderboard.rb'
   require_relative 'app/controllers/admin/admin_gamification_leaderboard_controller.rb'

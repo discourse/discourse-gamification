@@ -1,6 +1,6 @@
 export default {
   resource: "admin.adminPlugins",
-  path: "/gamification",
+  path: "/plugins",
   map() {
     this.route("gamification");
   },

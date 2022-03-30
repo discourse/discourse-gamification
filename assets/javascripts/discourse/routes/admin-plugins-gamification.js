@@ -1,5 +1,4 @@
 import DiscourseRoute from "discourse/routes/discourse";
-import EmberObject from "@ember/object";
 import { ajax } from "discourse/lib/ajax";
 
 export default DiscourseRoute.extend({
@@ -9,7 +8,6 @@ export default DiscourseRoute.extend({
     }
 
     return ajax("/admin/plugins/gamification.json").then((model) => {
-      console.log(model)
       return model;
     });
   },
