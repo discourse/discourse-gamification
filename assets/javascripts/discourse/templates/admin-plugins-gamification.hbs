@@ -1,1 +1,29 @@
-<h1> hello </h1>
+<h3>{{i18n "gamification.leaderboard.title"}}</h3>
+{{#if creatingNew}}
+  <div class="new-leaderboard-container">
+    {{input
+      type="text"
+      value=newLeaderboardName
+      placeholder=(i18n "gamification.leaderboard.name_placeholder")
+    }}
+    {{d-button
+      label="gamification.create"
+      title="gamification.create"
+      class="btn-primary create-new-leaderboard-btn"
+      disabled=(not nameValid)
+      action=(action "createNewLeaderboard")
+    }}
+    {{d-button
+      label="gamification.cancel"
+      title="gamification.cancel"
+      action=(action "resetNewLeaderboard")
+    }}
+  </div>
+{{else}}
+  {{d-button
+    label="gamification.leaderboard.new"
+    title="gamification.leaderboard.new"
+    class="btn-primary"
+    action=(action (mut creatingNew) true)
+  }}
+{{/if}}

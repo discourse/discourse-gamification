@@ -2,5 +2,11 @@ en:
   js:
     gamification:
       score: "Cheers"
+      leaderboard:
+        title: "Leaderboards"
+        name_placeholder: "name..."
+        new: "New Leaderboard"
+      create: "Create"
+      cancel: "Cancel"
       admin:
         title: "Gamification"
