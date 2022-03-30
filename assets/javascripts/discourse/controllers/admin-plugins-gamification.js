@@ -6,14 +6,16 @@ import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
 export default DiscourseRoute.extend({
+  queryParams: { selectedLeaderboardId: "id" },
+
   loading: false,
   creatingNew: false,
   newLeaderboardName: "",
   nameValid: and("newLeaderboardName"),
 
-  @discourseComputed("model.leaderboards.@each.created_at")
+  @discourseComputed("model.leaderboards.@each.updated_at")
   sortedLeaderboards(leaderboards) {
-    return leaderboards?.sortBy("created_at").reverse() || [];
+    return leaderboards?.sortBy("updated_at").reverse() || [];
   },
 
   @discourseComputed("selectedLeaderboardId")
@@ -24,6 +26,11 @@ export default DiscourseRoute.extend({
 
     id = parseInt(id, 10);
     return this.model.leaderboards.findBy("id", id);
+  },
+
+  @discourseComputed("selectedLeaderboard.name")
+  saveEditDisabled(name) {
+    return !name;
   },
 
   @action
@@ -45,12 +52,13 @@ export default DiscourseRoute.extend({
       .then((leaderboard) => {
         const newLeaderboard = EmberObject.create(leaderboard);
         this.set(
-          "model.gamification_leaderboard",
-          [newLeaderboard].concat(this.model.gamification_leaderboard)
+          "model.leaderboards",
+          [newLeaderboard].concat(this.model.leaderboards)
         );
         this.resetNewLeaderboard();
         this.setProperties({
           loading: false,
+          selectedLeaderboardId: leaderboard.id,
         });
       })
       .catch(popupAjaxError);
@@ -61,6 +69,7 @@ export default DiscourseRoute.extend({
     this.setProperties({
       creatingNew: false,
       newLeaderboardName: "",
+      newLeaderboardId: null,
     });
   },
 
@@ -74,9 +83,12 @@ export default DiscourseRoute.extend({
         }
 
         this.set("loading", true);
-        return ajax(`/admin/plugins/gamification/leaderboard/${leaderboard.name}`, {
-          type: "DELETE",
-        })
+        return ajax(
+          `/admin/plugins/gamification/leaderboard/${leaderboard.id}`,
+          {
+            type: "DELETE",
+          }
+        )
           .then(() => {
             this.model.leaderboards.removeObject(leaderboard);
             this.set("loading", false);
@@ -84,5 +96,30 @@ export default DiscourseRoute.extend({
           .catch(popupAjaxError);
       }
     );
+  },
+
+  @action
+  saveEdit() {
+    this.set("loading", true);
+    const data = {
+      name: this.selectedLeaderboard.name,
+      to_date: this.selectedWebhook?.to_date,
+      from_date: this.selectedWebhook?.from_date,
+    };
+    return ajax(
+      `/admin/plugins/gamification/leaderboard/${this.selectedLeaderboard.id}`,
+      {
+        data,
+        type: "PUT",
+      }
+    )
+      .then(() => {
+        this.selectedLeaderboard.set("updated_at", new Date());
+        this.setProperties({
+          loading: false,
+          selectedLeaderboardId: null,
+        });
+      })
+      .catch(popupAjaxError);
   },
 });

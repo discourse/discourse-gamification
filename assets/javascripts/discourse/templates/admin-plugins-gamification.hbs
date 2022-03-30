@@ -6,7 +6,23 @@
     title="gamification.back"
     action=(action (mut selectedLeaderboardId) null)
   }}
-
+  <form class="form-vertical">
+    <div class="control-group">
+      <label class="control-label">{{i18n "gamification.leaderboard.name"}}</label>
+      {{input
+        type="text"
+        value=selectedLeaderboard.name
+        placeholder=(i18n "gamification.leaderboard.name")
+      }}
+    </div>
+    {{d-button
+      class="btn-primary"
+      label="gamification.leaderboard.save"
+      title="gamification.leaderboard.save"
+      action=(action "saveEdit")
+      disabled=saveEditDisabled
+    }}
+  </form>
 {{else}}
   <h3>{{i18n "gamification.leaderboard.title"}}</h3>
   {{#if creatingNew}}
@@ -37,7 +53,6 @@
       action=(action (mut creatingNew) true)
     }}
   {{/if}}
-
   <div class="leaderboards">
     {{#if model.leaderboards}}
       {{#each sortedLeaderboards as |leaderboard|}}

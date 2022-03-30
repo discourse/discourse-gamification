@@ -63,8 +63,8 @@ after_initialize do
     mount ::DiscourseGamification::Engine, at: '/leaderboard'
     get '/admin/plugins/gamification' => 'discourse_gamification/admin_gamification_leaderboard#index', constraints: StaffConstraint.new
     post '/admin/plugins/gamification/leaderboard' => 'discourse_gamification/admin_gamification_leaderboard#create', constraints: StaffConstraint.new
-    put '/admin/plugins/gamification/leaderboard/:name' => 'discourse_gamification/admin_gamification_leaderboard#update', constraints: StaffConstraint.new
-    delete '/admin/plugins/gamification/leaderboard/:name' => 'discourse_gamification/admin_gamification_leaderboard#destroy', constraints: StaffConstraint.new
+    put '/admin/plugins/gamification/leaderboard/:id' => 'discourse_gamification/admin_gamification_leaderboard#update', constraints: StaffConstraint.new
+    delete '/admin/plugins/gamification/leaderboard/:id' => 'discourse_gamification/admin_gamification_leaderboard#destroy', constraints: StaffConstraint.new
   end
 
   SeedFu.fixture_paths << Rails.root.join("plugins", "discourse-gamification", "db", "fixtures").to_s

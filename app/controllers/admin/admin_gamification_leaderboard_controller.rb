@@ -20,9 +20,12 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
   end
 
   def update
-    params.require(:name)
+    params.require(:id)
 
-    leaderboard = DiscourseGamification::GamificationLeaderboard.find_by(name: params[:name])
+    p params.inspect
+    p params.inspect
+    p params.inspect
+    leaderboard = DiscourseGamification::GamificationLeaderboard.find(params[:id])
     raise Discourse::NotFound unless leaderboard
 
     if leaderboard.update(
@@ -37,9 +40,9 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
   end
 
   def destroy
-    params.require(:name)
+    params.require(:id)
 
-    leaderboard = DiscourseGamification::GamificationLeaderboard.find_by(name: params[:name])
+    leaderboard = DiscourseGamification::GamificationLeaderboard.find(params[:id])
     leaderboard.destroy if leaderboard
     render json: success_json
   end
