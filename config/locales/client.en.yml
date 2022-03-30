@@ -6,7 +6,12 @@ en:
         title: "Leaderboards"
         name_placeholder: "name..."
         new: "New Leaderboard"
+        none: "No existing leaderboards created"
+        confirm_destroy: "Are you sure you want to delete this leaderboard?"
       create: "Create"
       cancel: "Cancel"
+      delete: "Delete"
+      edit: "Edit"
+      back: "Back"
       admin:
         title: "Gamification"

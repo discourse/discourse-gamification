@@ -1,29 +1,70 @@
-<h3>{{i18n "gamification.leaderboard.title"}}</h3>
-{{#if creatingNew}}
-  <div class="new-leaderboard-container">
-    {{input
-      type="text"
-      value=newLeaderboardName
-      placeholder=(i18n "gamification.leaderboard.name_placeholder")
-    }}
-    {{d-button
-      label="gamification.create"
-      title="gamification.create"
-      class="btn-primary create-new-leaderboard-btn"
-      disabled=(not nameValid)
-      action=(action "createNewLeaderboard")
-    }}
-    {{d-button
-      label="gamification.cancel"
-      title="gamification.cancel"
-      action=(action "resetNewLeaderboard")
-    }}
-  </div>
-{{else}}
+{{#if selectedLeaderboard}}
   {{d-button
-    label="gamification.leaderboard.new"
-    title="gamification.leaderboard.new"
-    class="btn-primary"
-    action=(action (mut creatingNew) true)
+    class="leaderboard-back"
+    icon="chevron-left"
+    label="gamification.back"
+    title="gamification.back"
+    action=(action (mut selectedLeaderboardId) null)
   }}
+
+{{else}}
+  <h3>{{i18n "gamification.leaderboard.title"}}</h3>
+  {{#if creatingNew}}
+    <div class="new-leaderboard-container">
+      {{input
+        type="text"
+        value=newLeaderboardName
+        placeholder=(i18n "gamification.leaderboard.name_placeholder")
+      }}
+      {{d-button
+        label="gamification.create"
+        title="gamification.create"
+        class="btn-primary create-new-leaderboard-btn"
+        disabled=(not nameValid)
+        action=(action "createNewLeaderboard")
+      }}
+      {{d-button
+        label="gamification.cancel"
+        title="gamification.cancel"
+        action=(action "resetNewLeaderboard")
+      }}
+    </div>
+  {{else}}
+    {{d-button
+      label="gamification.leaderboard.new"
+      title="gamification.leaderboard.new"
+      class="btn-primary"
+      action=(action (mut creatingNew) true)
+    }}
+  {{/if}}
+
+  <div class="leaderboards">
+    {{#if model.leaderboards}}
+      {{#each sortedLeaderboards as |leaderboard|}}
+        <div>
+          <div>
+            <div>{{leaderboard.name}}</div>
+          </div>
+          <div>
+            <div>
+              {{d-button
+                class="btn"
+                icon="pencil-alt"
+                title="gamification.edit"
+                action=(action (mut selectedLeaderboardId) leaderboard.id)
+              }}
+              {{d-button
+                class="btn"
+                icon="trash-alt"
+                title="gamification.delete"
+                action=(action "destroyLeaderboard" leaderboard)
+              }}
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    {{else}}
+      {{i18n "gamification.leaderboard.none"}}
+    {{/if}}
+  </div>
 {{/if}}
