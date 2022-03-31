@@ -20,11 +20,8 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
   end
 
   def update
-    params.require(:id)
+    params.require([:id, :name])
 
-    p params.inspect
-    p params.inspect
-    p params.inspect
     leaderboard = DiscourseGamification::GamificationLeaderboard.find(params[:id])
     raise Discourse::NotFound unless leaderboard
 

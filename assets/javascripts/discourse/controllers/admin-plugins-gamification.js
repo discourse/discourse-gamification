@@ -6,8 +6,6 @@ import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
 export default DiscourseRoute.extend({
-  queryParams: { selectedLeaderboardId: "id" },
-
   loading: false,
   creatingNew: false,
   newLeaderboardName: "",
@@ -106,6 +104,7 @@ export default DiscourseRoute.extend({
       to_date: this.selectedWebhook?.to_date,
       from_date: this.selectedWebhook?.from_date,
     };
+
     return ajax(
       `/admin/plugins/gamification/leaderboard/${this.selectedLeaderboard.id}`,
       {
@@ -113,7 +112,7 @@ export default DiscourseRoute.extend({
         type: "PUT",
       }
     )
-      .then(() => {
+      .then((leaderboard) => {
         this.selectedLeaderboard.set("updated_at", new Date());
         this.setProperties({
           loading: false,

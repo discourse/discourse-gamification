@@ -4,6 +4,7 @@ en:
       score: "Cheers"
       leaderboard:
         title: "Leaderboards"
+        name: "Name"
         name_placeholder: "name..."
         new: "New Leaderboard"
         none: "No existing leaderboards created"
@@ -13,5 +14,6 @@ en:
       delete: "Delete"
       edit: "Edit"
       back: "Back"
+      save: "Save"
       admin:
         title: "Gamification"

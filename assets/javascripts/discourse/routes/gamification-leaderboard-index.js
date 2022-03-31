@@ -5,9 +5,11 @@ export default DiscourseRoute.extend({
   model(params) {
     // return default leaderboard for the index route
     params.leaderboardName = "Global Leaderboard";
-    return ajax(`/leaderboard/${params.leaderboardName}`).then((model) => {
-      model.leaderboardName = params.leaderboardName;
-      return model;
-    });
+    return ajax(`/leaderboard/${params.leaderboardName}`)
+      .then((model) => {
+        model.leaderboardName = params.leaderboardName;
+        return model;
+      })
+      .catch(() => this.replaceWith("/404"));
   },
 });
