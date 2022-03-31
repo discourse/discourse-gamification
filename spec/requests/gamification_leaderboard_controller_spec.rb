@@ -6,8 +6,8 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
   let(:user) { Fabricate(:user) }
   let!(:create_score) { UserVisit.create(user_id: user.id, visited_at: 2.days.ago) }
   let!(:create_topic) { Fabricate(:topic, user: user) }
-  let!(:leaderboard) { Fabricate(:gamification_leaderboard, name: DiscourseGamification::GamificationLeaderboard::DEFAULT_LEADERBOARD, created_by_id: user.id) }
-  let!(:leaderboard_2) { Fabricate(:gamification_leaderboard, name: "test", created_by_id: user.id, from_date: 3.days.ago, to_date: 1.day.ago) }
+  let!(:leaderboard) { Fabricate(:gamification_leaderboard, name: "test", created_by_id: user.id) }
+  let!(:leaderboard_2) { Fabricate(:gamification_leaderboard, name: "test_2", created_by_id: user.id, from_date: 3.days.ago, to_date: 1.day.ago) }
 
   before do
     DiscourseGamification::GamificationScore.calculate_scores(since_date: 10.days.ago)
@@ -15,7 +15,7 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
 
   describe "#respond" do
     it "returns users and their calculated scores" do
-      get "/leaderboard/Global%20Leaderboard.json"
+      get "/leaderboard/#{leaderboard.name}.json"
       expect(response.status).to eq(200)
 
       data = response.parsed_body
@@ -26,7 +26,7 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
     end
 
     it "only returns users and scores for specified date range" do
-      get "/leaderboard/test.json"
+      get "/leaderboard/#{leaderboard_2.name}.json"
       expect(response.status).to eq(200)
 
       data = response.parsed_body
