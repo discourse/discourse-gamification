@@ -5,10 +5,8 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
   validates :name, exclusion: { in: %w(new),
                                 message: "%{value} is reserved." }
 
-  def self.scores_for(leaderboard_name)
-    leaderboard = self.find_by(name: leaderboard_name)
-    puts leaderboard.inspect
-    puts leaderboard_name.inspect
+  def self.scores_for(leaderboard_id)
+    leaderboard = self.find(leaderboard_id)
     leaderboard.to_date ||= Date.today
 
     join_sql = "LEFT OUTER JOIN gamification_scores ON gamification_scores.user_id = users.id"

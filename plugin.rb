@@ -56,7 +56,7 @@ after_initialize do
 
   DiscourseGamification::Engine.routes.draw do
     get '/' => 'gamification_leaderboard#respond'
-    get '/:leaderboard_name' => 'gamification_leaderboard#respond'
+    get '/:id' => 'gamification_leaderboard#respond'
   end
 
   Discourse::Application.routes.append do

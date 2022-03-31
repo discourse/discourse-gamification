@@ -15,26 +15,26 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
 
   describe "#respond" do
     it "returns users and their calculated scores" do
-      get "/leaderboard/#{leaderboard.name}.json"
+      get "/leaderboard/#{leaderboard.id}.json"
       expect(response.status).to eq(200)
 
       data = response.parsed_body
-      expect(data[0]["username"]).to eq(user.username)
-      expect(data[0]["avatar_template"]).to eq(user.avatar_template)
+      expect(data["users"][0]["username"]).to eq(user.username)
+      expect(data["users"][0]["avatar_template"]).to eq(user.avatar_template)
       # expect score to be 6 because of 5 points for topic, 1 point for user visist
-      expect(data[0]["total_score"]).to eq(6)
+      expect(data["users"][0]["total_score"]).to eq(6)
     end
 
     it "only returns users and scores for specified date range" do
-      get "/leaderboard/#{leaderboard_2.name}.json"
+      get "/leaderboard/#{leaderboard_2.id}.json"
       expect(response.status).to eq(200)
 
       data = response.parsed_body
-      expect(data[0]["username"]).to eq(user.username)
-      expect(data[0]["avatar_template"]).to eq(user.avatar_template)
+      expect(data["users"][0]["username"]).to eq(user.username)
+      expect(data["users"][0]["avatar_template"]).to eq(user.avatar_template)
       # expect score to be 1 because of 1 point for user visit, and don't include 5 points for topic creation
       # because it is outside of the scope of specified date range
-      expect(data[0]["total_score"]).to eq(1)
+      expect(data["users"][0]["total_score"]).to eq(1)
     end
   end
 end
