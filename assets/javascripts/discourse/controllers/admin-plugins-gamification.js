@@ -1,7 +1,9 @@
 import DiscourseRoute from "discourse/routes/discourse";
 import EmberObject, { action } from "@ember/object";
+import bootbox from "bootbox";
 import discourseComputed from "discourse-common/utils/decorators";
 import { and } from "@ember/object/computed";
+import I18n from "I18n";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
@@ -112,7 +114,7 @@ export default DiscourseRoute.extend({
         type: "PUT",
       }
     )
-      .then((leaderboard) => {
+      .then(() => {
         this.selectedLeaderboard.set("updated_at", new Date());
         this.setProperties({
           loading: false,
