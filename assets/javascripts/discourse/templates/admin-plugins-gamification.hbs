@@ -58,7 +58,11 @@
       {{#each sortedLeaderboards as |leaderboard|}}
         <div>
           <div>
-            <div>{{leaderboard.name}}</div>
+            <div>
+              {{#link-to "gamificationLeaderboard.byName" leaderboard.id}}
+                {{leaderboard.name}}
+              {{/link-to}}
+            </div>
           </div>
           <div>
             <div>
