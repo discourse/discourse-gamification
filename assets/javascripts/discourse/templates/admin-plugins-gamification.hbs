@@ -15,6 +15,20 @@
         placeholder=(i18n "gamification.leaderboard.name")
       }}
     </div>
+    <label class="control-label">{{i18n "gamification.leaderboard.date.range"}}</label>
+    <div class="controls">
+      {{date-picker-past
+        class="date-input"
+        value=selectedLeaderboard.from_date
+        onSelect=(action (mut fromDate))
+      }}
+      {{date-picker
+        class="date-input"
+        value=selectedLeaderboard.to_date
+        onSelect=(action (mut toDate))
+      }}
+    </div>
+    <div>{{i18n "gamification.leaderboard.date.helper"}}</div>
     {{d-button
       class="btn-primary"
       label="gamification.save"

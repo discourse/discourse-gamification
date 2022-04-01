@@ -1,4 +1,4 @@
-import DiscourseRoute from "discourse/routes/discourse";
+import Controller from "@ember/controller";
 import EmberObject, { action } from "@ember/object";
 import bootbox from "bootbox";
 import discourseComputed from "discourse-common/utils/decorators";
@@ -7,11 +7,13 @@ import I18n from "I18n";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
-export default DiscourseRoute.extend({
+export default Controller.extend({
   loading: false,
   creatingNew: false,
   newLeaderboardName: "",
   nameValid: and("newLeaderboardName"),
+  toDate: "",
+  fromDate: "",
 
   @discourseComputed("model.leaderboards.@each.updated_at")
   sortedLeaderboards(leaderboards) {
@@ -70,6 +72,8 @@ export default DiscourseRoute.extend({
       creatingNew: false,
       newLeaderboardName: "",
       newLeaderboardId: null,
+      toDate: "", 
+      fromDate: "",
     });
   },
 
@@ -103,8 +107,8 @@ export default DiscourseRoute.extend({
     this.set("loading", true);
     const data = {
       name: this.selectedLeaderboard.name,
-      to_date: this.selectedWebhook?.to_date,
-      from_date: this.selectedWebhook?.from_date,
+      to_date: this.toDate,
+      from_date: this.fromDate,
     };
 
     return ajax(
@@ -119,6 +123,8 @@ export default DiscourseRoute.extend({
         this.setProperties({
           loading: false,
           selectedLeaderboardId: null,
+          toDate: "",
+          fromDate: "",
         });
       })
       .catch(popupAjaxError);
