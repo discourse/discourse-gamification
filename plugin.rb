@@ -20,10 +20,16 @@ after_initialize do
     isolate_namespace DiscourseGamification
   end
 
+  # route: /admin/plugins/gamification
+  add_admin_route 'gamification.admin.title', 'gamification'
+
   require_relative 'app/models/gamification_score.rb'
   require_relative 'app/models/gamification_leaderboard.rb'
+  require_relative 'app/controllers/admin/admin_gamification_leaderboard_controller.rb'
   require_relative 'app/controllers/gamification_leaderboard_controller.rb'
   require_relative 'app/serializers/user_score_serializer.rb'
+  require_relative 'app/serializers/leaderboard_serializer.rb'
+  require_relative 'app/serializers/admin_gamification_index_serializer.rb'
   require_relative 'lib/directory_integration.rb'
   require_relative 'lib/scorables/scorable.rb'
   require_relative 'lib/scorables/like_received.rb'
@@ -50,11 +56,15 @@ after_initialize do
 
   DiscourseGamification::Engine.routes.draw do
     get '/' => 'gamification_leaderboard#respond'
-    get '/:leaderboard_name' => 'gamification_leaderboard#respond'
+    get '/:id' => 'gamification_leaderboard#respond'
   end
 
   Discourse::Application.routes.append do
     mount ::DiscourseGamification::Engine, at: '/leaderboard'
+    get '/admin/plugins/gamification' => 'discourse_gamification/admin_gamification_leaderboard#index', constraints: StaffConstraint.new
+    post '/admin/plugins/gamification/leaderboard' => 'discourse_gamification/admin_gamification_leaderboard#create', constraints: StaffConstraint.new
+    put '/admin/plugins/gamification/leaderboard/:id' => 'discourse_gamification/admin_gamification_leaderboard#update', constraints: StaffConstraint.new
+    delete '/admin/plugins/gamification/leaderboard/:id' => 'discourse_gamification/admin_gamification_leaderboard#destroy', constraints: StaffConstraint.new
   end
 
   SeedFu.fixture_paths << Rails.root.join("plugins", "discourse-gamification", "db", "fixtures").to_s
