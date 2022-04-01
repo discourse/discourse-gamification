@@ -51,7 +51,7 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
 
       data = response.parsed_body
       # scoped to group
-      expect(data["users"].map{|u| u["id"]}).to eq([current_user.id])
+      expect(data["users"].map { |u| u["id"] }).to eq([current_user.id])
     end
 
     it "does not error if visible_to_groups_ids or included_groups_ids are empty" do
