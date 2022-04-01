@@ -2,7 +2,7 @@ import DiscourseRoute from "discourse/routes/discourse";
 import { ajax } from "discourse/lib/ajax";
 
 export default DiscourseRoute.extend({
-  model(params) {
+  model() {
     return ajax(`/leaderboard`)
       .then((model) => {
         return model;

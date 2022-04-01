@@ -7,10 +7,9 @@ class DiscourseGamification::GamificationLeaderboardController < ::ApplicationCo
     params[:id] ||= default_leaderboard_id
     leaderboard = DiscourseGamification::GamificationLeaderboard.find(params[:id])
 
-    # check here that we just need 1 group to match 
-    if !current_user.staff? && leaderboard.visible_to_groups_ids.present? && !leaderboard.visible_to_groups_ids.include?(current_user.group_ids)
+    if !current_user.staff? && leaderboard.visible_to_groups_ids.present? && (leaderboard.visible_to_groups_ids & current_user.group_ids).empty?
       raise Discourse::NotFound
-    else 
+    else
       render_serialized(leaderboard, LeaderboardSerializer, root: false)
     end
   end

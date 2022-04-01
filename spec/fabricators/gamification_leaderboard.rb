@@ -5,4 +5,6 @@ Fabricator(:gamification_leaderboard, from: ::DiscourseGamification::Gamificatio
   created_by_id { Fabricate(:user).id }
   from_date { nil }
   to_date { nil }
+  visible_to_groups_ids { [] }
+  included_groups_ids { [] }
 end
