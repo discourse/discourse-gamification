@@ -25,11 +25,15 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
     leaderboard = DiscourseGamification::GamificationLeaderboard.find(params[:id])
     raise Discourse::NotFound unless leaderboard
 
-    if leaderboard.update(
-        name: params[:name],
-        to_date: params[:to_date],
-        from_date: params[:from_date],
-      )
+    leaderboard.update(included_groups_ids: params[:included_groups_ids]) if params[:included_groups_ids]
+    leaderboard.update(visible_to_groups_ids: params[:visible_to_groups_ids]) if params[:visible_to_groups_ids]
+    leaderboard.update(
+      name: params[:name],
+      to_date: params[:to_date],
+      from_date: params[:from_date],
+    )
+
+    if leaderboard.save
       render json: success_json
     else
       render_json_error(leaderboard)
