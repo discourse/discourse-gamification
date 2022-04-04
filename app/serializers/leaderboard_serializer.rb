@@ -8,6 +8,8 @@ class LeaderboardSerializer < ApplicationSerializer
              :created_by_id,
              :from_date,
              :to_date,
+             :visible_to_groups_ids,
+             :included_groups_ids,
              :updated_at
 
   def users

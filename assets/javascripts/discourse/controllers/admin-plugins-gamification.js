@@ -1,4 +1,4 @@
-import DiscourseRoute from "discourse/routes/discourse";
+import Controller from "@ember/controller";
 import EmberObject, { action } from "@ember/object";
 import bootbox from "bootbox";
 import discourseComputed from "discourse-common/utils/decorators";
@@ -7,11 +7,15 @@ import I18n from "I18n";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
-export default DiscourseRoute.extend({
+export default Controller.extend({
   loading: false,
   creatingNew: false,
   newLeaderboardName: "",
   nameValid: and("newLeaderboardName"),
+  toDate: "",
+  fromDate: "",
+  visibleGroupIds: [],
+  includedGroupIds: [],
 
   @discourseComputed("model.leaderboards.@each.updated_at")
   sortedLeaderboards(leaderboards) {
@@ -25,7 +29,32 @@ export default DiscourseRoute.extend({
     }
 
     id = parseInt(id, 10);
-    return this.model.leaderboards.findBy("id", id);
+    const leaderboard = this.model.leaderboards.findBy("id", id);
+
+    this.leaderboardChanged(leaderboard);
+
+    return leaderboard;
+  },
+
+  leaderboardChanged(leaderboard) {
+    this.set(
+      "visibleGroupIds",
+      this.filterGroupsById(leaderboard.visible_to_groups_ids)
+    );
+    this.set(
+      "includedGroupIds",
+      this.filterGroupsById(leaderboard.included_groups_ids)
+    );
+  },
+
+  filterGroupsById(groupIds) {
+    if (!groupIds.length) {
+      return [];
+    }
+    const filteredGroups = this.model.groups.filter((group) =>
+      groupIds.includes(group.id)
+    );
+    return filteredGroups.mapBy("id");
   },
 
   @discourseComputed("selectedLeaderboard.name")
@@ -70,6 +99,10 @@ export default DiscourseRoute.extend({
       creatingNew: false,
       newLeaderboardName: "",
       newLeaderboardId: null,
+      toDate: "",
+      fromDate: "",
+      visibleGroupIds: [],
+      includedGroupIds: [],
     });
   },
 
@@ -103,8 +136,10 @@ export default DiscourseRoute.extend({
     this.set("loading", true);
     const data = {
       name: this.selectedLeaderboard.name,
-      to_date: this.selectedWebhook?.to_date,
-      from_date: this.selectedWebhook?.from_date,
+      to_date: this.toDate,
+      from_date: this.fromDate,
+      visible_to_groups_ids: this.visibleGroupIds,
+      included_groups_ids: this.includedGroupIds,
     };
 
     return ajax(
@@ -116,9 +151,25 @@ export default DiscourseRoute.extend({
     )
       .then(() => {
         this.selectedLeaderboard.set("updated_at", new Date());
+        if (this.visibleGroupIds.length) {
+          this.selectedLeaderboard.set(
+            "visible_to_groups_ids",
+            this.visibleGroupIds
+          );
+        }
+        if (this.includedGroupIds.length) {
+          this.selectedLeaderboard.set(
+            "included_groups_ids",
+            this.includedGroupIds
+          );
+        }
         this.setProperties({
           loading: false,
           selectedLeaderboardId: null,
+          toDate: "",
+          fromDate: "",
+          visibleGroupIds: [],
+          includedGroupIds: [],
         });
       })
       .catch(popupAjaxError);
