@@ -152,10 +152,16 @@ export default Controller.extend({
       .then(() => {
         this.selectedLeaderboard.set("updated_at", new Date());
         if (this.visibleGroupIds.length) {
-          this.selectedLeaderboard.set("visible_to_groups_ids", this.visibleGroupIds)
+          this.selectedLeaderboard.set(
+            "visible_to_groups_ids",
+            this.visibleGroupIds
+          );
         }
         if (this.includedGroupIds.length) {
-          this.selectedLeaderboard.set("included_groups_ids", this.includedGroupIds)
+          this.selectedLeaderboard.set(
+            "included_groups_ids",
+            this.includedGroupIds
+          );
         }
         this.setProperties({
           loading: false,
