@@ -10,9 +10,7 @@ module DiscourseGamification
       return '' if scorable_category_list.empty?
 
       <<~SQL
-        INNER JOIN topics
-          ON p.topic_id = topics.id AND
-          topics.category_id IN (#{scorable_category_list})
+        AND t.category_id IN (#{scorable_category_list})
       SQL
     end
 
