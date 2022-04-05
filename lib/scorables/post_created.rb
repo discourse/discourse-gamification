@@ -27,7 +27,7 @@ module DiscourseGamification
           posts AS p
         INNER JOIN topics AS t
           ON t.id = p.topic_id
-        #{category_filter}
+          #{category_filter}
         WHERE
           p.deleted_at IS NULL AND
           t.archetype <> 'private_message' AND
