@@ -11,9 +11,7 @@ module DiscourseGamification
       return '' if scorable_category_list.empty?
 
       <<~SQL
-        INNER JOIN topics
-          ON p.topic_id = topics.id AND
-          topics.category_id IN (#{scorable_category_list})
+        AND t.category_id IN (#{scorable_category_list})
       SQL
     end
 
@@ -25,9 +23,12 @@ module DiscourseGamification
           COUNT(*) * #{score_multiplier} AS points
         FROM
           posts AS p
-        #{category_filter}
+        INNER JOIN topics AS t
+          ON t.id = p.topic_id
+          #{category_filter}
         WHERE
           p.deleted_at IS NULL AND
+          t.archetype <> 'private_message' AND
           p.wiki IS FALSE AND
           p.created_at >= :since
         GROUP BY
