@@ -25,9 +25,12 @@ module DiscourseGamification
           COUNT(*) * #{score_multiplier} AS points
         FROM
           posts AS p
+        INNER JOIN topics AS t
+          ON t.id = p.topic_id
         #{category_filter}
         WHERE
           p.deleted_at IS NULL AND
+          t.archetype <> 'private_message' AND
           p.wiki IS FALSE AND
           p.created_at >= :since
         GROUP BY

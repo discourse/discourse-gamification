@@ -26,9 +26,12 @@ module DiscourseGamification
           post_actions AS pa
         INNER JOIN posts AS p
           ON p.id = pa.post_id
+        INNER JOIN topics AS t
+          ON t.id = p.topic_id
         #{category_filter}
         WHERE
           p.deleted_at IS NULL AND
+          t.archetype <> 'private_message' AND
           p.wiki IS FALSE AND
           post_action_type_id = 1 AND
           pa.created_at >= :since

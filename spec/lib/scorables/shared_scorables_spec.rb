@@ -6,12 +6,14 @@ RSpec.shared_examples "Scorable Type" do
   let!(:gamification_score) { Fabricate(:gamification_score, user_id: user.id) }
   let!(:gamification_score_2) { Fabricate(:gamification_score, user_id: user_2.id, date: 2.days.ago) }
   let(:expected_score) { described_class.score_multiplier }
+  let(:class_action_fabricator_for_pm) { nil }
   let(:class_action_fabricator_for_deleted_object) { nil }
   let(:class_action_fabricator_for_wiki) { nil }
 
   describe "updates gamification score" do
     let!(:create_score) { class_action_fabricator }
     let!(:create_score_for_deleted_object) { class_action_fabricator_for_deleted_object }
+    let!(:create_score_for_pm) { class_action_fabricator_for_pm }
     let!(:create_score_for_wiki) { class_action_fabricator_for_wiki }
 
     it "#{described_class} updates scores for today" do
@@ -67,6 +69,11 @@ RSpec.describe ::DiscourseGamification::LikeReceived do
     let(:post_2) { Fabricate(:post, topic: deleted_topic, user: user, deleted_at: Time.now) }
     let(:class_action_fabricator_for_deleted_object) { Fabricate(:post_action, user: user, post: post_2) }
 
+    # don't count private message towards score
+    let(:private_message_topic) { Fabricate(:private_message_topic) }
+    let(:post_3) { Fabricate(:post, topic: private_message_topic, user: user) }
+    let(:class_action_fabricator_for_pm) { Fabricate(:post_action, user: user, post: post_3) }
+
     # expect score to be 8 because of 1 point for like received, 5 points for topic, 2 points for post
     let(:expected_score) { 8 }
   end
@@ -89,6 +96,11 @@ RSpec.describe ::DiscourseGamification::LikeGiven do
     let(:deleted_topic) { Fabricate(:deleted_topic, user: user) }
     let(:post_2) { Fabricate(:post, topic: deleted_topic, user: user, deleted_at: Time.now) }
     let(:class_action_fabricator_for_deleted_object) { Fabricate(:post_action, user: user, post: post_2, post_action_type_id: 1) }
+
+    # don't count private message towards score
+    let(:private_message_topic) { Fabricate(:private_message_topic) }
+    let(:post_3) { Fabricate(:post, topic: private_message_topic, user: user) }
+    let(:class_action_fabricator_for_pm) { Fabricate(:post_action, user: user, post: post_3, post_action_type_id: 1) }
 
     # expect score to be 8 because of 1 point for like given, 5 points for topic, 2 points for post
     let(:expected_score) { 8 }
@@ -156,6 +168,9 @@ RSpec.describe ::DiscourseGamification::TopicCreated do
 
     # don't count deleted topic towards score
     let(:class_action_fabricator_for_deleted_object) { Fabricate(:deleted_topic, user: user) }
+
+    # don't count private message towards score
+    let(:class_action_fabricator_for_pm) { Fabricate(:private_message_topic) }
   end
   it_behaves_like "Category Scoped Scorable Type" do
     let(:class_action_fabricator) { Fabricate(:topic, user: user, category: category_allowed) }
