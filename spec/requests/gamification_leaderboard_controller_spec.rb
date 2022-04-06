@@ -26,8 +26,7 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
       data = response.parsed_body
       expect(data["users"][0]["username"]).to eq(current_user.username)
       expect(data["users"][0]["avatar_template"]).to eq(current_user.avatar_template)
-      # expect score to be 6 because of 5 points for topic, 1 point for user visist
-      expect(data["users"][0]["total_score"]).to eq(6)
+      expect(data["users"][0]["total_score"]).to eq(current_user.gamification_score)
     end
 
     it "only returns users and scores for specified date range" do
@@ -37,9 +36,7 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
       data = response.parsed_body
       expect(data["users"][0]["username"]).to eq(current_user.username)
       expect(data["users"][0]["avatar_template"]).to eq(current_user.avatar_template)
-      # expect score to be 1 because of 1 point for user visit, and don't include 5 points for topic creation
-      # because it is outside of the scope of specified date range
-      expect(data["users"][0]["total_score"]).to eq(1)
+      expect(data["users"][0]["total_score"]).to eq(current_user.gamification_score)
     end
 
     it "only returns users that are a part of a group within included_groups_ids" do

@@ -17,15 +17,15 @@ RSpec.shared_examples "Scorable Type" do
     let!(:create_score_for_wiki) { class_action_fabricator_for_wiki }
 
     it "#{described_class} updates scores for today" do
-      expect(DiscourseGamification::GamificationScore.find_by(user_id: user.id).score).to eq(0)
+      expect(user.gamification_score).to eq(0)
       DiscourseGamification::GamificationScore.calculate_scores
-      expect(DiscourseGamification::GamificationScore.find_by(user_id: user.id).score).to eq(expected_score)
+      expect(user.gamification_score).to eq(expected_score)
     end
 
     it "#{described_class} does not update scores for records with dates older than since_date" do
-      expect(DiscourseGamification::GamificationScore.find_by(user_id: user_2.id).score).to eq(0)
+      expect(user_2.gamification_score).to eq(0)
       DiscourseGamification::GamificationScore.calculate_scores
-      expect(DiscourseGamification::GamificationScore.find_by(user_id: user_2.id).score).to eq(0)
+      expect(user_2.gamification_score).to eq(0)
     end
   end
 end
@@ -44,17 +44,17 @@ RSpec.shared_examples "Category Scoped Scorable Type" do
     let!(:create_score) { class_action_fabricator }
 
     it "#{described_class} updates scores for action in the category configured" do
-      expect(DiscourseGamification::GamificationScore.find_by(user_id: user.id).score).to eq(0)
+      expect(user.gamification_score).to eq(0)
       SiteSetting.scorable_categories = category_allowed.id.to_s
       DiscourseGamification::GamificationScore.calculate_scores
-      expect(DiscourseGamification::GamificationScore.find_by(user_id: user.id).score).to eq(expected_score)
+      expect(user.gamification_score).to eq(expected_score)
     end
 
     it "#{described_class} doesn't updates scores for action in the category configured" do
-      expect(DiscourseGamification::GamificationScore.find_by(user_id: user_2.id).score).to eq(0)
+      expect(user_2.gamification_score).to eq(0)
       SiteSetting.scorable_categories = category_not_allowed.id.to_s
       DiscourseGamification::GamificationScore.calculate_scores
-      expect(DiscourseGamification::GamificationScore.find_by(user_id: user_2.id).score).to eq(0)
+      expect(user_2.gamification_score).to eq(0)
     end
   end
 end
