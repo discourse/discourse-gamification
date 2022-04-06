@@ -31,7 +31,7 @@ module DiscourseGamification
           p.deleted_at IS NULL AND
           t.archetype <> 'private_message' AND
           p.wiki IS FALSE AND
-          post_action_type_id = 1 AND
+          post_action_type_id = 2 AND
           pa.created_at >= :since
         GROUP BY
           1, 2
