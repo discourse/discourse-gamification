@@ -5,7 +5,7 @@ export default DiscourseRoute.extend({
   model() {
     return ajax(`/leaderboard`)
       .then((scores) => {
-        scores.users = scores.users.sortBy("total_score").reverse();
+        scores.users = scores.users?.sortBy("total_score").reverse();
         return scores;
       })
       .catch(() => this.replaceWith("/404"));
