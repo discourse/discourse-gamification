@@ -62,7 +62,7 @@ end
 
 RSpec.describe ::DiscourseGamification::LikeReceived do
   it_behaves_like "Scorable Type" do
-    before do 
+    before do
       Fabricate.times(10, :post, user: current_user)
       Post.update_all(like_count: 1)
     end
@@ -95,7 +95,7 @@ end
 
 RSpec.describe ::DiscourseGamification::LikeGiven do
   it_behaves_like "Scorable Type" do
-    before do 
+    before do
       Fabricate.times(10, :post, user: current_user)
       Post.all.each do |p|
         Fabricate(:post_action, user: current_user, post: p)
@@ -130,7 +130,7 @@ end
 
 RSpec.describe ::DiscourseGamification::PostCreated do
   it_behaves_like "Scorable Type" do
-    before do 
+    before do
       Fabricate.times(10, :post, user: current_user)
     end
 
@@ -160,8 +160,8 @@ RSpec.describe ::DiscourseGamification::PostCreated do
 end
 
 RSpec.describe ::DiscourseGamification::DayVisited do
-  it_should_behave_like "Scorable Type" do
-    before do 
+  it_behaves_like "Scorable Type" do
+    before do
       (Date.new(2022, 01, 01)..Date.new(2022, 01, 30)).each do |date|
         UserVisit.create(user_id: current_user.id, visited_at: date)
       end
@@ -173,8 +173,8 @@ RSpec.describe ::DiscourseGamification::DayVisited do
 end
 
 RSpec.describe ::DiscourseGamification::PostRead do
-  it_should_behave_like "Scorable Type" do
-    before do 
+  it_behaves_like "Scorable Type" do
+    before do
       (Date.new(2022, 01, 01)..Date.new(2022, 01, 30)).each do |date|
         UserVisit.create(user_id: current_user.id, visited_at: date, posts_read: 5)
       end
@@ -186,8 +186,8 @@ RSpec.describe ::DiscourseGamification::PostRead do
 end
 
 RSpec.describe ::DiscourseGamification::TimeRead do
-  it_should_behave_like "Scorable Type" do
-    before do 
+  it_behaves_like "Scorable Type" do
+    before do
       (Date.new(2022, 01, 01)..Date.new(2022, 01, 30)).each do |date|
         UserVisit.create(user_id: current_user.id, time_read: 60, visited_at: date)
       end
@@ -199,8 +199,8 @@ RSpec.describe ::DiscourseGamification::TimeRead do
 end
 
 RSpec.describe ::DiscourseGamification::FlagCreated do
-  it_should_behave_like "Scorable Type" do
-    before do 
+  it_behaves_like "Scorable Type" do
+    before do
       Fabricate.times(10, :reviewable, created_by: current_user) do
         after_create do
           self.update(status: 1)
@@ -214,8 +214,8 @@ RSpec.describe ::DiscourseGamification::FlagCreated do
 end
 
 RSpec.describe ::DiscourseGamification::TopicCreated do
-  it_should_behave_like "Scorable Type" do
-    before do 
+  it_behaves_like "Scorable Type" do
+    before do
       Fabricate.times(10, :topic, user: current_user)
     end
 
@@ -237,8 +237,8 @@ RSpec.describe ::DiscourseGamification::TopicCreated do
 end
 
 RSpec.describe ::DiscourseGamification::UserInvited do
-  it_should_behave_like "Scorable Type" do
-    before do 
+  it_behaves_like "Scorable Type" do
+    before do
       stub_request(
         :get,
         "http://local.hub:3000/api/customers/-1/account?access_token&admin_count=0&moderator_count=0"

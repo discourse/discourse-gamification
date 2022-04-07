@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module DiscourseGamification
   module UserExtension
     def gamification_score
