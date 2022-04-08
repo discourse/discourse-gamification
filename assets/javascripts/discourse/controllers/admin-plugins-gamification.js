@@ -142,7 +142,6 @@ export default Controller.extend({
       included_groups_ids: this.includedGroupIds,
     };
 
-    console.log(data)
     return ajax(
       `/admin/plugins/gamification/leaderboard/${this.selectedLeaderboard.id}`,
       {
