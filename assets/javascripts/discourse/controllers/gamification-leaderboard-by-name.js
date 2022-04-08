@@ -1,3 +1,3 @@
-import DiscourseRoute from "discourse/routes/discourse";
+import Controller from "@ember/controller";
 
-export default DiscourseRoute.extend({});
+export default Controller.extend({});

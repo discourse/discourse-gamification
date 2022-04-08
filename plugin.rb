@@ -42,16 +42,20 @@ after_initialize do
   require_relative 'lib/scorables/post_created.rb'
   require_relative 'lib/scorables/flag_created.rb'
   require_relative 'lib/scorables/day_visited.rb'
+  require_relative 'lib/user_extension.rb'
   require_relative 'jobs/scheduled/update_scores_for_today.rb'
   require_relative 'jobs/scheduled/update_scores_for_ten_days.rb'
+
+  reloadable_patch do |plugin|
+    User.class_eval { prepend DiscourseGamification::UserExtension }
+  end
 
   if respond_to?(:add_directory_column)
     add_directory_column("gamification_score", query: DiscourseGamification::DirectoryIntegration.query)
   end
 
   add_to_serializer(:user_card, :gamification_score, false) do
-    DiscourseGamification::GamificationScore
-      .find_by(user_id: object.id)&.score
+    object.gamification_score
   end
 
   DiscourseGamification::Engine.routes.draw do
