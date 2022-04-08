@@ -189,7 +189,7 @@ RSpec.describe ::DiscourseGamification::TimeRead do
   it_behaves_like "Scorable Type" do
     before do
       (Date.new(2022, 01, 01)..Date.new(2022, 01, 30)).each do |date|
-        UserVisit.create(user_id: current_user.id, time_read: 60, visited_at: date)
+        UserVisit.create(user_id: current_user.id, time_read: 3600, visited_at: date)
       end
     end
 
