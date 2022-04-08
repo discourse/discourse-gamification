@@ -36,7 +36,7 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
       data = response.parsed_body
       expect(data["users"][0]["username"]).to eq(current_user.username)
       expect(data["users"][0]["avatar_template"]).to eq(current_user.avatar_template)
-      expect(data["users"][0]["total_score"]).to eq(current_user.gamification_score)
+      expect(data["users"][0]["total_score"]).to eq(1)
     end
 
     it "only returns users that are a part of a group within included_groups_ids" do
