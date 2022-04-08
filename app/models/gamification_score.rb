@@ -16,8 +16,7 @@ class DiscourseGamification::GamificationScore < ::ActiveRecord::Base
   end
 
   def self.calculate_scores(since_date: Date.today, only_subclass: nil)
-    queries = only_subclass.query if only_subclass.present?
-    queries ||= scorables_queries
+    queries = only_subclass&.query || scorables_queries
 
     DB.exec(<<~SQL, since: since_date)
       INSERT INTO gamification_scores (user_id, date, score)
