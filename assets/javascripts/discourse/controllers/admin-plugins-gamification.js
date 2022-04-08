@@ -151,13 +151,13 @@ export default Controller.extend({
     )
       .then(() => {
         this.selectedLeaderboard.set("updated_at", new Date());
-        if (this.visibleGroupIds.length) {
+        if (this.visibleGroupIds) {
           this.selectedLeaderboard.set(
             "visible_to_groups_ids",
             this.visibleGroupIds
           );
         }
-        if (this.includedGroupIds.length) {
+        if (this.includedGroupIds) {
           this.selectedLeaderboard.set(
             "included_groups_ids",
             this.includedGroupIds

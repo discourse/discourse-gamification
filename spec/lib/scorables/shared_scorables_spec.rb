@@ -176,7 +176,7 @@ RSpec.describe ::DiscourseGamification::PostRead do
   it_behaves_like "Scorable Type" do
     before do
       (Date.new(2022, 01, 01)..Date.new(2022, 01, 30)).each do |date|
-        UserVisit.create(user_id: current_user.id, visited_at: date, posts_read: 5)
+        UserVisit.create(user_id: current_user.id, visited_at: date, posts_read: 100)
       end
     end
 
