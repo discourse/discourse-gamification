@@ -1,2 +1,55 @@
 .leaderboard {
+  .u-hide-on-mobile {
+    display: none;
+  }
+
+  .winner {
+    width: 30%;
+
+    &__avatar {
+      img {
+        border-width: 3px;
+      }
+    }
+
+     &__rank {
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+    }
+
+    &__score {
+      font-size: var(--font-up-4);
+    }
+
+    &.-first {
+      width: 40%;
+    }
+
+    &.-second {
+      transform: translate(15%, 40%);
+    }
+    
+    &.-third {
+      transform: translate(-15%, 40%);
+    }
+  }
+
+  .user {
+    padding: .5rem 1rem;
+
+    &__rank {
+      font-size: var(--font-up-3);
+    }
+
+     &__avatar {
+      img {
+        // width: 40px;
+      }
+    }
+
+     &__score {
+      font-size: var(--font-up-3);
+    }
+  }
 }
