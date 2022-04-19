@@ -14,6 +14,8 @@ register_asset 'stylesheets/common/leaderboard.scss'
 register_asset 'stylesheets/desktop/leaderboard.scss', :desktop
 register_asset 'stylesheets/mobile/leaderboard.scss', :mobile
 
+register_svg_icon 'crown'
+
 after_initialize do
   module ::DiscourseGamification
     PLUGIN_NAME = "discourse-gamification"
