@@ -1,27 +1,23 @@
 .leaderboard {
-
-  $gold: #FFD82A;
-  $silver: #C4C4C4;
-  $bronze: #CD7F32;
+  $gold: #ffd82a;
+  $silver: #c4c4c4;
+  $bronze: #cd7f32;
 
   margin-left: calc(50% - 49.5vw);
   margin-right: calc(50% - 49.5vw);
 
   .wrap-podium {
-    background: rgba(var(--tertiary-rgb), .1);
-
+    background: rgba(var(--tertiary-rgb), 0.1);
   }
 
-
   .page {
-
     &__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--header_primary);
       margin-top: 2rem;
-      padding-bottom: .5rem;
+      padding-bottom: 0.5rem;
 
       svg {
         vertical-align: middle;
@@ -41,7 +37,6 @@
   }
 
   .winner {
-
     &__crown {
       margin-bottom: 1rem;
       text-align: center;
@@ -78,8 +73,6 @@
       font-size: 28px;
       color: #222;
       font-weight: bold;
-
-
     }
 
     &__name {
@@ -143,8 +136,8 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.25rem;
-    padding: .5rem 2rem;
-    background-color: rgba(var(--primary-rgb), .075);
+    padding: 0.5rem 2rem;
+    background-color: rgba(var(--primary-rgb), 0.075);
     border-radius: 20px;
 
     &__rank {
@@ -155,7 +148,7 @@
     }
 
     &__avatar {
-      margin: 0 1rem 0 .5rem;
+      margin: 0 1rem 0 0.5rem;
       overflow: hidden;
       text-overflow: ellipsis;
 
@@ -187,7 +180,7 @@
         font-weight: bold;
       }
 
-       .user__score { 
+      .user__score {
         flex-grow: 0;
       }
     }

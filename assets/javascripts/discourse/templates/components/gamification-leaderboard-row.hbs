@@ -1,0 +1,8 @@
+<div class="user" id="leaderboard-user-{{rank.user.id}}">
+  <div class="user__rank">{{rank.position}}</div>
+  <div class="user__avatar clickable" role="button" data-user-card={{rank.user.username}}>
+    {{avatar rank.user imageSize="large"}}
+    <span class="user__name">{{rank.user.username}}</span>
+  </div>
+  <div class="user__score">{{rank.user.total_score}}</div>
+</div>

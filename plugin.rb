@@ -13,6 +13,9 @@ enabled_site_setting :discourse_gamification_enabled
 register_asset 'stylesheets/common/leaderboard.scss'
 register_asset 'stylesheets/desktop/leaderboard.scss', :desktop
 register_asset 'stylesheets/mobile/leaderboard.scss', :mobile
+register_asset 'stylesheets/common/leaderboard-info-modal.scss'
+register_asset 'stylesheets/desktop/leaderboard-info-modal.scss', :desktop
+register_asset 'stylesheets/mobile/leaderboard-info-modal.scss', :mobile
 
 register_svg_icon 'crown'
 

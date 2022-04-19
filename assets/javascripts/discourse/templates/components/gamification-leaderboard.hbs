@@ -3,97 +3,37 @@
     <div class="wrap">
       <div class="page__header">
         <h1 class="page__title">{{model.name}}</h1>
-        <a href="#popupplaceholder"> {{d-icon 'info-circle'}} <span class="u-hide-on-mobile">How does this work?</span></a>
+        {{d-button action=(action "showLeaderboardInfo") class="leaderboard-info" icon="info-circle" translatedLabel="How does this work?"}}
       </div>
 
       <div class="podium">
-
-        {{!-- <span>{{models.users.firstObject.username}}</span> --}}
-
-        <div class="winner -second">
-          <div class="winner__avatar">
-            <img src="{{model.users.[2].avatar_template}}" />
-            {{!-- /{{avatar model.users[1].avatar imageSize="large"}} --}}
-            <div class="winner__rank"><span>2</span></div>
-          </div>
-          <div class="winner__name">{{model.users.[2].username}}</div>
-          <div class="winner__score">{{model.users.[2].total_score}}</div>
-        </div>
-
-
-        <div class="winner -first">
-          <div class="winner__crown">{{d-icon 'crown'}}</div>
-          <div class="winner__avatar">
-            <img src="{{model.users.[0].avatar_template}}" />
-            <div class="winner__rank"><span>1</span></div>
-          </div>
-          <div class="winner__name">{{model.users.[0].username}}</div>
-          <div class="winner__score">{{model.users.[0].total_score}}</div>
-        </div>
-
-        <div class="winner -third">
-          <div class="winner__avatar">
-            <img src="{{model.users.[3].avatar_template}}" />
-            <div class="winner__rank"><span>3</span></div>
-          </div>
-          <div class="winner__name">{{model.users.[3].username}}</div>
-          <div class="winner__score">{{model.users.[3].total_score}}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-    <div class="wrap">
-      <div class="ranking">
-
-        <div class="user -self">
-          <div class="user__rank">100</div>
-          <div class="user__name">you</div>
-          <div class="user__score">1,600</div>
-        </div>
-
-    {{!-- {{log (get model.users this.currentUser.id)}} --}}
-
-        {{#each model.users as |u index|}}
-   
-          <div class="user">
-            <div class="user__rank">{{index}}</div>
-            <div class="user__avatar clickable" role="button" data-user-card={{u.username}}>
-                {{avatar u imageSize="large"}} 
-                {{!-- how do I change it to small on mobile tho? --}}
-                <span class="user__name">{{u.username}}</span>
-            </div>            
-            <div class="user__score">{{u.total_score}}</div>
+        {{#each winners as |winner|}}
+          <div class="winner -{{winner.class}}">
+            <div class="winner__avatar">
+              {{avatar winner.user imageSize="huge"}}
+              <div class="winner__rank"><span>{{winner.position}}</span></div>
+            </div>
+            <div class="winner__name">{{winner.user.username}}</div>
+            <div class="winner__score">{{winner.user.total_score}}</div>
           </div>
         {{/each}}
       </div>
-
-
-
-
-
-      {{!-- <table>
-    <thead>
-      <tr class="leaderboard-header">
-        <th>{{i18n "user.username.title"}}</th>
-        <th>{{i18n "gamification.score"}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each model.users as |u|}}
-      <tr class="leaderboard-row">
-        <td>
-          <div class="leaderboard-user-avatar">
-            <div role="button" class="leaderboard-user-avatar-container clickable" data-user-card={{u.username}}>
-              {{avatar u imageSize="small"}}
-              {{u.username}}
-            </div>
-          </div>
-        </td>
-        <td>{{u.total_score}}</td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table> --}}
     </div>
   </div>
+
+  <div class="wrap">
+    <div class="ranking">
+      {{#if currentUserRanking}}
+        <a href="#leaderboard-user-{{currentUserRanking.user.id}}" class="user -self">
+          <div class="user__rank">{{currentUserRanking.position}}</div>
+          <div class="user__name">you</div>
+          <div class="user__score">{{currentUserRanking.total_score}}</div>
+        </a>
+      {{/if}}
+
+      {{#each ranking as |rank|}}
+        {{gamification-leaderboard-row rank=rank}}
+      {{/each}}
+    </div>
+  </div>
+</div>
