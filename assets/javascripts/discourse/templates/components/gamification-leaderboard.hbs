@@ -1,6 +1,78 @@
 <div class="leaderboard">
-  <h1>{{model.name}}</h1>
-  <table>
+  <div class="wrap-podium">
+    <div class="wrap">
+      <div class="page__header">
+        <h1 class="page__title">{{model.name}}</h1>
+        <a href="#popupplaceholder"> {{d-icon 'info-circle'}} <span class="u-hide-on-mobile">How does this work?</span></a>
+      </div>
+
+      <div class="podium">
+
+        {{!-- <span>{{models.users.firstObject.username}}</span> --}}
+
+        <div class="winner -second">
+          <div class="winner__avatar">
+            <img src="{{model.users.[2].avatar_template}}" />
+            {{!-- /{{avatar model.users[1].avatar imageSize="large"}} --}}
+            <div class="winner__rank"><span>2</span></div>
+          </div>
+          <div class="winner__name">{{model.users.[2].username}}</div>
+          <div class="winner__score">{{model.users.[2].total_score}}</div>
+        </div>
+
+
+        <div class="winner -first">
+          <div class="winner__crown">{{d-icon 'crown'}}</div>
+          <div class="winner__avatar">
+            <img src="{{model.users.[0].avatar_template}}" />
+            <div class="winner__rank"><span>1</span></div>
+          </div>
+          <div class="winner__name">{{model.users.[0].username}}</div>
+          <div class="winner__score">{{model.users.[0].total_score}}</div>
+        </div>
+
+        <div class="winner -third">
+          <div class="winner__avatar">
+            <img src="{{model.users.[3].avatar_template}}" />
+            <div class="winner__rank"><span>3</span></div>
+          </div>
+          <div class="winner__name">{{model.users.[3].username}}</div>
+          <div class="winner__score">{{model.users.[3].total_score}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="wrap">
+      <div class="ranking">
+
+        <div class="user -self">
+          <div class="user__rank">100</div>
+          <div class="user__name">you</div>
+          <div class="user__score">1,600</div>
+        </div>
+
+    {{!-- {{log (get model.users this.currentUser.id)}} --}}
+
+        {{#each model.users as |u index|}}
+   
+          <div class="user">
+            <div class="user__rank">{{index}}</div>
+            <div class="user__avatar clickable" role="button" data-user-card={{u.username}}>
+                {{avatar u imageSize="large"}} 
+                {{!-- how do I change it to small on mobile tho? --}}
+                <span class="user__name">{{u.username}}</span>
+            </div>            
+            <div class="user__score">{{u.total_score}}</div>
+          </div>
+        {{/each}}
+      </div>
+
+
+
+
+
+      {{!-- <table>
     <thead>
       <tr class="leaderboard-header">
         <th>{{i18n "user.username.title"}}</th>
@@ -9,18 +81,19 @@
     </thead>
     <tbody>
       {{#each model.users as |u|}}
-        <tr class="leaderboard-row">
-          <td>
-            <div class="leaderboard-user-avatar">
-              <div role="button" class="leaderboard-user-avatar-container clickable" data-user-card={{u.username}}>
-                {{avatar u imageSize="small"}}
-                {{u.username}}
-              </div>
+      <tr class="leaderboard-row">
+        <td>
+          <div class="leaderboard-user-avatar">
+            <div role="button" class="leaderboard-user-avatar-container clickable" data-user-card={{u.username}}>
+              {{avatar u imageSize="small"}}
+              {{u.username}}
             </div>
-          </td>
-          <td>{{u.total_score}}</td>
-        </tr>
+          </div>
+        </td>
+        <td>{{u.total_score}}</td>
+      </tr>
       {{/each}}
     </tbody>
-  </table>
-</div>
+  </table> --}}
+    </div>
+  </div>
