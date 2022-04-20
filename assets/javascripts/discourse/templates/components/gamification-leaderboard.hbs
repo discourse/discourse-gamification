@@ -3,7 +3,7 @@
     <div class="wrap">
       <div class="page__header">
         <h1 class="page__title">{{model.name}}</h1>
-        {{d-button action=(action "showLeaderboardInfo") class="leaderboard-info" icon="info-circle" translatedLabel="How does this work?"}}
+        {{d-button action=(action "showLeaderboardInfo") class="-ghost" icon="info-circle" label=(unless site.mobileView "How does this work?")}}
       </div>
 
       <div class="podium">
@@ -23,6 +23,10 @@
 
   <div class="wrap">
     <div class="ranking">
+      <div class="ranking-col-names">
+        <span>Rank</span>
+        <span>{{d-icon 'award'}}{{i18n "gamification.score"}}</span>
+      </div>
       {{#if currentUserRanking}}
         <a href="#leaderboard-user-{{currentUserRanking.user.id}}" class="user -self">
           <div class="user__rank">{{currentUserRanking.position}}</div>
