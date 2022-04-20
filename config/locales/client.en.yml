@@ -4,6 +4,10 @@ en:
       score: "Cheers"
       leaderboard:
         title: "Leaderboards"
+        info: "How does this work?"
+        modal:
+          title: "How does the leaderboard work?"
+          text: "Points are awarded for engaging with the community, such as visiting, liking, and posting. Your score is updated every few minutes. So go be helpful, active, and supportive, and rise through the ranks!"
         name: "Name"
         name_placeholder: "name..."
         new: "New Leaderboard"

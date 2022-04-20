@@ -1,2 +1,41 @@
 .leaderboard {
+  .winner {
+    width: 30%;
+
+    &__avatar {
+      img {
+        border-width: 3px;
+      }
+    }
+
+    &__rank {
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+    }
+
+    &__score {
+      font-size: var(--font-up-4);
+    }
+
+    &.-position1 {
+      width: 40%;
+    }
+
+    .user {
+      padding: 0.5rem 1rem;
+
+      &__rank {
+        font-size: var(--font-up-3);
+      }
+
+      &__score {
+        font-size: var(--font-up-3);
+      }
+    }
+  }
+
+  .ranking-col-names {
+    padding: 0 1rem;
+  }
 }

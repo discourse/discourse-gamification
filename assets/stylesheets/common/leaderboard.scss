@@ -1,2 +1,229 @@
 .leaderboard {
+  $gold: #ffd82a;
+  $silver: #c4c4c4;
+  $bronze: #cd7f32;
+
+  margin-left: calc(50% - 49.5vw);
+  margin-right: calc(50% - 49.5vw);
+
+  .wrap-podium {
+    background: rgba(var(--tertiary-rgb), 0.1);
+  }
+
+  .page {
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--header_primary);
+      margin-top: 2rem;
+      padding-bottom: 0.5rem;
+
+      svg {
+        vertical-align: middle;
+      }
+    }
+
+    &__title {
+      margin: 0;
+    }
+  }
+
+  .-ghost,
+  .-ghost .d-icon {
+    padding: 0;
+    color: var(--tertiary);
+    background-color: transparent;
+
+    &:hover {
+      color: var(--tertiary);
+      background-color: transparent;
+
+      .d-icon {
+        color: var(--tertiary);
+        background-color: transparent;
+      }
+    }
+  }
+
+  .podium {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+  }
+
+  .winner {
+    &__crown {
+      display: none;
+      margin-bottom: 1rem;
+      text-align: center;
+
+      .d-icon {
+        color: $gold;
+        font-size: 40px;
+      }
+    }
+
+    &__avatar {
+      position: relative;
+      margin-bottom: 25px;
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 100%;
+        border-width: 5px;
+        border-style: solid;
+        box-sizing: border-box;
+      }
+    }
+
+    &__rank {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translate(50%, 50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 100%;
+      font-size: 28px;
+      color: #222;
+      font-weight: bold;
+    }
+
+    &__name {
+      font-size: var(--font-up-1);
+      text-align: center;
+    }
+
+    &__score {
+      font-size: var(--font-up-5);
+      font-weight: bold;
+      text-align: center;
+    }
+
+    &.-position1 {
+      position: relative;
+      z-index: 1;
+      order: 2;
+
+      .winner__crown {
+        display: block;
+      }
+
+      .winner__avatar img {
+        border-color: $gold;
+        background-color: #ffe46a;
+      }
+
+      .winner__rank {
+        background-color: $gold;
+      }
+    }
+
+    &.-position2 {
+      order: 1;
+      transform: translate(20%, 35%);
+
+      .winner__avatar img {
+        border-color: $silver;
+        background-color: #d6d6d6;
+      }
+
+      .winner__rank {
+        background-color: $silver;
+      }
+    }
+
+    &.-position3 {
+      order: 3;
+      transform: translate(-20%, 35%);
+
+      .winner__avatar img {
+        border-color: $bronze;
+        background-color: #dca570; //in case avatar has a transparent bg
+      }
+
+      .winner__rank {
+        background-color: $bronze;
+      }
+    }
+  }
+
+  .ranking {
+    margin-top: 2rem;
+  }
+
+  .ranking-col-names {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+
+    .d-icon {
+      margin-right: 0.25rem;
+    }
+  }
+
+  .user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    padding: 0.5rem 2rem;
+    background-color: rgba(var(--primary-rgb), 0.075);
+    border-radius: 20px;
+
+    &__rank {
+      flex-shrink: 0;
+      width: 3rem;
+      font-size: var(--font-up-4);
+      font-weight: bold;
+    }
+
+    &__avatar {
+      margin: 0 1rem 0 0.5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      img {
+        // width: 50px;
+        border-radius: 100%;
+      }
+    }
+
+    &__name {
+      font-size: var(--font-up-2);
+      margin-left: 1rem;
+    }
+
+    &__score {
+      flex-grow: 1;
+      text-align: right;
+      font-size: var(--font-up-4);
+      font-weight: bold;
+    }
+
+    &.-self {
+      margin-bottom: 2rem;
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+      background-color: var(--tertiary);
+      color: var(--secondary);
+
+      .user__name {
+        flex-grow: 1;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .user__score {
+        flex-grow: 0;
+      }
+    }
+  }
 }

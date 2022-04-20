@@ -1,2 +1,31 @@
 .leaderboard {
+  .podium {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .winner {
+    width: 25%;
+
+    &__avatar {
+      img {
+        border-width: 5px;
+      }
+    }
+
+    &.-postion1 {
+      width: 30%;
+    }
+  }
+
+  .ranking {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ranking-col-names {
+    padding: 0 2rem;
+  }
 }
