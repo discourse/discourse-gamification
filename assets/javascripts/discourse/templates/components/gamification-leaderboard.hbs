@@ -7,15 +7,15 @@
       </div>
 
       <div class="podium">
-        {{#each winners as |winner|}}
-          <div class="winner -{{winner.class}}">
+        {{#each winners as |winner position|}}
+          <div class="winner -position{{sum position 1}}">
             <div class="winner__crown">{{d-icon 'crown'}}</div>
-            <div class="winner__avatar clickable" role="button" data-user-card={{winner.user.username}}>
-              {{avatar winner.user imageSize="huge"}}
-              <div class="winner__rank"><span>{{winner.position}}</span></div>
+            <div class="winner__avatar clickable" role="button" data-user-card={{winner.username}}>
+              {{avatar winner imageSize="huge"}}
+              <div class="winner__rank"><span>{{sum position 1}}</span></div>
             </div>
-            <div class="winner__name">{{winner.user.username}}</div>
-            <div class="winner__score">{{winner.user.total_score}}</div>
+            <div class="winner__name">{{winner.username}}</div>
+            <div class="winner__score">{{winner.total_score}}</div>
           </div>
         {{/each}}
       </div>
@@ -36,8 +36,8 @@
         </a>
       {{/if}}
 
-      {{#each ranking as |rank|}}
-        {{gamification-leaderboard-row rank=rank}}
+      {{#each ranking as |rank index|}}
+        {{gamification-leaderboard-row rank=rank index=index}}
       {{/each}}
     </div>
   </div>

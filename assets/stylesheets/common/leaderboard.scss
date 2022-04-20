@@ -108,9 +108,10 @@
       text-align: center;
     }
 
-    &.-first {
+    &.-position1 {
       position: relative;
       z-index: 1;
+      order: 2;
 
       .winner__crown {
         display: block;
@@ -126,7 +127,8 @@
       }
     }
 
-    &.-second {
+    &.-position2 {
+      order: 1;
       transform: translate(20%, 35%);
 
       .winner__avatar img {
@@ -139,7 +141,8 @@
       }
     }
 
-    &.-third {
+    &.-position3 {
+      order: 3;
       transform: translate(-20%, 35%);
 
       .winner__avatar img {

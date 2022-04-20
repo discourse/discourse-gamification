@@ -20,18 +20,12 @@ export default Component.extend({
 
   @discourseComputed("model.users")
   winners(users) {
-    return [
-      { user: users[1], class: "second", position: 2 },
-      { user: users[0], class: "first", position: 1 },
-      { user: users[2], class: "third", position: 3 },
-    ];
+    return users.slice(0, 3);
   },
 
   @discourseComputed("model.users.[]", "winners.length")
   ranking(users, winnersLength) {
-    return users.slice(3).map((user, index) => {
-      return { user, position: index + 1 + winnersLength };
-    });
+    return users.slice(3);
   },
 
   @action
