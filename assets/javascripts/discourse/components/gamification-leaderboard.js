@@ -23,8 +23,8 @@ export default Component.extend({
     return users.slice(0, 3);
   },
 
-  @discourseComputed("model.users.[]", "winners.length")
-  ranking(users, winnersLength) {
+  @discourseComputed("model.users.[]")
+  ranking(users) {
     return users.slice(3);
   },
 
