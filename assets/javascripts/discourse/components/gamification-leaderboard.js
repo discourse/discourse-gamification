@@ -13,7 +13,7 @@ export default Component.extend({
       ? {
           user,
           total_score: user.total_score,
-          position: users.indexOf(user),
+          position: users.indexOf(user) + 1,
         }
       : null;
   },
