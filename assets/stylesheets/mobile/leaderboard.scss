@@ -1,7 +1,4 @@
 .leaderboard {
-  .u-hide-on-mobile {
-    display: none;
-  }
 
   .winner {
     width: 30%;
@@ -26,10 +23,6 @@
       width: 40%;
     }
 
-    .ranking-col-names {
-      padding: 0 1rem;
-    }
-
     .user {
       padding: .5rem 1rem;
 
@@ -41,5 +34,9 @@
         font-size: var(--font-up-3);
       }
     }
+  }
+
+  .ranking-col-names {
+    padding: 0 1rem;
   }
 }

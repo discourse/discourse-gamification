@@ -29,14 +29,16 @@
     }
   }
 
-  .-ghost, .-ghost .d-icon {
+  .-ghost,
+  .-ghost .d-icon {
     padding: 0;
     color: var(--tertiary);
     background-color: transparent;
 
     &:hover {
-        color: var(--tertiary);
-        background-color: transparent;
+      color: var(--tertiary);
+      background-color: transparent;
+
       .d-icon {
         color: var(--tertiary);
         background-color: transparent;
@@ -199,6 +201,9 @@
     }
 
     &.-self {
+      margin-bottom: 2rem;
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
       background-color: var(--tertiary);
       color: var(--secondary);
 
