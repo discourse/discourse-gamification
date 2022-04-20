@@ -8,8 +8,8 @@
 
       <div class="podium">
         {{#each winners as |winner|}}
-        {{log winner}}
           <div class="winner -{{winner.class}}">
+            <div class="winner__crown">{{d-icon 'crown'}}</div>
             <div class="winner__avatar clickable" role="button" data-user-card={{winner.user.username}}>
               {{avatar winner.user imageSize="huge"}}
               <div class="winner__rank"><span>{{winner.position}}</span></div>

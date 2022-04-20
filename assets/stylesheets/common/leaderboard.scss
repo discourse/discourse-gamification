@@ -50,12 +50,14 @@
   .podium {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 2rem;
     margin-bottom: 5rem;
   }
 
   .winner {
     &__crown {
+      display: none;
       margin-bottom: 1rem;
       text-align: center;
 
@@ -110,6 +112,10 @@
       position: relative;
       z-index: 1;
 
+      .winner__crown {
+        display: block;
+      }
+
       .winner__avatar img {
         border-color: $gold;
         background-color: #ffe46a;
@@ -121,7 +127,7 @@
     }
 
     &.-second {
-      transform: translate(20%, 30%);
+      transform: translate(20%, 35%);
 
       .winner__avatar img {
         border-color: $silver;
@@ -134,7 +140,7 @@
     }
 
     &.-third {
-      transform: translate(-20%, 30%);
+      transform: translate(-20%, 35%);
 
       .winner__avatar img {
         border-color: $bronze;
