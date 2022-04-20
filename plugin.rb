@@ -18,6 +18,7 @@ register_asset 'stylesheets/desktop/leaderboard-info-modal.scss', :desktop
 register_asset 'stylesheets/mobile/leaderboard-info-modal.scss', :mobile
 
 register_svg_icon 'crown'
+register_svg_icon 'award'
 
 after_initialize do
   module ::DiscourseGamification
