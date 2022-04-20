@@ -12,7 +12,7 @@
       }
     }
 
-     &__rank {
+    &__rank {
       width: 40px;
       height: 40px;
       font-size: 24px;
@@ -26,30 +26,19 @@
       width: 40%;
     }
 
-    &.-second {
-      transform: translate(15%, 40%);
-    }
-    
-    &.-third {
-      transform: translate(-15%, 40%);
-    }
-  }
-
-  .user {
-    padding: .5rem 1rem;
-
-    &__rank {
-      font-size: var(--font-up-3);
+    .ranking-col-names {
+      padding: 0 1rem;
     }
 
-     &__avatar {
-      img {
-        // width: 40px;
+    .user {
+      padding: .5rem 1rem;
+
+      &__rank {
+        font-size: var(--font-up-3);
+      }
+
+      &__score {
+        font-size: var(--font-up-3);
       }
     }
-
-     &__score {
-      font-size: var(--font-up-3);
-    }
   }
-}

@@ -29,6 +29,22 @@
     }
   }
 
+  .-ghost, .-ghost .d-icon {
+    padding: 0;
+    color: var(--tertiary);
+    background-color: transparent;
+
+    &:hover {
+        color: var(--tertiary);
+        background-color: transparent;
+      .d-icon {
+        color: var(--tertiary);
+        background-color: transparent;
+      }
+    }
+  }
+
+
   .podium {
     display: flex;
     justify-content: center;
@@ -53,9 +69,11 @@
 
       img {
         width: 100%;
+        height: auto;
         border-radius: 100%;
         border-width: 5px;
         border-style: solid;
+        box-sizing: border-box;
       }
     }
 
@@ -101,7 +119,7 @@
     }
 
     &.-second {
-      transform: translate(15%, 35%);
+      transform: translate(20%, 30%);
 
       .winner__avatar img {
         border-color: $silver;
@@ -114,7 +132,7 @@
     }
 
     &.-third {
-      transform: translate(-15%, 35%);
+      transform: translate(-20%, 30%);
 
       .winner__avatar img {
         border-color: $bronze;
@@ -129,6 +147,16 @@
 
   .ranking {
     margin-top: 2rem;
+  }
+
+  .ranking-col-names {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .5rem;
+
+    .d-icon {
+      margin-right: .25rem;
+    }
   }
 
   .user {
