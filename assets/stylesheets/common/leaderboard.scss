@@ -1,14 +1,18 @@
+// #main-outlet {
+//   padding-top: 0;
+// }
+
 .leaderboard {
   $gold: #ffd82a;
   $silver: #c4c4c4;
   $bronze: #cd7f32;
 
-  margin-left: calc(50% - 49.5vw);
-  margin-right: calc(50% - 49.5vw);
+  // margin-left: calc(50% - 49.5vw);
+  // margin-right: calc(50% - 49.5vw);
 
-  .wrap-podium {
-    background: rgba(var(--tertiary-rgb), 0.1);
-  }
+  // .wrap-podium {
+  //   background: rgba(var(--tertiary-rgb), 0.1);
+  // }
 
   .page {
     &__header {
@@ -33,7 +37,9 @@
   .-ghost .d-icon {
     padding: 0;
     color: var(--tertiary);
+    border: 0;
     background-color: transparent;
+    box-shadow: none;
 
     &:hover {
       color: var(--tertiary);
@@ -46,16 +52,20 @@
     }
   }
 
-
   .podium {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
-    margin-bottom: 5rem;
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+
+    &__wrapper {
+      background: rgba(var(--tertiary-rgb), 0.1);
+    }
   }
 
   .winner {
+    overflow: hidden; //best worst solution in case the username is very long, better to cut it than have it wrap mid-name or overflow
     &__crown {
       display: none;
       margin-bottom: 1rem;
@@ -163,10 +173,10 @@
   .ranking-col-names {
     display: flex;
     justify-content: space-between;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
 
     .d-icon {
-      margin-right: .25rem;
+      margin-right: 0.25rem;
     }
   }
 
@@ -190,16 +200,15 @@
       margin: 0 1rem 0 0.5rem;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
 
-      img {
-        // width: 50px;
-        border-radius: 100%;
-      }
+    &__avatar-img {
+      margin-right: 1rem;
+      border-radius: 100%;
     }
 
     &__name {
       font-size: var(--font-up-2);
-      margin-left: 1rem;
     }
 
     &__score {
