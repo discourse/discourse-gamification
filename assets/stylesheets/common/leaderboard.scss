@@ -61,6 +61,8 @@
 
     &__wrapper {
       background: rgba(var(--tertiary-rgb), 0.1);
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
     }
   }
 
@@ -172,12 +174,22 @@
   }
 
   .ranking-col-names {
+    position: sticky;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.5rem;
+    // padding: 1rem 1rem 0.25rem 1rem;
+    background-color: var(--secondary);
+    border-bottom: 1px solid black;
 
     .d-icon {
       margin-right: 0.25rem;
+    }
+
+    &__sticky-border {
+      position: relative;
+      height: 1px;
+      margin-top: -1px;
+      background-color: var(--secondary);
     }
   }
 
