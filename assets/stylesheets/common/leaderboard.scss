@@ -66,6 +66,7 @@
 
   .winner {
     overflow: hidden; //best worst solution in case the username is very long, better to cut it than have it wrap mid-name or overflow
+
     &__crown {
       display: none;
       margin-bottom: 1rem;
@@ -200,11 +201,11 @@
       margin: 0 1rem 0 0.5rem;
       overflow: hidden;
       text-overflow: ellipsis;
-    }
 
-    &__avatar-img {
-      margin-right: 1rem;
-      border-radius: 100%;
+      img {
+        margin-right: 1rem;
+        border-radius: 100%;
+      }
     }
 
     &__name {
