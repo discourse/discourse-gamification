@@ -21,21 +21,22 @@
     &.-position1 {
       width: 40%;
     }
-
-    .user {
-      padding: 0.5rem 1rem;
-
-      &__rank {
-        font-size: var(--font-up-3);
-      }
-
-      &__score {
-        font-size: var(--font-up-3);
-      }
-    }
   }
 
   .ranking-col-names {
-    padding: 0 1rem;
+    top: 55px;
+    padding: 1rem 1rem 0.25rem 1rem;
+  }
+
+  .user {
+    padding: 0.5rem 1rem;
+
+    &__rank {
+      font-size: var(--font-up-3);
+    }
+
+    &__score {
+      font-size: var(--font-up-3);
+    }
   }
 }

@@ -3,13 +3,6 @@
   $silver: #c4c4c4;
   $bronze: #cd7f32;
 
-  margin-left: calc(50% - 49.5vw);
-  margin-right: calc(50% - 49.5vw);
-
-  .wrap-podium {
-    background: rgba(var(--tertiary-rgb), 0.1);
-  }
-
   .page {
     &__header {
       display: flex;
@@ -33,7 +26,9 @@
   .-ghost .d-icon {
     padding: 0;
     color: var(--tertiary);
+    border: 0;
     background-color: transparent;
+    box-shadow: none;
 
     &:hover {
       color: var(--tertiary);
@@ -50,11 +45,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
-    margin-bottom: 5rem;
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+
+    &__wrapper {
+      background: rgba(var(--tertiary-rgb), 0.1);
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
   }
 
   .winner {
+    overflow: hidden; //best worst solution in case the username is very long, better to cut it than have it wrap mid-name or overflow
+
     &__crown {
       display: none;
       margin-bottom: 1rem;
@@ -160,12 +163,22 @@
   }
 
   .ranking-col-names {
+    position: sticky;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.5rem;
+    // padding: 1rem 1rem 0.25rem 1rem;
+    background-color: var(--secondary);
+    border-bottom: 1px solid black;
 
     .d-icon {
       margin-right: 0.25rem;
+    }
+
+    &__sticky-border {
+      position: relative;
+      height: 1px;
+      margin-top: -1px;
+      background-color: var(--secondary);
     }
   }
 
@@ -180,7 +193,7 @@
 
     &__rank {
       flex-shrink: 0;
-      width: 3rem;
+      width: 2.5rem;
       font-size: var(--font-up-4);
       font-weight: bold;
     }
@@ -188,17 +201,17 @@
     &__avatar {
       margin: 0 1rem 0 0.5rem;
       overflow: hidden;
+      white-space: nowrap;
       text-overflow: ellipsis;
 
       img {
-        // width: 50px;
+        margin-right: 1rem;
         border-radius: 100%;
       }
     }
 
     &__name {
       font-size: var(--font-up-2);
-      margin-left: 1rem;
     }
 
     &__score {
