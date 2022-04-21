@@ -1,5 +1,4 @@
 .leaderboard {
-
   .podium {
     width: 75%;
     margin-left: auto;
@@ -7,17 +6,15 @@
   }
 
   .winner {
-
     width: 25%;
 
     &__avatar {
-
       img {
         border-width: 5px;
       }
     }
 
-    &.-postion1 {
+    &.-position1 {
       width: 30%;
     }
   }
