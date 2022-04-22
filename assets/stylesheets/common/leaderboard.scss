@@ -166,7 +166,6 @@
     position: sticky;
     display: flex;
     justify-content: space-between;
-    // padding: 1rem 1rem 0.25rem 1rem;
     background-color: var(--secondary);
     border-bottom: 1px solid black;
 
@@ -187,7 +186,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.25rem;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 1.5rem;
     background-color: rgba(var(--primary-rgb), 0.075);
     border-radius: 20px;
 
@@ -237,6 +236,11 @@
       .user__score {
         flex-grow: 0;
       }
+    }
+
+    &-highlight {
+      background-color: var(--tertiary);
+      color: var(--secondary);
     }
   }
 }

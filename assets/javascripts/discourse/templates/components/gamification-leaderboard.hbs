@@ -32,7 +32,7 @@
       <a href="#leaderboard-user-{{ currentUserRanking.user.id }}" class="user -self">
         <div class="user__rank">{{ currentUserRanking.position }}</div>
         <div class="user__name">you</div>
-        <div class="user__score">{{ currentUserRanking.total_score }}</div>
+        <div class="user__score">{{number currentUserRanking.total_score}}</div>
       </a>
     {{/if}}
 
