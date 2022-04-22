@@ -25,6 +25,12 @@ export default Component.extend({
 
   @discourseComputed("model.users.[]")
   ranking(users) {
+    //im sorry for this… it's all I could think of :(
+    users.forEach((user) => {
+      if (user.id === this.currentUser.id) {
+        user.isCurrentUser = "true";
+      }
+    });
     return users.slice(3);
   },
 
