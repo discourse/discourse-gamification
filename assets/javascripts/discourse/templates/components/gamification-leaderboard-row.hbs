@@ -5,7 +5,8 @@
     <span class="user__name">{{rank.username}}</span>
   </div>
   <div class="user__score">
-    {{#if site.mobileView}}{{number rank.total_score}}
+    {{#if site.mobileView}}
+      {{number rank.total_score}}
     {{else}}
       {{format rank.total_score}}
     {{/if}}
