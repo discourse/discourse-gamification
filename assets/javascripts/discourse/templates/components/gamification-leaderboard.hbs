@@ -16,7 +16,7 @@
             </div>
           </div>
           <div class="winner__name">{{ winner.username }}</div>
-          <div class="winner__score">{{ format winner.total_score }}</div>
+          <div class="winner__score">{{ fullnumber winner.total_score }}</div>
         </div>
       {{/each}}
     </div>
@@ -36,7 +36,7 @@
           {{#if site.mobileView}}
             {{number currentUserRanking.total_score}}
           {{else}}
-            {{format currentUserRanking.total_score}}
+            {{fullnumber currentUserRanking.total_score}}
           {{/if}}
         </div>
       </a>
