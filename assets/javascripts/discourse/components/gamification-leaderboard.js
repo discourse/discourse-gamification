@@ -50,9 +50,7 @@ export default Component.extend(LoadMore, {
       `/leaderboard/${this.model.leaderboard.id}?last_user_id=${this.lastUser}`
     )
       .then((result) => {
-        debugger;
         this.model.set("users", this.model.users.concat(result.users));
-        return result;
       })
       .catch(popupAjaxError);
   },
