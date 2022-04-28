@@ -45,7 +45,6 @@
     {{#load-more selector=".user" action=(action "loadMore")}}
       {{#each ranking as |rank index|}}
         {{gamification-leaderboard-row rank=rank index=index}}
-        {{conditional-loading-spinner condition=model.loadingMore}}
       {{/each}}
     {{/load-more}}
   </div>

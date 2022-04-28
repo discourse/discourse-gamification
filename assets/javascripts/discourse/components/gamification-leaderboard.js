@@ -2,12 +2,14 @@ import Component from "@ember/component";
 import discourseComputed from "discourse-common/utils/decorators";
 import { action } from "@ember/object";
 import showModal from "discourse/lib/show-modal";
+import LoadMore from "discourse/mixins/load-more";
+import { ajax } from "discourse/lib/ajax";
+import { popupAjaxError } from "discourse/lib/ajax-error";
 
-export default Component.extend({
+export default Component.extend(LoadMore, {
   tagName: "",
-  loadMore: false,
-  loading: false,
-  users: null, // Array
+  eyelineSelector: ".user",
+  page: 0
 
   @discourseComputed("model.users.[]")
   currentUserRanking(users) {
@@ -39,5 +41,17 @@ export default Component.extend({
   @action
   showLeaderboardInfo() {
     showModal("leaderboard-info");
+  },
+
+  @action
+  loadMore() {
+    return ajax(`/leaderboard/${this.model.id}?page=${this.page}`, {
+      type: "GET",
+      cache: false,
+    })
+      .then((result) => {
+        debugger;
+      })
+      .catch(popupAjaxError);
   },
 });
