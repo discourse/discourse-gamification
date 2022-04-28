@@ -5,6 +5,9 @@ import showModal from "discourse/lib/show-modal";
 
 export default Component.extend({
   tagName: "",
+  loadMore: false,
+  loading: false,
+  users: null, // Array
 
   @discourseComputed("model.users.[]")
   currentUserRanking(users) {
