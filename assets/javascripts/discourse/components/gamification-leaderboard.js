@@ -9,7 +9,7 @@ import { popupAjaxError } from "discourse/lib/ajax-error";
 export default Component.extend(LoadMore, {
   tagName: "",
   eyelineSelector: ".user",
-  page: 0
+  lastUser: null,
 
   @discourseComputed("model.users.[]")
   currentUserRanking(users) {
@@ -45,12 +45,14 @@ export default Component.extend(LoadMore, {
 
   @action
   loadMore() {
-    return ajax(`/leaderboard/${this.model.id}?page=${this.page}`, {
-      type: "GET",
-      cache: false,
-    })
+    this.set("lastUser", this.model.users[this.model.users.length - 1].id);
+    return ajax(
+      `/leaderboard/${this.model.leaderboard.id}?last_user_id=${this.lastUser}`
+    )
       .then((result) => {
         debugger;
+        this.model.set("users", this.model.users.concat(result.users));
+        return result;
       })
       .catch(popupAjaxError);
   },

@@ -10,8 +10,11 @@ class DiscourseGamification::GamificationLeaderboardController < ::ApplicationCo
     if !current_user.staff? && leaderboard.visible_to_groups_ids.present? && (leaderboard.visible_to_groups_ids & current_user.group_ids).empty?
       raise Discourse::NotFound
     else
-      # we will need to build an object here to include param `page`
-      render_serialized(leaderboard, LeaderboardSerializer, root: false)
+      p params[:last_user_id]
+      render_serialized({
+        leaderboard: leaderboard,
+        last_user_id: params[:last_user_id],
+      }, LeaderboardViewSerializer, root: false)
     end
   end
 end

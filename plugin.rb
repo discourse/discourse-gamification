@@ -39,6 +39,7 @@ after_initialize do
   require_relative 'app/controllers/gamification_leaderboard_controller.rb'
   require_relative 'app/serializers/user_score_serializer.rb'
   require_relative 'app/serializers/leaderboard_serializer.rb'
+  require_relative 'app/serializers/leaderboard_view_serializer.rb'
   require_relative 'app/serializers/admin_gamification_index_serializer.rb'
   require_relative 'lib/directory_integration.rb'
   require_relative 'lib/scorables/scorable.rb'
