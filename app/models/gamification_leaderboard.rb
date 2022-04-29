@@ -2,7 +2,8 @@
 
 class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
 
-  USER_LIMIT = 10
+  # Needs to be updated alongside constant in gamification-leaderboard.js
+  USER_LIMIT = 100
 
   self.table_name = 'gamification_leaderboards'
   validates :name, exclusion: { in: %w(new),
@@ -21,7 +22,7 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
     # calculate scores up to to_date if just to_date is present
     users = users.where("gamification_scores.date <= ?", leaderboard.to_date) if leaderboard.to_date != Date.today && !leaderboard.from_date.present?
     users = users.select("users.id, users.username, users.uploaded_avatar_id, #{sum_sql}").group("users.id").order(total_score: :desc)
-    users = users.offset(users.find_index(after_user)) if after_user 
+    users = users.offset(users.find_index(after_user) + 1) if after_user 
     users = users.limit(USER_LIMIT)
     users
   end

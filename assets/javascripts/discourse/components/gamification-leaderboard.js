@@ -6,10 +6,15 @@ import LoadMore from "discourse/mixins/load-more";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
+// Needs to be updated alongside constant in gamification_leaderboard.rb
+const USER_LIMIT = 100
+
 export default Component.extend(LoadMore, {
   tagName: "",
   eyelineSelector: ".user",
   lastUser: null,
+  loading: false,
+  canLoadMore: true,
 
   @discourseComputed("model.users.[]")
   currentUserRanking(users) {
@@ -45,13 +50,23 @@ export default Component.extend(LoadMore, {
 
   @action
   loadMore() {
+    if (this.loading || !this.canLoadMore) {
+      return;
+    }
+
+    this.set("loading", true);
     this.set("lastUser", this.model.users[this.model.users.length - 1].id);
     return ajax(
       `/leaderboard/${this.model.leaderboard.id}?last_user_id=${this.lastUser}`
     )
       .then((result) => {
-        this.model.set("users", this.model.users.concat(result.users));
+        if (result.users.length < USER_LIMIT) {
+          this.set("canLoadMore", false);
+        }
+
+        this.set("model.users", this.model.users.concat(result.users));
       })
+      .finally(() => this.set("loading", false))
       .catch(popupAjaxError);
   },
 });
