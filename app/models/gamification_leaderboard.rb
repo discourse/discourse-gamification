@@ -2,7 +2,6 @@
 
 class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
 
-  # Needs to be updated alongside constant in gamification-leaderboard.js
   USER_LIMIT = 100
 
   self.table_name = 'gamification_leaderboards'

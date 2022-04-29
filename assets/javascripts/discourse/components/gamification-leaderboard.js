@@ -6,9 +6,6 @@ import LoadMore from "discourse/mixins/load-more";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
-// Needs to be updated alongside constant in gamification_leaderboard.rb
-const USER_LIMIT = 100;
-
 export default Component.extend(LoadMore, {
   tagName: "",
   eyelineSelector: ".user",
@@ -60,7 +57,7 @@ export default Component.extend(LoadMore, {
       `/leaderboard/${this.model.leaderboard.id}?last_user_id=${this.lastUser}`
     )
       .then((result) => {
-        if (result.users.length < USER_LIMIT) {
+        if (result.users.length > 0) {
           this.set("canLoadMore", false);
         }
 
