@@ -21,6 +21,7 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
   describe "#respond" do
     it "returns users and their calculated scores" do
       get "/leaderboard/#{leaderboard.id}.json"
+
       expect(response.status).to eq(200)
 
       data = response.parsed_body
