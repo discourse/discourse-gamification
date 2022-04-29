@@ -12,7 +12,7 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
   def self.scores_for(leaderboard_id, last_user_id = nil)
     leaderboard = self.find(leaderboard_id)
     leaderboard.to_date ||= Date.today
-    last_user = User.find(user_id) if last_user_id
+    last_user = User.find(last_user_id) if last_user_id
 
     join_sql = "LEFT OUTER JOIN gamification_scores ON gamification_scores.user_id = users.id"
     sum_sql = "SUM(COALESCE(gamification_scores.score, 0)) as total_score"
