@@ -9,10 +9,10 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
   validates :name, exclusion: { in: %w(new),
                                 message: "%{value} is reserved." }
 
-  def self.scores_for(leaderboard_id, user_id = nil)
+  def self.scores_for(leaderboard_id, last_user_id = nil)
     leaderboard = self.find(leaderboard_id)
     leaderboard.to_date ||= Date.today
-    after_user = User.find(user_id) if user_id
+    last_user = User.find(user_id) if user_id
 
     join_sql = "LEFT OUTER JOIN gamification_scores ON gamification_scores.user_id = users.id"
     sum_sql = "SUM(COALESCE(gamification_scores.score, 0)) as total_score"
@@ -22,7 +22,7 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
     # calculate scores up to to_date if just to_date is present
     users = users.where("gamification_scores.date <= ?", leaderboard.to_date) if leaderboard.to_date != Date.today && !leaderboard.from_date.present?
     users = users.select("users.id, users.username, users.uploaded_avatar_id, #{sum_sql}").group("users.id").order(total_score: :desc)
-    users = users.offset(users.find_index(after_user) + 1) if after_user 
+    users = users.offset(users.find_index(last_user) + 1) if last_user 
     users = users.limit(USER_LIMIT)
     users
   end
