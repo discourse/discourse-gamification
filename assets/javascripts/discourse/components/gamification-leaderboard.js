@@ -7,7 +7,7 @@ import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
 // Needs to be updated alongside constant in gamification_leaderboard.rb
-const USER_LIMIT = 100
+const USER_LIMIT = 100;
 
 export default Component.extend(LoadMore, {
   tagName: "",

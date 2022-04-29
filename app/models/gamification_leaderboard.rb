@@ -22,7 +22,7 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
     # calculate scores up to to_date if just to_date is present
     users = users.where("gamification_scores.date <= ?", leaderboard.to_date) if leaderboard.to_date != Date.today && !leaderboard.from_date.present?
     users = users.select("users.id, users.username, users.uploaded_avatar_id, #{sum_sql}").group("users.id").order(total_score: :desc)
-    users = users.offset(users.find_index(last_user) + 1) if last_user 
+    users = users.offset(users.find_index(last_user) + 1) if last_user
     users = users.limit(USER_LIMIT)
     users
   end
