@@ -2,6 +2,7 @@ en:
   js:
     gamification:
       score: "Cheers"
+      you: "You"
       leaderboard:
         title: "Leaderboards"
         info: "How does this work?"

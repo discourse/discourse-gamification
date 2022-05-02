@@ -31,7 +31,7 @@
     {{#if currentUserRanking}}
       <a href="#leaderboard-user-{{ currentUserRanking.user.id }}" class="user -self">
         <div class="user__rank">{{ currentUserRanking.position }}</div>
-        <div class="user__name">you</div>
+        <div class="user__name">{{i18n "gamification.you"}}</div>
         <div class="user__score">
           {{#if site.mobileView}}
             {{number currentUserRanking.total_score}}
@@ -42,8 +42,11 @@
       </a>
     {{/if}}
 
-    {{#each ranking as |rank index|}}
-      {{gamification-leaderboard-row rank=rank index=index}}
-    {{/each}}
+    {{#load-more selector=".user" action=(action "loadMore")}}
+      {{#each ranking as |rank index|}}
+        {{gamification-leaderboard-row rank=rank index=index}}
+      {{/each}}
+    {{/load-more}}
+    {{conditional-loading-spinner condition=loading}}
   </div>
 </div>
