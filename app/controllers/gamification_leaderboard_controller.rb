@@ -12,7 +12,7 @@ class DiscourseGamification::GamificationLeaderboardController < ::ApplicationCo
     else
       render_serialized({
         leaderboard: leaderboard,
-        last_user_id: params[:last_user_id],
+        page: params[:page].to_i,
       }, LeaderboardViewSerializer, root: false)
     end
   end
