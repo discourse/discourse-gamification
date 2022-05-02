@@ -53,14 +53,12 @@ export default Component.extend(LoadMore, {
 
     this.set("loading", true);
 
-    return ajax(
-      `/leaderboard/${this.model.leaderboard.id}?page=${this.page}`
-    )
+    return ajax(`/leaderboard/${this.model.leaderboard.id}?page=${this.page}`)
       .then((result) => {
         if (result.users.length === 0) {
           this.set("canLoadMore", false);
         }
-        this.set("page", this.page += 1);
+        this.set("page", (this.page += 1));
         this.set("model.users", this.model.users.concat(result.users));
       })
       .finally(() => this.set("loading", false))
