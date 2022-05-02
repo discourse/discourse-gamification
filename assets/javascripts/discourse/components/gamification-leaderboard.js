@@ -57,7 +57,7 @@ export default Component.extend(LoadMore, {
       `/leaderboard/${this.model.leaderboard.id}?last_user_id=${this.lastUser}`
     )
       .then((result) => {
-        if (result.users.length > 0) {
+        if (result.users.length === 0) {
           this.set("canLoadMore", false);
         }
 
