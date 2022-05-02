@@ -33,7 +33,7 @@ export default Component.extend(LoadMore, {
   @discourseComputed("model.users.[]")
   ranking(users) {
     users.forEach((user) => {
-      if (user.id === this.currentUser.id) {
+      if (user.id === this.currentUser?.id) {
         user.isCurrentUser = "true";
       }
     });
