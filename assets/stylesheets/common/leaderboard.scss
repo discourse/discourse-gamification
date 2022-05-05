@@ -165,6 +165,7 @@
     position: sticky;
     display: flex;
     justify-content: space-between;
+    top: var(--header-offset);
     background-color: var(--secondary);
     border-bottom: 1px solid black;
 
