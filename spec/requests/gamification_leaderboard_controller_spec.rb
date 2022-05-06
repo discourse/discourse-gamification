@@ -63,7 +63,7 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
       data = response.parsed_body
       expect(data["users"].map { |u| u["id"] }).to_not include(staged_user.id, anon_user.id)
     end
-    
+
     it "does not error if visible_to_groups_ids or included_groups_ids are empty" do
       get "/leaderboard/#{leaderboard.id}.json"
       expect(response.status).to eq(200)
