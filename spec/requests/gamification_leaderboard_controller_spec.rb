@@ -7,7 +7,7 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
   let(:current_user) { Fabricate(:user, group_ids: [group.id]) }
   let(:user_2) { Fabricate(:user) }
   let(:staged_user) { Fabricate(:user, staged: true) }
-  let(:anon_user) { Fabricate(:anonymous) }
+  let(:anon_user) { Fabricate(:user, email: "john@anonymized.invalid") }
   let!(:create_score) { UserVisit.create(user_id: current_user.id, visited_at: 2.days.ago) }
   let!(:create_score_for_user2) { UserVisit.create(user_id: user_2.id, visited_at: 2.days.ago) }
   let!(:create_score_for_staged_user) { UserVisit.create(user_id: staged_user.id, visited_at: 2.days.ago) }
