@@ -1,0 +1,37 @@
+# WARNING: Never edit this file.
+# It will be overwritten when translations are pulled from Crowdin.
+#
+# To work with us on translations, join this project:
+# https://translate.discourse.org/
+
+he:
+  js:
+    gamification:
+      score: "תשועות"
+      you: "אני"
+      leaderboard:
+        title: "לוחות תוצאות"
+        info: "איך זה עובד?"
+        modal:
+          title: "איך עובד לוח התוצאות?"
+          text: "נקודות מוענקות על מעורבות בקהילה, כגון ביקור, סימוני לייק ופרסום. הניקוד שלך מתעדכן כל כמה דקות. לכן, מומלץ להביא תועלת, לקדם פעילות ולתמוך, ככה הניקוד הולך ועולה!"
+        name: "שם"
+        name_placeholder: "שם…"
+        new: "לוח תוצאות חדש"
+        none: "לא נוצרו לוחות תוצאות קיימים"
+        confirm_destroy: "למחוק את לוח התוצאות הזה?"
+        date:
+          range: "טווח תאריך מ/עד"
+          helper: "אם התאריכים יישארו ריקים לוח התוצאות יציג את כל התוצאות הזמינות כברירת מחדל"
+        visible_to_groups: "גלוי לקבוצות"
+        visible_to_groups_help: "הקבוצות שיכולות לצפות בלוח התוצאות"
+        included_groups: "קבוצות שנכללות"
+        included_groups_help: "הקבוצה שתיכלל בלוח התוצאות"
+      create: "יצירה"
+      cancel: "ביטול"
+      delete: "מחיקה"
+      edit: "עריכה"
+      back: "חזרה"
+      save: "שמירה"
+      admin:
+        title: "משחקיות"
