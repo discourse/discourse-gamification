@@ -1,0 +1,32 @@
+# WARNING: Never edit this file.
+# It will be overwritten when translations are pulled from Crowdin.
+#
+# To work with us on translations, join this project:
+# https://translate.discourse.org/
+
+es:
+  js:
+    gamification:
+      score: "Puntos"
+      you: "Tú"
+      leaderboard:
+        title: "Clasificaciones"
+        info: "¿Cómo funciona?"
+        modal:
+          title: "¿Cómo funciona la clasificación?"
+          text: "Recibirás puntos por participar en la comunidad. Por ejemplo, cuando la visitas, usas el botón de me gusta o publicas cosas. Tu puntuación se actualiza cada pocos minutos. Así que ya sabes, ¡participa, ayuda y sube de posición!"
+        name: "Nombre"
+        name_placeholder: "nombre…"
+        new: "Nueva tabla de clasificación"
+        date:
+          range: "Fecha de inicio/fin"
+        visible_to_groups: "Visible para los grupos"
+        included_groups: "Grupos incluidos"
+      create: "Crear"
+      cancel: "Cancelar"
+      delete: "Eliminar"
+      edit: "Editar"
+      back: "Volver"
+      save: "Guardar"
+      admin:
+        title: "Gamification"

@@ -1,0 +1,13 @@
+# WARNING: Never edit this file.
+# It will be overwritten when translations are pulled from Crowdin.
+#
+# To work with us on translations, join this project:
+# https://translate.discourse.org/
+
+he:
+  site_settings:
+    discourse_gamification_enabled: "הפעלת תוסף המשחקיות של Discourse"
+    like_received_score_value: "ערך התשועה שמוענק כשמשתמש מקבל לייק"
+    scorable_categories: "רשימת הקטגוריות בהן פעולות מייצרות תשועות. יש להשאיר ריק כדי להפעיל תשועות בכל הקטגוריות"
+  score: "תשועות"
+  default_leaderboard_name: "לוח תוצאות עולמי"

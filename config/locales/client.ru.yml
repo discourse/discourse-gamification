@@ -1,0 +1,37 @@
+# WARNING: Never edit this file.
+# It will be overwritten when translations are pulled from Crowdin.
+#
+# To work with us on translations, join this project:
+# https://translate.discourse.org/
+
+ru:
+  js:
+    gamification:
+      score: "Репутация"
+      you: "Вы"
+      leaderboard:
+        title: "Таблица лидеров"
+        info: "Как это работает?"
+        modal:
+          title: "Как работает таблица лидеров?"
+          text: "Баллы начисляются за участие в сообществе, например за посещение, за выраженные симпатии, за публикацию сообщений. Баллы обновляются каждые несколько минут. Чем более вы активны на форуме, помогая другим участникам сообщества, тем больше баллов вам будет начислено!"
+        name: "Имя"
+        name_placeholder: "Имя..."
+        new: "Новая таблица лидеров"
+        none: "Список лидеров ещё не создан"
+        confirm_destroy: "Вы действительно хотите удалить эту таблицу лидеров?"
+        date:
+          range: "Диапазон дат (с/по)"
+          helper: "Если даты не указаны, то в таблице лидеров будут указаны все доступные результаты."
+        visible_to_groups: "Виден группе (группам)"
+        visible_to_groups_help: "Группа (группы), которые могут просматривать таблицу лидеров"
+        included_groups: "Включенная группа(ы)"
+        included_groups_help: "Группа(ы), которые будут включены в таблицу лидеров"
+      create: "Создать"
+      cancel: "Отмена"
+      delete: "Удалить"
+      edit: "Редактировать"
+      back: "Назад"
+      save: "Сохранить"
+      admin:
+        title: "Геймификация"
