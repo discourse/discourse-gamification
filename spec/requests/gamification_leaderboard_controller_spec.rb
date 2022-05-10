@@ -6,8 +6,12 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
   let(:group) { Fabricate(:group) }
   let(:current_user) { Fabricate(:user, group_ids: [group.id]) }
   let(:user_2) { Fabricate(:user) }
+  let(:staged_user) { Fabricate(:user, staged: true) }
+  let(:anon_user) { Fabricate(:user, email: "john@anonymized.invalid") }
   let!(:create_score) { UserVisit.create(user_id: current_user.id, visited_at: 2.days.ago) }
-  let!(:create_score_2) { UserVisit.create(user_id: user_2.id, visited_at: 2.days.ago) }
+  let!(:create_score_for_user2) { UserVisit.create(user_id: user_2.id, visited_at: 2.days.ago) }
+  let!(:create_score_for_staged_user) { UserVisit.create(user_id: staged_user.id, visited_at: 2.days.ago) }
+  let!(:create_score_for_anon_user) { UserVisit.create(user_id: anon_user.id, visited_at: 2.days.ago) }
   let!(:create_topic) { Fabricate(:topic, user: current_user) }
   let!(:leaderboard) { Fabricate(:gamification_leaderboard, name: "test", created_by_id: current_user.id) }
   let!(:leaderboard_2) { Fabricate(:gamification_leaderboard, name: "test_2", created_by_id: current_user.id, from_date: 3.days.ago, to_date: 1.day.ago) }
@@ -49,6 +53,15 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
       data = response.parsed_body
       # scoped to group
       expect(data["users"].map { |u| u["id"] }).to eq([current_user.id])
+    end
+
+    it "excludes staged and anon users" do
+      # prove score for staged/anon user exists
+      expect(DiscourseGamification::GamificationScore.all.map(&:user_id)).to include(staged_user.id, anon_user.id)
+
+      get "/leaderboard/#{leaderboard.id}.json"
+      data = response.parsed_body
+      expect(data["users"].map { |u| u["id"] }).to_not include(staged_user.id, anon_user.id)
     end
 
     it "does not error if visible_to_groups_ids or included_groups_ids are empty" do

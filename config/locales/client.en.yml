@@ -1,5 +1,7 @@
 en:
   js:
+    # directory column workaround 
+    gamification_score: "Cheers"
     gamification:
       score: "Cheers"
       you: "You"
