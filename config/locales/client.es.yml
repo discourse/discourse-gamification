@@ -6,6 +6,7 @@
 
 es:
   js:
+    gamification_score: "Puntos"
     gamification:
       score: "Puntos"
       you: "Tú"
