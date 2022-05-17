@@ -6,6 +6,7 @@
 
 he:
   js:
+    gamification_score: "תשועות"
     gamification:
       score: "תשועות"
       you: "אני"

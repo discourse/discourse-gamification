@@ -6,6 +6,7 @@
 
 ru:
   js:
+    gamification_score: "Репутация"
     gamification:
       score: "Репутация"
       you: "Вы"

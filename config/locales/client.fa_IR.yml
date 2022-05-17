@@ -6,6 +6,7 @@
 
 fa_IR:
   js:
+    gamification_score: "امتیازات"
     gamification:
       you: "شما"
       leaderboard:
