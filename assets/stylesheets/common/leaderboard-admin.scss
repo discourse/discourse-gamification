@@ -4,12 +4,20 @@
     font-size: var(--font-up-3);
   }
 
+  &__cta-new {
+    display: flex;
+    margin-top: 1rem;
+  }
+
   &__btn-new {
     float: right;
   }
 
-  &__cta-new {
-    display: flex;
-    margin-top: 1rem;
+  &__btn-back {
+    padding-left: 0;
+  }
+
+  &__form-row {
+    margin-top: 1.5rem;
   }
 }
