@@ -1,11 +1,15 @@
 .leaderboard-admin {
   &__title {
     display: inline-block;
-
     font-size: var(--font-up-3);
   }
 
   &__btn-new {
     float: right;
+  }
+
+  &__cta-new {
+    display: flex;
+    margin-top: 1rem;
   }
 }

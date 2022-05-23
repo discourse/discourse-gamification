@@ -14,7 +14,8 @@ en:
         name: "Name"
         name_placeholder: "name..."
         new: "Add new"
-        none: "No existing leaderboards created"
+        cta: "Make your first leaderboard"
+        none: "No leaderboards created yet."
         confirm_destroy: "Are you sure you want to delete this leaderboard?"
         date:
           range: "From / To Date Range"

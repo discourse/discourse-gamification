@@ -66,6 +66,7 @@
   <h3 class="leaderboard-admin__title">{{i18n
       "gamification.leaderboard.title"
     }}</h3>
+
   {{#if creatingNew}}
     <div class="new-leaderboard-container">
       {{input
@@ -88,13 +89,15 @@
     </div>
 
   {{else}}
-    {{d-button
-      label="gamification.leaderboard.new"
-      title="gamification.leaderboard.new"
-      icon="plus"
-      class="btn-primary leaderboard-admin__btn-new"
-      action=(action (mut creatingNew) true)
-    }}
+    {{#if model.leaderboards}}
+      {{d-button
+        label="gamification.leaderboard.new"
+        title="gamification.leaderboard.new"
+        icon="plus"
+        class="btn-primary leaderboard-admin__btn-new"
+        action=(action (mut creatingNew) true)
+      }}
+    {{/if}}
   {{/if}}
 
   <div class="leaderboards">
@@ -144,7 +147,15 @@
         {{/each}}
       </table>
     {{else}}
-      {{i18n "gamification.leaderboard.none"}}
+      {{#unless creatingNew}}
+        {{i18n "gamification.leaderboard.none"}}
+        {{d-button
+          label="gamification.leaderboard.cta"
+          title="gamification.leaderboard.cta"
+          class="btn-primary leaderboard-admin__cta-new"
+          action=(action (mut creatingNew) true)
+        }}
+      {{/unless}}
     {{/if}}
   </div>
 {{/if}}
