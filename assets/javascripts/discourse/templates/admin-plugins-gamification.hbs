@@ -8,13 +8,17 @@
   }}
   <form class="form-vertical">
     <div class="control-group">
-      <label class="control-label">{{i18n "gamification.leaderboard.name"}}</label>
+      <label class="control-label">{{i18n
+          "gamification.leaderboard.name"
+        }}</label>
       {{input
         type="text"
         value=selectedLeaderboard.name
         placeholder=(i18n "gamification.leaderboard.name")
       }}
-      <label class="control-label">{{i18n "gamification.leaderboard.date.range"}}</label>
+      <label class="control-label">{{i18n
+          "gamification.leaderboard.date.range"
+        }}</label>
       <div class="controls">
         {{date-picker-past
           class="date-input"
@@ -28,7 +32,9 @@
         }}
         <div>{{i18n "gamification.leaderboard.date.helper"}}</div>
       </div>
-      <label class="control-label">{{i18n "gamification.leaderboard.included_groups"}}</label>
+      <label class="control-label">{{i18n
+          "gamification.leaderboard.included_groups"
+        }}</label>
       {{group-chooser
         content=model.groups
         value=includedGroupIds
@@ -36,7 +42,9 @@
         onChange=(action (mut includedGroupIds))
       }}
       <div>{{i18n "gamification.leaderboard.included_groups_help"}}</div>
-      <label class="control-label">{{i18n "gamification.leaderboard.visible_to_groups"}}</label>
+      <label class="control-label">{{i18n
+          "gamification.leaderboard.visible_to_groups"
+        }}</label>
       {{group-chooser
         content=model.groups
         value=visibleGroupIds
@@ -53,8 +61,11 @@
       disabled=saveEditDisabled
     }}
   </form>
+
 {{else}}
-  <h3>{{i18n "gamification.leaderboard.title"}}</h3>
+  <h3 class="leaderboard-admin__title">{{i18n
+      "gamification.leaderboard.title"
+    }}</h3>
   {{#if creatingNew}}
     <div class="new-leaderboard-container">
       {{input
@@ -75,43 +86,63 @@
         action=(action "resetNewLeaderboard")
       }}
     </div>
+
   {{else}}
     {{d-button
       label="gamification.leaderboard.new"
       title="gamification.leaderboard.new"
-      class="btn-primary"
+      icon="plus"
+      class="btn-primary leaderboard-admin__btn-new"
       action=(action (mut creatingNew) true)
     }}
   {{/if}}
+
   <div class="leaderboards">
     {{#if model.leaderboards}}
-      {{#each sortedLeaderboards as |leaderboard|}}
-        <div>
-          <div>
-            <div>
-              {{#link-to "gamificationLeaderboard.byName" leaderboard.id}}
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Period</th>
+          <th>Contenders</th>
+          <th>Visible to</th>
+          <th></th>
+          <th></th>
+        </tr>
+
+        {{#each sortedLeaderboards as |leaderboard|}}
+          <tr>
+            {{log leaderboard}}
+            <td>{{#link-to "gamificationLeaderboard.byName" leaderboard.id}}
                 {{leaderboard.name}}
               {{/link-to}}
-            </div>
-          </div>
-          <div>
-            <div>
+            </td>
+            <td>
+              {{#if leaderboard.from_date}}
+                {{format-date leaderboard.from_date}}
+                -
+                {{format-date leaderboard.to_date}}
+              {{/if}}
+            </td>
+            <td>placeholder</td>
+            <td>placeholder</td>
+            <td>
               {{d-button
-                class="btn"
+                class="btn-flat"
                 icon="pencil-alt"
                 title="gamification.edit"
                 action=(action (mut selectedLeaderboardId) leaderboard.id)
-              }}
+              }}</td>
+            <td>
               {{d-button
-                class="btn"
+                class="btn-flat"
                 icon="trash-alt"
                 title="gamification.delete"
                 action=(action "destroyLeaderboard" leaderboard)
               }}
-            </div>
-          </div>
-        </div>
-      {{/each}}
+            </td>
+          </tr>
+        {{/each}}
+      </table>
     {{else}}
       {{i18n "gamification.leaderboard.none"}}
     {{/if}}
