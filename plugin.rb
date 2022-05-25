@@ -16,6 +16,7 @@ register_asset 'stylesheets/mobile/leaderboard.scss', :mobile
 register_asset 'stylesheets/common/leaderboard-info-modal.scss'
 register_asset 'stylesheets/desktop/leaderboard-info-modal.scss', :desktop
 register_asset 'stylesheets/mobile/leaderboard-info-modal.scss', :mobile
+register_asset 'stylesheets/common/leaderboard-admin.scss'
 
 register_svg_icon 'crown'
 register_svg_icon 'award'

@@ -1,0 +1,28 @@
+.leaderboard-admin {
+  &__title {
+    display: inline-block;
+  }
+
+  &__cta-new {
+    display: flex;
+    margin-top: 1rem;
+  }
+
+  &__btn-new {
+    float: right;
+  }
+
+  &__btn-back {
+    margin-bottom: 1rem;
+    padding-left: 0;
+  }
+
+  &__btn-cancel-edit {
+    margin-left: 1rem;
+  }
+
+  &__listitem-action {
+    width: 50px;
+    text-align: right;
+  }
+}
