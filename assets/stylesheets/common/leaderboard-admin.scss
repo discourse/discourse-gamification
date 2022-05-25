@@ -1,7 +1,6 @@
 .leaderboard-admin {
   &__title {
     display: inline-block;
-    font-size: var(--font-up-3);
   }
 
   &__cta-new {
@@ -17,8 +16,8 @@
     padding-left: 0;
   }
 
-  &__form-row {
-    margin-top: 1.5rem;
+  &__btn-cancel-edit {
+    margin-left: 1rem;
   }
 
   &__listitem-action {
