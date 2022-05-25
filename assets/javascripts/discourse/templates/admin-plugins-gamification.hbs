@@ -66,16 +66,13 @@
     {{d-button
       class="btn-primary"
       label="gamification.save"
-      title="gamification.save"
       action=(action "saveEdit")
       disabled=saveEditDisabled
     }}
     {{d-button
-      class="btn-secondary"
+      class="btn-secondary leaderboard-admin__btn-cancel-edit"
       label="gamification.cancel"
-      title="gamification.cancel"
-      action=(action "saveEdit")
-      disabled=saveEditDisabled
+      action=(action (mut selectedLeaderboardId) null)
     }}
   </form>
 
@@ -121,8 +118,8 @@
     {{#if model.leaderboards}}
       <table>
         <thead>
-          <th>Name</th>
-          <th>Period</th>
+          <th>{{i18n "gamification.admin.name"}}</th>
+          <th>{{i18n "gamification.admin.period"}}</th>
           {{!-- <th>Contenders</th>
           <th>Visible to</th> --}}
           <th></th>
