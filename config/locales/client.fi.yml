@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 fi:
+  js:
+    gamification:
+      admin:
+        name: "Nimi"

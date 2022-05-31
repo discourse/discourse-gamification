@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 sl:
+  js:
+    gamification:
+      admin:
+        name: "Polno ime"

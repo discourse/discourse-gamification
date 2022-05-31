@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 sk:
+  js:
+    gamification:
+      admin:
+        name: "Meno"

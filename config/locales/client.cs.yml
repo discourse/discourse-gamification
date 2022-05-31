@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 cs:
+  js:
+    gamification:
+      admin:
+        name: "Jméno"

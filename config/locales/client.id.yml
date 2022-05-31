@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 id:
+  js:
+    gamification:
+      admin:
+        name: "Nama"

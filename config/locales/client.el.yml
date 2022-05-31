@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 el:
+  js:
+    gamification:
+      admin:
+        name: "Όνομα"

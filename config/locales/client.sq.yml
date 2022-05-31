@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 sq:
+  js:
+    gamification:
+      admin:
+        name: "Emri"

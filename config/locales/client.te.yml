@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 te:
+  js:
+    gamification:
+      admin:
+        name: "పేరు"

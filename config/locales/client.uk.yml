@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 uk:
+  js:
+    gamification:
+      admin:
+        name: "Назва"

@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 nl:
+  js:
+    gamification:
+      admin:
+        name: "Naam"

@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 hy:
+  js:
+    gamification:
+      admin:
+        name: "Անուն"
