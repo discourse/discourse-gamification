@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 vi:
+  js:
+    gamification:
+      admin:
+        name: "Tên"

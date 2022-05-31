@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 lv:
+  js:
+    gamification:
+      admin:
+        name: "Vārds"

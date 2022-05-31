@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 ur:
+  js:
+    gamification:
+      admin:
+        name: "نام"

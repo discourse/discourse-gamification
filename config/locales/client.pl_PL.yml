@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 pl_PL:
+  js:
+    gamification:
+      admin:
+        name: "Imię"

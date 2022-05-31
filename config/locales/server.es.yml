@@ -7,7 +7,16 @@
 es:
   site_settings:
     discourse_gamification_enabled: "Activar el plugin Discourse Gamification"
-    like_received_score_value: "Puntos dados al autor de una publicación que reciba un «me gusta»"
+    like_received_score_value: "Puntos otorgados al autor de una publicación que reciba un «me gusta»"
+    like_given_score_value: "Puntos otorgados por cada me gusta que un usuario da"
+    solution_score_value: "Puntos otorgados cuando la publicación de un usuario es marcada como la solución"
+    user_invited_score_value: "Puntos otorgados a la persona cuya invitación haya sido usada para crear una nueva cuenta"
+    time_read_score_value: "Puntos otorgados por cada hora leyendo temas"
+    post_read_score_value: "Puntos otorgados por cada 100 publicaciones leídas"
+    topic_created_score_value: "Puntos otorgados por cada tema creado"
+    post_created_score_value: "Puntos otorgados por cada publicación creada"
+    flag_created_score_value: "Puntos otorgados a los usuarios por cada uno de sus reportes aceptados por el personal"
+    day_visited_score_value: "Puntos otorgados por cada día que un usuario visita el sitio"
     scorable_categories: "Lista de categorías en las que repartir puntos. Dejar vacío para dar puntos en todas las categorías"
   score: "Puntos"
   default_leaderboard_name: "Clasificación global"

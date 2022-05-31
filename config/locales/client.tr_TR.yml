@@ -5,3 +5,7 @@
 # https://translate.discourse.org/
 
 tr_TR:
+  js:
+    gamification:
+      admin:
+        name: "Ad"
