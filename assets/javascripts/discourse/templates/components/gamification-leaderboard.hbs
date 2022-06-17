@@ -28,15 +28,15 @@
       <span>{{d-icon "award"}}{{i18n "gamification.score"}}</span>
     </div>
     <div class="ranking-col-names__sticky-border"></div>
-    {{#if currentUserRanking}}
+    {{#if currentUserRanking.user}}
       <a href="#leaderboard-user-{{ currentUserRanking.user.id }}" class="user -self">
         <div class="user__rank">{{ currentUserRanking.position }}</div>
         <div class="user__name">{{i18n "gamification.you"}}</div>
         <div class="user__score">
           {{#if site.mobileView}}
-            {{number currentUserRanking.total_score}}
+            {{number currentUserRanking.user.total_score}}
           {{else}}
-            {{fullnumber currentUserRanking.total_score}}
+            {{fullnumber currentUserRanking.user.total_score}}
           {{/if}}
         </div>
       </a>

@@ -13,16 +13,10 @@ export default Component.extend(LoadMore, {
   loading: false,
   canLoadMore: true,
 
-  @discourseComputed("model.users.[]")
-  currentUserRanking(users) {
-    const user = users.findBy("id", this.currentUser?.id);
-    return user
-      ? {
-          user,
-          total_score: user.total_score,
-          position: users.indexOf(user) + 1,
-        }
-      : null;
+  @discourseComputed("model.users")
+  currentUserRanking() {
+    const user = this.model.personal;
+    return user || null;
   },
 
   @discourseComputed("model.users")

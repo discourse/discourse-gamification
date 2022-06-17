@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
-
   PAGE_SIZE = 100
 
   self.table_name = 'gamification_leaderboards'
   validates :name, exclusion: { in: %w(new),
                                 message: "%{value} is reserved." }
 
-  def self.scores_for(leaderboard_id, page = 0)
+  def self.scores_for(leaderboard_id, page: 0, for_user_id: false)
     leaderboard = self.find(leaderboard_id)
     leaderboard.to_date ||= Date.today
 
@@ -21,6 +20,11 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
     # calculate scores up to to_date if just to_date is present
     users = users.where("gamification_scores.date <= ?", leaderboard.to_date) if leaderboard.to_date != Date.today && !leaderboard.from_date.present?
     users = users.select("users.id, users.username, users.uploaded_avatar_id, #{sum_sql}").group("users.id").order(total_score: :desc, id: :asc)
+    if for_user_id
+      user = users.find_by(id: for_user_id)
+      index = users.index(user)
+      return { user: user, position: index ? index + 1 : nil }
+    end
     users = users.offset(PAGE_SIZE * page) if page > 0
     users = users.limit(PAGE_SIZE)
     users
