@@ -16,6 +16,7 @@ export default Controller.extend({
   fromDate: "",
   visibleGroupIds: [],
   includedGroupIds: [],
+  excludedGroupIds: [],
 
   @discourseComputed("model.leaderboards.@each.updated_at")
   sortedLeaderboards(leaderboards) {
@@ -44,6 +45,10 @@ export default Controller.extend({
     this.set(
       "includedGroupIds",
       this.filterGroupsById(leaderboard.included_groups_ids)
+    );
+    this.set(
+      "excludedGroupIds",
+      this.filterGroupsById(leaderboard.excluded_groups_ids)
     );
   },
 
@@ -103,6 +108,7 @@ export default Controller.extend({
       fromDate: "",
       visibleGroupIds: [],
       includedGroupIds: [],
+      excludedGroupIds: [],
     });
   },
 
@@ -140,6 +146,7 @@ export default Controller.extend({
       from_date: this.fromDate,
       visible_to_groups_ids: this.visibleGroupIds,
       included_groups_ids: this.includedGroupIds,
+      excluded_groups_ids: this.excludedGroupIds,
     };
 
     return ajax(
@@ -163,6 +170,12 @@ export default Controller.extend({
             this.includedGroupIds
           );
         }
+        if (this.excludedGroupIds) {
+          this.selectedLeaderboard.set(
+            "excluded_groups_ids",
+            this.excludedGroupIds
+          );
+        }
         this.setProperties({
           loading: false,
           selectedLeaderboardId: null,
@@ -170,6 +183,7 @@ export default Controller.extend({
           fromDate: "",
           visibleGroupIds: [],
           includedGroupIds: [],
+          excludedGroupIds: [],
         });
       })
       .catch(popupAjaxError);

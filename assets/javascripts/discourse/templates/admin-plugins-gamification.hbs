@@ -52,6 +52,18 @@
       </div>
       <div class="control-group">
         <label class="control-label">
+          {{i18n "gamification.leaderboard.excluded_groups"}}
+        </label>
+        {{group-chooser
+          content=model.groups
+          value=excludedGroupIds
+          labelProperty="name"
+          onChange=(action (mut excludedGroupIds))
+        }}
+        <div>{{i18n "gamification.leaderboard.excluded_groups_help"}}</div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
           {{i18n "gamification.leaderboard.visible_to_groups"}}
         </label>
         {{group-chooser

@@ -8,5 +8,6 @@ class LeaderboardSerializer < ApplicationSerializer
              :to_date,
              :visible_to_groups_ids,
              :included_groups_ids,
+             :excluded_groups_ids,
              :updated_at
 end
