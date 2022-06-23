@@ -108,7 +108,6 @@ export default Controller.extend({
       fromDate: "",
       visibleGroupIds: [],
       includedGroupIds: [],
-      includedGroupIds: [],
       excludedGroupIds: [],
     });
   },
