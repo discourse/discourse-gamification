@@ -24,6 +24,8 @@ en:
         visible_to_groups_help: "The groups that can view the the leaderboard."
         included_groups: "Included groups"
         included_groups_help: "The groups that will be included in the leaderboard."
+        excluded_groups: "Excluded groups"
+        excluded_groups_help: "The groups that will not be included in the leaderboard."
       create: "Create"
       cancel: "Cancel"
       delete: "Delete"

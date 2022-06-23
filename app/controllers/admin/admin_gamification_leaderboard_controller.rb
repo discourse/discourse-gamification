@@ -30,6 +30,7 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
       to_date: params[:to_date],
       from_date: params[:from_date],
       included_groups_ids: params[:included_groups_ids] || [],
+      excluded_groups_ids: params[:excluded_groups_ids] || [],
       visible_to_groups_ids: params[:visible_to_groups_ids] || [],
     )
 
