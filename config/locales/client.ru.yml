@@ -29,6 +29,8 @@ ru:
         visible_to_groups_help: "Группы, которые могут просматривать таблицу лидеров."
         included_groups: "Включённые группы"
         included_groups_help: "Группы, которые будут включены в таблицу лидеров."
+        excluded_groups: "Исключённые группы"
+        excluded_groups_help: "Группы, которые не будут включены в таблицу лидеров."
       create: "Создать"
       cancel: "Отмена"
       delete: "Удалить"

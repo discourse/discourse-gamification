@@ -6,6 +6,36 @@
 
 zh_CN:
   js:
+    gamification_score: "点数"
     gamification:
+      score: "点数"
+      you: "您"
+      leaderboard:
+        title: "排行榜"
+        info: "排行榜是如何运作的？"
+        modal:
+          title: "排行榜是如何运作的？"
+          text: "参与社区活动，如访问、点赞和发帖，都会获得积分。你的分数每隔几分钟就会更新。保持活跃，积极帮助&支持别人来提高自己的等级!"
+        name: "昵称"
+        name_placeholder: "昵称..."
+        new: "新排行榜"
+        cta: "制作你的第一个排行榜"
+        none: "尚未创建排行榜。"
+        confirm_destroy: "确定要删除此排行榜吗？"
+        date:
+          range: "开始/结束日期范围"
+          helper: "如果日期留空，排行榜将显示全部时间内获得的分数。"
+        visible_to_groups: "对下列群组可见"
+        visible_to_groups_help: "可以查看排行榜的群组。"
+        included_groups: "参与排行榜的群组"
+        included_groups_help: "将被列入排行榜的群组。"
+      create: "创建"
+      cancel: "取消"
+      delete: "删除"
+      edit: "编辑"
+      back: "返回"
+      save: "保存"
       admin:
+        title: "游戏化"
         name: "名称"
+        period: "时间段"
