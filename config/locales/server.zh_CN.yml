@@ -5,3 +5,18 @@
 # https://translate.discourse.org/
 
 zh_CN:
+  site_settings:
+    discourse_gamification_enabled: "启用Discourse游戏化插件"
+    like_received_score_value: "当用户收到点赞时所获得的点数"
+    like_given_score_value: "用户每给出一个点赞时所获得的点数"
+    solution_score_value: "当用户的帖子被标记为解决方案时获得的点数"
+    user_invited_score_value: "当用户发出的邀请被使用时所获得的点数"
+    time_read_score_value: "每花一小时的阅读时间所获得的点数"
+    post_read_score_value: "用户每阅读100个回复时所获得的点数"
+    topic_created_score_value: "当用户创建主题时所获得的点数"
+    post_created_score_value: "当用户创建回复时所获得的点数"
+    flag_created_score_value: "当用户标记帖子并且该标记被管理人员接受时获得的点数"
+    day_visited_score_value: "用户每访问站点一天所获得的点数"
+    scorable_categories: "活动将产生点数的类别列表。留空以启用所有类别。"
+  score: "点数"
+  default_leaderboard_name: "全局排行榜"
