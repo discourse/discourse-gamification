@@ -29,6 +29,8 @@ sv:
         visible_to_groups_help: "De grupper som kan se topplistan."
         included_groups: "Inkluderade grupper"
         included_groups_help: "De grupper som kommer att ingå i topplistan."
+        excluded_groups: "Exkluderade grupper"
+        excluded_groups_help: "De grupper som inte kommer att ingå i topplistan."
       create: "Skapa"
       cancel: "Avbryt"
       delete: "Radera"

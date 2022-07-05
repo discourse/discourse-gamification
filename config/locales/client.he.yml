@@ -29,6 +29,8 @@ he:
         visible_to_groups_help: "הקבוצות שיכולות לצפות בלוח התוצאות."
         included_groups: "קבוצות שנכללות"
         included_groups_help: "הקבוצות שתיכללנה בלוח התוצאות."
+        excluded_groups: "קבוצות מוחרגות"
+        excluded_groups_help: "הקבוצות שיוחרגו מלוח התוצאות."
       create: "יצירה"
       cancel: "ביטול"
       delete: "מחיקה"
