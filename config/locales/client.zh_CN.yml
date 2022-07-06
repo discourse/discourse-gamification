@@ -29,6 +29,8 @@ zh_CN:
         visible_to_groups_help: "可以查看排行榜的群组。"
         included_groups: "参与排行榜的群组"
         included_groups_help: "将被列入排行榜的群组。"
+        excluded_groups: "不参与排行榜的群组"
+        excluded_groups_help: "这些群组将不会参与排名"
       create: "创建"
       cancel: "取消"
       delete: "删除"
