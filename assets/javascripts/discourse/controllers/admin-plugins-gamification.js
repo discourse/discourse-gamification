@@ -142,8 +142,8 @@ export default Controller.extend({
     this.set("loading", true);
     const data = {
       name: this.selectedLeaderboard.name,
-      to_date: this.toDate,
-      from_date: this.fromDate,
+      to_date: this.toDate || this.selectedLeaderboard.to_date,
+      from_date: this.fromDate || this.selectedLeaderboard.from_date,
       visible_to_groups_ids: this.visibleGroupIds,
       included_groups_ids: this.includedGroupIds,
       excluded_groups_ids: this.excludedGroupIds,
