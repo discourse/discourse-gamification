@@ -12,7 +12,7 @@ export default Component.extend(LoadMore, {
   page: 1,
   loading: false,
   canLoadMore: true,
-  period: 'all',
+  period: "all",
 
   @discourseComputed("model.users")
   currentUserRanking() {
@@ -62,16 +62,18 @@ export default Component.extend(LoadMore, {
 
   @action
   changePeriod(period) {
-    this.set('period', period);
-    return ajax(`/leaderboard/${this.model.leaderboard.id}?period=${this.period}`)
-    .then((result) => {
-      if (result.users.length === 0) {
-        this.set("canLoadMore", false);
-      }
-      this.set("page", 1);
-      this.set("model.users", result.users);
-    })
-    .finally(() => this.set("loading", false))
-    .catch(popupAjaxError);
+    this.set("period", period);
+    return ajax(
+      `/leaderboard/${this.model.leaderboard.id}?period=${this.period}`
+    )
+      .then((result) => {
+        if (result.users.length === 0) {
+          this.set("canLoadMore", false);
+        }
+        this.set("page", 1);
+        this.set("model.users", result.users);
+      })
+      .finally(() => this.set("loading", false))
+      .catch(popupAjaxError);
   },
 });

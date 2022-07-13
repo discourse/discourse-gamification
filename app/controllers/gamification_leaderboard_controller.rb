@@ -8,14 +8,13 @@ class DiscourseGamification::GamificationLeaderboardController < ::ApplicationCo
     leaderboard = DiscourseGamification::GamificationLeaderboard.find(params[:id])
     period =
       case params[:period]&.to_sym
-        when :yearly    then 1.year.ago
-        when :monthly   then 1.month.ago
-        when :quarterly then 3.months.ago
-        when :weekly    then 1.week.ago
-        when :daily     then 1.day.ago
+      when :yearly    then 1.year.ago
+      when :monthly   then 1.month.ago
+      when :quarterly then 3.months.ago
+      when :weekly    then 1.week.ago
+      when :daily     then 1.day.ago
         else nil
       end
-
 
     if !current_user&.staff? && leaderboard.visible_to_groups_ids.present? && (leaderboard.visible_to_groups_ids & current_user&.group_ids).empty?
       raise Discourse::NotFound
