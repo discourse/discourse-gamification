@@ -11,10 +11,10 @@ class LeaderboardViewSerializer < ApplicationSerializer
   end
 
   def users
-    DiscourseGamification::GamificationLeaderboard.scores_for(object[:leaderboard].id, page: object[:page])
+    DiscourseGamification::GamificationLeaderboard.scores_for(object[:leaderboard].id, page: object[:page], period: object[:period])
   end
 
   def personal
-    DiscourseGamification::GamificationLeaderboard.scores_for(object[:leaderboard].id, for_user_id: object[:for_user_id])
+    DiscourseGamification::GamificationLeaderboard.scores_for(object[:leaderboard].id, for_user_id: object[:for_user_id], period: object[:period])
   end
 end

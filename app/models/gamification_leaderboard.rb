@@ -7,7 +7,7 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
   validates :name, exclusion: { in: %w(new),
                                 message: "%{value} is reserved." }
 
-  def self.scores_for(leaderboard_id, page: 0, for_user_id: false)
+  def self.scores_for(leaderboard_id, page: 0, for_user_id: false, period: nil)
     leaderboard = self.find(leaderboard_id)
     leaderboard.to_date ||= Date.today
 
@@ -20,6 +20,7 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
     users = users.where("gamification_scores.date BETWEEN ? AND ?", leaderboard.from_date, leaderboard.to_date) if leaderboard.from_date.present?
     # calculate scores up to to_date if just to_date is present
     users = users.where("gamification_scores.date <= ?", leaderboard.to_date) if leaderboard.to_date != Date.today && !leaderboard.from_date.present?
+    users = users.where("gamification_scores.date >= ?", period) if period.present?
     users = users.select("users.id, users.username, users.uploaded_avatar_id, #{sum_sql}").group("users.id").order(total_score: :desc, id: :asc)
 
     if for_user_id
