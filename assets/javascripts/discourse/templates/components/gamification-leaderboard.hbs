@@ -1,6 +1,6 @@
 <div class="leaderboard">
   <div class="page__header">
-    <h1 class="page__title">{{ model.name }}</h1>
+    <h1 class="page__title">{{ this.model.leaderboard.name }}</h1>
     {{d-button action=(action "showLeaderboardInfo") class="-ghost" icon="info-circle" label=(unless site.mobileView "gamification.leaderboard.info")}}
   </div>
 
