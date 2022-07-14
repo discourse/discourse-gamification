@@ -4,7 +4,7 @@
     {{d-button action=(action "showLeaderboardInfo") class="-ghost" icon="info-circle" label=(unless site.mobileView "gamification.leaderboard.info")}}
   </div>
 
-  <PeriodChooser @period={{this.period}} @action={{action "changePeriod"}} @fullDay={{false}} />
+  <PeriodChooser @period={{this.period}} @action={{action "changePeriod"}} @fullDay={{false}} class="leaderboard__period-chooser"/>
 
   <div class="podium__wrapper">
     <div class="podium">

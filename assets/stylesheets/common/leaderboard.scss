@@ -22,6 +22,14 @@
     }
   }
 
+  &__period-chooser {
+    margin: 1.5rem 0 0.75rem;
+
+    .selected-name {
+      margin: 0;
+    }
+  }
+
   .-ghost,
   .-ghost .d-icon {
     padding: 0;

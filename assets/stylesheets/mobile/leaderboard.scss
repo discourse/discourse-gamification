@@ -1,4 +1,13 @@
 .leaderboard {
+  &__period-chooser.select-kit.dropdown-select-box {
+    display: flex;
+    margin: 1rem 0;
+
+    .period-chooser-header {
+      text-align: center;
+    }
+  }
+
   .winner {
     width: 30%;
 
