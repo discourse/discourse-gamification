@@ -16,15 +16,13 @@ class DiscourseGamification::GamificationLeaderboardController < ::ApplicationCo
         else nil
       end
 
-    if !current_user&.staff? && leaderboard.visible_to_groups_ids.present? && (leaderboard.visible_to_groups_ids & current_user&.group_ids).empty?
-      raise Discourse::NotFound
-    else
-      render_serialized({
-        leaderboard: leaderboard,
-        page: params[:page].to_i,
-        for_user_id: current_user&.id,
-        period: period
-      }, LeaderboardViewSerializer, root: false)
-    end
+    raise Discourse::NotFound unless @guardian.can_see_leaderboard?(leaderboard)
+
+    render_serialized({
+      leaderboard: leaderboard,
+      page: params[:page].to_i,
+      for_user_id: current_user&.id,
+      period: period
+    }, LeaderboardViewSerializer, root: false)
   end
 end

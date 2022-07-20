@@ -43,7 +43,7 @@
           {{i18n "gamification.leaderboard.included_groups"}}
         </label>
         {{group-chooser
-          content=model.groups
+          content=this.siteGroups
           value=includedGroupIds
           labelProperty="name"
           onChange=(action (mut includedGroupIds))
@@ -55,7 +55,7 @@
           {{i18n "gamification.leaderboard.excluded_groups"}}
         </label>
         {{group-chooser
-          content=model.groups
+          content=this.siteGroups
           value=excludedGroupIds
           labelProperty="name"
           onChange=(action (mut excludedGroupIds))
@@ -67,7 +67,7 @@
           {{i18n "gamification.leaderboard.visible_to_groups"}}
         </label>
         {{group-chooser
-          content=model.groups
+          content=this.siteGroups
           value=visibleGroupIds
           labelProperty="name"
           onChange=(action (mut visibleGroupIds))
