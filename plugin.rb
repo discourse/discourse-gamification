@@ -43,6 +43,7 @@ after_initialize do
   require_relative 'app/serializers/leaderboard_view_serializer.rb'
   require_relative 'app/serializers/admin_gamification_index_serializer.rb'
   require_relative 'lib/directory_integration.rb'
+  require_relative 'lib/guardian.rb'
   require_relative 'lib/scorables/scorable.rb'
   require_relative 'lib/scorables/like_received.rb'
   require_relative 'lib/scorables/like_given.rb'
@@ -60,6 +61,7 @@ after_initialize do
 
   reloadable_patch do |plugin|
     User.class_eval { prepend DiscourseGamification::UserExtension }
+    Guardian.include(DiscourseGamification::Guardian)
   end
 
   if respond_to?(:add_directory_column)

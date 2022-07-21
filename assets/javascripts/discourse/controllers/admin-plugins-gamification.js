@@ -37,6 +37,12 @@ export default Controller.extend({
     return leaderboard;
   },
 
+  @discourseComputed("site.groups")
+  siteGroups(groups) {
+    // prevents group "everyone" to be listed
+    return groups.filter((g) => g.id !== 0);
+  },
+
   leaderboardChanged(leaderboard) {
     this.set(
       "visibleGroupIds",
