@@ -1,32 +1,42 @@
+GIT
+  remote: https://github.com/discourse/rubocop-discourse/
+  revision: 8afca6460a423a11a2e0bf1f7051b18dd9a7231b
+  branch: stree
+  specs:
+    rubocop-discourse (2.5.0)
+      rubocop (>= 1.1.0)
+      rubocop-rspec (>= 2.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.2)
-    parallel (1.20.1)
-    parser (3.0.0.0)
+    json (2.6.2)
+    parallel (1.22.1)
+    parser (3.1.2.0)
       ast (~> 2.4.1)
-    rainbow (3.0.0)
-    regexp_parser (2.1.1)
+    prettier_print (0.1.0)
+    rainbow (3.1.1)
+    regexp_parser (2.5.0)
     rexml (3.2.5)
-    rubocop (1.12.0)
+    rubocop (1.32.0)
+      json (~> 2.3)
       parallel (~> 1.10)
-      parser (>= 3.0.0.0)
+      parser (>= 3.1.0.0)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
-      rexml
-      rubocop-ast (>= 1.2.0, < 2.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.19.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.4.1)
-      parser (>= 2.7.1.5)
-    rubocop-discourse (2.4.1)
-      rubocop (>= 1.1.0)
-      rubocop-rspec (>= 2.0.0)
-    rubocop-rspec (2.2.0)
-      rubocop (~> 1.0)
-      rubocop-ast (>= 1.1.0)
+    rubocop-ast (1.19.1)
+      parser (>= 3.1.1.0)
+    rubocop-rspec (2.12.1)
+      rubocop (~> 1.31)
     ruby-progressbar (1.11.0)
-    unicode-display_width (2.0.0)
+    syntax_tree (3.2.1)
+      prettier_print
+    unicode-display_width (2.2.0)
 
 PLATFORMS
   arm64-darwin-20
@@ -37,7 +47,8 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  rubocop-discourse
+  rubocop-discourse!
+  syntax_tree
 
 BUNDLED WITH
-   2.2.13
+   2.2.22
