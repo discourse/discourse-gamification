@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 class DiscourseGamification::DirectoryIntegration
-
   def self.query
     <<~SQL
       WITH total_score AS (

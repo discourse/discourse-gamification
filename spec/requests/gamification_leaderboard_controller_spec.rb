@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe DiscourseGamification::GamificationLeaderboardController do
   let(:group) { Fabricate(:group) }
@@ -10,12 +10,34 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
   let(:anon_user) { Fabricate(:user, email: "john@anonymized.invalid") }
   let!(:create_score) { UserVisit.create(user_id: current_user.id, visited_at: 2.days.ago) }
   let!(:create_score_for_user2) { UserVisit.create(user_id: user_2.id, visited_at: 2.days.ago) }
-  let!(:create_score_for_staged_user) { UserVisit.create(user_id: staged_user.id, visited_at: 2.days.ago) }
-  let!(:create_score_for_anon_user) { UserVisit.create(user_id: anon_user.id, visited_at: 2.days.ago) }
+  let!(:create_score_for_staged_user) do
+    UserVisit.create(user_id: staged_user.id, visited_at: 2.days.ago)
+  end
+  let!(:create_score_for_anon_user) do
+    UserVisit.create(user_id: anon_user.id, visited_at: 2.days.ago)
+  end
   let!(:create_topic) { Fabricate(:topic, user: current_user) }
-  let!(:leaderboard) { Fabricate(:gamification_leaderboard, name: "test", created_by_id: current_user.id) }
-  let!(:leaderboard_2) { Fabricate(:gamification_leaderboard, name: "test_2", created_by_id: current_user.id, from_date: 3.days.ago, to_date: 1.day.ago) }
-  let!(:leaderboard_with_group) { Fabricate(:gamification_leaderboard, name: "test_3", created_by_id: current_user.id, included_groups_ids: [group.id], visible_to_groups_ids: [group.id]) }
+  let!(:leaderboard) do
+    Fabricate(:gamification_leaderboard, name: "test", created_by_id: current_user.id)
+  end
+  let!(:leaderboard_2) do
+    Fabricate(
+      :gamification_leaderboard,
+      name: "test_2",
+      created_by_id: current_user.id,
+      from_date: 3.days.ago,
+      to_date: 1.day.ago,
+    )
+  end
+  let!(:leaderboard_with_group) do
+    Fabricate(
+      :gamification_leaderboard,
+      name: "test_3",
+      created_by_id: current_user.id,
+      included_groups_ids: [group.id],
+      visible_to_groups_ids: [group.id],
+    )
+  end
 
   before do
     DiscourseGamification::GamificationScore.calculate_scores(since_date: 10.days.ago)
@@ -45,7 +67,10 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
 
     it "only returns users that are a part of a group within included_groups_ids" do
       # multiple scores present
-      expect(DiscourseGamification::GamificationScore.all.map(&:user_id)).to include(current_user.id, user_2.id)
+      expect(DiscourseGamification::GamificationScore.all.map(&:user_id)).to include(
+        current_user.id,
+        user_2.id,
+      )
 
       get "/leaderboard/#{leaderboard_with_group.id}.json"
       expect(response.status).to eq(200)
@@ -57,7 +82,10 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
 
     it "excludes staged and anon users" do
       # prove score for staged/anon user exists
-      expect(DiscourseGamification::GamificationScore.all.map(&:user_id)).to include(staged_user.id, anon_user.id)
+      expect(DiscourseGamification::GamificationScore.all.map(&:user_id)).to include(
+        staged_user.id,
+        anon_user.id,
+      )
 
       get "/leaderboard/#{leaderboard.id}.json"
       data = response.parsed_body

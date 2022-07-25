@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 module DiscourseGamification
   class LikeReceived < Scorable
-
     def self.score_multiplier
       SiteSetting.like_received_score_value
     end
 
     def self.category_filter
-      return '' if scorable_category_list.empty?
+      return "" if scorable_category_list.empty?
 
       <<~SQL
         AND t.category_id IN (#{scorable_category_list})

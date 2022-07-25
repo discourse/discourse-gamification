@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 module DiscourseGamification
   class Solutions < Scorable
-
     def self.score_multiplier
       SiteSetting.solution_score_value
     end
 
     def self.category_filter
-      return '' if scorable_category_list.empty?
+      return "" if scorable_category_list.empty?
 
       <<~SQL
         AND topics.category_id IN (#{scorable_category_list})

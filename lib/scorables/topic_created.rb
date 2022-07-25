@@ -2,13 +2,12 @@
 
 module DiscourseGamification
   class TopicCreated < Scorable
-
     def self.score_multiplier
       SiteSetting.topic_created_score_value
     end
 
     def self.category_filter
-      return '' if scorable_category_list.empty?
+      return "" if scorable_category_list.empty?
 
       <<~SQL
         AND t.category_id IN (#{scorable_category_list})

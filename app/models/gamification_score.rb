@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DiscourseGamification::GamificationScore < ::ActiveRecord::Base
-  self.table_name = 'gamification_scores'
+  self.table_name = "gamification_scores"
 
   belongs_to :user
 
@@ -10,9 +10,7 @@ class DiscourseGamification::GamificationScore < ::ActiveRecord::Base
   end
 
   def self.scorables_queries
-    enabled_scorables
-      .map { "( #{_1.query} )" }
-      .join(' UNION ALL ')
+    enabled_scorables.map { "( #{_1.query} )" }.join(" UNION ALL ")
   end
 
   def self.calculate_scores(since_date: Date.today, only_subclass: nil)
