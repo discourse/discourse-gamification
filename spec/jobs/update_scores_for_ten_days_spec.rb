@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 describe Jobs::UpdateScoresForTenDays do
-
   let(:user) { Fabricate(:user) }
   let(:user_2) { Fabricate(:user) }
   let(:post) { Fabricate(:post, user: user) }
   let!(:gamification_score) { Fabricate(:gamification_score, user_id: user.id, date: 8.days.ago) }
-  let!(:gamification_score_2) { Fabricate(:gamification_score, user_id: user_2.id, date: 12.days.ago) }
+  let!(:gamification_score_2) do
+    Fabricate(:gamification_score, user_id: user_2.id, date: 12.days.ago)
+  end
   let!(:topic_user_created) { Fabricate(:topic, user: user) }
   let!(:topic_user_2_created) { Fabricate(:topic, user: user_2) }
 

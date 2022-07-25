@@ -2,7 +2,6 @@
 
 module DiscourseGamification
   class UserInvited < Scorable
-
     def self.score_multiplier
       SiteSetting.user_invited_score_value
     end

@@ -6,7 +6,10 @@ RSpec.shared_examples "Scorable Type" do
 
   describe "#{described_class} updates gamification score" do
     it "has correct total score" do
-      DiscourseGamification::GamificationScore.calculate_scores(since_date: "2022-1-1", only_subclass: described_class)
+      DiscourseGamification::GamificationScore.calculate_scores(
+        since_date: "2022-1-1",
+        only_subclass: described_class,
+      )
       expect(current_user.gamification_score).to eq(expected_score)
     end
   end
@@ -54,7 +57,10 @@ RSpec.shared_examples "No Score Value" do
     let!(:trigger_after_create_hook) { after_create_hook }
 
     it "does not increase user gamficiation score" do
-      DiscourseGamification::GamificationScore.calculate_scores(since_date: "2022-1-1", only_subclass: described_class)
+      DiscourseGamification::GamificationScore.calculate_scores(
+        since_date: "2022-1-1",
+        only_subclass: described_class,
+      )
       expect(current_user.gamification_score).to eq(0)
     end
   end
@@ -83,11 +89,15 @@ RSpec.describe ::DiscourseGamification::LikeReceived do
   it_behaves_like "No Score Value" do
     # don't count deleted post towards score
     let(:deleted_topic) { Fabricate(:deleted_topic, user: current_user) }
-    let(:class_action_fabricator_for_deleted_object) { Fabricate(:post, user: current_user, topic: deleted_topic, deleted_at: Time.now) }
+    let(:class_action_fabricator_for_deleted_object) do
+      Fabricate(:post, user: current_user, topic: deleted_topic, deleted_at: Time.now)
+    end
 
     # don't count private message towards score
     let(:private_message_topic) { Fabricate(:private_message_topic) }
-    let(:class_action_fabricator_for_pm) { Fabricate(:post, user: current_user, topic: private_message_topic) }
+    let(:class_action_fabricator_for_pm) do
+      Fabricate(:post, user: current_user, topic: private_message_topic)
+    end
 
     let(:after_create_hook) { Post.update_all(like_count: 1) }
   end
@@ -97,9 +107,7 @@ RSpec.describe ::DiscourseGamification::LikeGiven do
   it_behaves_like "Scorable Type" do
     before do
       Fabricate.times(10, :post, user: current_user)
-      Post.all.each do |p|
-        Fabricate(:post_action, user: current_user, post: p)
-      end
+      Post.all.each { |p| Fabricate(:post_action, user: current_user, post: p) }
     end
 
     # ten likes given
@@ -119,20 +127,22 @@ RSpec.describe ::DiscourseGamification::LikeGiven do
     # don't count deleted post towards score
     let(:deleted_topic) { Fabricate(:deleted_topic, user: current_user) }
     let(:post) { Fabricate(:post, topic: deleted_topic, user: current_user, deleted_at: Time.now) }
-    let(:class_action_fabricator_for_deleted_object) { Fabricate(:post_action, user: current_user, post: post) }
+    let(:class_action_fabricator_for_deleted_object) do
+      Fabricate(:post_action, user: current_user, post: post)
+    end
 
     # don't count private message towards score
     let(:private_message_topic) { Fabricate(:private_message_topic) }
     let(:post_2) { Fabricate(:post, topic: private_message_topic, user: current_user) }
-    let(:class_action_fabricator_for_pm) { Fabricate(:post_action, user: current_user, post: post_2) }
+    let(:class_action_fabricator_for_pm) do
+      Fabricate(:post_action, user: current_user, post: post_2)
+    end
   end
 end
 
 RSpec.describe ::DiscourseGamification::PostCreated do
   it_behaves_like "Scorable Type" do
-    before do
-      Fabricate.times(10, :post, user: current_user)
-    end
+    before { Fabricate.times(10, :post, user: current_user) }
 
     # ten posts created
     let(:expected_score) { 20 }
@@ -148,13 +158,13 @@ RSpec.describe ::DiscourseGamification::PostCreated do
   it_behaves_like "No Score Value" do
     # don't count deleted post towards score
     let(:deleted_topic) { Fabricate(:deleted_topic, user: current_user) }
-    let(:class_action_fabricator_for_deleted_object) { Fabricate(:post, topic: deleted_topic, user: current_user, deleted_at: Time.now) }
+    let(:class_action_fabricator_for_deleted_object) do
+      Fabricate(:post, topic: deleted_topic, user: current_user, deleted_at: Time.now)
+    end
 
     # don't count wiki post towards score
     let(:class_action_fabricator_for_wiki) do
-      Fabricate(:post, topic: deleted_topic, user: current_user) do
-        wiki { true }
-      end
+      Fabricate(:post, topic: deleted_topic, user: current_user) { wiki { true } }
     end
   end
 end
@@ -202,9 +212,7 @@ RSpec.describe ::DiscourseGamification::FlagCreated do
   it_behaves_like "Scorable Type" do
     before do
       Fabricate.times(10, :reviewable, created_by: current_user) do
-        after_create do
-          self.update(status: 1)
-        end
+        after_create { self.update(status: 1) }
       end
     end
 
@@ -215,9 +223,7 @@ end
 
 RSpec.describe ::DiscourseGamification::TopicCreated do
   it_behaves_like "Scorable Type" do
-    before do
-      Fabricate.times(10, :topic, user: current_user)
-    end
+    before { Fabricate.times(10, :topic, user: current_user) }
 
     # ten topics created
     let(:expected_score) { 50 }
@@ -229,7 +235,9 @@ RSpec.describe ::DiscourseGamification::TopicCreated do
 
   it_behaves_like "No Score Value" do
     # don't count deleted topic towards score
-    let(:class_action_fabricator_for_deleted_object) { Fabricate(:deleted_topic, user: current_user) }
+    let(:class_action_fabricator_for_deleted_object) do
+      Fabricate(:deleted_topic, user: current_user)
+    end
 
     # don't count private message towards score
     let(:class_action_fabricator_for_pm) { Fabricate(:private_message_topic) }
@@ -241,18 +249,16 @@ RSpec.describe ::DiscourseGamification::UserInvited do
     before do
       stub_request(
         :get,
-        "http://local.hub:3000/api/customers/-1/account?access_token&admin_count=0&moderator_count=0"
+        "http://local.hub:3000/api/customers/-1/account?access_token&admin_count=0&moderator_count=0",
       ).with(
         headers: {
-          'Accept' => 'application/json, application/vnd.discoursehub.v1',
-          'Host' => 'local.hub:3000',
-          'Referer' => 'http://test.localhost'
-        }
+          "Accept" => "application/json, application/vnd.discoursehub.v1",
+          "Host" => "local.hub:3000",
+          "Referer" => "http://test.localhost",
+        },
       ).to_return(status: 200, body: "", headers: {})
       Fabricate.times(10, :invite, invited_by: current_user) do
-        after_create do
-          self.update(redemption_count: 1)
-        end
+        after_create { self.update(redemption_count: 1) }
       end
     end
 
