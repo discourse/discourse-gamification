@@ -22,6 +22,7 @@ class DiscourseGamification::GamificationScore < ::ActiveRecord::Base
       FROM (
         #{queries}
       ) AS source
+      WHERE user_id IS NOT NULL
       GROUP BY 1, 2
       ON CONFLICT (user_id, date) DO UPDATE
       SET score = EXCLUDED.score
