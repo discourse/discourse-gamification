@@ -4,7 +4,7 @@
 # about: Award users with a score for accomplishments
 # version: 0.0.1
 # authors: Discourse
-# url: https://github.com/janzenisaac/discourse-gamification
+# url: https://github.com/discourse/discourse-gamification
 # required_version: 2.7.0
 # transpile_js: true
 
