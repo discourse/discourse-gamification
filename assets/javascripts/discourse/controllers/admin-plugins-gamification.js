@@ -1,13 +1,14 @@
 import Controller from "@ember/controller";
 import EmberObject, { action } from "@ember/object";
-import bootbox from "bootbox";
 import discourseComputed from "discourse-common/utils/decorators";
 import { and } from "@ember/object/computed";
 import I18n from "I18n";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
+import { inject as service } from "@ember/service";
 
 export default Controller.extend({
+  dialog: service(),
   loading: false,
   creatingNew: false,
   newLeaderboardName: "",
@@ -120,13 +121,9 @@ export default Controller.extend({
 
   @action
   destroyLeaderboard(leaderboard) {
-    bootbox.confirm(
-      I18n.t("gamification.leaderboard.confirm_destroy"),
-      (confirm) => {
-        if (!confirm) {
-          return;
-        }
-
+    this.dialog.deleteConfirm({
+      message: I18n.t("gamification.leaderboard.confirm_destroy"),
+      didConfirm: () => {
         this.set("loading", true);
         return ajax(
           `/admin/plugins/gamification/leaderboard/${leaderboard.id}`,
@@ -139,8 +136,8 @@ export default Controller.extend({
             this.set("loading", false);
           })
           .catch(popupAjaxError);
-      }
-    );
+      },
+    });
   },
 
   @action
