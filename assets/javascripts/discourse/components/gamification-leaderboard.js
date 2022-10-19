@@ -6,6 +6,25 @@ import LoadMore from "discourse/mixins/load-more";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
+function periodString(periodValue) {
+  switch (periodValue) {
+    case 0:
+      return "all";
+    case 1:
+      return "yearly";
+    case 2:
+      return "quarterly";
+    case 3:
+      return "monthly";
+    case 4:
+      return "weekly";
+    case 5:
+      return "daily";
+    default:
+      return "all";
+  }
+}
+
 export default Component.extend(LoadMore, {
   tagName: "",
   eyelineSelector: ".user",
@@ -13,6 +32,14 @@ export default Component.extend(LoadMore, {
   loading: false,
   canLoadMore: true,
   period: "all",
+
+  init() {
+    this._super(...arguments);
+    const default_leaderboard_period = periodString(
+      this.siteSettings.default_leaderboard_period
+    );
+    this.set("period", default_leaderboard_period);
+  },
 
   @discourseComputed("model.users")
   currentUserRanking() {
