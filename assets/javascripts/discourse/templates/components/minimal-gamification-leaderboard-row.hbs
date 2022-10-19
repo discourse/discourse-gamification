@@ -1,0 +1,18 @@
+<div class="user {{if rank.isCurrentUser "user-highlight"}}" id="leaderboard-user-{{rank.id}}">
+  <div class="user__rank">{{sum index 1}}</div>
+  <div class="user__avatar clickable" role="button" data-user-card={{rank.username}}>
+    {{avatar rank imageSize="large"}}
+    {{#if rank.isCurrentUser}}
+      <span class="user__name">{{i18n "gamification.you"}}</span>
+    {{else}}
+      <span class="user__name">{{rank.username}}</span>
+    {{/if}}
+  </div>
+  <div class="user__score">
+    {{#if site.mobileView}}
+      {{number rank.total_score}}
+    {{else}}
+      {{fullnumber rank.total_score}}
+    {{/if}}
+  </div>
+</div>
