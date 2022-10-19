@@ -21,8 +21,6 @@ register_asset "stylesheets/common/leaderboard-admin.scss"
 register_svg_icon "crown"
 register_svg_icon "award"
 
-require_relative "lib/leaderboard_period_enum.rb"
-
 after_initialize do
   module ::DiscourseGamification
     PLUGIN_NAME = "discourse-gamification"
