@@ -7,8 +7,13 @@ import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
 export const LEADERBOARD_PERIODS = [
-  "all_time", "yearly", "quarterly", "monthly", "weekly", "daily"
-]
+  "all_time",
+  "yearly",
+  "quarterly",
+  "monthly",
+  "weekly",
+  "daily",
+];
 function periodString(periodValue) {
   switch (periodValue) {
     case 0:

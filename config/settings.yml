@@ -25,8 +25,3 @@ plugins:
     default: 10
   day_visited_score_value:   
     default: 1
-  # default_leaderboard_period:
-  #   type: enum
-  #   enum: "LeaderboardPeriodEnum"
-  #   default: 0
-  #   client: true
