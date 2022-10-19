@@ -12,14 +12,14 @@ en:
     flag_created_score_value: "The value of the cheer awarded when a user flags a post and that flag is accepted by a staff user"
     day_visited_score_value: "The value of the cheer awarded for every day a user visits the site"
     scorable_categories: "List of categories where actions will generate cheers. Leave empty to enable cheers on all categories"
-    default_leaderboard_period: "Default period for global leaderboard"
+    # default_leaderboard_period: "Default period for global leaderboard"
   score: "Cheers"
   default_leaderboard_name: "Global Leaderboard"
-  leaderboard:
-    period:
-      all: "All-time"
-      yearly: "Yearly"
-      quarterly: "Quarterly"
-      monthly: "Monthly"
-      weekly: "Weekly"
-      daily: "Daily"
+  # leaderboard:
+  #   period:
+  #     all_time: "All Time"
+  #     yearly: "Yearly"
+  #     quarterly: "Quarterly"
+  #     monthly: "Monthly"
+  #     weekly: "Weekly"
+  #     daily: "Daily"

@@ -153,6 +153,7 @@ export default Controller.extend({
       visible_to_groups_ids: this.visibleGroupIds,
       included_groups_ids: this.includedGroupIds,
       excluded_groups_ids: this.excludedGroupIds,
+      default_period: this.selectedLeaderboard.default_period,
     };
 
     return ajax(
@@ -190,6 +191,7 @@ export default Controller.extend({
           visibleGroupIds: [],
           includedGroupIds: [],
           excludedGroupIds: [],
+          default_period: "0",
         });
       })
       .catch(popupAjaxError);

@@ -6,6 +6,9 @@ import LoadMore from "discourse/mixins/load-more";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
+export const LEADERBOARD_PERIODS = [
+  "all_time", "yearly", "quarterly", "monthly", "weekly", "daily"
+]
 function periodString(periodValue) {
   switch (periodValue) {
     case 0:
@@ -36,7 +39,7 @@ export default Component.extend(LoadMore, {
   init() {
     this._super(...arguments);
     const default_leaderboard_period = periodString(
-      this.siteSettings.default_leaderboard_period
+      this.model.leaderboard.default_period
     );
     this.set("period", default_leaderboard_period);
   },

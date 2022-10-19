@@ -74,6 +74,13 @@
         }}
         <div>{{i18n "gamification.leaderboard.visible_to_groups_help"}}</div>
       </div>
+      <div class="control-group">
+        <label class="control-label">
+          {{i18n "gamification.leaderboard.default_period"}}
+        </label>
+        {{period-input value=selectedLeaderboard.default_period }}
+        <div>{{i18n "gamification.leaderboard.default_period_help"}}</div>
+      </div>
     </div>
     {{d-button
       class="btn-primary"

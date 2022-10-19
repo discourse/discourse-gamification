@@ -15,8 +15,8 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
     daily: 5
   }
 
-  def self.get_period_date(period_symbol)
-    period_symbol ||= DiscourseGamification::GamificationLeaderboard.periods.key(SiteSetting.default_leaderboard_period).to_sym
+  def get_period_date(period_symbol)
+    period_symbol ||= DiscourseGamification::GamificationLeaderboard.periods.key(default_period).to_sym
 
     case period_symbol
     when :all_time

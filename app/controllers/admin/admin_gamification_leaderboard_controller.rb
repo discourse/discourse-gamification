@@ -37,6 +37,7 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
       included_groups_ids: params[:included_groups_ids] || [],
       excluded_groups_ids: params[:excluded_groups_ids] || [],
       visible_to_groups_ids: params[:visible_to_groups_ids] || [],
+      default_period: params[:default_period]
     )
 
     if leaderboard.save
