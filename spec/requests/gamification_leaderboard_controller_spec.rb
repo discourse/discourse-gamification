@@ -65,6 +65,14 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
       expect(data["users"][0]["total_score"]).to eq(1)
     end
 
+    it "respects the user_limit parameter" do
+      get "/leaderboard/#{leaderboard.id}.json?user_limit=1"
+      expect(response.status).to eq(200)
+
+      data = response.parsed_body
+      expect(data["users"].count).to eq(1)
+    end
+
     it "only returns users that are a part of a group within included_groups_ids" do
       # multiple scores present
       expect(DiscourseGamification::GamificationScore.all.map(&:user_id)).to include(
