@@ -15,7 +15,7 @@ class LeaderboardViewSerializer < ApplicationSerializer
       object[:leaderboard].id,
       page: object[:page],
       period: object[:period],
-      user_limit: object[:user_limit] || nil
+      user_limit: object[:user_limit],
     )
   end
 
