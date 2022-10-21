@@ -30,6 +30,9 @@ export default class extends Component {
       if (user.id === this.model.personal?.user?.id) {
         user.isCurrentUser = "true";
       }
+      if (user.id === 1) {
+        user.topRanked = true;
+      }
     });
     return this.model?.users;
   }

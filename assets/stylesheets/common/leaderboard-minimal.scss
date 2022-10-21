@@ -30,6 +30,10 @@
 
     &__rank {
       font-size: var(--font-up-3);
+
+      &.-winner {
+        color: $gold;
+      }
     }
 
     &__name {
