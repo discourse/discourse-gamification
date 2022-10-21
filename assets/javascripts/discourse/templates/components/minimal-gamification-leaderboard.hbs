@@ -1,6 +1,8 @@
 <div class="leaderboard -minimal">
   <div class="page__header">
-    <h3 class="page__title">{{ this.model.leaderboard.name }}</h3>
+    {{#link-to "gamificationLeaderboard.byName" this.model.leaderboard.id}}
+      <h3 class="page__title">{{ this.model.leaderboard.name }}</h3>
+    {{/link-to}}
   </div>
 
   <div class="ranking-col-names">
