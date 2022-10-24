@@ -9,10 +9,19 @@ export default class extends Component {
   constructor() {
     super(...arguments);
 
+    const count = this.args?.params?.count || 10;
+
     const data = {
-      user_limit: 10,
+      user_limit: count,
     };
-    ajax(`/leaderboard`, { data }).then((model) => {
+
+    // used in the right sidebar blocks theme component
+    const leaderboardId = this.args?.params?.id || null;
+    const endpoint = leaderboardId
+      ? `/leaderboard/${leaderboardId}`
+      : "/leaderboard";
+
+    ajax(endpoint, { data }).then((model) => {
       this.model = model;
     });
   }
