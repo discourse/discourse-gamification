@@ -36,7 +36,7 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
     end
   end
 
-  def self.scores_for(leaderboard_id, page: 0, for_user_id: false, period: nil)
+  def self.scores_for(leaderboard_id, page: 0, for_user_id: false, period: nil, user_limit: nil)
     leaderboard = self.find(leaderboard_id)
     leaderboard.to_date ||= Date.today
 
@@ -83,7 +83,7 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
       return { user: user, position: index ? index + 1 : nil }
     end
     users = users.offset(PAGE_SIZE * page) if page > 0
-    users = users.limit(PAGE_SIZE)
+    users = users.limit(user_limit || PAGE_SIZE)
     users
   end
 end

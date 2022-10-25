@@ -15,6 +15,7 @@ class DiscourseGamification::GamificationLeaderboardController < ::ApplicationCo
         page: params[:page].to_i,
         for_user_id: current_user&.id,
         period: period,
+        user_limit: params[:user_limit]&.to_i,
       },
       LeaderboardViewSerializer,
       root: false,
