@@ -13,4 +13,4 @@ en:
     day_visited_score_value: "The value of the cheer awarded for every day a user visits the site"
     scorable_categories: "List of categories where actions will generate cheers. Leave empty to enable cheers on all categories"
   score: "Cheers"
-  default_leaderboard_name: "Global Leaderboard"  
+  default_leaderboard_name: "Global Leaderboard"

@@ -6,6 +6,36 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
   self.table_name = "gamification_leaderboards"
   validates :name, exclusion: { in: %w[new], message: "%{value} is reserved." }
 
+  enum :period, {
+    all_time: 0,
+    yearly: 1,
+    quarterly: 2,
+    monthly: 3,
+    weekly: 4,
+    daily: 5
+  }
+
+  def get_period_date(period_symbol)
+    period_symbol ||= DiscourseGamification::GamificationLeaderboard.periods.key(default_period).to_sym
+
+    case period_symbol
+    when :all_time
+      nil
+    when :yearly
+      1.year.ago
+    when :monthly
+      1.month.ago
+    when :quarterly
+      3.months.ago
+    when :weekly
+      1.week.ago
+    when :daily
+      1.day.ago
+    else
+      nil
+    end
+  end
+
   def self.scores_for(leaderboard_id, page: 0, for_user_id: false, period: nil, user_limit: nil)
     leaderboard = self.find(leaderboard_id)
     leaderboard.to_date ||= Date.today

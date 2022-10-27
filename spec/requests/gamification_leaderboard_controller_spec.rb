@@ -39,6 +39,15 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
     )
   end
 
+  let!(:leaderboard_with_default_period_set_to_daily) do
+    Fabricate(
+      :gamification_leaderboard,
+      name: "test_4",
+      created_by_id: current_user.id,
+      default_period: 5,
+    )
+  end
+
   before do
     DiscourseGamification::GamificationScore.calculate_scores(since_date: 10.days.ago)
     sign_in(current_user)
@@ -122,5 +131,20 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
       get "/leaderboard/#{leaderboard_with_group.id}.json"
       expect(response.status).to eq(200)
     end
+
+    it "displays leaderboard for the default leaderboard period" do
+      get "/leaderboard/#{leaderboard.id}.json"
+      regular_user_score = response.parsed_body["users"][0]["total_score"]
+
+      get "/leaderboard/#{leaderboard.id}.json?period=daily"
+      daily_user_score = response.parsed_body["users"][0]["total_score"]
+
+      get "/leaderboard/#{leaderboard_with_default_period_set_to_daily.id}.json"
+      default_user_score = response.parsed_body["users"][0]["total_score"]
+
+      expect(default_user_score).to eq(daily_user_score)
+      expect(default_user_score).not_to eq(regular_user_score)
+    end
+
   end
 end

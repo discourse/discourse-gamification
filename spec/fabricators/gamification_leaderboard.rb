@@ -7,4 +7,5 @@ Fabricator(:gamification_leaderboard, from: ::DiscourseGamification::Gamificatio
   to_date { nil }
   visible_to_groups_ids { [] }
   included_groups_ids { [] }
+  default_period { 0 }
 end
