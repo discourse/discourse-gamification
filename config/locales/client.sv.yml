@@ -31,6 +31,13 @@ sv:
         included_groups_help: "Endast användare i dessa grupper kommer att inkluderas i topplistan. Lämna tomt för att lista alla."
         excluded_groups: "Exkluderade grupper"
         excluded_groups_help: "Ta bort användare i dessa grupper från att inkluderas i topplistan. Lämna tomt för att lista alla."
+        period:
+          all_time: "Alltid"
+          yearly: "Årsvis"
+          quarterly: "Kvartalsvis"
+          monthly: "Månadsvis"
+          weekly: "Veckovis"
+          daily: "Dagligen"
       create: "Skapa"
       cancel: "Avbryt"
       delete: "Radera"

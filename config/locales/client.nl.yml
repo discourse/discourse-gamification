@@ -7,5 +7,13 @@
 nl:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Sinds het begin"
+          yearly: "Jaarlijks"
+          quarterly: "Per kwartaal"
+          monthly: "Maandelijks"
+          weekly: "Wekelijks"
+          daily: "Dagelijks"
       admin:
         name: "Naam"

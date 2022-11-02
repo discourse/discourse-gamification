@@ -7,5 +7,13 @@
 uk:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Весь час"
+          yearly: "Щорічно"
+          quarterly: "Щоквартала"
+          monthly: "Щомісяця"
+          weekly: "Щотижня"
+          daily: "За день"
       admin:
         name: "Назва"

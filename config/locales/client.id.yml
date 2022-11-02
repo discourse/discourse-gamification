@@ -7,5 +7,8 @@
 id:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Sepanjang Waktu"
       admin:
         name: "Nama"

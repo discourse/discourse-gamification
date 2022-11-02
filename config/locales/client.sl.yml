@@ -7,5 +7,13 @@
 sl:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Ves čas"
+          yearly: "V letu"
+          quarterly: "V četrtletju"
+          monthly: "Mesečno"
+          weekly: "Tedensko"
+          daily: "Dnevno"
       admin:
         name: "Polno ime"

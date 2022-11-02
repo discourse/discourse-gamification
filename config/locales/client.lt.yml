@@ -7,5 +7,13 @@
 lt:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Per visą laiką"
+          yearly: "Kasmet"
+          quarterly: "Kas ketvirtį"
+          monthly: "Kas mėnesį"
+          weekly: "Kas savaitę"
+          daily: "Kasdien"
       admin:
         name: "Vardas"

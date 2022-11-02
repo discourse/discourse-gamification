@@ -7,5 +7,13 @@
 sw:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Wakati wote"
+          yearly: "Kila Mwaka"
+          quarterly: "Kila baada ya miezi mitatu"
+          monthly: "Klla mwezi"
+          weekly: "Kila wiki"
+          daily: "Kila siku"
       admin:
         name: "Jina"

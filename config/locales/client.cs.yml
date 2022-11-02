@@ -7,5 +7,13 @@
 cs:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Za celou dobu"
+          yearly: "Ročně"
+          quarterly: "Čtvrtletně"
+          monthly: "Měsíčně"
+          weekly: "Týdně"
+          daily: "Denně"
       admin:
         name: "Jméno"

@@ -7,5 +7,13 @@
 sk:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Za celú dobu"
+          yearly: "Ročne"
+          quarterly: "Štvrťročne"
+          monthly: "Mesačne"
+          weekly: "Týždenne"
+          daily: "Denne"
       admin:
         name: "Meno"

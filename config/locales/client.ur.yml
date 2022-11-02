@@ -7,5 +7,13 @@
 ur:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "تمام اوقات"
+          yearly: "سالانہ"
+          quarterly: "سہ ماہی"
+          monthly: "ماہانہ"
+          weekly: "ہفتہ وار"
+          daily: "روزانہ"
       admin:
         name: "نام"

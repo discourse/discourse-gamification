@@ -7,5 +7,13 @@
 hu:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Bármikor"
+          yearly: "Éves"
+          quarterly: "Negyedéves"
+          monthly: "Havi"
+          weekly: "Heti"
+          daily: "Napi"
       admin:
         name: "Név"

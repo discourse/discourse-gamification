@@ -7,5 +7,13 @@
 el:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Από πάντα"
+          yearly: "Ετήσια"
+          quarterly: "Τριμηνιαία"
+          monthly: "Μηνιαίες"
+          weekly: "Εβδομαδιαίες"
+          daily: "Ημερήσιες"
       admin:
         name: "Όνομα"

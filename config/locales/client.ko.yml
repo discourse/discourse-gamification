@@ -7,5 +7,13 @@
 ko:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "전체 시간"
+          yearly: "연"
+          quarterly: "분기마다"
+          monthly: "월"
+          weekly: "주"
+          daily: "일"
       admin:
         name: "이름"

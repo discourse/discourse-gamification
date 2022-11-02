@@ -7,5 +7,13 @@
 pt:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Desde Sempre"
+          yearly: "Anual"
+          quarterly: "Trimestral"
+          monthly: "Mensal"
+          weekly: "Semanal"
+          daily: "Diário"
       admin:
         name: "Nome"

@@ -7,5 +7,13 @@
 gl:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Desde o principio"
+          yearly: "Anual"
+          quarterly: "Trimestral"
+          monthly: "Mensual"
+          weekly: "Semanal"
+          daily: "Diario"
       admin:
         name: "Nome"

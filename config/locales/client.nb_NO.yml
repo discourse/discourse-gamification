@@ -7,5 +7,13 @@
 nb_NO:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Totalt"
+          yearly: "Årlig"
+          quarterly: "Kvartalsvis"
+          monthly: "Månedlig"
+          weekly: "Ukentlig"
+          daily: "Daglig"
       admin:
         name: "Navn"

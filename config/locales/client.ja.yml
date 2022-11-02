@@ -7,5 +7,13 @@
 ja:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "全期間"
+          yearly: "年間"
+          quarterly: "四半期"
+          monthly: "月間"
+          weekly: "週間"
+          daily: "日間"
       admin:
         name: "名前"
