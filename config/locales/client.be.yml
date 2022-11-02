@@ -7,5 +7,13 @@
 be:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "За ўвесь час"
+          yearly: "штогод"
+          quarterly: "штоквартальна"
+          monthly: "штомесяц"
+          weekly: "штотыдзень"
+          daily: "штодня"
       admin:
         name: "імя"

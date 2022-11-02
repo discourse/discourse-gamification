@@ -7,5 +7,13 @@
 sr:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Oduvek"
+          yearly: "Top godišnje"
+          quarterly: "Top kvartalne"
+          monthly: "Top mesečne"
+          weekly: "Top nedeljne"
+          daily: "Top dnevne"
       admin:
         name: "Ime foruma"

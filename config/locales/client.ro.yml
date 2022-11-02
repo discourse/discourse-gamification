@@ -7,5 +7,13 @@
 ro:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Dintotdeauna"
+          yearly: "Anual"
+          quarterly: "Trimestrial"
+          monthly: "Lunar"
+          weekly: "Săptămânal"
+          daily: "Zilnic"
       admin:
         name: "Nume"

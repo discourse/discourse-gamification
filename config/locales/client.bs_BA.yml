@@ -7,5 +7,13 @@
 bs_BA:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Oduvijek"
+          yearly: "Godišnje"
+          quarterly: "Kvartalno"
+          monthly: "Mesečno"
+          weekly: "Sedmično"
+          daily: "Dnevno"
       admin:
         name: "Ime"

@@ -21,6 +21,13 @@ hr:
         confirm_destroy: "Jeste li sigurni da želite izbrisati ovu ploču s najboljim rezultatima?"
         date:
           range: "Od/do datumskog raspona"
+        period:
+          all_time: "Oduvijek"
+          yearly: "Godišnje"
+          quarterly: "Tromjesečno"
+          monthly: "Mjesečno"
+          weekly: "Tjedno"
+          daily: "Dnevno"
       create: "Stvorite"
       cancel: "Odustani"
       delete: "Izbriši"

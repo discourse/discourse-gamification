@@ -7,5 +7,13 @@
 sq:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Gjithë Kohës"
+          yearly: "Vjetore"
+          quarterly: "Tremujorsh"
+          monthly: "Mujore"
+          weekly: "Javore"
+          daily: "Ditore"
       admin:
         name: "Emri"

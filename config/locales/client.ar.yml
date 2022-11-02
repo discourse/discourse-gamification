@@ -7,5 +7,13 @@
 ar:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "طوال الوقت"
+          yearly: "سنويًا"
+          quarterly: "ربع سنوي"
+          monthly: "شهريًا"
+          weekly: "أسبوعيًا"
+          daily: "يوميًا"
       admin:
         name: "الاسم"

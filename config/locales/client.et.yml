@@ -7,5 +7,13 @@
 et:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Alates algusest"
+          yearly: "Iga-aastaselt"
+          quarterly: "Kvartaalselt"
+          monthly: "Igakuiselt"
+          weekly: "Iganädalaselt"
+          daily: "Igapäevaselt"
       admin:
         name: "Nimi"

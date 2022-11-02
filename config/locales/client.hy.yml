@@ -7,5 +7,13 @@
 hy:
   js:
     gamification:
+      leaderboard:
+        period:
+          all_time: "Ամբողջ Ժամանակվա"
+          yearly: "Տարվա Ընթացքում"
+          quarterly: "Եռամսյակի Ընթացքում"
+          monthly: "Ամսվա Ընթացքում"
+          weekly: "Շաբաթվա Ընթացքում"
+          daily: "Օրվա Ընթացքում"
       admin:
         name: "Անուն"

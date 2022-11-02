@@ -31,6 +31,13 @@ zh_CN:
         included_groups_help: "只有这些组中的用户才会被列入排行榜。留空则默认所有人都参与排行榜。"
         excluded_groups: "不参与排行榜的群组"
         excluded_groups_help: "这些组中的用户将不会参与排行榜。留空则默认所有人都参与排行榜。"
+        period:
+          all_time: "所有时间"
+          yearly: "每年"
+          quarterly: "每季度"
+          monthly: "每月"
+          weekly: "每周"
+          daily: "每天"
       create: "创建"
       cancel: "取消"
       delete: "删除"

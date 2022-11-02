@@ -27,6 +27,13 @@ es:
           helper: "Si dejas las fechas vacías, la tabla incluirá puntuaciones obtenidas en cualquier momento"
         visible_to_groups: "Visible para los grupos"
         included_groups: "Grupos incluidos"
+        period:
+          all_time: "Siempre"
+          yearly: "Anualmente"
+          quarterly: "Trimestralmente"
+          monthly: "Mensualmente"
+          weekly: "Semanalmente"
+          daily: "Diariamente"
       create: "Crear"
       cancel: "Cancelar"
       delete: "Eliminar"

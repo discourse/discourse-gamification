@@ -19,6 +19,15 @@ fa_IR:
         confirm_destroy: "آیا مطمئنید که می‌خواهید این تابلوی امتیاز را حذف کنید؟"
         date:
           range: "از / تا محدوده تاریخ"
+        default_period: "بازه زمانی پیش‌فرض"
+        default_period_help: "بازه زمانی پیش‌فرض را برای نمایش این تابلوی امتیازات تنظیم کنید."
+        period:
+          all_time: "همیشه"
+          yearly: "سالیانه "
+          quarterly: "فصلی"
+          monthly: "ماهیانه"
+          weekly: "هفتگی"
+          daily: "روزانه"
       create: "ایجاد"
       cancel: "لغو"
       delete: "حذف"
