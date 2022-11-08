@@ -7,7 +7,9 @@
 lt:
   js:
     gamification:
+      you: "Jūs"
       leaderboard:
+        name: "Vardas"
         period:
           all_time: "Per visą laiką"
           yearly: "Kasmet"
@@ -15,5 +17,11 @@ lt:
           monthly: "Kas mėnesį"
           weekly: "Kas savaitę"
           daily: "Kasdien"
+      create: "Sukurti"
+      cancel: "Atšaukti"
+      delete: "Pašalinti"
+      edit: "Redaguoti"
+      back: "Atgal"
+      save: "Išsaugoti"
       admin:
         name: "Vardas"

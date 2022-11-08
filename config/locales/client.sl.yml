@@ -7,7 +7,9 @@
 sl:
   js:
     gamification:
+      you: "Vi"
       leaderboard:
+        name: "Ime"
         period:
           all_time: "Ves čas"
           yearly: "V letu"
@@ -15,5 +17,11 @@ sl:
           monthly: "Mesečno"
           weekly: "Tedensko"
           daily: "Dnevno"
+      create: "Ustvari"
+      cancel: "Prekliči"
+      delete: "Izbriši"
+      edit: "Uredi"
+      back: "Nazaj"
+      save: "Shrani"
       admin:
         name: "Polno ime"

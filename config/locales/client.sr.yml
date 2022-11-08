@@ -7,7 +7,9 @@
 sr:
   js:
     gamification:
+      you: "Ti"
       leaderboard:
+        name: "Ime foruma"
         period:
           all_time: "Oduvek"
           yearly: "Top godišnje"
@@ -15,5 +17,10 @@ sr:
           monthly: "Top mesečne"
           weekly: "Top nedeljne"
           daily: "Top dnevne"
+      cancel: "Odustani"
+      delete: "Obriši"
+      edit: "Izmeni"
+      back: "Nazad"
+      save: "Sačuvaj"
       admin:
         name: "Ime foruma"

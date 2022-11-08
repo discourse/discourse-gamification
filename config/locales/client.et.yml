@@ -7,7 +7,9 @@
 et:
   js:
     gamification:
+      you: "Sina"
       leaderboard:
+        name: "Nimi"
         period:
           all_time: "Alates algusest"
           yearly: "Iga-aastaselt"
@@ -15,5 +17,11 @@ et:
           monthly: "Igakuiselt"
           weekly: "Iganädalaselt"
           daily: "Igapäevaselt"
+      create: "Loo"
+      cancel: "Tühista"
+      delete: "Kustuta"
+      edit: "Muuda"
+      back: "Tagasi"
+      save: "Salvesta"
       admin:
         name: "Nimi"

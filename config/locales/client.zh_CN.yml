@@ -31,6 +31,8 @@ zh_CN:
         included_groups_help: "只有这些组中的用户才会被列入排行榜。留空则默认所有人都参与排行榜。"
         excluded_groups: "不参与排行榜的群组"
         excluded_groups_help: "这些组中的用户将不会参与排行榜。留空则默认所有人都参与排行榜。"
+        default_period: "默认时间段"
+        default_period_help: "设置要为此排行榜显示的默认时间段。"
         period:
           all_time: "所有时间"
           yearly: "每年"

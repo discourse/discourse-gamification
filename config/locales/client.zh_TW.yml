@@ -7,7 +7,9 @@
 zh_TW:
   js:
     gamification:
+      you: "你"
       leaderboard:
+        name: "名字"
         period:
           all_time: "所以時間"
           yearly: "年"
@@ -15,5 +17,11 @@ zh_TW:
           monthly: "月"
           weekly: "周"
           daily: "日"
+      create: "創建"
+      cancel: "取消"
+      delete: "刪除"
+      edit: "編輯"
+      back: "上一步"
+      save: "保存"
       admin:
         name: "名字"

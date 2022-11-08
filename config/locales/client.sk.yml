@@ -7,7 +7,9 @@
 sk:
   js:
     gamification:
+      you: "Vy"
       leaderboard:
+        name: "Meno"
         period:
           all_time: "Za celú dobu"
           yearly: "Ročne"
@@ -15,5 +17,11 @@ sk:
           monthly: "Mesačne"
           weekly: "Týždenne"
           daily: "Denne"
+      create: "Vytvoriť"
+      cancel: "Zrušiť"
+      delete: "Odstrániť"
+      edit: "Upraviť"
+      back: "Späť"
+      save: "Uložiť"
       admin:
         name: "Meno"

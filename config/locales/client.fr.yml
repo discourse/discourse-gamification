@@ -6,8 +6,33 @@
 
 fr:
   js:
+    gamification_score: "Acclamations"
     gamification:
+      score: "Acclamations"
+      you: "Vous"
       leaderboard:
+        title: "Classements"
+        info: "Comment ça fonctionne ?"
+        modal:
+          title: "Comment fonctionne le classement ?"
+          text: "Des points sont attribués pour l'engagement auprès de la communauté, par exemple pour les visites, les mentions J'aime et les publications. Votre score est mis à jour toutes les quelques minutes. Veillez donc à être aimable, actif(ve) et solidaire, et gravissez les échelons !"
+        name: "Nom"
+        name_placeholder: "nom…"
+        new: "Ajouter"
+        cta: "Créez votre premier classement"
+        none: "Aucun classement n'a encore été créé."
+        confirm_destroy: "Voulez-vous vraiment supprimer ce classement ?"
+        date:
+          range: "Plage de date du/au"
+          helper: "Si les dates sont laissées vides, le classement affichera les scores obtenus sans aucune restriction de temps."
+        visible_to_groups: "Visible par les groupes"
+        visible_to_groups_help: "Seuls les utilisateurs de ces groupes pourront voir le classement. Laissez le champ vide pour autoriser tout le monde."
+        included_groups: "Groupes inclus"
+        included_groups_help: "Seuls les utilisateurs de ces groupes seront inclus dans le classement. Laissez ce champ vide pour lister tout le monde."
+        excluded_groups: "Groupes exclus"
+        excluded_groups_help: "Supprimez les utilisateurs de ces groupes afin qu'ils ne figurent pas dans le classement. Laissez ce champ vide pour lister tout le monde."
+        default_period: "Période par défaut"
+        default_period_help: "Définissez la période par défaut à afficher pour ce classement."
         period:
           all_time: "Depuis toujours"
           yearly: "Annuel"
@@ -15,5 +40,13 @@ fr:
           monthly: "Mensuel"
           weekly: "Hebdomadaire"
           daily: "Quotidien"
+      create: "Créer"
+      cancel: "Annuler"
+      delete: "Supprimer"
+      edit: "Modifier"
+      back: "Retour"
+      save: "Enregistrer"
       admin:
+        title: "Gamification"
         name: "Nom"
+        period: "Période"

@@ -7,7 +7,9 @@
 th:
   js:
     gamification:
+      you: "คุณ"
       leaderboard:
+        name: "ชื่อ"
         period:
           all_time: "ตลอดเวลา"
           yearly: "รายปี"
@@ -15,5 +17,11 @@ th:
           monthly: "รายเดือน"
           weekly: "รายสัปดาห์"
           daily: "รายวัน"
+      create: "สร้าง"
+      cancel: "ยกเลิก"
+      delete: "ลบ"
+      edit: "แก้ไข"
+      back: "กลับ"
+      save: "บันทึก"
       admin:
         name: "ชื่อ"

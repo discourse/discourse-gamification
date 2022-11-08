@@ -7,7 +7,9 @@
 nb_NO:
   js:
     gamification:
+      you: "Du"
       leaderboard:
+        name: "Navn"
         period:
           all_time: "Totalt"
           yearly: "Årlig"
@@ -15,5 +17,11 @@ nb_NO:
           monthly: "Månedlig"
           weekly: "Ukentlig"
           daily: "Daglig"
+      create: "Opprett"
+      cancel: "Avbryt"
+      delete: "Slett"
+      edit: "Endre"
+      back: "Forrige"
+      save: "Lagre"
       admin:
         name: "Navn"

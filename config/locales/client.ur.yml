@@ -7,7 +7,9 @@
 ur:
   js:
     gamification:
+      you: "آپ "
       leaderboard:
+        name: "نام"
         period:
           all_time: "تمام اوقات"
           yearly: "سالانہ"
@@ -15,5 +17,11 @@ ur:
           monthly: "ماہانہ"
           weekly: "ہفتہ وار"
           daily: "روزانہ"
+      create: "بنائیں"
+      cancel: "منسوخ"
+      delete: "مٹائیں"
+      edit: "ترمیم کریں"
+      back: "واپس"
+      save: "محفوظ کریں"
       admin:
         name: "نام"

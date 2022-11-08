@@ -7,7 +7,9 @@
 uk:
   js:
     gamification:
+      you: "Ви"
       leaderboard:
+        name: "Назва"
         period:
           all_time: "Весь час"
           yearly: "Щорічно"
@@ -15,5 +17,11 @@ uk:
           monthly: "Щомісяця"
           weekly: "Щотижня"
           daily: "За день"
+      create: "Створити"
+      cancel: "Скасувати"
+      delete: "Видалити"
+      edit: "Редагувати"
+      back: "Назад"
+      save: "Зберегти"
       admin:
         name: "Назва"

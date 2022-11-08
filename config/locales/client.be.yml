@@ -7,7 +7,9 @@
 be:
   js:
     gamification:
+      you: "Вы"
       leaderboard:
+        name: "імя"
         period:
           all_time: "За ўвесь час"
           yearly: "штогод"
@@ -15,5 +17,11 @@ be:
           monthly: "штомесяц"
           weekly: "штотыдзень"
           daily: "штодня"
+      create: "стварыць"
+      cancel: "адмяніць"
+      delete: "выдаляць"
+      edit: "рэдагаваць"
+      back: "Назад"
+      save: "захаваць"
       admin:
         name: "імя"
