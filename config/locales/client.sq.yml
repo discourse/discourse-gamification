@@ -7,7 +7,9 @@
 sq:
   js:
     gamification:
+      you: "Ju"
       leaderboard:
+        name: "Emri"
         period:
           all_time: "Gjithë Kohës"
           yearly: "Vjetore"
@@ -15,5 +17,10 @@ sq:
           monthly: "Mujore"
           weekly: "Javore"
           daily: "Ditore"
+      cancel: "Anulo"
+      delete: "Fshij"
+      edit: "Redakto"
+      back: "Kthehu mbrapa"
+      save: "Ruaj"
       admin:
         name: "Emri"

@@ -7,7 +7,9 @@
 lv:
   js:
     gamification:
+      you: "Tu"
       leaderboard:
+        name: "Vārds"
         period:
           all_time: "Vienmēr"
           yearly: "Gada"
@@ -15,5 +17,11 @@ lv:
           monthly: "Mēneša"
           weekly: "Nedēļas"
           daily: "Dienas"
+      create: "Izveidot"
+      cancel: "Atcelt"
+      delete: "Dzēst"
+      edit: "Rediģēt"
+      back: "Atpakaļ"
+      save: "Saglabāt"
       admin:
         name: "Vārds"

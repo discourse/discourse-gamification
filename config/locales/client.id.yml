@@ -7,8 +7,14 @@
 id:
   js:
     gamification:
+      you: "Anda"
       leaderboard:
+        name: "Nama"
         period:
           all_time: "Sepanjang Waktu"
+      cancel: "Batal"
+      delete: "Hapus"
+      edit: "Ubah"
+      save: "Simpan"
       admin:
         name: "Nama"

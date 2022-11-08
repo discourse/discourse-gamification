@@ -7,7 +7,9 @@
 bg:
   js:
     gamification:
+      you: "Вие"
       leaderboard:
+        name: "Име"
         period:
           all_time: "От началото"
           yearly: "Годишно"
@@ -15,5 +17,10 @@ bg:
           monthly: "Месечно"
           weekly: "Седмично"
           daily: "Дневно"
+      cancel: "Прекрати"
+      delete: "Изтрий"
+      edit: "Редактирай"
+      back: "Назад"
+      save: "Запази "
       admin:
         name: "Име"

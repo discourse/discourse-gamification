@@ -7,7 +7,9 @@
 ca:
   js:
     gamification:
+      you: "Vós"
       leaderboard:
+        name: "Nom"
         period:
           all_time: "Sempre"
           yearly: "Anualment"
@@ -15,5 +17,11 @@ ca:
           monthly: "Mensualment"
           weekly: "Setmanalment"
           daily: "Diàriament"
+      create: "Crea"
+      cancel: "Cancel·la"
+      delete: "Suprimeix"
+      edit: "Edita"
+      back: "Enrere"
+      save: "Desa"
       admin:
         name: "Nom"

@@ -6,14 +6,47 @@
 
 it:
   js:
+    gamification_score: "Complimenti"
     gamification:
+      score: "Complimenti"
+      you: "Tu"
       leaderboard:
+        title: "Classifiche"
+        info: "Come funziona?"
+        modal:
+          title: "Come funziona la classifica?"
+          text: "I punti vengono assegnati per il coinvolgimento con la community, ad esempio in base al numero di visite, Mi piace e pubblicazioni. Il tuo punteggio viene aggiornato ogni pochi minuti. Quindi cerca di essere propositivo, attivo e di supporto per scalare le classifiche!"
+        name: "Nome"
+        name_placeholder: "nome..."
+        new: "Aggiungi nuova"
+        cta: "Crea la tua prima classifica"
+        none: "Nessuna classifica ancora creata."
+        confirm_destroy: "Vuoi cancellare questa classifica?"
+        date:
+          range: "Intervallo di date dal/al"
+          helper: "Se le date vengono lasciate vuote, la classifica mostrerà i punteggi ottenuti senza alcun limite di tempo."
+        visible_to_groups: "Visibile ai gruppi"
+        visible_to_groups_help: "Solo gli utenti di questi gruppi potranno visualizzare la classifica. Lascia vuota l'opzione per consentire a tutti la visione."
+        included_groups: "Gruppi inclusi"
+        included_groups_help: "Solo gli utenti di questi gruppi saranno inclusi in classifica. Lascia vuota l'opzione per elencare tutti."
+        excluded_groups: "Gruppi esclusi"
+        excluded_groups_help: "Gli utenti di questi gruppi saranno esclusi dalla classifica. Lascia vuota l'opzione per elencare tutti."
+        default_period: "Periodo predefinito"
+        default_period_help: "Imposta il periodo di tempo predefinito per visualizzare questa classifica."
         period:
           all_time: "Di Sempre"
           yearly: "Annuale"
           quarterly: "Trimestrale"
           monthly: "Mensile"
           weekly: "Settimanale"
-          daily: "Ogni giorno"
+          daily: "Giornaliero"
+      create: "Crea"
+      cancel: "Annulla"
+      delete: "Cancella"
+      edit: "Modifica"
+      back: "Indietro"
+      save: "Salva"
       admin:
+        title: "Gamification"
         name: "Nome"
+        period: "Periodo"

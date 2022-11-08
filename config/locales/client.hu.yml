@@ -7,7 +7,9 @@
 hu:
   js:
     gamification:
+      you: "Ön"
       leaderboard:
+        name: "Név"
         period:
           all_time: "Bármikor"
           yearly: "Éves"
@@ -15,5 +17,11 @@ hu:
           monthly: "Havi"
           weekly: "Heti"
           daily: "Napi"
+      create: "Létrehozás"
+      cancel: "Mégse"
+      delete: "Törlés"
+      edit: "Szerkesztés"
+      back: "Vissza"
+      save: "Mentés"
       admin:
         name: "Név"

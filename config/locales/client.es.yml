@@ -26,7 +26,13 @@ es:
           range: "Fecha de inicio/fin"
           helper: "Si dejas las fechas vacías, la tabla incluirá puntuaciones obtenidas en cualquier momento"
         visible_to_groups: "Visible para los grupos"
+        visible_to_groups_help: "Solo los usuarios de esos grupos podrán ver la tabla de clasificación. Déjalo vacío para permitir a todos."
         included_groups: "Grupos incluidos"
+        included_groups_help: "Solo los usuarios de esos grupos se incluirán en la tabla de clasificación. Déjelo vacío para incluir a todos."
+        excluded_groups: "Grupos excluidos"
+        excluded_groups_help: "Elimina a los usuarios de esos grupos para que no se incluyan en la tabla de clasificación. Déjalo vacío para que aparezcan todos."
+        default_period: "Período predeterminado"
+        default_period_help: "Establece el período de tiempo predeterminado que se mostrará en esta tabla de clasificación."
         period:
           all_time: "Siempre"
           yearly: "Anualmente"

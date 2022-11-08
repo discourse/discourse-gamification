@@ -7,7 +7,9 @@
 pl_PL:
   js:
     gamification:
+      you: "Ty"
       leaderboard:
+        name: "Nazwa"
         period:
           all_time: "Przez cały czas"
           yearly: "Rocznie"
@@ -15,5 +17,11 @@ pl_PL:
           monthly: "Miesięcznie"
           weekly: "Tygodniowo"
           daily: "Dziennie"
+      create: "Utwórz"
+      cancel: "Anuluj"
+      delete: "Usuń"
+      edit: "Edytuj"
+      back: "Poprzednia"
+      save: "Zapisz"
       admin:
         name: "Imię"

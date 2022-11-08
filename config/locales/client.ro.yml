@@ -7,7 +7,9 @@
 ro:
   js:
     gamification:
+      you: "Tu"
       leaderboard:
+        name: "Nume"
         period:
           all_time: "Dintotdeauna"
           yearly: "Anual"
@@ -15,5 +17,11 @@ ro:
           monthly: "Lunar"
           weekly: "Săptămânal"
           daily: "Zilnic"
+      create: "Creează"
+      cancel: "Anulare"
+      delete: "Șterge"
+      edit: "Modifică"
+      back: "Înapoi"
+      save: "Salvare"
       admin:
         name: "Nume"

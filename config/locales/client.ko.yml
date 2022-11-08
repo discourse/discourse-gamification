@@ -7,7 +7,9 @@
 ko:
   js:
     gamification:
+      you: "사용자님"
       leaderboard:
+        name: "그룹명"
         period:
           all_time: "전체 시간"
           yearly: "연"
@@ -15,5 +17,11 @@ ko:
           monthly: "월"
           weekly: "주"
           daily: "일"
+      create: "글"
+      cancel: "취소"
+      delete: "삭제하기"
+      edit: "편집"
+      back: "뒤로"
+      save: "저장하기"
       admin:
         name: "이름"

@@ -7,7 +7,9 @@
 sw:
   js:
     gamification:
+      you: "Wewe"
       leaderboard:
+        name: "Jina"
         period:
           all_time: "Wakati wote"
           yearly: "Kila Mwaka"
@@ -15,5 +17,11 @@ sw:
           monthly: "Klla mwezi"
           weekly: "Kila wiki"
           daily: "Kila siku"
+      create: "Tengeneza"
+      cancel: "Ghairi"
+      delete: "Futa"
+      edit: "Hariri"
+      back: "Iliyopita"
+      save: "Hifadhi"
       admin:
         name: "Jina"

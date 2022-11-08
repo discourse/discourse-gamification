@@ -7,8 +7,15 @@
 te:
   js:
     gamification:
+      you: "మీరు"
       leaderboard:
+        name: "పేరు"
         period:
           all_time: "ఆల్ టైమ్"
+      cancel: "రద్దుచేయి"
+      delete: "తొలగించు"
+      edit: "సవరణ"
+      back: "వెనుకకు"
+      save: "భద్రపరుచు"
       admin:
         name: "పేరు"

@@ -7,7 +7,9 @@
 hy:
   js:
     gamification:
+      you: "Դուք "
       leaderboard:
+        name: "Անուն"
         period:
           all_time: "Ամբողջ Ժամանակվա"
           yearly: "Տարվա Ընթացքում"
@@ -15,5 +17,11 @@ hy:
           monthly: "Ամսվա Ընթացքում"
           weekly: "Շաբաթվա Ընթացքում"
           daily: "Օրվա Ընթացքում"
+      create: "Ստեղծել"
+      cancel: "Չեղարկել"
+      delete: "Ջնջել"
+      edit: "Խմբագրել"
+      back: "Ետ"
+      save: "Պահպանել"
       admin:
         name: "Անուն"

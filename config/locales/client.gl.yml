@@ -7,7 +7,9 @@
 gl:
   js:
     gamification:
+      you: "Vostede"
       leaderboard:
+        name: "Nome"
         period:
           all_time: "Desde o principio"
           yearly: "Anual"
@@ -15,5 +17,11 @@ gl:
           monthly: "Mensual"
           weekly: "Semanal"
           daily: "Diario"
+      create: "Crear"
+      cancel: "Cancelar"
+      delete: "Eliminar"
+      edit: "Editar"
+      back: "Volver"
+      save: "Gardar"
       admin:
         name: "Nome"

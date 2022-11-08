@@ -7,7 +7,9 @@
 vi:
   js:
     gamification:
+      you: "Bạn"
       leaderboard:
+        name: "Tên"
         period:
           all_time: "Từ trước tới nay"
           yearly: "Hàng năm"
@@ -15,5 +17,11 @@ vi:
           monthly: "Hàng tháng"
           weekly: "Hàng tuần"
           daily: "hằng ngày"
+      create: "Tạo"
+      cancel: "Huỷ"
+      delete: "Xóa"
+      edit: "Sửa"
+      back: "Quay lại"
+      save: "Lưu lại"
       admin:
         name: "Tên"

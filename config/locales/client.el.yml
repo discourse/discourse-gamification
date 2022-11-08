@@ -7,7 +7,9 @@
 el:
   js:
     gamification:
+      you: "Εσείς"
       leaderboard:
+        name: "Όνομα"
         period:
           all_time: "Από πάντα"
           yearly: "Ετήσια"
@@ -15,5 +17,11 @@ el:
           monthly: "Μηνιαίες"
           weekly: "Εβδομαδιαίες"
           daily: "Ημερήσιες"
+      create: "Δημιουργία"
+      cancel: "Ακύρωση"
+      delete: "Σβήσιμο"
+      edit: "Επεξεργασία"
+      back: "Πίσω"
+      save: "Αποθήκευση"
       admin:
         name: "Όνομα"

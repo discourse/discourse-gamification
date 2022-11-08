@@ -8,6 +8,7 @@ fa_IR:
   js:
     gamification_score: "امتیازات"
     gamification:
+      score: "امتیازات"
       you: "شما"
       leaderboard:
         title: "تابلو امتیازات"

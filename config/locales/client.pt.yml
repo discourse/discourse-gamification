@@ -7,7 +7,9 @@
 pt:
   js:
     gamification:
+      you: "Você"
       leaderboard:
+        name: "Nome"
         period:
           all_time: "Desde Sempre"
           yearly: "Anual"
@@ -15,5 +17,11 @@ pt:
           monthly: "Mensal"
           weekly: "Semanal"
           daily: "Diário"
+      create: "Criar"
+      cancel: "Cancelar"
+      delete: "Eliminar"
+      edit: "Editar"
+      back: "Retroceder"
+      save: "Guardar"
       admin:
         name: "Nome"

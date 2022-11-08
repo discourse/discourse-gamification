@@ -7,7 +7,9 @@
 bs_BA:
   js:
     gamification:
+      you: "Vi"
       leaderboard:
+        name: "Ime"
         period:
           all_time: "Oduvijek"
           yearly: "Godišnje"
@@ -15,5 +17,11 @@ bs_BA:
           monthly: "Mesečno"
           weekly: "Sedmično"
           daily: "Dnevno"
+      create: "napravi"
+      cancel: "Odustani"
+      delete: "Delete"
+      edit: "Edit"
+      back: "Prethodno"
+      save: "Save"
       admin:
         name: "Ime"

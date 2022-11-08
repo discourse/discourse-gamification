@@ -7,7 +7,9 @@
 da:
   js:
     gamification:
+      you: "Dig"
       leaderboard:
+        name: "Navn"
         period:
           all_time: "Alt"
           yearly: "Årligt"
@@ -15,5 +17,11 @@ da:
           monthly: "Månedligt"
           weekly: "Ugentligt"
           daily: "Dagligt"
+      create: "Opret"
+      cancel: "Annuller"
+      delete: "Slet"
+      edit: "Rediger"
+      back: "Tilbage"
+      save: "Gem"
       admin:
         name: "Navn"
