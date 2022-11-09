@@ -156,6 +156,8 @@
                   {{format-date leaderboard.from_date}}
                   -
                   {{format-date leaderboard.to_date}}
+                {{else}}
+                  {{leaderboard.default_period}}
                 {{/if}}
               </td>
               <td class="leaderboard-admin__listitem-action">
