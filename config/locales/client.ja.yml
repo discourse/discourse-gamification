@@ -6,8 +6,33 @@
 
 ja:
   js:
+    gamification_score: "拍手"
     gamification:
+      score: "拍手"
+      you: "あなた"
       leaderboard:
+        title: "リーダーボード"
+        info: "仕組みは？"
+        modal:
+          title: "リーダーボードの仕組みは？"
+          text: "アクセス、「いいね！」、投稿など、コミュニティーでのアクションに対してポイントが付与されます。スコアは数分ごとに更新されます。活発な協力を通じて、ランクを上げましょう！"
+        name: "名前"
+        name_placeholder: "名前..."
+        new: "新規追加"
+        cta: "最初のリーダーボードを作成しよう"
+        none: "リーダーボードはまだ作成されていません。"
+        confirm_destroy: "このリーダーボードを削除してもよろしいですか？"
+        date:
+          range: "開始日/終了日の範囲"
+          helper: "日付が空である場合、リーダーボードには期間制限なしで獲得されたスコアが表示されます。"
+        visible_to_groups: "グループに表示"
+        visible_to_groups_help: "これらのグループのユーザーのみがリーダーボードを表示できます。全員を許可する場合は、空白のままにします。"
+        included_groups: "含まれるグループ"
+        included_groups_help: "これらのグループのユーザーのみがリーダーボードに含まれます。全員を表示する場合は、空白のままにします。"
+        excluded_groups: "除外されるグループ"
+        excluded_groups_help: "これらのグループのユーザーは、リーダーボードに含まれません。全員を表示する場合は、空白のままにします。"
+        default_period: "デフォルトの期間"
+        default_period_help: "このリーダーボードに表示するデフォルトの期間を設定します。"
         period:
           all_time: "全期間"
           yearly: "年間"
@@ -15,5 +40,13 @@ ja:
           monthly: "月間"
           weekly: "週間"
           daily: "日間"
+      create: "作成"
+      cancel: "キャンセル"
+      delete: "削除"
+      edit: "編集"
+      back: "戻る"
+      save: "保存"
       admin:
+        title: "ゲーミフィケーション"
         name: "名前"
+        period: "期間"

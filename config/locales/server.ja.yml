@@ -5,3 +5,18 @@
 # https://translate.discourse.org/
 
 ja:
+  site_settings:
+    discourse_gamification_enabled: "Discourse Gamification プラグインを有効にする"
+    like_received_score_value: "ユーザーが「いいね！」を受け取った時に付与される拍手の値"
+    like_given_score_value: "ユーザーが与える「いいね！」ごとに付与される拍手の値"
+    solution_score_value: "ユーザーの投稿が解決策としてマークされたときに付与される拍手の値"
+    user_invited_score_value: "ユーザーに招待の引き換えがあった時に付与される拍手の値"
+    time_read_score_value: "閲覧に費やした時間ごとに付与される拍手の値"
+    post_read_score_value: "ユーザーが投稿を 100 件読むたびに付与される拍手の値"
+    topic_created_score_value: "ユーザーがトピックを作成した時に付与される拍手の値"
+    post_created_score_value: "ユーザーが投稿を作成した時に付与される拍手の値"
+    flag_created_score_value: "ユーザーが投稿を通報し、その通報がスタッフユーザーに承認された時に付与される拍手の値"
+    day_visited_score_value: "ユーザーがサイトにアクセスする日ごとに付与される拍手の値"
+    scorable_categories: "アクションによって拍手が生成されるカテゴリのリスト。全カテゴリで拍手を有効にする場合は、空白のままにします。"
+  score: "拍手"
+  default_leaderboard_name: "グローバルリーダーボード"
