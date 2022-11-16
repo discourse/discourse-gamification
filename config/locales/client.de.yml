@@ -6,8 +6,33 @@
 
 de:
   js:
+    gamification_score: "Beifall"
     gamification:
+      score: "Beifall"
+      you: "Du"
       leaderboard:
+        title: "Ranglisten"
+        info: "Wie funktioniert das?"
+        modal:
+          title: "Wie funktioniert die Rangliste?"
+          text: "Punkte werden für die Interaktion mit der Community vergeben, z. B. für Besuche, „Gefällt mir“ und Posten. Deine Punktzahl wird alle paar Minuten aktualisiert. Sei also hilfsbereit, aktiv sowie solidarisch und steige auf!"
+        name: "Name"
+        name_placeholder: "Name …"
+        new: "Neu hinzufügen"
+        cta: "Erstelle deine erste Rangliste"
+        none: "Es wurden noch keine Ranglisten erstellt."
+        confirm_destroy: "Bist du sicher, dass du diese Rangliste löschen möchtest?"
+        date:
+          range: "Datumsbereich von/bis"
+          helper: "Wenn die Daten leer gelassen werden, zeigt die Rangliste die erzielten Punktzahlen ohne Zeitbeschränkungen."
+        visible_to_groups: "Sichtbar für Gruppen"
+        visible_to_groups_help: "Nur Benutzer in diesen Gruppen können die Rangliste sehen. Leer lassen, um dies allen zu ermöglichen."
+        included_groups: "Eingeschlossene Gruppen"
+        included_groups_help: "Nur Benutzer in diesen Gruppen werden in die Rangliste aufgenommen. Leer lassen, um alle aufzulisten."
+        excluded_groups: "Ausgeschlossene Gruppen"
+        excluded_groups_help: "Benutzer in diesen Gruppen von der Rangliste entfernen. Leer lassen, um alle aufzulisten."
+        default_period: "Standard-Zeitraum"
+        default_period_help: "Lege den Standard-Zeitraum fest, der für diese Rangliste angezeigt werden soll."
         period:
           all_time: "Gesamt"
           yearly: "Jährlich"
@@ -15,5 +40,13 @@ de:
           monthly: "Monatlich"
           weekly: "Wöchentlich"
           daily: "Täglich"
+      create: "Erstellen"
+      cancel: "Abbrechen"
+      delete: "Löschen"
+      edit: "Bearbeiten"
+      back: "Zurück"
+      save: "Speichern"
       admin:
+        title: "Gamifizierung"
         name: "Name"
+        period: "Zeitraum"
