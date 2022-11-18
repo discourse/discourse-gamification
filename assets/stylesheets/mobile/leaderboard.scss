@@ -8,6 +8,12 @@
     }
   }
 
+  .page__header button.-ghost,
+  &__settings {
+    font-size: var(--font-up-2);
+    padding: 0.5rem 0 0.5rem 0.5rem;
+  }
+
   .winner {
     width: 30%;
 

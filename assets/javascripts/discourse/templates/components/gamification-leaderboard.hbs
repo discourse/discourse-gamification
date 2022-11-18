@@ -4,7 +4,13 @@
     {{d-button action=(action "showLeaderboardInfo") class="-ghost" icon="info-circle" label=(unless site.mobileView "gamification.leaderboard.info")}}
   </div>
 
-  <PeriodChooser @period={{this.period}} @action={{action "changePeriod"}} @fullDay={{false}} class="leaderboard__period-chooser"/>
+  <div class="leaderboard__controls">
+    <PeriodChooser @period={{this.period}} @action={{action "changePeriod"}} @fullDay={{false}} class="leaderboard__period-chooser"/>
+    <a href="admin/plugins/gamification" class="leaderboard__settings">
+      {{d-icon "cog"}}
+      {{unless site.mobileView (i18n "gamification.leaderboard.link_to_settings")}}
+    </a>
+  </div>
 
   <div class="podium__wrapper">
     <div class="podium">

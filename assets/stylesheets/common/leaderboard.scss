@@ -22,6 +22,12 @@
     }
   }
 
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   &__period-chooser {
     margin: 1.5rem 0 0.75rem;
 
