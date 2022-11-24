@@ -10,7 +10,6 @@
 
 enabled_site_setting :discourse_gamification_enabled
 
-register_asset "stylesheets/common/common.scss"
 register_asset "stylesheets/common/leaderboard.scss"
 register_asset "stylesheets/desktop/leaderboard.scss", :desktop
 register_asset "stylesheets/mobile/leaderboard.scss", :mobile
