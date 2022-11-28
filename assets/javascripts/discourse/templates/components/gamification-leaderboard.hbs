@@ -6,7 +6,7 @@
 
   <div class="leaderboard__controls">
     <PeriodChooser @period={{this.period}} @action={{action "changePeriod"}} @fullDay={{false}} class="leaderboard__period-chooser"/>
-    <a href="admin/plugins/gamification" class="leaderboard__settings">
+    <a href="/admin/plugins/gamification" class="leaderboard__settings">
       {{d-icon "cog"}}
       {{unless site.mobileView (i18n "gamification.leaderboard.link_to_settings")}}
     </a>
