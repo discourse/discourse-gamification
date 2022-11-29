@@ -9,6 +9,7 @@ bg:
     gamification:
       you: "Вие"
       leaderboard:
+        link_to_settings: "Настройки"
         name: "Име"
         period:
           all_time: "От началото"

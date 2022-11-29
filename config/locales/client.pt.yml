@@ -9,6 +9,7 @@ pt:
     gamification:
       you: "Você"
       leaderboard:
+        link_to_settings: "Configurações"
         name: "Nome"
         period:
           all_time: "Desde Sempre"

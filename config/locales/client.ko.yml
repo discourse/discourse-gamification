@@ -9,6 +9,7 @@ ko:
     gamification:
       you: "사용자님"
       leaderboard:
+        link_to_settings: "설정"
         name: "그룹명"
         period:
           all_time: "전체 시간"

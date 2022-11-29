@@ -9,6 +9,7 @@ ro:
     gamification:
       you: "Tu"
       leaderboard:
+        link_to_settings: "Opțiuni"
         name: "Nume"
         period:
           all_time: "Dintotdeauna"

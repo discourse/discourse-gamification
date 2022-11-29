@@ -9,6 +9,7 @@ sq:
     gamification:
       you: "Ju"
       leaderboard:
+        link_to_settings: "Rregullimet"
         name: "Emri"
         period:
           all_time: "Gjithë Kohës"

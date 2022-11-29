@@ -9,6 +9,7 @@ sl:
     gamification:
       you: "Vi"
       leaderboard:
+        link_to_settings: "Nastavitve"
         name: "Ime"
         period:
           all_time: "Ves čas"

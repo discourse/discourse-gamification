@@ -9,6 +9,7 @@ hu:
     gamification:
       you: "Ön"
       leaderboard:
+        link_to_settings: "Beállítások"
         name: "Név"
         period:
           all_time: "Bármikor"

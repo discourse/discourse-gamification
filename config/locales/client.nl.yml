@@ -6,14 +6,47 @@
 
 nl:
   js:
+    gamification_score: "Aanmoedigingen"
     gamification:
+      score: "Aanmoedigingen"
+      you: "Jij"
       leaderboard:
+        title: "Klassementen"
+        info: "Hoe werkt dit?"
+        modal:
+          title: "Hoe werkt het klassement?"
+          text: "Punten worden toegekend voor interactie met de community, zoals bezoeken, likes en berichten. Je score wordt om de paar minuten bijgewerkt. Dus wees behulpzaam, actief en ondersteunend en stijg in het klassement!"
+        name: "Naam"
+        name_placeholder: "naam..."
+        new: "Nieuwe toevoegen"
+        cta: "Maak je eerste klassement"
+        none: "Nog geen klassementen gemaakt."
+        confirm_destroy: "Weet je zeker dat je dit klassement wilt verwijderen?"
+        date:
+          range: "Datumbereik van/tot"
+          helper: "Als de datums leeg worden gelaten, toont het klassement behaalde scores zonder enige tijdsbeperking."
+        visible_to_groups: "Zichtbaar voor groepen"
+        visible_to_groups_help: "Alleen gebruikers van die groepen kunnen het klassement bekijken. Laat dit leeg om iedereen toe te staan."
+        included_groups: "Opgenomen groepen"
+        included_groups_help: "Alleen gebruikers van die groepen wordenopgenomen in het klassement. Laat dit leeg om iedereen toe te staan."
+        excluded_groups: "Uitgesloten groepen"
+        excluded_groups_help: "Sluit gebruikers van die groepen uit van het klassement. Laat dit leeg om iedereen toe te staan."
+        default_period: "Standaard periode"
+        default_period_help: "Stel de standaard periode in die voor dit klassement moet worden weergegeven."
         period:
           all_time: "Sinds het begin"
           yearly: "Jaarlijks"
-          quarterly: "Per kwartaal"
+          quarterly: "Driemaandelijks"
           monthly: "Maandelijks"
           weekly: "Wekelijks"
           daily: "Dagelijks"
+      create: "Maken"
+      cancel: "Annuleren"
+      delete: "Verwijderen"
+      edit: "Bewerken"
+      back: "Terug"
+      save: "Opslaan"
       admin:
+        title: "Gamificatie"
         name: "Naam"
+        period: "Periode"

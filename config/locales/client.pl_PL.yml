@@ -9,6 +9,7 @@ pl_PL:
     gamification:
       you: "Ty"
       leaderboard:
+        link_to_settings: "Ustawienia"
         name: "Nazwa"
         period:
           all_time: "Przez cały czas"

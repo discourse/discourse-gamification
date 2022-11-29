@@ -9,6 +9,7 @@ cs:
     gamification:
       you: "Vy"
       leaderboard:
+        link_to_settings: "Nastavení"
         name: "Jméno"
         period:
           all_time: "Za celou dobu"

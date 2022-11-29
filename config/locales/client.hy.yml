@@ -9,6 +9,7 @@ hy:
     gamification:
       you: "Դուք "
       leaderboard:
+        link_to_settings: "Կարգավորումներ"
         name: "Անուն"
         period:
           all_time: "Ամբողջ Ժամանակվա"

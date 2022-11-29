@@ -9,6 +9,7 @@ sr:
     gamification:
       you: "Ti"
       leaderboard:
+        link_to_settings: "Podešavanja"
         name: "Ime foruma"
         period:
           all_time: "Oduvek"

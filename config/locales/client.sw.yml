@@ -9,6 +9,7 @@ sw:
     gamification:
       you: "Wewe"
       leaderboard:
+        link_to_settings: "Mipangilio"
         name: "Jina"
         period:
           all_time: "Wakati wote"

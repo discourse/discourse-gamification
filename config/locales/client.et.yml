@@ -9,6 +9,7 @@ et:
     gamification:
       you: "Sina"
       leaderboard:
+        link_to_settings: "Sätted"
         name: "Nimi"
         period:
           all_time: "Alates algusest"
