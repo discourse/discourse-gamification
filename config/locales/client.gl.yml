@@ -9,6 +9,7 @@ gl:
     gamification:
       you: "Vostede"
       leaderboard:
+        link_to_settings: "Configuración"
         name: "Nome"
         period:
           all_time: "Desde o principio"

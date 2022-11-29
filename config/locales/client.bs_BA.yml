@@ -9,6 +9,7 @@ bs_BA:
     gamification:
       you: "Vi"
       leaderboard:
+        link_to_settings: "Postavke"
         name: "Ime"
         period:
           all_time: "Oduvijek"

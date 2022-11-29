@@ -9,6 +9,7 @@ be:
     gamification:
       you: "Вы"
       leaderboard:
+        link_to_settings: "Налады"
         name: "імя"
         period:
           all_time: "За ўвесь час"

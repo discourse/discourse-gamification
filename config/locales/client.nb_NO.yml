@@ -9,6 +9,7 @@ nb_NO:
     gamification:
       you: "Du"
       leaderboard:
+        link_to_settings: "Instillinger"
         name: "Navn"
         period:
           all_time: "Totalt"

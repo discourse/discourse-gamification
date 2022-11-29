@@ -9,6 +9,7 @@ id:
     gamification:
       you: "Anda"
       leaderboard:
+        link_to_settings: "Pengaturan"
         name: "Nama"
         period:
           all_time: "Sepanjang Waktu"

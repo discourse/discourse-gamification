@@ -9,6 +9,7 @@ da:
     gamification:
       you: "Dig"
       leaderboard:
+        link_to_settings: "Indstillinger"
         name: "Navn"
         period:
           all_time: "Alt"

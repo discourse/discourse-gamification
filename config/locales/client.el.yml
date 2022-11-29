@@ -9,6 +9,7 @@ el:
     gamification:
       you: "Εσείς"
       leaderboard:
+        link_to_settings: "Ρυθμίσεις"
         name: "Όνομα"
         period:
           all_time: "Από πάντα"

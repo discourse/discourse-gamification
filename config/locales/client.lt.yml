@@ -9,6 +9,7 @@ lt:
     gamification:
       you: "Jūs"
       leaderboard:
+        link_to_settings: "Nustatymai"
         name: "Vardas"
         period:
           all_time: "Per visą laiką"

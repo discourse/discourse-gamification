@@ -13,6 +13,7 @@ fa_IR:
       leaderboard:
         title: "تابلو امتیازات"
         info: "این چطور کار می‌کنه؟"
+        link_to_settings: "تنظیمات"
         modal:
           title: "تابلو امتیازات چطور کار می‌کنه؟"
         name: "نام"

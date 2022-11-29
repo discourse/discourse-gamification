@@ -9,6 +9,7 @@ th:
     gamification:
       you: "คุณ"
       leaderboard:
+        link_to_settings: "การตั้งค่า"
         name: "ชื่อ"
         period:
           all_time: "ตลอดเวลา"

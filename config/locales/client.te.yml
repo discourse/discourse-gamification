@@ -9,6 +9,7 @@ te:
     gamification:
       you: "మీరు"
       leaderboard:
+        link_to_settings: "అమరికలు"
         name: "పేరు"
         period:
           all_time: "ఆల్ టైమ్"

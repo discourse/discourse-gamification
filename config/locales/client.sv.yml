@@ -13,6 +13,7 @@ sv:
       leaderboard:
         title: "Topplistor"
         info: "Hur fungerar detta?"
+        link_to_settings: "Inställningar"
         modal:
           title: "Hur fungerar topplistan?"
           text: "Poäng delas ut för att du engagerar dig i gemenskapen, till exempel genom att besöka, gilla och publicera. Dina poäng uppdateras med några minuters mellanrum. Var hjälpsam, aktiv och stödjande och stig sedan i graderna!"

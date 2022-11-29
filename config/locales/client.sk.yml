@@ -9,6 +9,7 @@ sk:
     gamification:
       you: "Vy"
       leaderboard:
+        link_to_settings: "Nastavenia"
         name: "Meno"
         period:
           all_time: "Za celú dobu"

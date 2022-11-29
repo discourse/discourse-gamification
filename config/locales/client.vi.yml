@@ -9,6 +9,7 @@ vi:
     gamification:
       you: "Bạn"
       leaderboard:
+        link_to_settings: "Cài đặt"
         name: "Tên"
         period:
           all_time: "Từ trước tới nay"

@@ -9,6 +9,7 @@ zh_TW:
     gamification:
       you: "你"
       leaderboard:
+        link_to_settings: "設定"
         name: "名字"
         period:
           all_time: "所以時間"

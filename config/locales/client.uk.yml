@@ -9,6 +9,7 @@ uk:
     gamification:
       you: "Ви"
       leaderboard:
+        link_to_settings: "Налаштування"
         name: "Назва"
         period:
           all_time: "Весь час"

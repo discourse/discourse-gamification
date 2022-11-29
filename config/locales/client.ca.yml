@@ -9,6 +9,7 @@ ca:
     gamification:
       you: "Vós"
       leaderboard:
+        link_to_settings: "Configuració"
         name: "Nom"
         period:
           all_time: "Sempre"

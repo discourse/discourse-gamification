@@ -9,6 +9,7 @@ ur:
     gamification:
       you: "آپ "
       leaderboard:
+        link_to_settings: "ترتیبات"
         name: "نام"
         period:
           all_time: "تمام اوقات"

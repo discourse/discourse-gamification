@@ -9,6 +9,7 @@ lv:
     gamification:
       you: "Tu"
       leaderboard:
+        link_to_settings: "Iestatījumi"
         name: "Vārds"
         period:
           all_time: "Vienmēr"
