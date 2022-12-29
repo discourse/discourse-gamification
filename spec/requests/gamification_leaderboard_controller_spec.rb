@@ -145,6 +145,5 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
       expect(default_user_score).to eq(daily_user_score)
       expect(default_user_score).not_to eq(regular_user_score)
     end
-
   end
 end
