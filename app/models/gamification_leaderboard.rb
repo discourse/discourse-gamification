@@ -6,17 +6,11 @@ class DiscourseGamification::GamificationLeaderboard < ::ActiveRecord::Base
   self.table_name = "gamification_leaderboards"
   validates :name, exclusion: { in: %w[new], message: "%{value} is reserved." }
 
-  enum :period, {
-    all_time: 0,
-    yearly: 1,
-    quarterly: 2,
-    monthly: 3,
-    weekly: 4,
-    daily: 5
-  }
+  enum :period, { all_time: 0, yearly: 1, quarterly: 2, monthly: 3, weekly: 4, daily: 5 }
 
   def get_period_date(period_symbol)
-    period_symbol ||= DiscourseGamification::GamificationLeaderboard.periods.key(default_period).to_sym
+    period_symbol ||=
+      DiscourseGamification::GamificationLeaderboard.periods.key(default_period).to_sym
 
     case period_symbol
     when :all_time
