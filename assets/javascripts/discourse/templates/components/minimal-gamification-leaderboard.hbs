@@ -1,7 +1,7 @@
 <div class="leaderboard -minimal">
   <div class="page__header">
     {{#link-to "gamificationLeaderboard.byName" this.model.leaderboard.id}}
-      <h3 class="page__title">{{ this.model.leaderboard.name }}</h3>
+      <h3 class="page__title">{{this.model.leaderboard.name}}</h3>
     {{/link-to}}
   </div>
 
@@ -10,9 +10,9 @@
     <span>{{d-icon "award"}}{{i18n "gamification.score"}}</span>
   </div>
   <div class="ranking-col-names__sticky-border"></div>
-  {{#if (and currentUserRanking.user notTopTen) }}
+  {{#if (and currentUserRanking.user notTopTen)}}
     <div class="user -self">
-      <div class="user__rank">{{ currentUserRanking.position }}</div>
+      <div class="user__rank">{{currentUserRanking.position}}</div>
       <div class="user__name">{{i18n "gamification.you"}}</div>
       <div class="user__score">
         {{#if site.mobileView}}

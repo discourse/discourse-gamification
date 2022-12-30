@@ -1,6 +1,13 @@
-<div class="user {{if rank.currentUser "user-highlight"}}" id="leaderboard-user-{{rank.id}}">
+<div
+  class="user {{if rank.currentUser 'user-highlight'}}"
+  id="leaderboard-user-{{rank.id}}"
+>
   <div class="user__rank">{{sum index 4}}</div>
-  <div class="user__avatar clickable" role="button" data-user-card={{rank.username}}>
+  <div
+    class="user__avatar clickable"
+    role="button"
+    data-user-card={{rank.username}}
+  >
     {{avatar rank imageSize="large"}}
     <span class="user__name">{{rank.username}}</span>
   </div>

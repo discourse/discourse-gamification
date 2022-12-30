@@ -1,14 +1,27 @@
 <div class="leaderboard">
   <div class="page__header">
-    <h1 class="page__title">{{ this.model.leaderboard.name }}</h1>
-    {{d-button action=(action "showLeaderboardInfo") class="-ghost" icon="info-circle" label=(unless site.mobileView "gamification.leaderboard.info")}}
+    <h1 class="page__title">{{this.model.leaderboard.name}}</h1>
+    {{d-button
+      action=(action "showLeaderboardInfo")
+      class="-ghost"
+      icon="info-circle"
+      label=(unless site.mobileView "gamification.leaderboard.info")
+    }}
   </div>
 
   <div class="leaderboard__controls">
-    <PeriodChooser @period={{this.period}} @action={{action "changePeriod"}} @fullDay={{false}} class="leaderboard__period-chooser"/>
+    <PeriodChooser
+      @period={{this.period}}
+      @action={{action "changePeriod"}}
+      @fullDay={{false}}
+      class="leaderboard__period-chooser"
+    />
     <a href="/admin/plugins/gamification" class="leaderboard__settings">
       {{d-icon "cog"}}
-      {{unless site.mobileView (i18n "gamification.leaderboard.link_to_settings")}}
+      {{unless
+        site.mobileView
+        (i18n "gamification.leaderboard.link_to_settings")
+      }}
     </a>
   </div>
 
@@ -17,14 +30,18 @@
       {{#each winners as |winner position|}}
         <div class="winner -position{{sum position 1}}">
           <div class="winner__crown">{{d-icon "crown"}}</div>
-          <div class="winner__avatar clickable" role="button" data-user-card={{ winner.username }}>
+          <div
+            class="winner__avatar clickable"
+            role="button"
+            data-user-card={{winner.username}}
+          >
             {{avatar winner imageSize="huge"}}
             <div class="winner__rank">
               <span>{{sum position 1}}</span>
             </div>
           </div>
-          <div class="winner__name">{{ winner.username }}</div>
-          <div class="winner__score">{{ fullnumber winner.total_score }}</div>
+          <div class="winner__name">{{winner.username}}</div>
+          <div class="winner__score">{{fullnumber winner.total_score}}</div>
         </div>
       {{/each}}
     </div>
@@ -38,7 +55,7 @@
     <div class="ranking-col-names__sticky-border"></div>
     {{#if currentUserRanking.user}}
       <div class="user -self">
-        <div class="user__rank">{{ currentUserRanking.position }}</div>
+        <div class="user__rank">{{currentUserRanking.position}}</div>
         <div class="user__name">{{i18n "gamification.you"}}</div>
         <div class="user__score">
           {{#if site.mobileView}}

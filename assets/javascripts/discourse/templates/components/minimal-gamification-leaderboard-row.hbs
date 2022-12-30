@@ -1,6 +1,15 @@
-<div class="user {{if rank.isCurrentUser "user-highlight"}}" id="leaderboard-user-{{rank.id}}">
-  <div class="user__rank {{if rank.topRanked "-winner"}}">{{#if rank.topRanked}} {{d-icon "crown"}} {{else}} {{sum index 1}}{{/if}}</div>
-  <div class="user__avatar clickable" role="button" data-user-card={{rank.username}}>
+<div
+  class="user {{if rank.isCurrentUser 'user-highlight'}}"
+  id="leaderboard-user-{{rank.id}}"
+>
+  <div class="user__rank {{if rank.topRanked '-winner'}}">{{#if rank.topRanked}}
+      {{d-icon "crown"}}
+    {{else}} {{sum index 1}}{{/if}}</div>
+  <div
+    class="user__avatar clickable"
+    role="button"
+    data-user-card={{rank.username}}
+  >
     {{avatar rank imageSize="small"}}
     {{#if rank.isCurrentUser}}
       <span class="user__name">{{i18n "gamification.you"}}</span>
