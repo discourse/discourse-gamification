@@ -36,6 +36,7 @@ en:
           monthly: "Monthly"
           weekly: "Weekly"
           daily: "Daily"
+        rank: "Rank"
       create: "Create"
       cancel: "Cancel"
       delete: "Delete"
