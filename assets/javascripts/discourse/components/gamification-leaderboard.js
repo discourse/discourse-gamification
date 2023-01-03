@@ -83,7 +83,9 @@ export default Component.extend(LoadMore, {
 
     this.set("loading", true);
 
-    return ajax(`/leaderboard/${this.model.leaderboard.id}?page=${this.page}`)
+    return ajax(
+      `/leaderboard/${this.model.leaderboard.id}?page=${this.page}&period=${this.period}`
+    )
       .then((result) => {
         if (result.users.length === 0) {
           this.set("canLoadMore", false);
