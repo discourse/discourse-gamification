@@ -50,7 +50,12 @@ jobs:
 
       - name: Ember template lint
         if: ${{ !cancelled() }}
-        run: yarn ember-template-lint --no-error-on-unmatched-pattern assets/javascripts admin/assets/javascripts
+        run: yarn ember-template-lint --no-error-on-unmatched-pattern assets/javascripts
+
+      # Separated due to https://github.com/ember-template-lint/ember-template-lint/issues/2758
+      - name: Ember template lint (admin)
+        if: ${{ !cancelled() }}
+        run: yarn ember-template-lint --no-error-on-unmatched-pattern admin/assets/javascripts
 
       - name: Rubocop
         if: ${{ !cancelled() }}
