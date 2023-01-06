@@ -109,6 +109,7 @@ export default Component.extend(LoadMore, {
         }
         this.set("page", 1);
         this.set("model.users", result.users);
+        this.set("model.personal", result.personal);
       })
       .finally(() => this.set("loading", false))
       .catch(popupAjaxError);
