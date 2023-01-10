@@ -41,6 +41,7 @@ he:
           monthly: "חודשי"
           weekly: "שבועי"
           daily: "יומי"
+        rank: "דירוג"
       create: "יצירה"
       cancel: "ביטול"
       delete: "מחיקה"

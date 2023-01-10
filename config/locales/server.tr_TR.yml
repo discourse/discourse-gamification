@@ -5,3 +5,18 @@
 # https://translate.discourse.org/
 
 tr_TR:
+  site_settings:
+    discourse_gamification_enabled: "Discourse Oyunlaştırma Eklentisini Etkinleştirin"
+    like_received_score_value: "Bir kullanıcı bir beğeni aldığında verilen tezahüratın değeri"
+    like_given_score_value: "Bir kullanıcının verdiği her beğeni için verilen tezahüratın değeri"
+    solution_score_value: "Bir kullanıcının gönderisi çözüm olarak işaretlendiğinde verilen tezahüratın değeri"
+    user_invited_score_value: "Bir kullanıcı bir davetiyeyi kullandığında verilen tezahüratın değeri"
+    time_read_score_value: "Okumak için harcanan her saat için verilen tezahüratın değeri"
+    post_read_score_value: "Bir kullanıcının okuduğu her yüz gönderi için verilen tezahüratın değeri"
+    topic_created_score_value: "Bir kullanıcı bir konu oluşturduğunda verilen tezahüratın değeri"
+    post_created_score_value: "Bir kullanıcı bir gönderi oluşturduğunda verilen tezahüratın değeri"
+    flag_created_score_value: "Bir kullanıcı bir gönderiye bayrak eklendiğinde ve bu bayrak bir personel kullanıcı tarafından kabul edildiğinde verilen tezahüratın değeri"
+    day_visited_score_value: "Bir kullanıcının siteyi ziyaret ettiği her gün için verilen tezahüratın değeri"
+    scorable_categories: "Eylemlerin tezahürat oluşturacağı kategorilerin listesi. Tüm kategorilerde tezahüratları etkinleştirmek için boş bırakın"
+  score: "Tezahürat"
+  default_leaderboard_name: "Küresel Liderlik Tablosu"
