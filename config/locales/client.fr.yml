@@ -13,6 +13,7 @@ fr:
       leaderboard:
         title: "Classements"
         info: "Comment ça fonctionne ?"
+        link_to_settings: "Paramètres"
         modal:
           title: "Comment fonctionne le classement ?"
           text: "Des points sont attribués pour l'engagement auprès de la communauté, par exemple pour les visites, les mentions J'aime et les publications. Votre score est mis à jour toutes les quelques minutes. Veillez donc à être aimable, actif(ve) et solidaire, et gravissez les échelons !"

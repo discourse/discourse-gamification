@@ -13,6 +13,7 @@ it:
       leaderboard:
         title: "Classifiche"
         info: "Come funziona?"
+        link_to_settings: "Impostazioni"
         modal:
           title: "Come funziona la classifica?"
           text: "I punti vengono assegnati per il coinvolgimento con la community, ad esempio in base al numero di visite, Mi piace e pubblicazioni. Il tuo punteggio viene aggiornato ogni pochi minuti. Quindi cerca di essere propositivo, attivo e di supporto per scalare le classifiche!"
