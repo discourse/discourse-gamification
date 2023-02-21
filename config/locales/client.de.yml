@@ -13,6 +13,7 @@ de:
       leaderboard:
         title: "Ranglisten"
         info: "Wie funktioniert das?"
+        link_to_settings: "Einstellungen"
         modal:
           title: "Wie funktioniert die Rangliste?"
           text: "Punkte werden für die Interaktion mit der Community vergeben, z. B. für Besuche, „Gefällt mir“ und Posten. Deine Punktzahl wird alle paar Minuten aktualisiert. Sei also hilfsbereit, aktiv sowie solidarisch und steige auf!"

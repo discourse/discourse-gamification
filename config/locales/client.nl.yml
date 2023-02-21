@@ -13,6 +13,7 @@ nl:
       leaderboard:
         title: "Klassementen"
         info: "Hoe werkt dit?"
+        link_to_settings: "Instellingen"
         modal:
           title: "Hoe werkt het klassement?"
           text: "Punten worden toegekend voor interactie met de community, zoals bezoeken, likes en berichten. Je score wordt om de paar minuten bijgewerkt. Dus wees behulpzaam, actief en ondersteunend en stijg in het klassement!"
