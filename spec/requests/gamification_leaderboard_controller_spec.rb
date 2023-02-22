@@ -49,6 +49,7 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
   end
 
   before do
+    SiteSetting.discourse_gamification_enabled = true
     DiscourseGamification::GamificationScore.calculate_scores(since_date: 10.days.ago)
     sign_in(current_user)
   end

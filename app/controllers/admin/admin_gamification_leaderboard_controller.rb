@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class DiscourseGamification::AdminGamificationLeaderboardController < Admin::AdminController
+  requires_plugin DiscourseGamification::PLUGIN_NAME
+
   def index
     render_serialized(
       { leaderboards: DiscourseGamification::GamificationLeaderboard.all },

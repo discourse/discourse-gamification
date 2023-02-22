@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class DiscourseGamification::GamificationLeaderboardController < ::ApplicationController
+  requires_plugin DiscourseGamification::PLUGIN_NAME
+
   def respond
     default_leaderboard_id = DiscourseGamification::GamificationLeaderboard.first.id
     params[:id] ||= default_leaderboard_id
