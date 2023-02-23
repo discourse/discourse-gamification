@@ -25,11 +25,11 @@ register_svg_icon "award"
 after_initialize do
   module ::DiscourseGamification
     PLUGIN_NAME = "discourse-gamification"
-  end
 
-  class DiscourseGamification::Engine < Rails::Engine
-    engine_name DiscourseGamification::PLUGIN_NAME
-    isolate_namespace DiscourseGamification
+    class Engine < Rails::Engine
+      engine_name PLUGIN_NAME
+      isolate_namespace DiscourseGamification
+    end
   end
 
   # route: /admin/plugins/gamification
