@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-module DiscourseGamification
+module ::DiscourseGamification
   class Solutions < Scorable
     def self.score_multiplier
       SiteSetting.solution_score_value

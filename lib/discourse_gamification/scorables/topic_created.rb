@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-module DiscourseGamification
-  class PostCreated < Scorable
+module ::DiscourseGamification
+  class TopicCreated < Scorable
     def self.score_multiplier
-      SiteSetting.post_created_score_value
+      SiteSetting.topic_created_score_value
     end
 
     def self.category_filter
@@ -17,19 +17,16 @@ module DiscourseGamification
     def self.query
       <<~SQL
         SELECT
-          p.user_id AS user_id,
-          date_trunc('day', p.created_at) AS date,
+          t.user_id AS user_id,
+          date_trunc('day', t.created_at) AS date,
           COUNT(*) * #{score_multiplier} AS points
         FROM
-          posts AS p
-        INNER JOIN topics AS t
-          ON t.id = p.topic_id
-          #{category_filter}
+          topics AS t
         WHERE
-          p.deleted_at IS NULL AND
+          t.deleted_at IS NULL AND
           t.archetype <> 'private_message' AND
-          p.wiki IS FALSE AND
-          p.created_at >= :since
+          t.created_at >= :since
+          #{category_filter}
         GROUP BY
           1, 2
       SQL

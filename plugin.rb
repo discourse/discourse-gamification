@@ -22,47 +22,36 @@ register_asset "stylesheets/common/leaderboard-admin.scss"
 register_svg_icon "crown"
 register_svg_icon "award"
 
+module ::DiscourseGamification
+  PLUGIN_NAME = "discourse-gamification"
+end
+
+require_relative "lib/discourse_gamification/engine"
+
 after_initialize do
-  module ::DiscourseGamification
-    PLUGIN_NAME = "discourse-gamification"
-
-    class Engine < Rails::Engine
-      engine_name PLUGIN_NAME
-      isolate_namespace DiscourseGamification
-    end
-  end
-
   # route: /admin/plugins/gamification
   add_admin_route "gamification.admin.title", "gamification"
 
-  require_relative "app/models/gamification_score.rb"
-  require_relative "app/models/gamification_leaderboard.rb"
-  require_relative "app/controllers/admin/admin_gamification_leaderboard_controller.rb"
-  require_relative "app/controllers/gamification_leaderboard_controller.rb"
-  require_relative "app/serializers/user_score_serializer.rb"
-  require_relative "app/serializers/leaderboard_serializer.rb"
-  require_relative "app/serializers/leaderboard_view_serializer.rb"
-  require_relative "app/serializers/admin_gamification_index_serializer.rb"
-  require_relative "lib/directory_integration.rb"
-  require_relative "lib/guardian.rb"
-  require_relative "lib/scorables/scorable.rb"
-  require_relative "lib/scorables/like_received.rb"
-  require_relative "lib/scorables/like_given.rb"
-  require_relative "lib/scorables/user_invited.rb"
-  require_relative "lib/scorables/solutions.rb"
-  require_relative "lib/scorables/time_read.rb"
-  require_relative "lib/scorables/post_read.rb"
-  require_relative "lib/scorables/topic_created.rb"
-  require_relative "lib/scorables/post_created.rb"
-  require_relative "lib/scorables/flag_created.rb"
-  require_relative "lib/scorables/day_visited.rb"
-  require_relative "lib/user_extension.rb"
-  require_relative "jobs/scheduled/update_scores_for_today.rb"
-  require_relative "jobs/scheduled/update_scores_for_ten_days.rb"
+  require_relative "jobs/scheduled/update_scores_for_ten_days"
+  require_relative "jobs/scheduled/update_scores_for_today"
+  require_relative "lib/discourse_gamification/directory_integration"
+  require_relative "lib/discourse_gamification/guardian_extension"
+  require_relative "lib/discourse_gamification/scorables/scorable"
+  require_relative "lib/discourse_gamification/scorables/day_visited"
+  require_relative "lib/discourse_gamification/scorables/flag_created"
+  require_relative "lib/discourse_gamification/scorables/like_given"
+  require_relative "lib/discourse_gamification/scorables/like_received"
+  require_relative "lib/discourse_gamification/scorables/post_created"
+  require_relative "lib/discourse_gamification/scorables/post_read"
+  require_relative "lib/discourse_gamification/scorables/solutions"
+  require_relative "lib/discourse_gamification/scorables/time_read"
+  require_relative "lib/discourse_gamification/scorables/topic_created"
+  require_relative "lib/discourse_gamification/scorables/user_invited"
+  require_relative "lib/discourse_gamification/user_extension"
 
   reloadable_patch do |plugin|
     User.class_eval { prepend DiscourseGamification::UserExtension }
-    Guardian.include(DiscourseGamification::Guardian)
+    Guardian.include(DiscourseGamification::GuardianExtension)
   end
 
   if respond_to?(:add_directory_column)
@@ -73,27 +62,6 @@ after_initialize do
   end
 
   add_to_serializer(:user_card, :gamification_score, false) { object.gamification_score }
-
-  DiscourseGamification::Engine.routes.draw do
-    get "/" => "gamification_leaderboard#respond"
-    get "/:id" => "gamification_leaderboard#respond"
-  end
-
-  Discourse::Application.routes.append do
-    mount ::DiscourseGamification::Engine, at: "/leaderboard"
-    get "/admin/plugins/gamification" =>
-          "discourse_gamification/admin_gamification_leaderboard#index",
-        :constraints => StaffConstraint.new
-    post "/admin/plugins/gamification/leaderboard" =>
-           "discourse_gamification/admin_gamification_leaderboard#create",
-         :constraints => StaffConstraint.new
-    put "/admin/plugins/gamification/leaderboard/:id" =>
-          "discourse_gamification/admin_gamification_leaderboard#update",
-        :constraints => StaffConstraint.new
-    delete "/admin/plugins/gamification/leaderboard/:id" =>
-             "discourse_gamification/admin_gamification_leaderboard#destroy",
-           :constraints => StaffConstraint.new
-  end
 
   SeedFu.fixture_paths << Rails
     .root
