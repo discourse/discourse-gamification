@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-module DiscourseGamification
-  class PostRead < Scorable
+module ::DiscourseGamification
+  class TimeRead < Scorable
     def self.score_multiplier
-      SiteSetting.post_read_score_value
+      SiteSetting.time_read_score_value
     end
 
     def self.query
@@ -11,12 +11,12 @@ module DiscourseGamification
         SELECT
           uv.user_id AS user_id,
           date_trunc('day', uv.visited_at) AS date,
-          SUM(uv.posts_read) / 100 * #{score_multiplier} AS points
+          SUM(uv.time_read) / 3600 * #{score_multiplier} AS points
         FROM
           user_visits AS uv
         WHERE
           uv.visited_at >= :since AND
-          uv.posts_read >= 5
+          uv.time_read >= 60
         GROUP BY
           1, 2
       SQL

@@ -1,8 +1,9 @@
 # frozen_string_literal: true
-module DiscourseGamification
-  class LikeReceived < Scorable
+
+module ::DiscourseGamification
+  class PostCreated < Scorable
     def self.score_multiplier
-      SiteSetting.like_received_score_value
+      SiteSetting.post_created_score_value
     end
 
     def self.category_filter
@@ -18,7 +19,7 @@ module DiscourseGamification
         SELECT
           p.user_id AS user_id,
           date_trunc('day', p.created_at) AS date,
-          SUM(p.like_count * #{score_multiplier}) AS points
+          COUNT(*) * #{score_multiplier} AS points
         FROM
           posts AS p
         INNER JOIN topics AS t
