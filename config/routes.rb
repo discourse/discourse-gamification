@@ -20,3 +20,16 @@ Discourse::Application.routes.append do
            "discourse_gamification/admin_gamification_leaderboard#destroy",
          :constraints => StaffConstraint.new
 end
+
+Discourse::Application.routes.append do
+  get "/admin/plugins/gamification/score_events" =>
+        "discourse_gamification/admin_gamification_score_event#show",
+      :constraints => StaffConstraint.new
+  post "/admin/plugins/gamification/score_events" =>
+         "discourse_gamification/admin_gamification_score_event#create",
+       :constraints => StaffConstraint.new
+  put "/admin/plugins/gamification/score_events" =>
+        "discourse_gamification/admin_gamification_score_event#update",
+      :constraints => StaffConstraint.new
+end
+
