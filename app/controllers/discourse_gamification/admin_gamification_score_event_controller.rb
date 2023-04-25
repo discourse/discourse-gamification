@@ -42,10 +42,7 @@ class DiscourseGamification::AdminGamificationScoreEventController < Admin::Admi
     event = DiscourseGamification::GamificationScoreEvent.find(params[:id])
     raise Discourse::NotFound unless event
 
-    event.update(
-      points: params[:points],
-      description: params[:description] || event.description,
-    )
+    event.update(points: params[:points], description: params[:description] || event.description)
 
     if event.save
       render json: success_json

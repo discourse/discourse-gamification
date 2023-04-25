@@ -69,11 +69,11 @@ RSpec.describe DiscourseGamification::AdminGamificationScoreEventController do
 
     it "affects user scores when a score event is created" do
       post "/admin/plugins/gamification/score_events.json",
-          params: {
-            points: 10,
-            user_id: another_user.id,
-            date: Date.today,
-          }
+           params: {
+             points: 10,
+             user_id: another_user.id,
+             date: Date.today,
+           }
       expect(response.status).to eq(200)
 
       DiscourseGamification::GamificationScore.calculate_scores(since_date: 10.days.ago.midnight)
