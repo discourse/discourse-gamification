@@ -32,4 +32,3 @@ Discourse::Application.routes.append do
         "discourse_gamification/admin_gamification_score_event#update",
       :constraints => StaffConstraint.new
 end
-
