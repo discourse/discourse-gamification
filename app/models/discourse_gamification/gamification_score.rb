@@ -22,6 +22,11 @@ module ::DiscourseGamification
         SELECT user_id, date, SUM(points) AS score
         FROM (
           #{queries}
+          UNION ALL
+          SELECT user_id, date, SUM(points) AS points
+          FROM gamification_score_events
+          WHERE date >= :since
+          GROUP BY 1, 2
         ) AS source
         WHERE user_id IS NOT NULL
         GROUP BY 1, 2
@@ -31,3 +36,18 @@ module ::DiscourseGamification
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: gamification_scores
+#
+#  id      :bigint           not null, primary key
+#  user_id :integer          not null
+#  date    :date             not null
+#  score   :integer          not null
+#
+# Indexes
+#
+#  index_gamification_scores_on_date              (date)
+#  index_gamification_scores_on_user_id_and_date  (user_id,date) UNIQUE
+#
