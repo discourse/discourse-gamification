@@ -11,6 +11,7 @@
 enabled_site_setting :discourse_gamification_enabled
 
 register_asset "stylesheets/common/leaderboard.scss"
+register_asset "stylesheets/common/leaderboard-tiered.scss"
 register_asset "stylesheets/desktop/leaderboard.scss", :desktop
 register_asset "stylesheets/mobile/leaderboard.scss", :mobile
 register_asset "stylesheets/common/leaderboard-info-modal.scss"

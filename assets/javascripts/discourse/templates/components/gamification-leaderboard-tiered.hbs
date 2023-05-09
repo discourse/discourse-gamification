@@ -1,0 +1,89 @@
+<div class="t-leaderboard__layout">
+  <aside class="t-leaderboard__sidebar">
+    <h2>Your stats</h2>
+    <div class="t-leaderboard__user">
+    {{avatar this.currentUser imageSize="huge"}}
+    <div class="t-leaderboard__tier-symbol">
+      <img src="/assets/img/icon-leaderboard-tier-guide.svg"/>
+    </div>
+    </div>
+    <div class="t-leaderboard__stats">
+      <div>
+        <h5>Rank</h5>
+        <div>{{this.currentUserRanking.position}}</div>
+      </div>
+       <div>
+        <h5>XP</h5>
+        <div>99</div>
+      </div>
+    </div>
+    <div class="t-leaderboard__progressbar-wrapper">
+      <div class="t-leaderboard__progressbar"></div>
+    </div>
+    <div>
+      <h4>How to earn Experience Points</h4>
+      <ul class="t-leaderboard__xp-actions">
+        <li><span>Daily visit</span><span>10 XP</span></li>
+        <li><span>Like given</span><span>1 XP</span></li>
+        <li><span>Like received</span><span>5 XP</span></li>
+        <li><span>Solution accepted</span><span>30 XP</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Tiers</h3>
+      <div class="t-leaderboard__tier-level">
+        <div class="t-leaderboard__tier-symbol">
+          <img src="/assets/img/icon-leaderboard-tier-exploration.svg"/>
+        </div>
+        <div class="t-leaderboard__tier-info">
+          <div class="t-leaderboard__tier-title">Explorer</div>
+          <div class="t-leaderboard__tier-treshhold">220 XP</div>
+        </div>
+      </div>
+      <div class="t-leaderboard__tier-level">
+        <div class="t-leaderboard__tier-symbol">
+          <img src="/assets/img/icon-leaderboard-tier-guide.svg"/>
+        </div>
+        <div class="t-leaderboard__tier-info">
+          <div class="t-leaderboard__tier-title">Guide</div>
+          <div class="t-leaderboard__tier-treshhold">670 XP</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div>
+   <nav class="t-leaderboard__timeframe">
+      <ul>
+        <li><a href="#" class="active">All time</a></li>
+        <li><a href="#">This month</a></li>
+        <li><a href="#">This month</a></li>
+        <li><a href="#">Today</a></li>
+      </ul>
+    </nav>
+  <main class="t-leaderboard__main">
+   
+  <h1 class="t-leaderboard__title"></h1>
+    <div class="t-leaderboard__ranking">
+      <div class="t-leaderboard__col-titles">
+        <div class="t-leaderboard__col-titles-rank">Rank</div>
+        <div class="t-leaderboard__col-titles-user">User</div>
+        <div class="t-leaderboard__col-titles-flair">Flair</div>
+        <div class="t-leaderboard__col-titles-xp">XP</div>
+        <div class="t-leaderboard__col-titles-tier">Tier</div>
+        <div class="t-leaderboard__col-titles-badges">Badges</div>
+      </div>
+      {{!-- {{log this.model}} --}}
+      {{#each this.model.users as |rank index|}}
+        <div class="t-leaderboard__account">
+          <div class="t-leaderboard__account-rank">{{rank.id}}</div>
+          <div class="t-leaderboard__account-user">  {{avatar rank imageSize="large"}}<span>{{rank.username}}</span></div>
+          <div class="t-leaderboard__account-flair"></div>
+          <div class="t-leaderboard__account-xp">{{rank.total_score}}</div>
+          <div class="t-leaderboard__account-tier"></div>
+          <div class="t-leaderboard__account-badges"></div>
+      </div>
+      {{/each}}
+    </div>
+  </main>
+  </div>
+</div>
