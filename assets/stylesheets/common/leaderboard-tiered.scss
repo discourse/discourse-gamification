@@ -23,12 +23,19 @@ html {
 
   &__sidebar {
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
   &__user {
-    display: inline-block;
-    transform: translateX(50%);
     text-align: center;
     position: relative;
+  }
+  &__stats {
+    display: flex;
+    justify-content: space-around;
+    border-radius: 30px;
+    background-color: var(--tertiary-very-low);
   }
   &__progressbar {
     width: 100%;
@@ -75,7 +82,7 @@ html {
     .t-leaderboard__user & {
       position: absolute;
       top: 0;
-      right: 0;
+      left: 60%;
       width: 40px;
       height: 40px;
 
