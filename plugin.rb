@@ -61,7 +61,7 @@ after_initialize do
     )
   end
 
-  add_to_serializer(:user_card, :gamification_score, false) { object.gamification_score }
+  add_to_serializer(:user_card, :gamification_score) { object.gamification_score }
 
   SeedFu.fixture_paths << Rails
     .root
