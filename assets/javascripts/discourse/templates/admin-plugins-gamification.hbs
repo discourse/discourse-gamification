@@ -1,11 +1,11 @@
 {{#if selectedLeaderboard}}
-  {{d-button
-    class="leaderboard-admin__btn-back btn-flat"
-    icon="chevron-left"
-    label="gamification.back"
-    title="gamification.back"
-    action=(action (mut selectedLeaderboardId) null)
-  }}
+  <DButton
+    @class="leaderboard-admin__btn-back btn-flat"
+    @icon="chevron-left"
+    @label="gamification.back"
+    @title="gamification.back"
+    @action={{action (mut selectedLeaderboardId) null}}
+  />
   <form class="form-vertical">
     <div class="control-group">
       <div class="control-group">
@@ -29,12 +29,12 @@
             value=selectedLeaderboard.from_date
             onSelect=(action (mut fromDate))
           }}
-          {{date-picker
-            class="date-input"
-            placeholder="yyyy-mm-dd"
-            value=selectedLeaderboard.to_date
-            onSelect=(action (mut toDate))
-          }}
+          <DatePicker
+            @class="date-input"
+            @placeholder="yyyy-mm-dd"
+            @value={{selectedLeaderboard.to_date}}
+            @onSelect={{action (mut toDate)}}
+          />
           <div>{{i18n "gamification.leaderboard.date.helper"}}</div>
         </div>
       </div>
@@ -42,36 +42,36 @@
         <label class="control-label">
           {{i18n "gamification.leaderboard.included_groups"}}
         </label>
-        {{group-chooser
-          content=this.siteGroups
-          value=includedGroupIds
-          labelProperty="name"
-          onChange=(action (mut includedGroupIds))
-        }}
+        <GroupChooser
+          @content={{this.siteGroups}}
+          @value={{includedGroupIds}}
+          @labelProperty="name"
+          @onChange={{action (mut includedGroupIds)}}
+        />
         <div>{{i18n "gamification.leaderboard.included_groups_help"}}</div>
       </div>
       <div class="control-group">
         <label class="control-label">
           {{i18n "gamification.leaderboard.excluded_groups"}}
         </label>
-        {{group-chooser
-          content=this.siteGroups
-          value=excludedGroupIds
-          labelProperty="name"
-          onChange=(action (mut excludedGroupIds))
-        }}
+        <GroupChooser
+          @content={{this.siteGroups}}
+          @value={{excludedGroupIds}}
+          @labelProperty="name"
+          @onChange={{action (mut excludedGroupIds)}}
+        />
         <div>{{i18n "gamification.leaderboard.excluded_groups_help"}}</div>
       </div>
       <div class="control-group">
         <label class="control-label">
           {{i18n "gamification.leaderboard.visible_to_groups"}}
         </label>
-        {{group-chooser
-          content=this.siteGroups
-          value=visibleGroupIds
-          labelProperty="name"
-          onChange=(action (mut visibleGroupIds))
-        }}
+        <GroupChooser
+          @content={{this.siteGroups}}
+          @value={{visibleGroupIds}}
+          @labelProperty="name"
+          @onChange={{action (mut visibleGroupIds)}}
+        />
         <div>{{i18n "gamification.leaderboard.visible_to_groups_help"}}</div>
       </div>
       <div class="control-group">
@@ -82,17 +82,17 @@
         <div>{{i18n "gamification.leaderboard.default_period_help"}}</div>
       </div>
     </div>
-    {{d-button
-      class="btn-primary"
-      label="gamification.save"
-      action=(action "saveEdit")
-      disabled=saveEditDisabled
-    }}
-    {{d-button
-      class="btn-secondary leaderboard-admin__btn-cancel-edit"
-      label="gamification.cancel"
-      action=(action (mut selectedLeaderboardId) null)
-    }}
+    <DButton
+      @class="btn-primary"
+      @label="gamification.save"
+      @action={{action "saveEdit"}}
+      @disabled={{saveEditDisabled}}
+    />
+    <DButton
+      @class="btn-secondary leaderboard-admin__btn-cancel-edit"
+      @label="gamification.cancel"
+      @action={{action (mut selectedLeaderboardId) null}}
+    />
   </form>
 
 {{else}}
@@ -107,29 +107,29 @@
         value=newLeaderboardName
         placeholder=(i18n "gamification.leaderboard.name_placeholder")
       }}
-      {{d-button
-        label="gamification.create"
-        title="gamification.create"
-        class="btn-primary create-new-leaderboard-btn"
-        disabled=(not nameValid)
-        action=(action "createNewLeaderboard")
-      }}
-      {{d-button
-        label="gamification.cancel"
-        title="gamification.cancel"
-        action=(action (mut selectedLeaderboardId) null)
-      }}
+      <DButton
+        @label="gamification.create"
+        @title="gamification.create"
+        @class="btn-primary create-new-leaderboard-btn"
+        @disabled={{not nameValid}}
+        @action={{action "createNewLeaderboard"}}
+      />
+      <DButton
+        @label="gamification.cancel"
+        @title="gamification.cancel"
+        @action={{action (mut selectedLeaderboardId) null}}
+      />
     </div>
 
   {{else}}
     {{#if model.leaderboards}}
-      {{d-button
-        label="gamification.leaderboard.new"
-        title="gamification.leaderboard.new"
-        icon="plus"
-        class="btn-primary leaderboard-admin__btn-new"
-        action=(action (mut creatingNew) true)
-      }}
+      <DButton
+        @label="gamification.leaderboard.new"
+        @title="gamification.leaderboard.new"
+        @icon="plus"
+        @class="btn-primary leaderboard-admin__btn-new"
+        @action={{action (mut creatingNew) true}}
+      />
     {{/if}}
   {{/if}}
 
@@ -161,20 +161,20 @@
                 {{/if}}
               </td>
               <td class="leaderboard-admin__listitem-action">
-                {{d-button
-                  class="btn-flat"
-                  icon="pencil-alt"
-                  title="gamification.edit"
-                  action=(action (mut selectedLeaderboardId) leaderboard.id)
-                }}
+                <DButton
+                  @class="btn-flat"
+                  @icon="pencil-alt"
+                  @title="gamification.edit"
+                  @action={{action (mut selectedLeaderboardId) leaderboard.id}}
+                />
               </td>
               <td class="leaderboard-admin__listitem-action">
-                {{d-button
-                  class="btn-flat"
-                  icon="trash-alt"
-                  title="gamification.delete"
-                  action=(action "destroyLeaderboard" leaderboard)
-                }}
+                <DButton
+                  @class="btn-flat"
+                  @icon="trash-alt"
+                  @title="gamification.delete"
+                  @action={{action "destroyLeaderboard" leaderboard}}
+                />
               </td>
             </tr>
           {{/each}}
@@ -183,11 +183,11 @@
     {{else}}
       {{#unless creatingNew}}
         {{i18n "gamification.leaderboard.none"}}
-        {{d-button
-          label="gamification.leaderboard.cta"
-          class="btn-primary leaderboard-admin__cta-new"
-          action=(action (mut creatingNew) true)
-        }}
+        <DButton
+          @label="gamification.leaderboard.cta"
+          @class="btn-primary leaderboard-admin__cta-new"
+          @action={{action (mut creatingNew) true}}
+        />
       {{/unless}}
     {{/if}}
   </div>
