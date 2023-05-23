@@ -1,8 +1,6 @@
 {{#if user.gamification_score}}
   <h3>
     <span class="desc">{{i18n "gamification.score"}}</span>
-    {{#link-to "gamificationLeaderboard"}}
-      {{fullnumber user.gamification_score}}
-    {{/link-to}}
+    {{fullnumber user.gamification_score}}
   </h3>
 {{/if}}
