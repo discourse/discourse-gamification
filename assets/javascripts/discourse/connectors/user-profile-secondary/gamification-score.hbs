@@ -3,8 +3,8 @@
     <dt>
       {{i18n "gamification.score"}}
     </dt>
-    <dd>
+    {{#link-to "gamificationLeaderboard"}}
       {{fullnumber model.gamification_score}}
-    </dd>
+    {{/link-to}}
   </dl>
 {{/if}}
