@@ -9,13 +9,7 @@
     data-user-card={{rank.username}}
   >
     {{avatar rank imageSize="large"}}
-    <span class="user__name">
-      {{#if this.siteSettings.prioritize_username_in_ux}}
-        {{rank.username}}
-      {{else}}
-        {{rank.name}}
-      {{/if}}
-    </span>
+    <span class="user__name">{{rank.username}}</span>
   </div>
   <div class="user__score">
     {{#if site.mobileView}}

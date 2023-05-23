@@ -67,7 +67,7 @@ module ::DiscourseGamification
       users = users.where("gamification_scores.date >= ?", period) if period.present?
       users =
         users
-          .select("users.id, users.name, users.username, users.uploaded_avatar_id, #{sum_sql}")
+          .select("users.id, users.username, users.uploaded_avatar_id, #{sum_sql}")
           .group("users.id")
           .order(total_score: :desc, id: :asc)
 
