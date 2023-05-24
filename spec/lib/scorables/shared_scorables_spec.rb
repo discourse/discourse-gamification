@@ -2,6 +2,8 @@
 
 RSpec.shared_examples "Scorable Type" do
   let(:current_user) { Fabricate(:user) }
+  let(:other_user) { Fabricate(:user) }
+  let(:third_user) { Fabricate(:user) }
   let(:expected_score) { expected_score }
 
   describe "#{described_class} updates gamification score" do
@@ -106,8 +108,13 @@ end
 RSpec.describe ::DiscourseGamification::LikeGiven do
   it_behaves_like "Scorable Type" do
     before do
-      Fabricate.times(10, :post, user: current_user)
-      Post.all.each { |p| Fabricate(:post_action, user: current_user, post: p) }
+      Fabricate.times(10, :post, user: other_user)
+      Post.all.each do |p|
+        Fabricate(:post_action, user: current_user, post: p, post_action_type_id: 2)
+      end
+      Post.all.limit(5).each do |p|
+        Fabricate(:post_action, user: third_user, post: p, post_action_type_id: 2)
+      end
     end
 
     # ten likes given
