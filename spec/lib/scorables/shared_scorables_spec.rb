@@ -112,9 +112,10 @@ RSpec.describe ::DiscourseGamification::LikeGiven do
       Post.all.each do |p|
         Fabricate(:post_action, user: current_user, post: p, post_action_type_id: 2)
       end
-      Post.all.limit(5).each do |p|
-        Fabricate(:post_action, user: third_user, post: p, post_action_type_id: 2)
-      end
+      Post
+        .all
+        .limit(5)
+        .each { |p| Fabricate(:post_action, user: third_user, post: p, post_action_type_id: 2) }
     end
 
     # ten likes given
