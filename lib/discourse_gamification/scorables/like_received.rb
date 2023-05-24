@@ -17,10 +17,12 @@ module ::DiscourseGamification
       <<~SQL
         SELECT
           p.user_id AS user_id,
-          date_trunc('day', p.created_at) AS date,
-          SUM(p.like_count * #{score_multiplier}) AS points
+          date_trunc('day', pa.created_at) AS date,
+          COUNT(*) * #{score_multiplier} AS points
         FROM
-          posts AS p
+          post_actions AS pa
+        INNER JOIN posts AS p
+          ON p.id = pa.post_id
         INNER JOIN topics AS t
           ON t.id = p.topic_id
           #{category_filter}
@@ -28,7 +30,8 @@ module ::DiscourseGamification
           p.deleted_at IS NULL AND
           t.archetype <> 'private_message' AND
           p.wiki IS FALSE AND
-          p.created_at >= :since
+          post_action_type_id = 2 AND
+          pa.created_at >= :since
         GROUP BY
           1, 2
       SQL
