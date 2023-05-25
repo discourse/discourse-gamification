@@ -3,7 +3,7 @@
     <dt>
       {{i18n "gamification.score"}}
     </dt>
-    {{#link-to "gamificationLeaderboard"}}
+    {{#link-to "gamificationLeaderboard.byName" site.default_gamification_leaderboard_id}}
       {{fullnumber model.gamification_score}}
     {{/link-to}}
   </dl>
