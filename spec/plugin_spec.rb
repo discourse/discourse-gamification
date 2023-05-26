@@ -12,3 +12,15 @@ describe ::DiscourseGamification do
     expect(serializer.gamification_score).to eq(gamification_score.score)
   end
 end
+
+describe ::DiscourseGamification do
+  let(:guardian) { Guardian.new }
+  let!(:default_gamification_leaderboard) { Fabricate(:gamification_leaderboard) }
+
+  it "adds default_gamification_leaderboard_id to the SiteSettingSerializer" do
+    site = Site.new(guardian)
+    serializer = SiteSerializer.new(site)
+    expect(serializer).to respond_to(:default_gamification_leaderboard_id)
+    expect(serializer.default_gamification_leaderboard_id).to eq(default_gamification_leaderboard.id)
+  end
+end
