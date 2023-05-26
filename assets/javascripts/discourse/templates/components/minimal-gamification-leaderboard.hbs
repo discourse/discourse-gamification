@@ -1,6 +1,9 @@
 <div class="leaderboard -minimal">
   <div class="page__header">
-    <LinkTo @route="gamificationLeaderboard.byName" @model={{this.model.leaderboard.id}}>
+    <LinkTo
+      @route="gamificationLeaderboard.byName"
+      @model={{this.model.leaderboard.id}}
+    >
       <h3 class="page__title">{{this.model.leaderboard.name}}</h3>
     </LinkTo>
   </div>
