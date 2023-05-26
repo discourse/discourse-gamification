@@ -42,7 +42,13 @@
               <span>{{sum position 1}}</span>
             </div>
           </div>
-          <div class="winner__name">{{winner.username}}</div>
+          <div class="winner__name">
+            {{#if this.siteSettings.prioritize_username_in_ux}}
+              {{winner.username}}
+            {{else}}
+              {{winner.name}}
+            {{/if}}
+          </div>
           <div class="winner__score">{{fullnumber winner.total_score}}</div>
         </div>
       {{/each}}
