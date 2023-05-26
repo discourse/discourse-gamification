@@ -69,11 +69,11 @@
       </div>
     {{/if}}
 
-    {{#load-more selector=".user" action=(action "loadMore")}}
+    <LoadMore @selector=".user" @action={{action "loadMore"}}>
       {{#each ranking as |rank index|}}
-        {{gamification-leaderboard-row rank=rank index=index}}
+        <GamificationLeaderboardRow @rank={{rank}} @index={{index}} />
       {{/each}}
-    {{/load-more}}
-    {{conditional-loading-spinner condition=loading}}
+    </LoadMore>
+    <ConditionalLoadingSpinner @condition={{loading}} />
   </div>
 </div>

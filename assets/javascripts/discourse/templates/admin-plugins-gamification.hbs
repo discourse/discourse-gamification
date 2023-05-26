@@ -12,23 +12,14 @@
         <label class="control-label">
           {{i18n "gamification.leaderboard.name"}}
         </label>
-        {{input
-          type="text"
-          value=selectedLeaderboard.name
-          placeholder=(i18n "gamification.leaderboard.name")
-        }}
+        <Input @type="text" @value={{selectedLeaderboard.name}} placeholder={{i18n "gamification.leaderboard.name"}} />
       </div>
       <div class="control-group">
         <label class="control-label">
           {{i18n "gamification.leaderboard.date.range"}}
         </label>
         <div class="controls">
-          {{date-picker-past
-            class="date-input"
-            placeholder="yyyy-mm-dd"
-            value=selectedLeaderboard.from_date
-            onSelect=(action (mut fromDate))
-          }}
+          <DatePickerPast @class="date-input" @placeholder="yyyy-mm-dd" @value={{selectedLeaderboard.from_date}} @onSelect={{action (mut fromDate)}} />
           <DatePicker
             @class="date-input"
             @placeholder="yyyy-mm-dd"
@@ -78,7 +69,7 @@
         <label class="control-label">
           {{i18n "gamification.leaderboard.default_period"}}
         </label>
-        {{period-input value=selectedLeaderboard.default_period}}
+        <PeriodInput @value={{selectedLeaderboard.default_period}} />
         <div>{{i18n "gamification.leaderboard.default_period_help"}}</div>
       </div>
     </div>
@@ -102,11 +93,7 @@
 
   {{#if creatingNew}}
     <div class="new-leaderboard-container">
-      {{input
-        type="text"
-        value=newLeaderboardName
-        placeholder=(i18n "gamification.leaderboard.name_placeholder")
-      }}
+      <Input @type="text" @value={{newLeaderboardName}} placeholder={{i18n "gamification.leaderboard.name_placeholder"}} />
       <DButton
         @label="gamification.create"
         @title="gamification.create"
@@ -147,9 +134,9 @@
           {{#each sortedLeaderboards as |leaderboard|}}
             <tr>
               <td>
-                {{#link-to "gamificationLeaderboard.byName" leaderboard.id}}
+                <LinkTo @route="gamificationLeaderboard.byName" @model={{leaderboard.id}}>
                   {{leaderboard.name}}
-                {{/link-to}}
+                </LinkTo>
               </td>
               <td>
                 {{#if leaderboard.from_date}}
