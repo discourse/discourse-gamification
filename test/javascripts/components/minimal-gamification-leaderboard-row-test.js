@@ -13,7 +13,7 @@ module(
   function (hooks) {
     setupRenderingTest(hooks);
 
-    test("name", async function (assert) {
+    test("Display name prioritizes name", async function (assert) {
       this.siteSettings.prioritize_username_in_ux = false;
       this.set("rank", { username: "id", name: "bob" });
 
@@ -24,7 +24,7 @@ module(
       assert.strictEqual(displayName(), "bob");
     });
 
-    test("username", async function (assert) {
+    test("Display name prioritizes username", async function (assert) {
       this.siteSettings.prioritize_username_in_ux = true;
       this.set("rank", { username: "id", name: "bob" });
 
