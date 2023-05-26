@@ -1,12 +1,12 @@
 <div class="leaderboard">
   <div class="page__header">
     <h1 class="page__title">{{this.model.leaderboard.name}}</h1>
-    {{d-button
-      action=(action "showLeaderboardInfo")
+    <DButton
+      @action={{action "showLeaderboardInfo"}}
       class="-ghost"
-      icon="info-circle"
-      label=(unless site.mobileView "gamification.leaderboard.info")
-    }}
+      @icon="info-circle"
+      @label={{unless site.mobileView "gamification.leaderboard.info"}}
+    />
   </div>
 
   <div class="leaderboard__controls">
@@ -42,7 +42,13 @@
               <span>{{sum position 1}}</span>
             </div>
           </div>
-          <div class="winner__name">{{winner.username}}</div>
+          <div class="winner__name">
+            {{#if this.siteSettings.prioritize_username_in_ux}}
+              {{winner.username}}
+            {{else}}
+              {{winner.name}}
+            {{/if}}
+          </div>
           <div class="winner__score">{{fullnumber winner.total_score}}</div>
         </div>
       {{/each}}
@@ -69,11 +75,11 @@
       </div>
     {{/if}}
 
-    {{#load-more selector=".user" action=(action "loadMore")}}
+    <LoadMore @selector=".user" @action={{action "loadMore"}}>
       {{#each ranking as |rank index|}}
-        {{gamification-leaderboard-row rank=rank index=index}}
+        <GamificationLeaderboardRow @rank={{rank}} @index={{index}} />
       {{/each}}
-    {{/load-more}}
-    {{conditional-loading-spinner condition=loading}}
+    </LoadMore>
+    <ConditionalLoadingSpinner @condition={{loading}} />
   </div>
 </div>

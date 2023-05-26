@@ -16,7 +16,7 @@ module ::DiscourseGamification
     def self.query
       <<~SQL
         SELECT
-          p.user_id AS user_id,
+          pa.user_id AS user_id,
           date_trunc('day', pa.created_at) AS date,
           COUNT(*) * #{score_multiplier} AS points
         FROM

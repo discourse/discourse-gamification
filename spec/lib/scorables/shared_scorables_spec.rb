@@ -2,6 +2,8 @@
 
 RSpec.shared_examples "Scorable Type" do
   let(:current_user) { Fabricate(:user) }
+  let(:other_user) { Fabricate(:user) }
+  let(:third_user) { Fabricate(:user) }
   let(:expected_score) { expected_score }
 
   describe "#{described_class} updates gamification score" do
@@ -70,7 +72,7 @@ RSpec.describe ::DiscourseGamification::LikeReceived do
   it_behaves_like "Scorable Type" do
     before do
       Fabricate.times(10, :post, user: current_user)
-      Post.update_all(like_count: 1)
+      Post.all.each { |p| Fabricate(:post_action, post: p) }
     end
 
     # ten likes recieved
@@ -80,7 +82,7 @@ RSpec.describe ::DiscourseGamification::LikeReceived do
   it_behaves_like "Category Scoped Scorable Type" do
     let(:topic) { Fabricate(:topic, user: user, category: category_allowed) }
     let(:class_action_fabricator) { Fabricate(:post, user: user, topic: topic) }
-    let(:after_create_hook) { Post.update_all(like_count: 1) }
+    let(:after_create_hook) { Post.all.each { |p| Fabricate(:post_action, post: p) } }
 
     # 1 like received
     let(:expected_score) { 1 }
@@ -99,15 +101,21 @@ RSpec.describe ::DiscourseGamification::LikeReceived do
       Fabricate(:post, user: current_user, topic: private_message_topic)
     end
 
-    let(:after_create_hook) { Post.update_all(like_count: 1) }
+    let(:after_create_hook) { Post.all.each { |p| Fabricate(:post_action, post: p) } }
   end
 end
 
 RSpec.describe ::DiscourseGamification::LikeGiven do
   it_behaves_like "Scorable Type" do
     before do
-      Fabricate.times(10, :post, user: current_user)
-      Post.all.each { |p| Fabricate(:post_action, user: current_user, post: p) }
+      Fabricate.times(10, :post, user: other_user)
+      Post.all.each do |p|
+        Fabricate(:post_action, user: current_user, post: p, post_action_type_id: 2)
+      end
+      Post
+        .all
+        .limit(5)
+        .each { |p| Fabricate(:post_action, user: third_user, post: p, post_action_type_id: 2) }
     end
 
     # ten likes given
