@@ -16,7 +16,11 @@ module(
     test("name", async function (assert) {
       this.siteSettings.prioritize_username_in_ux = false;
       this.set("winner", { username: "id", name: "bob" });
-      this.set("model", { leaderboard: "", personal: "", users: [this.winner] });
+      this.set("model", {
+        leaderboard: "",
+        personal: "",
+        users: [this.winner],
+      });
 
       await render(hbs`<GamificationLeaderboard @model={{this.model}} />`);
 
@@ -26,7 +30,11 @@ module(
     test("username", async function (assert) {
       this.siteSettings.prioritize_username_in_ux = true;
       this.set("winner", { username: "id", name: "bob" });
-      this.set("model", { leaderboard: "", personal: "", users: [this.winner] });
+      this.set("model", {
+        leaderboard: "",
+        personal: "",
+        users: [this.winner],
+      });
 
       await render(hbs`<GamificationLeaderboard @model={{this.model}} />`);
 

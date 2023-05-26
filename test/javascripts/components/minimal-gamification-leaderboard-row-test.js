@@ -17,7 +17,9 @@ module(
       this.siteSettings.prioritize_username_in_ux = false;
       this.set("rank", { username: "id", name: "bob" });
 
-      await render(hbs`<MinimalGamificationLeaderboardRow @rank={{this.rank}} />`);
+      await render(
+        hbs`<MinimalGamificationLeaderboardRow @rank={{this.rank}} />`
+      );
 
       assert.strictEqual(displayName(), "bob");
     });
@@ -26,7 +28,9 @@ module(
       this.siteSettings.prioritize_username_in_ux = true;
       this.set("rank", { username: "id", name: "bob" });
 
-      await render(hbs`<MinimalGamificationLeaderboardRow @rank={{this.rank}} />`);
+      await render(
+        hbs`<MinimalGamificationLeaderboardRow @rank={{this.rank}} />`
+      );
 
       assert.strictEqual(displayName(), "id");
     });
