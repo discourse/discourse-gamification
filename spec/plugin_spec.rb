@@ -21,6 +21,8 @@ describe ::DiscourseGamification do
     site = Site.new(guardian)
     serializer = SiteSerializer.new(site)
     expect(serializer).to respond_to(:default_gamification_leaderboard_id)
-    expect(serializer.default_gamification_leaderboard_id).to eq(default_gamification_leaderboard.id)
+    expect(serializer.default_gamification_leaderboard_id).to eq(
+      default_gamification_leaderboard.id,
+    )
   end
 end

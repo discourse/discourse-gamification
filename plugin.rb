@@ -62,7 +62,9 @@ after_initialize do
   end
 
   add_to_serializer(:user_card, :gamification_score) { object.gamification_score }
-  add_to_serializer(:site, :default_gamification_leaderboard_id) { DiscourseGamification::GamificationLeaderboard.first&.id }
+  add_to_serializer(:site, :default_gamification_leaderboard_id) do
+    DiscourseGamification::GamificationLeaderboard.first&.id
+  end
 
   SeedFu.fixture_paths << Rails
     .root
