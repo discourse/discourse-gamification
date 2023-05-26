@@ -1,8 +1,8 @@
 <div
-  class="user {{if rank.isCurrentUser "user-highlight"}}"
+  class="user {{if rank.isCurrentUser 'user-highlight'}}"
   id="leaderboard-user-{{rank.id}}"
 >
-  <div class="user__rank {{if rank.topRanked "-winner"}}">{{#if rank.topRanked}}
+  <div class="user__rank {{if rank.topRanked '-winner'}}">{{#if rank.topRanked}}
       {{d-icon "crown"}}
     {{else}} {{sum index 1}}{{/if}}</div>
   <div

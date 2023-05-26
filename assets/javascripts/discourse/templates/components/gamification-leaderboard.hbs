@@ -3,7 +3,7 @@
     <h1 class="page__title">{{this.model.leaderboard.name}}</h1>
     <DButton
       @action={{action "showLeaderboardInfo"}}
-      @class="-ghost"
+      class="-ghost"
       @icon="info-circle"
       @label={{unless site.mobileView "gamification.leaderboard.info"}}
     />
