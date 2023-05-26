@@ -1,11 +1,1 @@
-{{#if user.gamification_score}}
-  <h3>
-    <span class="desc">{{i18n "gamification.score"}}</span>
-    {{#link-to
-      "gamificationLeaderboard.byName"
-      site.default_gamification_leaderboard_id
-    }}
-      {{fullnumber user.gamification_score}}
-    {{/link-to}}
-  </h3>
-{{/if}}
+{{gamification-score model=user}}
