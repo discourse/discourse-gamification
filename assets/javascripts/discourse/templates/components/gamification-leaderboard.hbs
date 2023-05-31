@@ -46,7 +46,7 @@
             {{#if this.siteSettings.prioritize_username_in_ux}}
               {{winner.username}}
             {{else}}
-              {{winner.name}}
+              {{or winner.name winner.username}}
             {{/if}}
           </div>
           <div class="winner__score">{{fullnumber winner.total_score}}</div>
