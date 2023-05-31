@@ -30,5 +30,14 @@ module(
 
       assert.strictEqual(displayName(), "id");
     });
+
+    test("Display name prioritizes username when name is empty", async function (assert) {
+      this.siteSettings.prioritize_username_in_ux = false;
+      this.set("rank", { username: "id", name: "" });
+
+      await render(hbs`<GamificationLeaderboardRow @rank={{this.rank}} />`);
+
+      assert.strictEqual(displayName(), "id");
+    });
   }
 );
