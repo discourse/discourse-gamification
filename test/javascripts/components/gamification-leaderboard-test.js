@@ -5,7 +5,7 @@ import { module, test } from "qunit";
 import { render } from "@ember/test-helpers";
 
 function displayName() {
-  return query(".winner__name").innerText.trim();
+    return query(".winner__name").innerText.trim();
 }
 
 module(
@@ -50,7 +50,9 @@ module(
         users: [this.winner],
       });
 
-      await render(hbs`<GamificationLeaderboardRow @model={{this.model}} />`);
+      await render(hbs`<GamificationLeaderboard @model={{this.model}} />`);
+
+      console.log(query(".winner__name"));
 
       assert.strictEqual(displayName(), "id");
     });
