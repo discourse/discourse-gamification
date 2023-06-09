@@ -2,8 +2,7 @@
 module ::DiscourseGamification
   class ChatMessage < Scorable
     def self.enabled?
-      SiteSetting.chat_enabled &&
-        score_multiplier > 0
+      SiteSetting.chat_enabled && score_multiplier > 0
     end
 
     def self.score_multiplier
