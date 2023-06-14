@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 module ::DiscourseGamification
-  class ChatMessage < Scorable
+  class ChatMessageCreated < Scorable
     def self.enabled?
       SiteSetting.chat_enabled && score_multiplier > 0
     end
@@ -12,19 +12,25 @@ module ::DiscourseGamification
     def self.query
       <<~SQL
         SELECT
-          cm.user_id AS user_id,
-          date_trunc('day', cm.created_at) AS date,
+          m.user_id,
+          date_trunc('day', m.created_at) AS date,
           COUNT(*) * #{score_multiplier} AS points
         FROM
-          chat_messages AS cm
-        INNER JOIN chat_channels AS cc
-          ON cc.id = cm.chat_channel_id
+          chat_messages AS m
+        JOIN
+          chat_channels AS c ON c.id = m.chat_channel_id
+        LEFT JOIN (
+          SELECT direct_message_channel_id
+          FROM direct_message_users
+          GROUP BY direct_message_channel_id
+          HAVING COUNT(DISTINCT user_id) > 1
+        ) AS dm ON dm.direct_message_channel_id = c.chatable_id
         WHERE
-          cc.deleted_at IS NULL AND
-          cm.deleted_at IS NULL AND
-          cm.created_at >= :since
+          m.created_at >= :since AND
+          m.deleted_at IS NULL AND
+          (c.chatable_type <> 'DirectMessage' OR dm.direct_message_channel_id IS NOT NULL)
         GROUP BY
-          1, 2
+          m.user_id, date_trunc('day', m.created_at)
       SQL
     end
   end
