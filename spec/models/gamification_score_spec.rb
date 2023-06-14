@@ -11,7 +11,6 @@ RSpec.describe DiscourseGamification::GamificationScore, type: :model do
       described_class.calculate_scores
       expect(user.gamification_score).to eq(50)
 
-
       user.topics.take(5).each(&:destroy)
       described_class.calculate_scores
       expect(user.gamification_score).to eq(25)
