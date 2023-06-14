@@ -9,10 +9,6 @@ module ::DiscourseGamification
       SiteSetting.chat_reaction_received_score_value
     end
 
-    def self.category_filter
-      return "" if scorable_category_list.empty?
-    end
-
     def self.query
       <<~SQL
         SELECT
@@ -25,10 +21,10 @@ module ::DiscourseGamification
           ON cm.id = reactions.chat_message_id
         INNER JOIN chat_channels AS cc
           ON cc.id = cm.chat_channel_id
-          #{category_filter}
         WHERE
           cc.deleted_at IS NULL AND
           cm.deleted_at IS NULL AND
+          cm.user_id <> reactions.user_id AND
           reactions.created_at >= :since
         GROUP BY
           1, 2

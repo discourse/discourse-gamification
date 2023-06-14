@@ -9,10 +9,6 @@ module ::DiscourseGamification
       SiteSetting.chat_message_score_value
     end
 
-    def self.category_filter
-      return "" if scorable_category_list.empty?
-    end
-
     def self.query
       <<~SQL
         SELECT
@@ -23,7 +19,6 @@ module ::DiscourseGamification
           chat_messages AS cm
         INNER JOIN chat_channels AS cc
           ON cc.id = cm.chat_channel_id
-          #{category_filter}
         WHERE
           cc.deleted_at IS NULL AND
           cm.deleted_at IS NULL AND

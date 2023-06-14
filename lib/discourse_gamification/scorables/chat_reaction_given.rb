@@ -2,15 +2,12 @@
 module ::DiscourseGamification
   class ChatReactionGiven < Scorable
     def self.enabled?
-      SiteSetting.chat_enabled && score_multiplier > 0
+      SiteSetting.chat_enabled &&
+        score_multiplier > 0
     end
 
     def self.score_multiplier
       SiteSetting.chat_reaction_given_score_value
-    end
-
-    def self.category_filter
-      return "" if scorable_category_list.empty?
     end
 
     def self.query
@@ -25,10 +22,10 @@ module ::DiscourseGamification
           ON cm.id = reactions.chat_message_id
         INNER JOIN chat_channels AS cc
           ON cc.id = cm.chat_channel_id
-          #{category_filter}
         WHERE
           cc.deleted_at IS NULL AND
           cm.deleted_at IS NULL AND
+          cm.user_id <> reactions.user_id AND
           reactions.created_at >= :since
         GROUP BY
           1, 2
