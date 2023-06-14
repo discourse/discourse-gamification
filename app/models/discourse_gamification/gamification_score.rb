@@ -18,6 +18,9 @@ module ::DiscourseGamification
       queries = only_subclass&.query || scorables_queries
 
       DB.exec(<<~SQL, since: since_date)
+        DELETE FROM gamification_scores
+        WHERE date >= :since;
+
         INSERT INTO gamification_scores (user_id, date, score)
         SELECT user_id, date, SUM(points) AS score
         FROM (
@@ -31,7 +34,7 @@ module ::DiscourseGamification
         WHERE user_id IS NOT NULL
         GROUP BY 1, 2
         ON CONFLICT (user_id, date) DO UPDATE
-        SET score = EXCLUDED.score
+        SET score = EXCLUDED.score;
       SQL
     end
   end
