@@ -18,6 +18,7 @@ register_asset "stylesheets/common/leaderboard-minimal.scss"
 register_asset "stylesheets/desktop/leaderboard-info-modal.scss", :desktop
 register_asset "stylesheets/mobile/leaderboard-info-modal.scss", :mobile
 register_asset "stylesheets/common/leaderboard-admin.scss"
+register_asset "stylesheets/common/gamification-score.scss"
 
 register_svg_icon "crown"
 register_svg_icon "award"
@@ -62,6 +63,9 @@ after_initialize do
   end
 
   add_to_serializer(:user_card, :gamification_score) { object.gamification_score }
+  add_to_serializer(:site, :default_gamification_leaderboard_id) do
+    DiscourseGamification::GamificationLeaderboard.first&.id
+  end
 
   SeedFu.fixture_paths << Rails
     .root
