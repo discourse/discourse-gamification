@@ -5,7 +5,7 @@ DiscourseGamification::Engine.routes.draw do
   get "/:id" => "gamification_leaderboard#respond"
 end
 
-Discourse::Application.routes.append do
+Discourse::Application.routes.draw do
   mount ::DiscourseGamification::Engine, at: "/leaderboard"
   get "/admin/plugins/gamification" =>
         "discourse_gamification/admin_gamification_leaderboard#index",
@@ -21,7 +21,7 @@ Discourse::Application.routes.append do
          :constraints => StaffConstraint.new
 end
 
-Discourse::Application.routes.append do
+Discourse::Application.routes.draw do
   get "/admin/plugins/gamification/score_events" =>
         "discourse_gamification/admin_gamification_score_event#show",
       :constraints => StaffConstraint.new
