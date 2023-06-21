@@ -29,5 +29,5 @@ plugins:
     default: 1
   chat_reaction_given_score_value:
     default: 1
-  chat_message_score_value:
+  chat_message_created_score_value:
     default: 1

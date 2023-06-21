@@ -6,7 +6,7 @@ module ::DiscourseGamification
     end
 
     def self.score_multiplier
-      SiteSetting.chat_message_score_value
+      SiteSetting.chat_message_created_score_value
     end
 
     def self.query
