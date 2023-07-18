@@ -7,6 +7,7 @@ import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { inject as service } from "@ember/service";
 import { LEADERBOARD_PERIODS } from "discourse/plugins/discourse-gamification/discourse/components/gamification-leaderboard";
+import showModal from "discourse/lib/show-modal";
 
 export default Controller.extend({
   dialog: service(),
@@ -202,5 +203,10 @@ export default Controller.extend({
         });
       })
       .catch(popupAjaxError);
+  },
+
+  @action
+  recalculateScores() {
+    showModal("recalculate-scores-form", { model: this.model });
   },
 });

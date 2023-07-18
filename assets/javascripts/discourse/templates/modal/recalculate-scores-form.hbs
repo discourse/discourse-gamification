@@ -1,0 +1,60 @@
+<DModalBody @title="gamification.recalculate">
+  {{#if (eq this.status "loading")}}
+    <div class="status">{{i18n "gamification.recalculating"}}</div>
+  {{else if (eq this.status "complete")}}
+    {{d-icon "check"}}
+    <div class="status">{{i18n "gamification.completed"}}</div>
+  {{else}}
+    <form class="form-horizontal">
+      <div class="input-group">
+        <div>{{i18n "gamification.update_scores_help"}}</div>
+        <ComboBox
+          @id="update-range"
+          @valueProperty="value"
+          @content={{this.updateRange}}
+          @value={{this.updateRangeValue}}
+          @onChange={{action (mut this.updateRangeValue)}}
+        />
+        {{#if (eq this.updateRangeValue 5)}}
+          <div class="input-group">
+            <div>{{i18n "gamification.custom_range_from"}}</div>
+            <DatePickerPast
+              @id="custom-from-date"
+              @class="date-input"
+              @placeholder="yyyy-mm-dd"
+              @value={{recalculateFromDate}}
+              @onSelect={{action (mut recalculateFromDate)}}
+            />
+          </div>
+        {{else}}
+          <div class="date-range">
+            {{dateRange}}
+          </div>
+        {{/if}}
+      </div>
+    </form>
+  {{/if}}
+</DModalBody>
+
+<div class="modal-footer">
+  <DButton
+    @id="apply-section"
+    @action={{action "apply"}}
+    @class="btn-primary"
+    @label="gamification.apply"
+    @ariaLabel="gamification.apply"
+    @disabled={{applyDisabled}}
+  />
+  <DButton
+    @id="cancel-section"
+    @action={{action "closeModal"}}
+    @class="btn-primary"
+    @label={{if
+      (eq status "complete")
+      "gamification.close"
+      "gamification.cancel"
+    }}
+    @ariaLabel="gamification.cancel"
+  />
+  <div class="remaining">{{remainingText}}</div>
+</div>
