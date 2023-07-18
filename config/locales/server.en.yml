@@ -14,3 +14,6 @@ en:
     scorable_categories: "List of categories where actions will generate cheers. Leave empty to enable cheers on all categories"
   score: "Cheers"
   default_leaderboard_name: "Global Leaderboard"
+  rate_limiter:
+    by_type:
+      recalculate_scores_remaining: "You’ve reached the maximum number of recalculating scores. Please wait %{time_left} before trying again."

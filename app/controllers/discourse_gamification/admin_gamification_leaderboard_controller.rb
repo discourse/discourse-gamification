@@ -56,4 +56,21 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
     leaderboard.destroy if leaderboard
     render json: success_json
   end
+
+  def recalculate_scores
+    DiscourseGamification::RecalculateScoresRateLimiter.perform!
+
+    since =
+      begin
+        Date.parse(params[:from_date]).midnight
+      rescue StandardError
+        raise Discourse::InvalidParameters.new(:from_date)
+      end
+
+    raise Discourse::InvalidParameters.new(:from_date) if since > Time.now
+
+    Jobs.enqueue(Jobs::RecalculateScores, since: since)
+
+    render json: success_json
+  end
 end

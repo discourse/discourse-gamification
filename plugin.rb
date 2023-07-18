@@ -35,6 +35,7 @@ after_initialize do
 
   require_relative "jobs/scheduled/update_scores_for_ten_days"
   require_relative "jobs/scheduled/update_scores_for_today"
+  require_relative "jobs/regular/recalculate_scores"
   require_relative "lib/discourse_gamification/directory_integration"
   require_relative "lib/discourse_gamification/guardian_extension"
   require_relative "lib/discourse_gamification/scorables/scorable"
@@ -49,6 +50,7 @@ after_initialize do
   require_relative "lib/discourse_gamification/scorables/topic_created"
   require_relative "lib/discourse_gamification/scorables/user_invited"
   require_relative "lib/discourse_gamification/user_extension"
+  require_relative "lib/discourse_gamification/recalculate_scores_rate_limiter"
 
   reloadable_patch do |plugin|
     User.class_eval { prepend DiscourseGamification::UserExtension }

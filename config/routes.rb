@@ -19,6 +19,10 @@ Discourse::Application.routes.draw do
   delete "/admin/plugins/gamification/leaderboard/:id" =>
            "discourse_gamification/admin_gamification_leaderboard#destroy",
          :constraints => StaffConstraint.new
+  put "/admin/plugins/gamification/recalculate-scores" =>
+        "discourse_gamification/admin_gamification_leaderboard#recalculate_scores",
+      :constraints => StaffConstraint.new,
+      :as => :recalculate_scores
 end
 
 Discourse::Application.routes.draw do
