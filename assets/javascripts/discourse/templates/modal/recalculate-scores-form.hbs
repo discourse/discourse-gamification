@@ -2,7 +2,8 @@
   {{#if (eq this.status "loading")}}
     <div class="status">{{i18n "gamification.recalculating"}}</div>
   {{else if (eq this.status "complete")}}
-    <div class="status">{{d-icon "check"}} {{i18n "gamification.completed"}}</div>
+    <div class="status">{{d-icon "check"}}
+      {{i18n "gamification.completed"}}</div>
   {{else}}
     <form class="form-horizontal">
       <div class="input-group">
