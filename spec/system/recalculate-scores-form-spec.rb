@@ -13,7 +13,7 @@ describe "Recalculate Scores Form", type: :system do
   end
 
   def format_date(date)
-    date.midnight.strftime('%b %-d, %Y')
+    date.midnight.strftime("%b %-d, %Y")
   end
 
   it "has date options that are valid and can be applied" do
@@ -50,33 +50,34 @@ describe "Recalculate Scores Form", type: :system do
       find(".leaderboard-admin__btn-recalculate").click
 
       recalculate_scores_modal.apply.click
-      
+
       try_until_success do
         expect(recalculate_scores_modal.status.text).to eq(I18n.t("js.gamification.recalculating"))
       end
 
       try_until_success do
-        ::MessageBus.publish "/recalculate_scores", { 
-          success: true, 
-          remaining: DiscourseGamification::RecalculateScoresRateLimiter.remaining
-        }
+        ::MessageBus.publish "/recalculate_scores",
+                             {
+                               success: true,
+                               remaining:
+                                 DiscourseGamification::RecalculateScoresRateLimiter.remaining,
+                             }
         expect(recalculate_scores_modal.status.text).to eq(I18n.t("js.gamification.completed"))
       end
       expect(recalculate_scores_modal).to have_button("apply-section", disabled: true)
-   
+
       expect(recalculate_scores_modal.remaining.text).to eq(
-        I18n.t("js.gamification.daily_update_scores_availability", 
-          count: DiscourseGamification::RecalculateScoresRateLimiter.remaining
-          )
-        )
+        I18n.t(
+          "js.gamification.daily_update_scores_availability",
+          count: DiscourseGamification::RecalculateScoresRateLimiter.remaining,
+        ),
+      )
     end
   end
 
   describe "when admin does not have daily recalculation remaining" do
     it "'apply' button should be disabled" do
-      5.times do
-        DiscourseGamification::RecalculateScoresRateLimiter.perform!
-      end
+      5.times { DiscourseGamification::RecalculateScoresRateLimiter.perform! }
 
       visit("/admin/plugins/gamification")
       find(".leaderboard-admin__btn-recalculate").click
