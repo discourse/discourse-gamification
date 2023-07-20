@@ -7,9 +7,10 @@ import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { inject as service } from "@ember/service";
 import { LEADERBOARD_PERIODS } from "discourse/plugins/discourse-gamification/discourse/components/gamification-leaderboard";
-import showModal from "discourse/lib/show-modal";
+import RecalculateScoresForm from "discourse/plugins/discourse-gamification/discourse/components/modal/recalculate-scores-form";
 
 export default Controller.extend({
+  modal: service(),
   dialog: service(),
   loading: false,
   creatingNew: false,
@@ -207,6 +208,8 @@ export default Controller.extend({
 
   @action
   recalculateScores() {
-    showModal("recalculate-scores-form", { model: this.model });
+    this.modal.show(RecalculateScoresForm, {
+      model: this.model,
+    });
   },
 });
