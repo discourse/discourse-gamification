@@ -49,6 +49,9 @@ after_initialize do
   require_relative "lib/discourse_gamification/scorables/topic_created"
   require_relative "lib/discourse_gamification/scorables/user_invited"
   require_relative "lib/discourse_gamification/user_extension"
+  require_relative "lib/discourse_gamification/scorables/chat_reaction_given"
+  require_relative "lib/discourse_gamification/scorables/chat_reaction_received"
+  require_relative "lib/discourse_gamification/scorables/chat_message_created"
 
   reloadable_patch do |plugin|
     User.class_eval { prepend DiscourseGamification::UserExtension }
