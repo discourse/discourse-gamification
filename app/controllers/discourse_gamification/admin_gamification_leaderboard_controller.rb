@@ -69,7 +69,7 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
 
     raise Discourse::InvalidParameters.new(:from_date) if since > Time.now
 
-    Jobs.enqueue(Jobs::RecalculateScores, since: since)
+    Jobs.enqueue(Jobs::RecalculateScores, since: since, user_id: current_user.id)
 
     render json: success_json
   end
