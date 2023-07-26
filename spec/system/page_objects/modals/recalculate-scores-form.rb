@@ -16,7 +16,7 @@ module PageObjects
       end
 
       def date_range
-        find(".date-range")
+        find(".recalculate-modal__date-range")
       end
 
       def custom_since_date
@@ -24,11 +24,11 @@ module PageObjects
       end
 
       def status
-        find(".status")
+        find(".recalculate-modal__status")
       end
 
       def remaining
-        find(".remaining")
+        find(".recalculate-modal__footer-text")
       end
 
       def apply

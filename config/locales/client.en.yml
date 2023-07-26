@@ -47,7 +47,7 @@ en:
       apply: "Apply"
       recalculate: "Recalculate Scores"
       recalculating: "Recalculating Scores..."
-      completed: "Successfully done!"
+      completed: "Done! The scores have been successfully recalculated."
       update_scores_help: "Update all scores for all leaderboards from"
       update_range:
         last_10_days: "Last 10 days"
