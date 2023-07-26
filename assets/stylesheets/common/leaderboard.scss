@@ -286,6 +286,10 @@
       max-width: 400px;
     }
   }
+
+  .status.is-success .d-icon-check {
+    color: $success;
+  }
 }
 
 .recalculate-modal {
@@ -297,11 +301,5 @@
   &__footer-text {
     margin-left: auto;
     color: var(--primary-high);
-  }
-
-  &__status {
-    &.is-success .d-icon-check {
-      color: $success;
-    }
   }
 }
