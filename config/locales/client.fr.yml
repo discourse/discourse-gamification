@@ -43,10 +43,18 @@ fr:
           daily: "Quotidien"
       create: "Créer"
       cancel: "Annuler"
+      close: "Fermer"
       delete: "Supprimer"
       edit: "Modifier"
       back: "Retour"
       save: "Enregistrer"
+      apply: "Appliquer"
+      update_range:
+        last_10_days: "Ces 10 derniers jours"
+        last_30_days: "Ces 30 derniers jours"
+        last_90_days: "Ces 90 derniers jours"
+        all_time: "Depuis toujours"
+      custom_range_from: "De"
       admin:
         title: "Gamification"
         name: "Nom"

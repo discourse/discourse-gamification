@@ -43,10 +43,18 @@ it:
           daily: "Giornaliero"
       create: "Crea"
       cancel: "Annulla"
+      close: "Chiudi"
       delete: "Cancella"
       edit: "Modifica"
       back: "Indietro"
       save: "Salva"
+      apply: "Applica"
+      update_range:
+        last_10_days: "Ultimi 10 giorni"
+        last_30_days: "Ultimi 30 giorni"
+        last_90_days: "Ultimi 90 giorni"
+        all_time: "Di Sempre"
+      custom_range_from: "Da"
       admin:
         title: "Gamification"
         name: "Nome"

@@ -31,10 +31,18 @@ hr:
           daily: "Dnevno"
       create: "Stvorite"
       cancel: "Odustani"
+      close: "Zatvori"
       delete: "Izbriši"
       edit: "Uredi"
       back: "Natrag"
       save: "Spremi"
+      apply: "Primijeni"
+      update_range:
+        last_10_days: "Zadnjih 10 dana"
+        last_30_days: "Zadnjih 30 dana"
+        last_90_days: "Zadnjih 90 dana"
+        all_time: "Oduvijek"
+      custom_range_from: "Od"
       admin:
         title: "Gamifikacija"
         name: "Ime i prezime"

@@ -14,8 +14,16 @@ id:
         period:
           all_time: "Sepanjang Waktu"
       cancel: "Batal"
+      close: "Tutup"
       delete: "Hapus"
       edit: "Ubah"
       save: "Simpan"
+      apply: "menerapkan"
+      update_range:
+        last_10_days: "10 hari terakhir"
+        last_30_days: "30 hari terakhir"
+        last_90_days: "90 hari terakhir"
+        all_time: "Sepanjang Waktu"
+      custom_range_from: "Dari"
       admin:
         name: "Nama"

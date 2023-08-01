@@ -20,9 +20,17 @@ pl_PL:
           daily: "Dziennie"
       create: "Utwórz"
       cancel: "Anuluj"
+      close: "Zamknij"
       delete: "Usuń"
       edit: "Edytuj"
       back: "Poprzednia"
       save: "Zapisz"
+      apply: "Zastosuj"
+      update_range:
+        last_10_days: "Ostatnie 10 dni"
+        last_30_days: "Ostatnie 30 dni"
+        last_90_days: "Ostatnie 90 dni"
+        all_time: "Przez cały czas"
+      custom_range_from: "Od"
       admin:
         name: "Imię"

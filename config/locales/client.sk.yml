@@ -20,9 +20,14 @@ sk:
           daily: "Denne"
       create: "Vytvoriť"
       cancel: "Zrušiť"
+      close: "Zavrieť"
       delete: "Odstrániť"
       edit: "Upraviť"
       back: "Späť"
       save: "Uložiť"
+      apply: "Použi"
+      update_range:
+        all_time: "Za celú dobu"
+      custom_range_from: "Od"
       admin:
         name: "Meno"

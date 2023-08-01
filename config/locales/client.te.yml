@@ -14,9 +14,13 @@ te:
         period:
           all_time: "ఆల్ టైమ్"
       cancel: "రద్దుచేయి"
+      close: "మూసివేయి"
       delete: "తొలగించు"
       edit: "సవరణ"
       back: "వెనుకకు"
       save: "భద్రపరుచు"
+      apply: "ఆపాదించు"
+      update_range:
+        all_time: "ఆల్ టైమ్"
       admin:
         name: "పేరు"

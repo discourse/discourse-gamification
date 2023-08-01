@@ -20,9 +20,17 @@ vi:
           daily: "hằng ngày"
       create: "Tạo"
       cancel: "Huỷ"
+      close: "Đóng"
       delete: "Xóa"
       edit: "Sửa"
       back: "Quay lại"
       save: "Lưu lại"
+      apply: "Áp dụng"
+      update_range:
+        last_10_days: "10 ngày qua"
+        last_30_days: "30 ngày qua"
+        last_90_days: "90 ngày qua"
+        all_time: "Từ trước tới nay"
+      custom_range_from: "Từ"
       admin:
         name: "Tên"

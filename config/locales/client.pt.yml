@@ -20,9 +20,17 @@ pt:
           daily: "Diário"
       create: "Criar"
       cancel: "Cancelar"
+      close: "Fechar"
       delete: "Eliminar"
       edit: "Editar"
       back: "Retroceder"
       save: "Guardar"
+      apply: "Aplicar"
+      update_range:
+        last_10_days: "Últimos 10 Dias"
+        last_30_days: "Últimos 30 Dias"
+        last_90_days: "Últimos 90 Dias"
+        all_time: "Desde Sempre"
+      custom_range_from: "De"
       admin:
         name: "Nome"

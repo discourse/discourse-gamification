@@ -19,9 +19,16 @@ sr:
           weekly: "Top nedeljne"
           daily: "Top dnevne"
       cancel: "Odustani"
+      close: "Zatvori"
       delete: "Obriši"
       edit: "Izmeni"
       back: "Nazad"
       save: "Sačuvaj"
+      apply: "Primeni"
+      update_range:
+        last_10_days: "Последњих 10 дана"
+        last_30_days: "Последњих 30 дана"
+        last_90_days: "Последњих 90 дана"
+        all_time: "Oduvek"
       admin:
         name: "Ime foruma"

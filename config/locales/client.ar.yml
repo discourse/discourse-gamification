@@ -43,10 +43,18 @@ ar:
           daily: "يوميًا"
       create: "إنشاء"
       cancel: "إلغاء"
+      close: "إغلاق"
       delete: "حذف"
       edit: "تعديل"
       back: "الرجوع"
       save: "حفظ"
+      apply: "طبّق"
+      update_range:
+        last_10_days: "آخر 10 أيام"
+        last_30_days: "آخر 30 يومًا"
+        last_90_days: "آخر 90 أيام"
+        all_time: "طوال الوقت"
+      custom_range_from: "من"
       admin:
         title: "التلعيب"
         name: "الاسم"

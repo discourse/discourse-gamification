@@ -41,10 +41,18 @@ sv:
           daily: "Dagligen"
       create: "Skapa"
       cancel: "Avbryt"
+      close: "Stäng"
       delete: "Radera"
       edit: "Redigera"
       back: "Tillbaka"
       save: "Spara"
+      apply: "Tillämpa"
+      update_range:
+        last_10_days: "Senaste 10 dagarna"
+        last_30_days: "Senaste 30 dagarna"
+        last_90_days: "Senaste 90 dagarna"
+        all_time: "Alltid"
+      custom_range_from: "Från"
       admin:
         title: "Gamification"
         name: "Namn"

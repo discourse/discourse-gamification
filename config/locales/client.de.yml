@@ -43,10 +43,18 @@ de:
           daily: "Täglich"
       create: "Erstellen"
       cancel: "Abbrechen"
+      close: "Beenden"
       delete: "Löschen"
       edit: "Bearbeiten"
       back: "Zurück"
       save: "Speichern"
+      apply: "Anwenden"
+      update_range:
+        last_10_days: "Letzte 10 Tage"
+        last_30_days: "Letzte 30 Tage"
+        last_90_days: "Letzte 90 Tage"
+        all_time: "Gesamt"
+      custom_range_from: "Von"
       admin:
         title: "Gamifizierung"
         name: "Name"
