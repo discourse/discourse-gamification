@@ -20,9 +20,17 @@ ca:
           daily: "Diàriament"
       create: "Crea"
       cancel: "Cancel·la"
+      close: "Tanca"
       delete: "Suprimeix"
       edit: "Edita"
       back: "Enrere"
       save: "Desa"
+      apply: "Aplica"
+      update_range:
+        last_10_days: "Els darrers 10 dies"
+        last_30_days: "Els darrers 30 dies"
+        last_90_days: "Els darrers 90 dies"
+        all_time: "Sempre"
+      custom_range_from: "De"
       admin:
         name: "Nom"

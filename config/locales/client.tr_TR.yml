@@ -44,10 +44,18 @@ tr_TR:
         rank: "Sıra"
       create: "Oluştur"
       cancel: "İptal et"
+      close: "Bitir"
       delete: "Sil"
       edit: "Düzenle"
       back: "Geri"
       save: "Kaydet"
+      apply: "Uygula"
+      update_range:
+        last_10_days: "Son 10 gün"
+        last_30_days: "Son 30 gün"
+        last_90_days: "Son 90 gün"
+        all_time: "Tüm Zamanlar"
+      custom_range_from: "Gönderen"
       admin:
         title: "Oyunlaştırma"
         name: "Ad"

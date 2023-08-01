@@ -19,9 +19,14 @@ sq:
           weekly: "Javore"
           daily: "Ditore"
       cancel: "Anulo"
+      close: "Mbyll"
       delete: "Fshij"
       edit: "Redakto"
       back: "Kthehu mbrapa"
       save: "Ruaj"
+      apply: "Apliko"
+      update_range:
+        all_time: "Gjithë Kohës"
+      custom_range_from: "Nga"
       admin:
         name: "Emri"

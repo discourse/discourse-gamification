@@ -43,10 +43,18 @@ fi:
           daily: "Päivittäinen"
       create: "Luo"
       cancel: "Peruuta"
+      close: "Sulje"
       delete: "Poista"
       edit: "Muokkaa"
       back: "Takaisin"
       save: "Tallenna"
+      apply: "Käytä"
+      update_range:
+        last_10_days: "Viimeiset 10 päivää"
+        last_30_days: "Viimeiset 30 päivää"
+        last_90_days: "Viimeiset 90 päivää"
+        all_time: "Kaikilta ajoilta"
+      custom_range_from: "Alkaen"
       admin:
         title: "Pelillistäminen"
         name: "Nimi"

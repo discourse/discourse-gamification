@@ -43,10 +43,18 @@ zh_CN:
           daily: "每天"
       create: "创建"
       cancel: "取消"
+      close: "关闭"
       delete: "删除"
       edit: "编辑"
       back: "返回"
       save: "保存"
+      apply: "应用"
+      update_range:
+        last_10_days: "过去 10 天"
+        last_30_days: "过去 30 天"
+        last_90_days: "过去 90 天"
+        all_time: "所有时间"
+      custom_range_from: "发件人"
       admin:
         title: "游戏化"
         name: "名称"

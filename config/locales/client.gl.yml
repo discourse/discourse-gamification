@@ -20,9 +20,14 @@ gl:
           daily: "Diario"
       create: "Crear"
       cancel: "Cancelar"
+      close: "Pechar"
       delete: "Eliminar"
       edit: "Editar"
       back: "Volver"
       save: "Gardar"
+      apply: "Aplicar"
+      update_range:
+        all_time: "Desde o principio"
+      custom_range_from: "De"
       admin:
         name: "Nome"

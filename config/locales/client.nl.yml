@@ -43,10 +43,18 @@ nl:
           daily: "Dagelijks"
       create: "Maken"
       cancel: "Annuleren"
+      close: "Sluiten"
       delete: "Verwijderen"
       edit: "Bewerken"
       back: "Terug"
       save: "Opslaan"
+      apply: "Toepassen"
+      update_range:
+        last_10_days: "Afgelopen 10 dagen"
+        last_30_days: "Afgelopen 30 dagen"
+        last_90_days: "Afgelopen 90 dagen"
+        all_time: "Sinds het begin"
+      custom_range_from: "Van"
       admin:
         title: "Gamificatie"
         name: "Naam"

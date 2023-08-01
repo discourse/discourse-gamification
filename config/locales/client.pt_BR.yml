@@ -43,10 +43,18 @@ pt_BR:
           daily: "A cada dia"
       create: "Criar"
       cancel: "Cancelar"
+      close: "Fechar"
       delete: "Excluir"
       edit: "Editar"
       back: "Voltar"
       save: "Salvar"
+      apply: "Aplicar"
+      update_range:
+        last_10_days: "Últimos 10 dias"
+        last_30_days: "Últimos 30 dias"
+        last_90_days: "Últimos 90 dias"
+        all_time: "Desde o início"
+      custom_range_from: "De"
       admin:
         title: "Gamificação"
         name: "Nome"

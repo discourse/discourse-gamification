@@ -20,9 +20,17 @@ sl:
           daily: "Dnevno"
       create: "Ustvari"
       cancel: "Prekliči"
+      close: "Zapri"
       delete: "Izbriši"
       edit: "Uredi"
       back: "Nazaj"
       save: "Shrani"
+      apply: "Uporabi"
+      update_range:
+        last_10_days: "Zadnjih 10 dni"
+        last_30_days: "Zadnjih 30 dni"
+        last_90_days: "Zadnjih 90 dni"
+        all_time: "Ves čas"
+      custom_range_from: "Od"
       admin:
         name: "Polno ime"

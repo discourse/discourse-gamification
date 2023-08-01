@@ -43,10 +43,18 @@ ru:
           daily: "За день"
       create: "Создать"
       cancel: "Отмена"
+      close: "Завершить"
       delete: "Удалить"
       edit: "Редактировать"
       back: "Назад"
       save: "Сохранить"
+      apply: "Применить"
+      update_range:
+        last_10_days: "За последние 10 дней"
+        last_30_days: "За последние 30 дней"
+        last_90_days: "За последние 90 дней"
+        all_time: "За всё время"
+      custom_range_from: "Отправитель"
       admin:
         title: "Геймификация"
         name: "Название"

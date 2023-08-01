@@ -20,9 +20,17 @@ zh_TW:
           daily: "日"
       create: "創建"
       cancel: "取消"
+      close: "關閉"
       delete: "刪除"
       edit: "編輯"
       back: "上一步"
       save: "保存"
+      apply: "套用"
+      update_range:
+        last_10_days: "過去 10 天"
+        last_30_days: "過去 30 天"
+        last_90_days: "過去 90 天"
+        all_time: "所有時間"
+      custom_range_from: "來自"
       admin:
         name: "名字"

@@ -20,3 +20,6 @@ he:
     scorable_categories: "רשימת הקטגוריות בהן פעולות מייצרות תשועות. יש להשאיר ריק כדי להפעיל תשועות בכל הקטגוריות"
   score: "תשועות"
   default_leaderboard_name: "לוח תוצאות עולמי"
+  rate_limiter:
+    by_type:
+      recalculate_scores_remaining: "הגעת למספר החישובים מחדש לניקוד המרבי. נא להמתין %{time_left} בטרם ביצוע ניסיון חוזר."

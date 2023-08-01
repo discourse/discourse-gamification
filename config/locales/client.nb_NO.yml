@@ -20,9 +20,17 @@ nb_NO:
           daily: "Daglig"
       create: "Opprett"
       cancel: "Avbryt"
+      close: "Lukk"
       delete: "Slett"
       edit: "Endre"
       back: "Forrige"
       save: "Lagre"
+      apply: "Bruk"
+      update_range:
+        last_10_days: "Siste 10 dager"
+        last_30_days: "Siste 30 dager"
+        last_90_days: "Siste 90 dager"
+        all_time: "Totalt"
+      custom_range_from: "Fra"
       admin:
         name: "Navn"

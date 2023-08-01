@@ -20,9 +20,17 @@ cs:
           daily: "Denně"
       create: "Vytvoř"
       cancel: "Zrušit"
+      close: "Zavřít"
       delete: "Smazat"
       edit: "Upravit"
       back: "Zpět"
       save: "Uložit"
+      apply: "Použít"
+      update_range:
+        last_10_days: "Posledních 10 dní"
+        last_30_days: "Posledních 30 dní"
+        last_90_days: "Posledních 90 dní"
+        all_time: "Za celou dobu"
+      custom_range_from: "Od koho"
       admin:
         name: "Jméno"
