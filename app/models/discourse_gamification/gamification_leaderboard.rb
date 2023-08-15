@@ -35,12 +35,18 @@ module ::DiscourseGamification
         "leaderboard",
         leaderboard.id,
         page,
-        period&.strftime('%Y%m%d'),
+        period&.strftime("%Y%m%d"),
         user_limit,
         leaderboard.included_groups_ids.present? ? leaderboard.included_groups_ids.join : nil,
         leaderboard.excluded_groups_ids.present? ? leaderboard.excluded_groups_ids.join : nil,
-        leaderboard.from_date.present? ? leaderboard.from_date.strftime('%Y%m%d') : nil,
-        (leaderboard.to_date != Date.today && !leaderboard.from_date.present?) ? leaderboard.to_date.strftime('%Y%m%d') : nil,
+        leaderboard.from_date.present? ? leaderboard.from_date.strftime("%Y%m%d") : nil,
+        (
+          if (leaderboard.to_date != Date.today && !leaderboard.from_date.present?)
+            leaderboard.to_date.strftime("%Y%m%d")
+          else
+            nil
+          end
+        ),
       ].compact.map(&:to_s).join(":")
     end
 
@@ -83,8 +89,10 @@ module ::DiscourseGamification
           ) if leaderboard.from_date.present?
         # calculate scores up to to_date if just to_date is present
         users =
-          users.where("gamification_scores.date <= ?", leaderboard.to_date) if leaderboard.to_date !=
-          Date.today && !leaderboard.from_date.present?
+          users.where(
+            "gamification_scores.date <= ?",
+            leaderboard.to_date,
+          ) if leaderboard.to_date != Date.today && !leaderboard.from_date.present?
         users = users.where("gamification_scores.date >= ?", period) if period.present?
         users =
           users
