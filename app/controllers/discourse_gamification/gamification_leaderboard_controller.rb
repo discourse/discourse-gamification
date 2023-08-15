@@ -5,6 +5,8 @@ module ::DiscourseGamification
     requires_plugin PLUGIN_NAME
 
     def respond
+      discourse_expires_in 1.minute
+
       default_leaderboard_id = GamificationLeaderboard.first.id
       params[:id] ||= default_leaderboard_id
       leaderboard = GamificationLeaderboard.find(params[:id])
