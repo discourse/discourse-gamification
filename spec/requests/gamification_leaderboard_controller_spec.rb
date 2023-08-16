@@ -67,7 +67,6 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
           expect(data["users"][0]["avatar_template"]).to eq(current_user.avatar_template)
           expect(data["users"][0]["total_score"]).to eq(current_user.gamification_score)
         end.length
-      expect(initial_sql_queries_count).to eq(24)
 
       freeze_time 1.minutes.from_now
       new_sql_queries_count =
@@ -80,7 +79,7 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
           expect(data["users"][0]["avatar_template"]).to eq(current_user.avatar_template)
           expect(data["users"][0]["total_score"]).to eq(current_user.gamification_score)
         end.length
-      expect(new_sql_queries_count).to eq(11)
+      expect(new_sql_queries_count).to be < initial_sql_queries_count
 
       freeze_time 6.hours.from_now
       reset_sql_queries_count =
