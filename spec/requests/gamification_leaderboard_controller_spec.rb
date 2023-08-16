@@ -59,7 +59,6 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
       freeze_time
       initial_sql_queries_count =
         track_sql_queries do
-
           get "/leaderboard/#{leaderboard.id}.json"
           expect(response.status).to eq(200)
 
@@ -73,7 +72,6 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
       freeze_time 1.minutes.from_now
       new_sql_queries_count =
         track_sql_queries do
-
           get "/leaderboard/#{leaderboard.id}.json"
           expect(response.status).to eq(200)
 
@@ -87,7 +85,6 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
       freeze_time 6.hours.from_now
       reset_sql_queries_count =
         track_sql_queries do
-
           get "/leaderboard/#{leaderboard.id}.json"
           expect(response.status).to eq(200)
 
