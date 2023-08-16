@@ -56,13 +56,43 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
 
   describe "#respond" do
     it "returns users and their calculated scores" do
-      get "/leaderboard/#{leaderboard.id}.json"
-      expect(response.status).to eq(200)
+      freeze_time
+      initial_sql_queries_count =
+        track_sql_queries do
+          get "/leaderboard/#{leaderboard.id}.json"
+          expect(response.status).to eq(200)
 
-      data = response.parsed_body
-      expect(data["users"][0]["username"]).to eq(current_user.username)
-      expect(data["users"][0]["avatar_template"]).to eq(current_user.avatar_template)
-      expect(data["users"][0]["total_score"]).to eq(current_user.gamification_score)
+          data = response.parsed_body
+          expect(data["users"][0]["username"]).to eq(current_user.username)
+          expect(data["users"][0]["avatar_template"]).to eq(current_user.avatar_template)
+          expect(data["users"][0]["total_score"]).to eq(current_user.gamification_score)
+        end.length
+
+      freeze_time 1.minutes.from_now
+      new_sql_queries_count =
+        track_sql_queries do
+          get "/leaderboard/#{leaderboard.id}.json"
+          expect(response.status).to eq(200)
+
+          data = response.parsed_body
+          expect(data["users"][0]["username"]).to eq(current_user.username)
+          expect(data["users"][0]["avatar_template"]).to eq(current_user.avatar_template)
+          expect(data["users"][0]["total_score"]).to eq(current_user.gamification_score)
+        end.length
+      expect(new_sql_queries_count).to be < initial_sql_queries_count
+
+      freeze_time 6.hours.from_now
+      reset_sql_queries_count =
+        track_sql_queries do
+          get "/leaderboard/#{leaderboard.id}.json"
+          expect(response.status).to eq(200)
+
+          data = response.parsed_body
+          expect(data["users"][0]["username"]).to eq(current_user.username)
+          expect(data["users"][0]["avatar_template"]).to eq(current_user.avatar_template)
+          expect(data["users"][0]["total_score"]).to eq(current_user.gamification_score)
+        end.length
+      expect(reset_sql_queries_count).to eq(initial_sql_queries_count)
     end
 
     it "only returns users and scores for specified date range" do
