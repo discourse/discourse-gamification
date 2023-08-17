@@ -81,7 +81,7 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
         end.length
       expect(new_sql_queries_count).to be < initial_sql_queries_count
 
-      freeze_time 6.hours.from_now
+      freeze_time 1.day.from_now
       reset_sql_queries_count =
         track_sql_queries do
           get "/leaderboard/#{leaderboard.id}.json"
@@ -92,7 +92,6 @@ RSpec.describe DiscourseGamification::GamificationLeaderboardController do
           expect(data["users"][0]["avatar_template"]).to eq(current_user.avatar_template)
           expect(data["users"][0]["total_score"]).to eq(current_user.gamification_score)
         end.length
-      skip("Temporary ignore. Will fix flakey test soon.")
       expect(reset_sql_queries_count).to eq(initial_sql_queries_count)
     end
 
