@@ -20,3 +20,6 @@ zh_CN:
     scorable_categories: "操作将生成点数的类别列表。留空以在所有类别上启用点数。"
   score: "点数"
   default_leaderboard_name: "全局排行榜"
+  rate_limiter:
+    by_type:
+      recalculate_scores_remaining: "您已达到重新计算分数的最大次数。请等待 %{time_left}后再试。"

@@ -20,3 +20,6 @@ tr_TR:
     scorable_categories: "Eylemlerin tezahürat oluşturacağı kategorilerin listesi. Tüm kategorilerde tezahüratları etkinleştirmek için boş bırakın"
   score: "Tezahürat"
   default_leaderboard_name: "Küresel Liderlik Tablosu"
+  rate_limiter:
+    by_type:
+      recalculate_scores_remaining: "Maksimum puan yeniden hesaplama sayısına ulaştınız. Lütfen tekrar denemeden önce %{time_left} bekleyin."

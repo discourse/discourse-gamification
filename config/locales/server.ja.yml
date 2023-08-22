@@ -20,3 +20,6 @@ ja:
     scorable_categories: "アクションによって拍手が生成されるカテゴリのリスト。全カテゴリで拍手を有効にする場合は、空白のままにします。"
   score: "拍手"
   default_leaderboard_name: "グローバルリーダーボード"
+  rate_limiter:
+    by_type:
+      recalculate_scores_remaining: "スコアの再計算回数の上限に達しました。%{time_left}経ってから、もう一度お試しください。"

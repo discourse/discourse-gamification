@@ -20,3 +20,6 @@ it:
     scorable_categories: "Elenco di categorie in cui le azioni genereranno complimenti. Lascia vuota l'opzione per abilitare i complimenti in tutte le categorie"
   score: "Complimenti"
   default_leaderboard_name: "Classifica globale"
+  rate_limiter:
+    by_type:
+      recalculate_scores_remaining: "Hai raggiunto il numero massimo di ricalcoli di punteggio. Attendi %{time_left} prima di riprovare."
