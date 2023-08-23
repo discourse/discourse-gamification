@@ -20,3 +20,6 @@ es:
     scorable_categories: "Lista de categorías en las que repartir puntos. Dejar vacío para dar puntos en todas las categorías"
   score: "Puntos"
   default_leaderboard_name: "Clasificación global"
+  rate_limiter:
+    by_type:
+      recalculate_scores_remaining: "Ha alcanzado el número máximo de puntuaciones recalculables. Espere %{time_left} antes de intentarlo de nuevo."

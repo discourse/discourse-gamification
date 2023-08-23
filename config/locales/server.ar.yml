@@ -20,3 +20,6 @@ ar:
     scorable_categories: "قائمة الفئات التي ستُنشئ فيها الإجراءات هتافات. اتركه فارغًا لتفعيل الهتافات في جميع الفئات"
   score: "الهتافات"
   default_leaderboard_name: "لوحة المتصدرين العالمية"
+  rate_limiter:
+    by_type:
+      recalculate_scores_remaining: "لقد وصلت إلى الحد الأقصى لإعادة حساب النقاط. يُرجى الانتظار %{time_left} قبل إعادة المحاولة."

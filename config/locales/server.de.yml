@@ -20,3 +20,6 @@ de:
     scorable_categories: "Liste der Kategorien, in denen Aktionen Beifall erzeugen. Leer lassen, um Beifall für alle Kategorien zu aktivieren"
   score: "Beifall"
   default_leaderboard_name: "Globale Rangliste"
+  rate_limiter:
+    by_type:
+      recalculate_scores_remaining: "Du hast die maximale Anzahl an Score-Neuberechnungen erreicht. Bitte warte %{time_left}, bevor du es wieder versuchst."

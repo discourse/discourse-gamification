@@ -20,3 +20,6 @@ nl:
     scorable_categories: "Lijst van categorieën waar acties aanmoedigingen opleveren. Laat dit leeg om aanmoedigingen in te schakelen voor alle categorieën"
   score: "Aanmoedigingen"
   default_leaderboard_name: "Algemeen klassement"
+  rate_limiter:
+    by_type:
+      recalculate_scores_remaining: "U hebt het maximale aantal scoreherberekeningen bereikt. Wacht %{time_left} voordat u het opnieuw probeert."

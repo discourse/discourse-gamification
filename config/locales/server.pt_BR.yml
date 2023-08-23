@@ -20,3 +20,6 @@ pt_BR:
     scorable_categories: "Lista de categorias em que as ações vão gerar saudações. Deixe em branco para ativar saudações em todas as categorias"
   score: "Saudações"
   default_leaderboard_name: "Tabela de Classificação Global"
+  rate_limiter:
+    by_type:
+      recalculate_scores_remaining: "Você atingiu o número máximo de pontuação recalculada. Espere %{time_left} antes de tentar novamente."

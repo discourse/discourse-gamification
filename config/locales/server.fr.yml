@@ -20,3 +20,6 @@ fr:
     scorable_categories: "Liste des catégories où les actions susciteront des acclamations. Laissez ce champ vide pour activer les acclamations dans toutes les catégories"
   score: "Acclamations"
   default_leaderboard_name: "Classement mondial"
+  rate_limiter:
+    by_type:
+      recalculate_scores_remaining: "Vous avez atteint le nombre maximal de recalculs de scores. Veuillez patienter %{time_left} avant de réessayer."
