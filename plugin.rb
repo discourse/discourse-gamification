@@ -51,6 +51,7 @@ after_initialize do
   require_relative "lib/discourse_gamification/scorables/user_invited"
   require_relative "lib/discourse_gamification/user_extension"
   require_relative "lib/discourse_gamification/recalculate_scores_rate_limiter"
+  require_relative "lib/discourse_gamification/leaderboard_cached_view"
 
   reloadable_patch do |plugin|
     User.class_eval { prepend DiscourseGamification::UserExtension }
