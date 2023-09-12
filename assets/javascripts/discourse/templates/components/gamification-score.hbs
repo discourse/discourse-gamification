@@ -1,11 +1,11 @@
 {{#if site.default_gamification_leaderboard_id}}
-  {{#link-to
-    "gamificationLeaderboard.byName"
-    site.default_gamification_leaderboard_id
+  <LinkTo
+    @route="gamificationLeaderboard.byName"
+    @model={{site.default_gamification_leaderboard_id}}
     class="gamification-score__link"
-  }}
+  >
     {{fullnumber model.gamification_score}}
-  {{/link-to}}
+  </LinkTo>
 {{else}}
   {{fullnumber model.gamification_score}}
 {{/if}}
