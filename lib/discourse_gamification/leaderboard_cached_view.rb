@@ -2,6 +2,9 @@
 
 module ::DiscourseGamification
   class LeaderboardCachedView
+    # Bump up when materialized view query changes
+    QUERY_VERSION = 1
+
     attr_reader :leaderboard
 
     def initialize(leaderboard)
@@ -20,6 +23,24 @@ module ::DiscourseGamification
       periods.each { |period| delete_mview(period) }
     end
 
+    def purge_stale
+      stale_mviews_query = <<~SQL
+        SELECT
+          relname
+        FROM
+          pg_class
+        WHERE
+          relname LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%'
+        AND relkind = 'm'
+        AND relname NOT LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%_#{QUERY_VERSION}'
+      SQL
+
+      stale_mviews = DB.query_single(stale_mviews_query)
+      return if stale_mviews.empty?
+
+      DB.exec("DROP MATERIALIZED VIEW IF EXISTS #{stale_mviews.join(", ")} CASCADE")
+    end
+
     def scores(period: "all_time")
       DB.query("SELECT * FROM #{mview_name(period)}")
     end
@@ -32,9 +53,18 @@ module ::DiscourseGamification
       GamificationLeaderboard.find_each { |leaderboard| self.new(leaderboard).refresh }
     end
 
+    def self.delete_all
+      GamificationLeaderboard.find_each { |leaderboard| self.new(leaderboard).delete }
+    end
+
+    def self.purge_all_stale
+      GamificationLeaderboard.find_each { |leaderboard| self.new(leaderboard).purge_stale }
+    end
+
     private
 
     def create_mview(period)
+      # NOTE: Update QUERY_VERSION on changing the any of the queries here
       name = mview_name(period)
 
       total_scores_query = <<~SQL
@@ -136,7 +166,7 @@ module ::DiscourseGamification
       SQL
 
       user_id_index_query = <<~SQL
-        CREATE UNIQUE INDEX IF NOT EXISTS user_id_#{leaderboard.id}_#{period}_index ON #{name} (user_id)
+        CREATE UNIQUE INDEX IF NOT EXISTS user_id_#{leaderboard.id}_#{period}_#{QUERY_VERSION}_index ON #{name} (user_id)
       SQL
 
       DB.exec(mview_query, leaderboard_id: leaderboard.id)
@@ -148,11 +178,11 @@ module ::DiscourseGamification
     end
 
     def delete_mview(period)
-      DB.exec("DROP MATERIALIZED VIEW #{mview_name(period)} CASCADE")
+      DB.exec("DROP MATERIALIZED VIEW IF EXISTS #{mview_name(period)} CASCADE")
     end
 
     def mview_name(period)
-      "gamification_leaderboard_cache_#{leaderboard.id}_#{period}"
+      "gamification_leaderboard_cache_#{leaderboard.id}_#{period}_#{QUERY_VERSION}"
     end
 
     def periods

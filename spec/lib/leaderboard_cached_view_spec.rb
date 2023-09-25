@@ -11,7 +11,7 @@ describe DiscourseGamification::LeaderboardCachedView do
 
   let(:mviews) do
     DiscourseGamification::GamificationLeaderboard.periods.map do |period, _|
-      "gamification_leaderboard_cache_#{leaderboard.id}_#{period}"
+      "gamification_leaderboard_cache_#{leaderboard.id}_#{period}_#{DiscourseGamification::LeaderboardCachedView::QUERY_VERSION}"
     end
   end
 
@@ -22,7 +22,17 @@ describe DiscourseGamification::LeaderboardCachedView do
         pg_class
       WHERE
         relname LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%'
-      AND relkind= 'm'
+      AND relkind = 'm'
+    SQL
+
+    let(:mview_names_query) { <<~SQL }
+      SELECT
+        relname
+      FROM
+        pg_class
+      WHERE
+        relname LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%'
+      AND relkind = 'm'
     SQL
 
   describe "#create" do
@@ -69,6 +79,36 @@ describe DiscourseGamification::LeaderboardCachedView do
       cached_mview.delete
 
       expect(DB.query_single(mview_count_query).first).to eq(0)
+    end
+  end
+
+  describe "#purge_stale" do
+    it "removes all stale materialized views for leaderboard" do
+      stub_const(DiscourseGamification::LeaderboardCachedView, "QUERY_VERSION", 1) do
+         described_class.new(leaderboard).create
+         expect(DB.query_single(mview_count_query).first).to eq(6)
+      end
+
+      stub_const(DiscourseGamification::LeaderboardCachedView, "QUERY_VERSION", 2) do
+        described_class.new(leaderboard).create
+        expect(DB.query_single(mview_count_query).first).to eq(12)
+      end
+
+      stub_const(DiscourseGamification::LeaderboardCachedView, "QUERY_VERSION", 3) do
+        described_class.new(leaderboard).create
+        expect(DB.query_single(mview_count_query).first).to eq(18)
+
+        described_class.new(leaderboard).purge_stale
+        expect(DB.query_single(mview_names_query)).to contain_exactly(*mviews)
+       end
+    end
+
+    it "does nothing if no stale materialized view exist for leaderboard" do
+      described_class.new(leaderboard).create
+      expect(DB.query_single(mview_names_query)).to contain_exactly(*mviews)
+
+      described_class.new(leaderboard).purge_stale
+      expect(DB.query_single(mview_names_query)).to contain_exactly(*mviews)
     end
   end
 end
