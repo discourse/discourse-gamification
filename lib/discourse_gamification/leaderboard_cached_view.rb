@@ -24,21 +24,15 @@ module ::DiscourseGamification
     end
 
     def purge_stale
-      stale_mviews_query = <<~SQL
-        SELECT
-          relname
-        FROM
-          pg_class
-        WHERE
-          relname LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%'
-        AND relkind = 'm'
-        AND relname NOT LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%_#{QUERY_VERSION}'
-      SQL
+      list = stale_mviews
 
-      stale_mviews = DB.query_single(stale_mviews_query)
-      return if stale_mviews.empty?
+      return if list.empty?
 
-      DB.exec("DROP MATERIALIZED VIEW IF EXISTS #{stale_mviews.join(", ")} CASCADE")
+      DB.exec("DROP MATERIALIZED VIEW IF EXISTS #{list.join(", ")} CASCADE")
+    end
+
+    def stale?
+      stale_mviews.present?
     end
 
     def scores(period: "all_time")
@@ -61,9 +55,15 @@ module ::DiscourseGamification
       GamificationLeaderboard.find_each { |leaderboard| self.new(leaderboard).purge_stale }
     end
 
+    def self.update_all
+      purge_all_stale
+      create_all
+    end
+
     private
 
     def create_mview(period)
+      # TODO: only continue if view does not exist
       # NOTE: Update QUERY_VERSION on changing the any of the queries here
       name = mview_name(period)
 
@@ -187,6 +187,21 @@ module ::DiscourseGamification
 
     def periods
       @periods ||= GamificationLeaderboard.periods.keys
+    end
+
+    def stale_mviews
+      stale_mviews_query = <<~SQL
+        SELECT
+          relname
+        FROM
+          pg_class
+        WHERE
+          relname LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%'
+        AND relkind = 'm'
+        AND relname NOT LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%_#{QUERY_VERSION}'
+      SQL
+
+      DB.query_single(stale_mviews_query)
     end
 
     def score_period_condtion(period)

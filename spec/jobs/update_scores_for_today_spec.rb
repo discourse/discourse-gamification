@@ -30,4 +30,13 @@ describe Jobs::UpdateScoresForToday do
     run_job
     expect(DiscourseGamification::GamificationScore.find_by(user_id: user_2.id).score).to eq(0)
   end
+
+  it "purges stale leaderboard positions" do
+  end
+
+  it "refreshes leaderboard positions" do
+  end
+
+  it "generates new leaderboard positions" do
+  end
 end
