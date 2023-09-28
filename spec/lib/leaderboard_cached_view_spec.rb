@@ -25,7 +25,7 @@ describe DiscourseGamification::LeaderboardCachedView do
       AND relkind = 'm'
     SQL
 
-    let(:mview_names_query) { <<~SQL }
+  let(:mview_names_query) { <<~SQL }
       SELECT
         relname
       FROM
@@ -85,8 +85,8 @@ describe DiscourseGamification::LeaderboardCachedView do
   describe "#purge_stale" do
     it "removes all stale materialized views for leaderboard" do
       stub_const(DiscourseGamification::LeaderboardCachedView, "QUERY_VERSION", 1) do
-         described_class.new(leaderboard).create
-         expect(DB.query_single(mview_count_query).first).to eq(6)
+        described_class.new(leaderboard).create
+        expect(DB.query_single(mview_count_query).first).to eq(6)
       end
 
       stub_const(DiscourseGamification::LeaderboardCachedView, "QUERY_VERSION", 2) do
@@ -100,7 +100,7 @@ describe DiscourseGamification::LeaderboardCachedView do
 
         described_class.new(leaderboard).purge_stale
         expect(DB.query_single(mview_names_query)).to contain_exactly(*mviews)
-       end
+      end
     end
 
     it "does nothing if no stale materialized view exist for leaderboard" do

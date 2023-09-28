@@ -174,7 +174,23 @@ module ::DiscourseGamification
     end
 
     def refresh_mview(period)
+      return unless mview_exist?(period)
+
       DB.exec("REFRESH MATERIALIZED VIEW CONCURRENTLY #{mview_name(period)}")
+    end
+
+    def mview_exist?(period)
+      query = <<~SQL
+        SELECT
+          1
+        FROM
+          pg_class
+        WHERE
+          relname = '#{mview_name(period)}'
+        AND relkind = 'm'
+      SQL
+
+      DB.exec(query) == 1
     end
 
     def delete_mview(period)
