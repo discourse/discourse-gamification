@@ -11,6 +11,16 @@ describe ::DiscourseGamification do
     expect(serializer).to respond_to(:gamification_score)
     expect(serializer.gamification_score).to eq(gamification_score.score)
   end
+
+  context "with leaderboard positions" do
+    before { SiteSetting.discourse_gamification_enabled = true }
+
+    it "enqueues job to regenerate leaderboard positions for score ranking strategy changes" do
+      expect do SiteSetting.score_ranking_strategy = "row_number" end.to change {
+        Jobs::RegenerateLeaderboardPositions.jobs.size
+      }.by(1)
+    end
+  end
 end
 
 describe ::DiscourseGamification do

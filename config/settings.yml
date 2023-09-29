@@ -5,23 +5,31 @@ plugins:
   scorable_categories:
     type: category_list
     default: ""
-  like_received_score_value:   
+  like_received_score_value:
     default: 1
-  like_given_score_value:   
+  like_given_score_value:
     default: 1
-  solution_score_value:   
+  solution_score_value:
     default: 10
-  user_invited_score_value:   
+  user_invited_score_value:
     default: 10
-  time_read_score_value:   
+  time_read_score_value:
     default: 1
-  post_read_score_value:   
+  post_read_score_value:
     default: 1
-  topic_created_score_value:   
+  topic_created_score_value:
     default: 5
-  post_created_score_value:   
+  post_created_score_value:
     default: 2
-  flag_created_score_value:   
+  flag_created_score_value:
     default: 10
-  day_visited_score_value:   
+  day_visited_score_value:
     default: 1
+  score_ranking_strategy:
+    default: dense_rank
+    client: true
+    type: enum
+    choices:
+      - dense_rank
+      - rank
+      - row_number

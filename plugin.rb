@@ -40,6 +40,7 @@ after_initialize do
   require_relative "jobs/regular/refresh_leaderboard_positions"
   require_relative "jobs/regular/delete_leaderboard_positions"
   require_relative "jobs/regular/update_stale_leaderboard_positions"
+  require_relative "jobs/regular/regenerate_leaderboard_positions"
   require_relative "lib/discourse_gamification/directory_integration"
   require_relative "lib/discourse_gamification/guardian_extension"
   require_relative "lib/discourse_gamification/scorables/scorable"
@@ -81,4 +82,10 @@ after_initialize do
 
   # Purge and replace all stale leaderboard positions
   Jobs.enqueue(Jobs::UpdateStaleLeaderboardPositions)
+
+  on(:site_setting_changed) do |name|
+    next if name != :score_ranking_strategy
+
+    Jobs.enqueue(Jobs::RegenerateLeaderboardPositions)
+  end
 end

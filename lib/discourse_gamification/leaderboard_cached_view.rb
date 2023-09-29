@@ -4,6 +4,11 @@ module ::DiscourseGamification
   class LeaderboardCachedView
     # Bump up when materialized view query changes
     QUERY_VERSION = 1
+    SCORE_RANKING_STRATEGY_MAP = {
+      row_number: "ROW_NUMBER()",
+      rank: "RANK()",
+      dense_rank: "DENSE_RANK()",
+    }
 
     attr_reader :leaderboard
 
@@ -63,7 +68,8 @@ module ::DiscourseGamification
     private
 
     def create_mview(period)
-      # TODO: only continue if view does not exist
+      return if mview_exist?(period)
+
       # NOTE: Update QUERY_VERSION on changing the any of the queries here
       name = mview_name(period)
 
@@ -148,7 +154,8 @@ module ::DiscourseGamification
 
         SELECT
          lu.id AS user_id,
-         SUM(COALESCE(s.score, 0)) AS total_score
+         SUM(COALESCE(s.score, 0)) AS total_score,
+         #{ranking_function} OVER (ORDER BY SUM(COALESCE(s.score, 0)) DESC) AS position
         FROM
           leaderboard_users lu
         LEFT OUTER JOIN
@@ -156,7 +163,7 @@ module ::DiscourseGamification
         GROUP BY
           lu.id
         ORDER BY
-          total_score DESC,
+          position ASC,
           user_id ASC
       SQL
 
@@ -171,6 +178,10 @@ module ::DiscourseGamification
 
       DB.exec(mview_query, leaderboard_id: leaderboard.id)
       DB.exec(user_id_index_query)
+    end
+
+    def ranking_function
+      SCORE_RANKING_STRATEGY_MAP[SiteSetting.score_ranking_strategy.to_sym]
     end
 
     def refresh_mview(period)

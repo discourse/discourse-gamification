@@ -52,8 +52,8 @@ describe Jobs::UpdateScoresForToday do
 
       expect(leaderboard_1_positions.scores.length).to eq(2)
       expect(leaderboard_1_positions.scores.map(&:to_h)).to include(
-        { user_id: user.id, total_score: 12 },
-        { user_id: user_2.id, total_score: 0 },
+        { user_id: user.id, total_score: 12, position: 1 },
+        { user_id: user_2.id, total_score: 0, position: 2 },
       )
     end
 
@@ -63,8 +63,8 @@ describe Jobs::UpdateScoresForToday do
       DiscourseGamification::LeaderboardCachedView.create_all
 
       expect(leaderboard_1_positions.scores.map(&:to_h)).to include(
-        { user_id: user.id, total_score: 12 },
-        { user_id: user_2.id, total_score: 0 },
+        { user_id: user.id, total_score: 12, position: 1 },
+        { user_id: user_2.id, total_score: 0, position: 2 },
       )
 
       Fabricate(:gamification_score, user_id: user_2.id, date: 3.days.ago, score: 2)
@@ -72,8 +72,8 @@ describe Jobs::UpdateScoresForToday do
       run_job
 
       expect(leaderboard_1_positions.scores.map(&:to_h)).to include(
-        { user_id: user.id, total_score: 12 },
-        { user_id: user_2.id, total_score: 2 },
+        { user_id: user.id, total_score: 12, position: 1 },
+        { user_id: user_2.id, total_score: 2, position: 2 },
       )
     end
 
@@ -91,8 +91,8 @@ describe Jobs::UpdateScoresForToday do
 
         expect(leaderboard_1_positions.scores.length).to eq(2)
         expect(leaderboard_1_positions.scores.map(&:to_h)).to include(
-          { user_id: user.id, total_score: 12 },
-          { user_id: user_2.id, total_score: 0 },
+          { user_id: user.id, total_score: 12, position: 1 },
+          { user_id: user_2.id, total_score: 0, position: 2 },
         )
       end
     end

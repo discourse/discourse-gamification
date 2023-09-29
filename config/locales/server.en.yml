@@ -12,6 +12,7 @@ en:
     flag_created_score_value: "The value of the cheer awarded when a user flags a post and that flag is accepted by a staff user"
     day_visited_score_value: "The value of the cheer awarded for every day a user visits the site"
     scorable_categories: "List of categories where actions will generate cheers. Leave empty to enable cheers on all categories"
+    score_ranking_strategy: "Leaderboard position ranking strategy"
   score: "Cheers"
   default_leaderboard_name: "Global Leaderboard"
   rate_limiter:

@@ -6,6 +6,7 @@ describe DiscourseGamification::LeaderboardCachedView do
   fab!(:admin) { Fabricate(:admin) }
   fab!(:user) { Fabricate(:user) }
   fab!(:other_user) { Fabricate(:user) }
+  fab!(:moderator) { Fabricate(:moderator) }
   fab!(:leaderboard) { Fabricate(:gamification_leaderboard, created_by_id: admin.id) }
   fab!(:gamification_score) { Fabricate(:gamification_score, user_id: user.id, date: 8.days.ago) }
 
@@ -54,17 +55,17 @@ describe DiscourseGamification::LeaderboardCachedView do
 
     it "refreshes leaderboard materialized views with the latest scores" do
       expect(DB.query_hash("SELECT * FROM #{mviews.first}")).to include(
-        { "total_score" => 0, "user_id" => user.id },
-        { "total_score" => 0, "user_id" => other_user.id },
-        { "total_score" => 0, "user_id" => admin.id },
+        { "total_score" => 0, "user_id" => user.id, "position" => 1 },
+        { "total_score" => 0, "user_id" => other_user.id, "position" => 1 },
+        { "total_score" => 0, "user_id" => admin.id, "position" => 1 },
       )
 
       described_class.new(leaderboard).refresh
 
       expect(DB.query_hash("SELECT * FROM #{mviews.first}")).to include(
-        { "total_score" => 10, "user_id" => user.id },
-        { "total_score" => 5, "user_id" => other_user.id },
-        { "total_score" => 20, "user_id" => admin.id },
+        { "total_score" => 10, "user_id" => user.id, "position" => 2 },
+        { "total_score" => 5, "user_id" => other_user.id, "position" => 3 },
+        { "total_score" => 20, "user_id" => admin.id, "position" => 1 },
       )
     end
   end
@@ -109,6 +110,74 @@ describe DiscourseGamification::LeaderboardCachedView do
 
       described_class.new(leaderboard).purge_stale
       expect(DB.query_single(mview_names_query)).to contain_exactly(*mviews)
+    end
+  end
+
+  describe "#scores" do
+    before do
+      Fabricate(:gamification_score, user_id: user.id, score: 20)
+      Fabricate(:gamification_score, user_id: admin.id, score: 50)
+      Fabricate(:gamification_score, user_id: other_user.id, score: 20)
+      Fabricate(:gamification_score, user_id: moderator.id, score: 10)
+    end
+
+    let(:leaderboard_positions) { described_class.new(leaderboard) }
+
+    context "with rank ranking strategy" do
+      before do
+        SiteSetting.score_ranking_strategy = "rank"
+
+        described_class.new(leaderboard).create
+      end
+
+      it "returns ranked scores skipping the next rank after duplicates" do
+        expect(leaderboard_positions.scores.map(&:to_h)).to eq(
+          [
+            { total_score: 50, user_id: admin.id, position: 1 },
+            { total_score: 20, user_id: user.id, position: 2 },
+            { total_score: 20, user_id: other_user.id, position: 2 },
+            { total_score: 10, user_id: moderator.id, position: 4 },
+          ],
+        )
+      end
+    end
+
+    context "with dense_rank ranking strategy" do
+      before do
+        SiteSetting.score_ranking_strategy = "dense_rank"
+
+        described_class.new(leaderboard).create
+      end
+
+      it "returns ranked scores without skipping the next rank after duplicates" do
+        expect(leaderboard_positions.scores.map(&:to_h)).to eq(
+          [
+            { total_score: 50, user_id: admin.id, position: 1 },
+            { total_score: 20, user_id: user.id, position: 2 },
+            { total_score: 20, user_id: other_user.id, position: 2 },
+            { total_score: 10, user_id: moderator.id, position: 3 },
+          ],
+        )
+      end
+    end
+
+    context "with rown_number ranking strategy" do
+      before do
+        SiteSetting.score_ranking_strategy = "row_number"
+
+        described_class.new(leaderboard).create
+      end
+
+      it "returns ranked scores without distinguishing duplicates" do
+        expect(leaderboard_positions.scores.map(&:to_h)).to eq(
+          [
+            { total_score: 50, user_id: admin.id, position: 1 },
+            { total_score: 20, user_id: user.id, position: 2 },
+            { total_score: 20, user_id: other_user.id, position: 3 },
+            { total_score: 10, user_id: moderator.id, position: 4 },
+          ],
+        )
+      end
     end
   end
 end
