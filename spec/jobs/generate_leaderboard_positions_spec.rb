@@ -7,7 +7,9 @@ describe Jobs::GenerateLeaderboardPositions do
   let(:leaderboard_positions) { DiscourseGamification::LeaderboardCachedView.new(leaderboard) }
 
   it "generates leaderboard positions" do
-    expect { leaderboard_positions.scores }.to raise_error(PG::UndefinedTable)
+    expect { leaderboard_positions.scores }.to raise_error(
+      DiscourseGamification::LeaderboardCachedView::NotReadyError,
+    )
 
     DB.active_record_connection.current_transaction.rollback
 

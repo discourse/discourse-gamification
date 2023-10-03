@@ -3,8 +3,7 @@
 module Jobs
   class RegenerateLeaderboardPositions < ::Jobs::Base
     def execute(args = nil)
-      DiscourseGamification::LeaderboardCachedView.delete_all
-      DiscourseGamification::LeaderboardCachedView.create_all
+      DiscourseGamification::LeaderboardCachedView.regenerate_all
     end
   end
 end

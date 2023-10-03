@@ -39,11 +39,15 @@ describe Jobs::UpdateScoresForToday do
   context "with leaderboard positions" do
     it "generates new leaderboard positions" do
       ActiveRecord::Base.transaction do
-        expect { leaderboard_1_positions.scores }.to raise_error(PG::UndefinedTable)
+        expect { leaderboard_1_positions.scores }.to raise_error(
+          DiscourseGamification::LeaderboardCachedView::NotReadyError,
+        )
 
         DB.active_record_connection.current_transaction.rollback
 
-        expect { leaderboard_2_positions.scores }.to raise_error(PG::UndefinedTable)
+        expect { leaderboard_2_positions.scores }.to raise_error(
+          DiscourseGamification::LeaderboardCachedView::NotReadyError,
+        )
 
         DB.active_record_connection.current_transaction.rollback
       end
@@ -51,9 +55,23 @@ describe Jobs::UpdateScoresForToday do
       run_job
 
       expect(leaderboard_1_positions.scores.length).to eq(2)
-      expect(leaderboard_1_positions.scores.map(&:to_h)).to include(
-        { user_id: user.id, total_score: 12, position: 1 },
-        { user_id: user_2.id, total_score: 0, position: 2 },
+      expect(leaderboard_1_positions.scores.map(&:attributes)).to include(
+        {
+          "id" => user.id,
+          "total_score" => 12,
+          "position" => 1,
+          "uploaded_avatar_id" => nil,
+          "username" => user.username,
+          "name" => user.name,
+        },
+        {
+          "id" => user_2.id,
+          "total_score" => 0,
+          "position" => 2,
+          "uploaded_avatar_id" => nil,
+          "username" => user_2.username,
+          "name" => user_2.name,
+        },
       )
     end
 
@@ -62,18 +80,46 @@ describe Jobs::UpdateScoresForToday do
       DiscourseGamification::GamificationScore.calculate_scores
       DiscourseGamification::LeaderboardCachedView.create_all
 
-      expect(leaderboard_1_positions.scores.map(&:to_h)).to include(
-        { user_id: user.id, total_score: 12, position: 1 },
-        { user_id: user_2.id, total_score: 0, position: 2 },
+      expect(leaderboard_1_positions.scores.map(&:attributes)).to include(
+        {
+          "id" => user.id,
+          "total_score" => 12,
+          "position" => 1,
+          "uploaded_avatar_id" => nil,
+          "username" => user.username,
+          "name" => user.name,
+        },
+        {
+          "id" => user_2.id,
+          "total_score" => 0,
+          "position" => 2,
+          "uploaded_avatar_id" => nil,
+          "username" => user_2.username,
+          "name" => user_2.name,
+        },
       )
 
       Fabricate(:gamification_score, user_id: user_2.id, date: 3.days.ago, score: 2)
 
       run_job
 
-      expect(leaderboard_1_positions.scores.map(&:to_h)).to include(
-        { user_id: user.id, total_score: 12, position: 1 },
-        { user_id: user_2.id, total_score: 2, position: 2 },
+      expect(leaderboard_1_positions.scores.map(&:attributes)).to include(
+        {
+          "id" => user.id,
+          "total_score" => 12,
+          "position" => 1,
+          "uploaded_avatar_id" => nil,
+          "username" => user.username,
+          "name" => user.name,
+        },
+        {
+          "id" => user_2.id,
+          "total_score" => 2,
+          "position" => 2,
+          "uploaded_avatar_id" => nil,
+          "username" => user_2.username,
+          "name" => user_2.name,
+        },
       )
     end
 
@@ -90,9 +136,23 @@ describe Jobs::UpdateScoresForToday do
         expect(leaderboard_2_positions.stale?).to eq(false)
 
         expect(leaderboard_1_positions.scores.length).to eq(2)
-        expect(leaderboard_1_positions.scores.map(&:to_h)).to include(
-          { user_id: user.id, total_score: 12, position: 1 },
-          { user_id: user_2.id, total_score: 0, position: 2 },
+        expect(leaderboard_1_positions.scores.map(&:attributes)).to include(
+          {
+            "id" => user.id,
+            "total_score" => 12,
+            "position" => 1,
+            "uploaded_avatar_id" => nil,
+            "username" => user.username,
+            "name" => user.name,
+          },
+          {
+            "id" => user_2.id,
+            "total_score" => 0,
+            "position" => 2,
+            "uploaded_avatar_id" => nil,
+            "username" => user_2.username,
+            "name" => user_2.name,
+          },
         )
       end
     end

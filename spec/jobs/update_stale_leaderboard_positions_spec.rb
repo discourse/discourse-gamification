@@ -11,9 +11,10 @@ describe Jobs::UpdateStaleLeaderboardPositions do
       DiscourseGamification::LeaderboardCachedView.new(leaderboard).create
 
       expect(leaderboard_positions.scores.length).to eq(1)
-      expect(leaderboard_positions.scores.first.to_h).to include(
-        user_id: leaderboard.created_by_id,
-        total_score: 0,
+      expect(leaderboard_positions.scores.first.attributes).to include(
+        "id" => leaderboard.created_by_id,
+        "total_score" => 0,
+        "position" => 1,
       )
     end
 
@@ -21,18 +22,20 @@ describe Jobs::UpdateStaleLeaderboardPositions do
       DiscourseGamification::LeaderboardCachedView.new(leaderboard).create
 
       expect(leaderboard_positions.scores.length).to eq(1)
-      expect(leaderboard_positions.scores.first.to_h).to include(
-        user_id: leaderboard.created_by_id,
-        total_score: 0,
+      expect(leaderboard_positions.scores.first.attributes).to include(
+        "id" => leaderboard.created_by_id,
+        "total_score" => 0,
       )
     end
 
     stub_const(DiscourseGamification::LeaderboardCachedView, "QUERY_VERSION", 3) do
-      # Leaderboard positions exist for `QUERY_VERSION` other than the current version
+      # Leaderboard positions exist only for past`QUERY_VERSION`s
       expect(leaderboard_positions.stale?).to eq(true)
 
       ActiveRecord::Base.transaction do
-        expect { leaderboard_positions.scores }.to raise_error(PG::UndefinedTable)
+        expect { leaderboard_positions.scores }.to raise_error(
+          DiscourseGamification::LeaderboardCachedView::NotReadyError,
+        )
 
         DB.active_record_connection.current_transaction.rollback
       end
@@ -41,9 +44,9 @@ describe Jobs::UpdateStaleLeaderboardPositions do
 
       expect(leaderboard_positions.stale?).to eq(false)
       expect(leaderboard_positions.scores.length).to eq(1)
-      expect(leaderboard_positions.scores.first.to_h).to include(
-        user_id: leaderboard.created_by_id,
-        total_score: 0,
+      expect(leaderboard_positions.scores.first.attributes).to include(
+        "id" => leaderboard.created_by_id,
+        "total_score" => 0,
       )
     end
   end

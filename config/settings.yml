@@ -27,7 +27,6 @@ plugins:
     default: 1
   score_ranking_strategy:
     default: dense_rank
-    client: true
     type: enum
     choices:
       - dense_rank

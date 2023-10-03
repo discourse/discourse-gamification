@@ -2,6 +2,9 @@
 
 module ::DiscourseGamification
   class LeaderboardCachedView
+    class NotReadyError < StandardError
+    end
+
     # Bump up when materialized view query changes
     QUERY_VERSION = 1
     SCORE_RANKING_STRATEGY_MAP = {
@@ -40,8 +43,25 @@ module ::DiscourseGamification
       stale_mviews.present?
     end
 
-    def scores(period: "all_time")
-      DB.query("SELECT * FROM #{mview_name(period)}")
+    def scores(period: "all_time", page: 0, for_user_id: false, limit: nil, offset: nil)
+      user_filter_condition = for_user_id ? ["users.id = ?", for_user_id] : [nil]
+
+      User
+        .where(*user_filter_condition)
+        .joins("INNER JOIN #{mview_name(period)} p ON  p.user_id = users.id")
+        .select(
+          "users.id, users.name, users.username, users.uploaded_avatar_id, p.total_score, p.position",
+        )
+        .limit(limit)
+        .offset(offset)
+        .order(position: :asc, id: :asc)
+        .load
+    rescue ActiveRecord::StatementInvalid => e
+      if PG::UndefinedTable === e.cause
+        raise NotReadyError.new(I18n.t("errors.leaderboard_positions_not_ready"))
+      else
+        raise
+      end
     end
 
     def self.create_all
@@ -65,12 +85,17 @@ module ::DiscourseGamification
       create_all
     end
 
+    def self.regenerate_all
+      delete_all
+      create_all
+    end
+
     private
 
     def create_mview(period)
-      return if mview_exist?(period)
+      # NOTE: Update QUERY_VERSION above on changing any of the queries here
+      return if mview_exists?(period)
 
-      # NOTE: Update QUERY_VERSION on changing the any of the queries here
       name = mview_name(period)
 
       total_scores_query = <<~SQL
@@ -102,14 +127,14 @@ module ::DiscourseGamification
             (
               (COALESCE(array_length(lb.included_groups_ids, 1), 0) = 0)
               OR
-              (EXISTS (SELECT 1 FROM group_users AS gu WHERE group_id = ANY(lb.included_groups_ids) AND gu.user_id = u.id))
+              (EXISTS (SELECT 1 FROM group_users AS gu WHERE gu.group_id = ANY(lb.included_groups_ids) AND gu.user_id = u.id))
             )
           AND
             -- Ensure user is not a member of excluded_groups_ids if it's not empty
             (
               (COALESCE(array_length(lb.excluded_groups_ids, 1), 0) = 0)
               OR
-              (NOT EXISTS (SELECT 1 FROM group_users AS gu WHERE group_id = ANY(lb.excluded_groups_ids) AND gu.user_id = u.id))
+              (NOT EXISTS (SELECT 1 FROM group_users AS gu WHERE gu.group_id = ANY(lb.excluded_groups_ids) AND gu.user_id = u.id))
             )
         ),
 
@@ -185,12 +210,12 @@ module ::DiscourseGamification
     end
 
     def refresh_mview(period)
-      return unless mview_exist?(period)
+      return unless mview_exists?(period)
 
       DB.exec("REFRESH MATERIALIZED VIEW CONCURRENTLY #{mview_name(period)}")
     end
 
-    def mview_exist?(period)
+    def mview_exists?(period)
       query = <<~SQL
         SELECT
           1

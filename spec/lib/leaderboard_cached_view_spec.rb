@@ -131,12 +131,40 @@ describe DiscourseGamification::LeaderboardCachedView do
       end
 
       it "returns ranked scores skipping the next rank after duplicates" do
-        expect(leaderboard_positions.scores.map(&:to_h)).to eq(
+        expect(leaderboard_positions.scores.map(&:attributes)).to eq(
           [
-            { total_score: 50, user_id: admin.id, position: 1 },
-            { total_score: 20, user_id: user.id, position: 2 },
-            { total_score: 20, user_id: other_user.id, position: 2 },
-            { total_score: 10, user_id: moderator.id, position: 4 },
+            {
+              "total_score" => 50,
+              "id" => admin.id,
+              "position" => 1,
+              "uploaded_avatar_id" => nil,
+              "username" => admin.username,
+              "name" => admin.name,
+            },
+            {
+              "total_score" => 20,
+              "id" => user.id,
+              "position" => 2,
+              "uploaded_avatar_id" => nil,
+              "username" => user.username,
+              "name" => user.name,
+            },
+            {
+              "total_score" => 20,
+              "id" => other_user.id,
+              "position" => 2,
+              "uploaded_avatar_id" => nil,
+              "username" => other_user.username,
+              "name" => other_user.name,
+            },
+            {
+              "total_score" => 10,
+              "id" => moderator.id,
+              "position" => 4,
+              "uploaded_avatar_id" => nil,
+              "username" => moderator.username,
+              "name" => moderator.name,
+            },
           ],
         )
       end
@@ -150,12 +178,40 @@ describe DiscourseGamification::LeaderboardCachedView do
       end
 
       it "returns ranked scores without skipping the next rank after duplicates" do
-        expect(leaderboard_positions.scores.map(&:to_h)).to eq(
+        expect(leaderboard_positions.scores.map(&:attributes)).to eq(
           [
-            { total_score: 50, user_id: admin.id, position: 1 },
-            { total_score: 20, user_id: user.id, position: 2 },
-            { total_score: 20, user_id: other_user.id, position: 2 },
-            { total_score: 10, user_id: moderator.id, position: 3 },
+            {
+              "total_score" => 50,
+              "id" => admin.id,
+              "position" => 1,
+              "uploaded_avatar_id" => nil,
+              "username" => admin.username,
+              "name" => admin.name,
+            },
+            {
+              "total_score" => 20,
+              "id" => user.id,
+              "position" => 2,
+              "uploaded_avatar_id" => nil,
+              "username" => user.username,
+              "name" => user.name,
+            },
+            {
+              "total_score" => 20,
+              "id" => other_user.id,
+              "position" => 2,
+              "uploaded_avatar_id" => nil,
+              "username" => other_user.username,
+              "name" => other_user.name,
+            },
+            {
+              "total_score" => 10,
+              "id" => moderator.id,
+              "position" => 3,
+              "uploaded_avatar_id" => nil,
+              "username" => moderator.username,
+              "name" => moderator.name,
+            },
           ],
         )
       end
@@ -169,12 +225,40 @@ describe DiscourseGamification::LeaderboardCachedView do
       end
 
       it "returns ranked scores without distinguishing duplicates" do
-        expect(leaderboard_positions.scores.map(&:to_h)).to eq(
+        expect(leaderboard_positions.scores.map(&:attributes)).to eq(
           [
-            { total_score: 50, user_id: admin.id, position: 1 },
-            { total_score: 20, user_id: user.id, position: 2 },
-            { total_score: 20, user_id: other_user.id, position: 3 },
-            { total_score: 10, user_id: moderator.id, position: 4 },
+            {
+              "total_score" => 50,
+              "id" => admin.id,
+              "position" => 1,
+              "uploaded_avatar_id" => nil,
+              "username" => admin.username,
+              "name" => admin.name,
+            },
+            {
+              "total_score" => 20,
+              "id" => user.id,
+              "position" => 2,
+              "uploaded_avatar_id" => nil,
+              "username" => user.username,
+              "name" => user.name,
+            },
+            {
+              "total_score" => 20,
+              "id" => other_user.id,
+              "position" => 3,
+              "uploaded_avatar_id" => nil,
+              "username" => other_user.username,
+              "name" => other_user.name,
+            },
+            {
+              "total_score" => 10,
+              "id" => moderator.id,
+              "position" => 4,
+              "uploaded_avatar_id" => nil,
+              "username" => moderator.username,
+              "name" => moderator.name,
+            },
           ],
         )
       end
