@@ -183,7 +183,7 @@ module ::DiscourseGamification
          #{ranking_function} OVER (ORDER BY SUM(COALESCE(s.score, 0)) DESC) AS position
         FROM
           leaderboard_users lu
-        LEFT OUTER JOIN
+        INNER JOIN
           scores s ON s.user_id = lu.id
         GROUP BY
           lu.id

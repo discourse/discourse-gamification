@@ -56,8 +56,6 @@ describe DiscourseGamification::LeaderboardCachedView do
     it "refreshes leaderboard materialized views with the latest scores" do
       expect(DB.query_hash("SELECT * FROM #{mviews.first}")).to include(
         { "total_score" => 0, "user_id" => user.id, "position" => 1 },
-        { "total_score" => 0, "user_id" => other_user.id, "position" => 1 },
-        { "total_score" => 0, "user_id" => admin.id, "position" => 1 },
       )
 
       described_class.new(leaderboard).refresh

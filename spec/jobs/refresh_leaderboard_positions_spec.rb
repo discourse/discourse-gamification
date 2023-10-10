@@ -11,11 +11,7 @@ describe Jobs::RefreshLeaderboardPositions do
   it "refereshes leaderboard positions" do
     Fabricate(:gamification_score, user_id: leaderboard.created_by_id, score: 10)
 
-    expect(leaderboard_positions.scores.length).to eq(1)
-    expect(leaderboard_positions.scores.first.attributes).to include(
-      "id" => leaderboard.created_by_id,
-      "total_score" => 0,
-    )
+    expect(leaderboard_positions.scores).to be_empty
 
     described_class.new.execute(leaderboard_id: leaderboard.id)
 
