@@ -81,11 +81,11 @@ after_initialize do
     .to_s
 
   # Purge and replace all stale leaderboard positions
-  Jobs.enqueue(Jobs::UpdateStaleLeaderboardPositions)
+  Jobs.enqueue(::Jobs::UpdateStaleLeaderboardPositions)
 
   on(:site_setting_changed) do |name|
     next if name != :score_ranking_strategy
 
-    Jobs.enqueue(Jobs::RegenerateLeaderboardPositions)
+    Jobs.enqueue(::Jobs::RegenerateLeaderboardPositions)
   end
 end

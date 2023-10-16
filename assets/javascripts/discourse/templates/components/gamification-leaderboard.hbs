@@ -40,8 +40,8 @@
   {{else}}
     <div class="podium__wrapper">
       <div class="podium">
-        {{#each winners as |winner position|}}
-          <div class="winner -position{{sum position 1}}">
+        {{#each winners as |winner|}}
+          <div class="winner -position{{winner.position}}">
             <div class="winner__crown">{{d-icon "crown"}}</div>
             <div
               class="winner__avatar clickable"
@@ -50,7 +50,7 @@
             >
               {{avatar winner imageSize="huge"}}
               <div class="winner__rank">
-                <span>{{sum position 1}}</span>
+                <span>{{winner.position}}</span>
               </div>
             </div>
             <div class="winner__name">
