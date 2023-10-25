@@ -20,12 +20,14 @@ class LeaderboardViewSerializer < ApplicationSerializer
   end
 
   def personal
+    return {} if object[:for_user_id].blank?
+
     user_score =
       DiscourseGamification::GamificationLeaderboard.scores_for(
         object[:leaderboard].id,
         for_user_id: object[:for_user_id],
         period: object[:period],
-      ).try(:first)
+      ).take
 
     { user: user_score, position: user_score.try(:position) }
   end
