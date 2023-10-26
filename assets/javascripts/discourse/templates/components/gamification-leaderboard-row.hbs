@@ -2,7 +2,7 @@
   class="user {{if rank.currentUser 'user-highlight'}}"
   id="leaderboard-user-{{rank.id}}"
 >
-  <div class="user__rank">{{sum index 4}}</div>
+  <div class="user__rank">{{rank.position}}</div>
   <div
     class="user__avatar clickable"
     role="button"

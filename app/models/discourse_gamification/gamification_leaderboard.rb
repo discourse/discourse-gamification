@@ -9,116 +9,28 @@ module ::DiscourseGamification
 
     enum :period, { all_time: 0, yearly: 1, quarterly: 2, monthly: 3, weekly: 4, daily: 5 }
 
-    def get_period_date(period_symbol)
-      period_symbol ||= GamificationLeaderboard.periods.key(default_period).to_sym
+    def resolve_period(given_period)
+      return given_period if self.class.periods.key?(given_period)
 
-      case period_symbol
-      when :all_time
-        nil
-      when :yearly
-        1.year.ago
-      when :monthly
-        1.month.ago
-      when :quarterly
-        3.months.ago
-      when :weekly
-        1.week.ago
-      when :daily
-        1.day.ago
-      else
-        nil
-      end
-    end
-
-    def self.get_cache_key(leaderboard, page, period, user_limit)
-      [
-        "leaderboard",
-        leaderboard.id,
-        page,
-        period&.strftime("%Y%m%d"),
-        user_limit,
-        leaderboard.included_groups_ids.present? ? leaderboard.included_groups_ids.join : nil,
-        leaderboard.excluded_groups_ids.present? ? leaderboard.excluded_groups_ids.join : nil,
-        leaderboard.from_date.present? ? leaderboard.from_date.strftime("%Y%m%d") : nil,
-        (
-          if (leaderboard.to_date != Date.today && !leaderboard.from_date.present?)
-            leaderboard.to_date.strftime("%Y%m%d")
-          else
-            nil
-          end
-        ),
-      ].compact.map(&:to_s).join(":")
+      self.class.periods.key(default_period) || "all_time"
     end
 
     def self.scores_for(leaderboard_id, page: 0, for_user_id: false, period: nil, user_limit: nil)
+      offset = PAGE_SIZE * page
+      limit = user_limit || PAGE_SIZE
+      period = period || "all_time"
+
       leaderboard = self.find(leaderboard_id)
-      leaderboard.to_date ||= Date.today
 
-      join_sql = "LEFT OUTER JOIN gamification_scores ON gamification_scores.user_id = users.id"
-      sum_sql = "SUM(COALESCE(gamification_scores.score, 0)) as total_score"
+      return [] unless leaderboard
 
-      cache_key = get_cache_key(leaderboard, page, period, user_limit)
-
-      users = Discourse.cache.read(cache_key) # Shared w/ paged_users and user_position queries
-      paged_users = Discourse.cache.read("#{cache_key}:paged")
-      user_position = Discourse.cache.read("#{cache_key}:#{for_user_id}") if for_user_id
-
-      if !users
-        users =
-          User
-            .joins(:primary_email)
-            .real
-            .where.not("user_emails.email LIKE '%@anonymized.invalid%'")
-            .where(staged: false)
-            .joins(join_sql)
-        users =
-          users.where(
-            "EXISTS (SELECT 1 FROM group_users AS gu WHERE group_id IN (?) and gu.user_id = users.id)",
-            leaderboard.included_groups_ids,
-          ) if leaderboard.included_groups_ids.present?
-        users =
-          users.where(
-            "NOT EXISTS (SELECT 1 FROM group_users AS gu WHERE group_id IN (?) and gu.user_id = users.id)",
-            leaderboard.excluded_groups_ids,
-          ) if leaderboard.excluded_groups_ids.present?
-        users =
-          users.where(
-            "gamification_scores.date BETWEEN ? AND ?",
-            leaderboard.from_date,
-            leaderboard.to_date,
-          ) if leaderboard.from_date.present?
-        # calculate scores up to to_date if just to_date is present
-        users =
-          users.where(
-            "gamification_scores.date <= ?",
-            leaderboard.to_date,
-          ) if leaderboard.to_date != Date.today && !leaderboard.from_date.present?
-        users = users.where("gamification_scores.date >= ?", period) if period.present?
-        users =
-          users
-            .select("users.id, users.name, users.username, users.uploaded_avatar_id, #{sum_sql}")
-            .group("users.id")
-            .order(total_score: :desc, id: :asc)
-        Discourse.cache.write(cache_key, users, expires_in: 4.hours)
-      end
-
-      if for_user_id
-        if !user_position
-          user = users.find_by(id: for_user_id)
-          index = users.index(user)
-          user_position = { user: user, position: index ? index + 1 : nil }
-          Discourse.cache.write("#{cache_key}:#{for_user_id}", user_position, expires_in: 4.hours)
-        end
-        return user_position
-      end
-
-      if !paged_users
-        users = users.offset(PAGE_SIZE * page) if page > 0
-        users = users.limit(user_limit || PAGE_SIZE)
-        Discourse.cache.write("#{cache_key}:paged", users, expires_in: 4.hours)
-      end
-
-      paged_users.present? ? paged_users : users
+      LeaderboardCachedView.new(leaderboard).scores(
+        page: page,
+        for_user_id: for_user_id,
+        period: period,
+        limit: limit,
+        offset: offset,
+      )
     end
   end
 end

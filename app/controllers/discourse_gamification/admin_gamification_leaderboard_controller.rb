@@ -20,6 +20,8 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
         created_by_id: params[:created_by_id],
       )
     if leaderboard.save
+      Jobs.enqueue(Jobs::GenerateLeaderboardPositions, leaderboard_id: leaderboard.id)
+
       render_serialized(leaderboard, LeaderboardSerializer, root: false)
     else
       render_json_error(leaderboard)
@@ -43,6 +45,9 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
     )
 
     if leaderboard.save
+      # TODO(selase): Only refresh on specific attribute changes
+      Jobs.enqueue(Jobs::RefreshLeaderboardPositions, leaderboard_id: leaderboard.id)
+
       render json: success_json
     else
       render_json_error(leaderboard)
@@ -53,7 +58,11 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
     params.require(:id)
 
     leaderboard = DiscourseGamification::GamificationLeaderboard.find(params[:id])
-    leaderboard.destroy if leaderboard
+
+    if leaderboard && leaderboard.destroy
+      Jobs.enqueue(Jobs::DeleteLeaderboardPositions, leaderboard_id: leaderboard.id)
+    end
+
     render json: success_json
   end
 
