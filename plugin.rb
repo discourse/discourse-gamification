@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 # name: discourse-gamification
-# about: Award users with a score for accomplishments
+# about: Allows admins to create and customize community scoring contests for user accomplishments with leaderboards.
+# meta_topic_id: 225916
 # version: 0.0.1
 # authors: Discourse
 # url: https://github.com/discourse/discourse-gamification
