@@ -10,6 +10,7 @@ cs:
       you: "Vy"
       leaderboard:
         link_to_settings: "Nastavení"
+        refresh: "Aktualizovat"
         name: "Jméno"
         period:
           all_time: "Za celou dobu"

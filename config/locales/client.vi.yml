@@ -10,6 +10,7 @@ vi:
       you: "Bạn"
       leaderboard:
         link_to_settings: "Cài đặt"
+        refresh: "Làm mới"
         name: "Tên"
         period:
           all_time: "Từ trước tới nay"

@@ -10,6 +10,7 @@ id:
       you: "Anda"
       leaderboard:
         link_to_settings: "Pengaturan"
+        refresh: "Segarkan"
         name: "Nama"
         period:
           all_time: "Sepanjang Waktu"

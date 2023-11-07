@@ -10,6 +10,7 @@ uk:
       you: "Ви"
       leaderboard:
         link_to_settings: "Налаштування"
+        refresh: "Оновити"
         name: "Назва"
         period:
           all_time: "Весь час"

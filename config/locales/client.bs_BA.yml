@@ -10,6 +10,7 @@ bs_BA:
       you: "Vi"
       leaderboard:
         link_to_settings: "Postavke"
+        refresh: "Refresh"
         name: "Ime"
         period:
           all_time: "Oduvijek"

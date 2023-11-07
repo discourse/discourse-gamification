@@ -10,6 +10,7 @@ el:
       you: "Εσείς"
       leaderboard:
         link_to_settings: "Ρυθμίσεις"
+        refresh: "Ανανέωση"
         name: "Όνομα"
         period:
           all_time: "Από πάντα"

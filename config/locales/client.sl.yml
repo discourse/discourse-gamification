@@ -10,6 +10,7 @@ sl:
       you: "Vi"
       leaderboard:
         link_to_settings: "Nastavitve"
+        refresh: "Osveži"
         name: "Ime"
         period:
           all_time: "Ves čas"

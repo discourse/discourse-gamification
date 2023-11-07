@@ -18,8 +18,11 @@ he:
     flag_created_score_value: "ערך התשועה שמוענק כאשר משתמש מסמן פוסט בדגל והדגל מתקבל על ידי משתמש צוות"
     day_visited_score_value: "ערך התשועה שמוענק עבור כל יום בו משתמש מבקר באתר"
     scorable_categories: "רשימת הקטגוריות בהן פעולות מייצרות תשועות. יש להשאיר ריק כדי להפעיל תשועות בכל הקטגוריות"
+    score_ranking_strategy: "אסטרטגיית דירוג מיקום בלוח התוצאות"
   score: "תשועות"
   default_leaderboard_name: "לוח תוצאות עולמי"
   rate_limiter:
     by_type:
       recalculate_scores_remaining: "הגעת למספר החישובים מחדש לניקוד המרבי. נא להמתין %{time_left} בטרם ביצוע ניסיון חוזר."
+  errors:
+    leaderboard_positions_not_ready: "אנו מייצרים את לוח התוצאות שלך. נא לנסות שוב בעוד כמה דקות."
