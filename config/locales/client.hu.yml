@@ -10,6 +10,7 @@ hu:
       you: "Ön"
       leaderboard:
         link_to_settings: "Beállítások"
+        refresh: "Újratöltés"
         name: "Név"
         period:
           all_time: "Bármikor"

@@ -14,6 +14,7 @@ hr:
         title: "Ljestvice članova"
         info: "Kako ovo radi?"
         link_to_settings: "Postavke"
+        refresh: "Osvježi"
         modal:
           title: "Kako radi ploča s najboljim rezultatima?"
           text: "Bodovi se dodjeljuju za interakciju sa zajednicom, kao što su posjete, sviđanje i objavljivanje. Vaš rezultat se ažurira svakih nekoliko minuta. Zato budite od pomoći, aktivni i podržavajte i napredujte kroz činove!"

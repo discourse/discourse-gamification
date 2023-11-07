@@ -10,6 +10,7 @@ te:
       you: "మీరు"
       leaderboard:
         link_to_settings: "అమరికలు"
+        refresh: "తాజాపరుచు"
         name: "పేరు"
         period:
           all_time: "ఆల్ టైమ్"

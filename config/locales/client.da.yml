@@ -10,6 +10,7 @@ da:
       you: "Dig"
       leaderboard:
         link_to_settings: "Indstillinger"
+        refresh: "Genindlæs"
         name: "Navn"
         period:
           all_time: "Alt"

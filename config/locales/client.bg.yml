@@ -10,6 +10,7 @@ bg:
       you: "Вие"
       leaderboard:
         link_to_settings: "Настройки"
+        refresh: "Обнови"
         name: "Име"
         period:
           all_time: "От началото"

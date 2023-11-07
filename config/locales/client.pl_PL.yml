@@ -10,6 +10,7 @@ pl_PL:
       you: "Ty"
       leaderboard:
         link_to_settings: "Ustawienia"
+        refresh: "Odśwież"
         name: "Nazwa"
         period:
           all_time: "Przez cały czas"

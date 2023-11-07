@@ -14,6 +14,7 @@ pt_BR:
         title: "Tabelas de classificação"
         info: "Como isso funciona?"
         link_to_settings: "Definições"
+        refresh: "Atualizar"
         modal:
           title: "Como funciona a tabela de classificação?"
           text: "Os pontos são concedidos por se envolver com a comunidade, como visitar, curtir e postar. Sua pontuação é atualizada dentro de poucos minutos. Então, seja útil, ativo(a) e solidário(a), e suba na hierarquia!"

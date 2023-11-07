@@ -10,6 +10,7 @@ ro:
       you: "Tu"
       leaderboard:
         link_to_settings: "Opțiuni"
+        refresh: "Reîmprospătează"
         name: "Nume"
         period:
           all_time: "Dintotdeauna"

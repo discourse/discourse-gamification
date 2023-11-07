@@ -10,6 +10,7 @@ be:
       you: "Вы"
       leaderboard:
         link_to_settings: "Налады"
+        refresh: "абнавіць"
         name: "імя"
         period:
           all_time: "За ўвесь час"

@@ -14,6 +14,7 @@ tr_TR:
         title: "Liderlik Tabloları"
         info: "Bu nasıl işler?"
         link_to_settings: "Ayarlar"
+        refresh: "Yenile"
         modal:
           title: "Liderlik tablosu nasıl işler?"
           text: "Ziyaret etme, beğenme ve gönderme gibi toplulukla etkileşim için puan verilir. Puanınız birkaç dakikada bir güncellenir. Bu yüzden yardımsever, aktif ve destekleyici olun ve sıralamada yükselin!"
