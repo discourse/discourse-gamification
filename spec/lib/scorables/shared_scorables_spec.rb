@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples "Scorable Type" do
+  fab!(:leaderboard) { Fabricate(:gamification_leaderboard) }
   let(:current_user) { Fabricate(:user) }
   let(:other_user) { Fabricate(:user) }
   let(:third_user) { Fabricate(:user) }
@@ -12,12 +13,15 @@ RSpec.shared_examples "Scorable Type" do
         since_date: "2022-1-1",
         only_subclass: described_class,
       )
+      DiscourseGamification::LeaderboardCachedView.create_all
+
       expect(current_user.gamification_score).to eq(expected_score)
     end
   end
 end
 
 RSpec.shared_examples "Category Scoped Scorable Type" do
+  fab!(:leaderboard) { Fabricate(:gamification_leaderboard) }
   let(:user) { Fabricate(:user) }
   let(:user_2) { Fabricate(:user) }
   let(:category_allowed) { Fabricate(:category) }
@@ -28,11 +32,13 @@ RSpec.shared_examples "Category Scoped Scorable Type" do
   describe "updates gamification score" do
     let!(:create_score) { class_action_fabricator }
     let!(:trigger_after_create_hook) { after_create_hook }
+    before { DiscourseGamification::LeaderboardCachedView.create_all }
 
     it "#{described_class} updates scores for action in the category configured" do
       expect(user.gamification_score).to eq(0)
       SiteSetting.scorable_categories = category_allowed.id.to_s
       DiscourseGamification::GamificationScore.calculate_scores(only_subclass: described_class)
+      DiscourseGamification::LeaderboardCachedView.refresh_all
       expect(user.gamification_score).to eq(expected_score)
     end
 
@@ -40,12 +46,14 @@ RSpec.shared_examples "Category Scoped Scorable Type" do
       expect(user_2.gamification_score).to eq(0)
       SiteSetting.scorable_categories = category_not_allowed.id.to_s
       DiscourseGamification::GamificationScore.calculate_scores(only_subclass: described_class)
+      DiscourseGamification::LeaderboardCachedView.refresh_all
       expect(user_2.gamification_score).to eq(0)
     end
   end
 end
 
 RSpec.shared_examples "No Score Value" do
+  fab!(:leaderboard) { Fabricate(:gamification_leaderboard) }
   let(:current_user) { Fabricate(:user) }
   let(:class_action_fabricator_for_pm) { nil }
   let(:class_action_fabricator_for_deleted_object) { nil }
@@ -63,6 +71,8 @@ RSpec.shared_examples "No Score Value" do
         since_date: "2022-1-1",
         only_subclass: described_class,
       )
+      DiscourseGamification::LeaderboardCachedView.create_all
+
       expect(current_user.gamification_score).to eq(0)
     end
   end
