@@ -220,10 +220,12 @@ module ::DiscourseGamification
         SELECT
           1
         FROM
-          pg_class
+          pg_class cls
+        INNER JOIN pg_namespace  ns ON ns.oid = cls.relnamespace
         WHERE
-          relname = '#{mview_name(period)}'
-        AND relkind = 'm'
+          cls.relname = '#{mview_name(period)}'
+          AND cls.relkind = 'm'
+          AND ns.nspname = 'public'
       SQL
 
       DB.exec(query) == 1
@@ -244,13 +246,15 @@ module ::DiscourseGamification
     def stale_mviews
       stale_mviews_query = <<~SQL
         SELECT
-          relname
+          cls.relname
         FROM
-          pg_class
+          pg_class cls
+        INNER JOIN pg_namespace  ns ON ns.oid = cls.relnamespace
         WHERE
-          relname LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%'
-        AND relkind = 'm'
-        AND relname NOT LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%_#{QUERY_VERSION}'
+          cls.relname LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%'
+          AND cls.relkind = 'm'
+          AND cls.relname NOT LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%_#{QUERY_VERSION}'
+          AND ns.nspname = 'public'
       SQL
 
       DB.query_single(stale_mviews_query)
