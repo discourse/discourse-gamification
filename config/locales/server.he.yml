@@ -6,7 +6,7 @@
 
 he:
   site_settings:
-    discourse_gamification_enabled: "הפעלת תוסף המשחקיות של Discourse"
+    discourse_gamification_enabled: "הפעלת תוסף המשחוק של Discourse"
     like_received_score_value: "ערך התשועה שמוענק כשמשתמש מקבל לייק"
     like_given_score_value: "ערך התשועה שמוענק עבור כל לייק שמשתמש נותן"
     solution_score_value: "ערך התשועה שמוענק כאשר פוסט של משתמש מסומן כפתרון"

@@ -5,6 +5,11 @@
 # https://translate.discourse.org/
 
 he:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          discourse_gamification: "Discourse משחוק"
   js:
     gamification_score: "תשועות"
     gamification:
@@ -69,6 +74,6 @@ he:
         many: "נותרו %{count} חישובים מחדש יומיים"
         other: "נותרו %{count} חישובים מחדש יומיים"
       admin:
-        title: "משחקיות"
+        title: "משחוק"
         name: "שם"
         period: "פרק זמן"
