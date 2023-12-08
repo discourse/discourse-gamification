@@ -1,11 +1,11 @@
 import Component from "@ember/component";
 import discourseComputed from "discourse-common/utils/decorators";
 import { action } from "@ember/object";
-import showModal from "discourse/lib/show-modal";
 import LoadMore from "discourse/mixins/load-more";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { inject as service } from "@ember/service";
+import LeaderboardInfo from "./modal/leaderboard-info";
 
 export const LEADERBOARD_PERIODS = [
   "all_time",
@@ -36,6 +36,7 @@ function periodString(periodValue) {
 
 export default Component.extend(LoadMore, {
   router: service(),
+  modal: service(),
 
   tagName: "",
   eyelineSelector: ".user",
@@ -80,7 +81,7 @@ export default Component.extend(LoadMore, {
 
   @action
   showLeaderboardInfo() {
-    showModal("leaderboard-info");
+    this.modal.show(LeaderboardInfo);
   },
 
   @action
