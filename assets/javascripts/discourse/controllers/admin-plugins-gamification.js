@@ -1,11 +1,11 @@
 import Controller from "@ember/controller";
 import EmberObject, { action } from "@ember/object";
-import discourseComputed from "discourse-common/utils/decorators";
 import { and } from "@ember/object/computed";
-import I18n from "I18n";
+import { inject as service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
-import { inject as service } from "@ember/service";
+import discourseComputed from "discourse-common/utils/decorators";
+import I18n from "I18n";
 import { LEADERBOARD_PERIODS } from "discourse/plugins/discourse-gamification/discourse/components/gamification-leaderboard";
 import RecalculateScoresForm from "discourse/plugins/discourse-gamification/discourse/components/modal/recalculate-scores-form";
 

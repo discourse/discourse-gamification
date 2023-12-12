@@ -1,10 +1,10 @@
 import Component from "@ember/component";
-import discourseComputed from "discourse-common/utils/decorators";
 import { action } from "@ember/object";
-import LoadMore from "discourse/mixins/load-more";
+import { inject as service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
-import { inject as service } from "@ember/service";
+import LoadMore from "discourse/mixins/load-more";
+import discourseComputed from "discourse-common/utils/decorators";
 import LeaderboardInfo from "./modal/leaderboard-info";
 
 export const LEADERBOARD_PERIODS = [

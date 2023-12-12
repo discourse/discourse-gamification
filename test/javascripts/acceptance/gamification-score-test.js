@@ -1,12 +1,12 @@
+import { click, visit } from "@ember/test-helpers";
+import { test } from "qunit";
+import userFixtures from "discourse/tests/fixtures/user-fixtures";
+import { fixturesByUrl } from "discourse/tests/helpers/create-pretender";
 import {
   acceptance,
   exists,
   query,
 } from "discourse/tests/helpers/qunit-helpers";
-import { fixturesByUrl } from "discourse/tests/helpers/create-pretender";
-import { click, visit } from "@ember/test-helpers";
-import { test } from "qunit";
-import userFixtures from "discourse/tests/fixtures/user-fixtures";
 import { cloneJSON } from "discourse-common/lib/object";
 
 acceptance(

@@ -1,12 +1,12 @@
 // import Component from "@ember/component";
 import Component from "@glimmer/component";
-import { inject as service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
+import { inject as service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
-import I18n from "I18n";
 import { bind } from "discourse-common/utils/decorators";
+import I18n from "I18n";
 
 export default class RecalculateScoresForm extends Component {
   @service messageBus;
