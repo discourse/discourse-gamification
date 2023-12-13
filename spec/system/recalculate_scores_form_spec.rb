@@ -9,6 +9,7 @@ describe "Recalculate Scores Form", type: :system do
   before do
     RateLimiter.enable
     SiteSetting.discourse_gamification_enabled = true
+    DiscourseGamification::LeaderboardCachedView.new(leaderboard).create
     sign_in(admin)
   end
 
