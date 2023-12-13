@@ -52,19 +52,13 @@ describe "Recalculate Scores Form", type: :system do
 
       recalculate_scores_modal.apply.click
 
-      try_until_success do
-        expect(recalculate_scores_modal.status.text).to eq(I18n.t("js.gamification.recalculating"))
-      end
+      expect(recalculate_scores_modal.status).to have_content(
+        I18n.t("js.gamification.recalculating"),
+      )
 
-      try_until_success do
-        ::MessageBus.publish "/recalculate_scores",
-                             {
-                               success: true,
-                               remaining:
-                                 DiscourseGamification::RecalculateScoresRateLimiter.remaining,
-                             }
-        expect(recalculate_scores_modal.status.text).to eq(I18n.t("js.gamification.completed"))
-      end
+      Jobs::RecalculateScores.new.execute({ user_id: admin.id })
+      expect(recalculate_scores_modal.status).to have_content(I18n.t("js.gamification.completed"))
+
       expect(recalculate_scores_modal).to have_button("apply-section", disabled: true)
 
       expect(recalculate_scores_modal.remaining.text).to eq(
