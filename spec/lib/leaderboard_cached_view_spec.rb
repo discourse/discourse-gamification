@@ -215,7 +215,7 @@ describe DiscourseGamification::LeaderboardCachedView do
       end
     end
 
-    context "with rown_number ranking strategy" do
+    context "with row_number ranking strategy" do
       before do
         SiteSetting.score_ranking_strategy = "row_number"
 
