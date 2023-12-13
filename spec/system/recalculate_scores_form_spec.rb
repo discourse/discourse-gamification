@@ -44,8 +44,8 @@ describe "Recalculate Scores Form", type: :system do
     expect(recalculate_scores_modal.custom_since_date.value).to eq(today)
   end
 
-  describe "when admin has daily recalculation remaining" do
-    it "clicking 'apply' should decrease and show the daily recalculation remaining" do
+  context "when admin has daily recalculation remaining" do
+    it "decreases and shows the daily recalculation remaining" do
       visit("/admin/plugins/gamification")
       find(".leaderboard-admin__btn-recalculate").click
 
@@ -75,8 +75,8 @@ describe "Recalculate Scores Form", type: :system do
     end
   end
 
-  describe "when admin does not have daily recalculation remaining" do
-    it "'apply' button should be disabled" do
+  context "when admin does not have daily recalculation remaining" do
+    it "disables the 'apply' button" do
       5.times { DiscourseGamification::RecalculateScoresRateLimiter.perform! }
 
       visit("/admin/plugins/gamification")
