@@ -3,7 +3,7 @@
 describe "Recalculate Scores Form", type: :system do
   let(:recalculate_scores_modal) { PageObjects::Modals::RecalculateScoresForm.new }
 
-  fab!(:admin) { Fabricate(:admin) }
+  fab!(:admin)
   fab!(:leaderboard) { Fabricate(:gamification_leaderboard) }
 
   before do
