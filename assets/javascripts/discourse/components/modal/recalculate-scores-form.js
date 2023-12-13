@@ -18,8 +18,6 @@ export default class RecalculateScoresForm extends Component {
   constructor() {
     super(...arguments);
 
-    this.saveAttrNames = ["update_range"];
-
     this.updateRange = [
       {
         name: I18n.t("gamification.update_range.last_10_days"),
