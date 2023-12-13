@@ -15,6 +15,6 @@ describe Jobs::RecalculateScores do
       .expects(:publish)
       .with("/recalculate_scores", { success: true, remaining: 5, user_id: [current_user.id] })
       .once
-    Jobs::RecalculateScores.new.execute(since: since, user_id: current_user.id)
+    Jobs::RecalculateScores.new.execute({ since: since, user_id: current_user.id })
   end
 end
