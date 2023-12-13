@@ -9,42 +9,40 @@ import I18n from "I18n";
 
 export default class RecalculateScoresForm extends Component {
   @service messageBus;
+
   @tracked updateRangeValue = 0;
   @tracked recalculateFromDate = "";
-  @tracked haveAvailability = true;
-  @tracked remaining;
+  @tracked haveAvailability = this.args.model.recalculate_scores_remaining > 0;
+  @tracked remaining = this.args.model.recalculate_scores_remaining;
   @tracked status = "initial";
+
+  updateRange = [
+    {
+      name: I18n.t("gamification.update_range.last_10_days"),
+      value: 0,
+      calculation: { count: 10, type: "days" },
+    },
+    {
+      name: I18n.t("gamification.update_range.last_30_days"),
+      value: 1,
+      calculation: { count: 30, type: "days" },
+    },
+    {
+      name: I18n.t("gamification.update_range.last_90_days"),
+      value: 2,
+      calculation: { count: 90, type: "days" },
+    },
+    {
+      name: I18n.t("gamification.update_range.last_year"),
+      value: 3,
+      calculation: { count: 1, type: "year" },
+    },
+    { name: I18n.t("gamification.update_range.all_time"), value: 4 },
+    { name: I18n.t("gamification.update_range.custom_date_range"), value: 5 },
+  ];
 
   constructor() {
     super(...arguments);
-
-    this.updateRange = [
-      {
-        name: I18n.t("gamification.update_range.last_10_days"),
-        value: 0,
-        calculation: { count: 10, type: "days" },
-      },
-      {
-        name: I18n.t("gamification.update_range.last_30_days"),
-        value: 1,
-        calculation: { count: 30, type: "days" },
-      },
-      {
-        name: I18n.t("gamification.update_range.last_90_days"),
-        value: 2,
-        calculation: { count: 90, type: "days" },
-      },
-      {
-        name: I18n.t("gamification.update_range.last_year"),
-        value: 3,
-        calculation: { count: 1, type: "year" },
-      },
-      { name: I18n.t("gamification.update_range.all_time"), value: 4 },
-      { name: I18n.t("gamification.update_range.custom_date_range"), value: 5 },
-    ];
-
-    this.haveAvailability = this.args.model.recalculate_scores_remaining > 0;
-    this.remaining = this.args.model.recalculate_scores_remaining;
     this.messageBus.subscribe("/recalculate_scores", this.onMessage);
   }
 
