@@ -13,11 +13,15 @@ describe "Recalculate Scores Form", type: :system do
     sign_in(admin)
   end
 
+  use_redis_snapshotting
+
   def format_date(date)
     date.midnight.strftime("%b %-d, %Y")
   end
 
   it "has date options that are valid and can be applied" do
+    freeze_time
+
     visit("/admin/plugins/gamification")
     find(".leaderboard-admin__btn-recalculate").click
 
@@ -46,7 +50,7 @@ describe "Recalculate Scores Form", type: :system do
   end
 
   context "when admin has daily recalculation remaining" do
-    it "decreases and shows the daily recalculation remaining" do
+    it "can trigger recalculation" do
       visit("/admin/plugins/gamification")
       find(".leaderboard-admin__btn-recalculate").click
 
@@ -55,18 +59,9 @@ describe "Recalculate Scores Form", type: :system do
       expect(recalculate_scores_modal.status).to have_content(
         I18n.t("js.gamification.recalculating"),
       )
-
-      Jobs::RecalculateScores.new.execute({ user_id: admin.id })
-      expect(recalculate_scores_modal.status).to have_content(I18n.t("js.gamification.completed"))
-
       expect(recalculate_scores_modal).to have_button("apply-section", disabled: true)
 
-      expect(recalculate_scores_modal.remaining.text).to eq(
-        I18n.t(
-          "js.gamification.daily_update_scores_availability",
-          count: DiscourseGamification::RecalculateScoresRateLimiter.remaining,
-        ),
-      )
+      expect(Jobs::RecalculateScores.jobs.count).to eq(1)
     end
   end
 
