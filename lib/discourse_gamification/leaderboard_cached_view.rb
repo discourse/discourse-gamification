@@ -46,21 +46,19 @@ module ::DiscourseGamification
     def scores(period: "all_time", page: 0, for_user_id: false, limit: nil, offset: nil)
       user_filter_condition = for_user_id ? ["users.id = ?", for_user_id] : [nil]
 
-      User
-        .where(*user_filter_condition)
-        .joins("INNER JOIN #{mview_name(period)} p ON  p.user_id = users.id")
-        .select(
-          "users.id, users.name, users.username, users.uploaded_avatar_id, p.total_score, p.position",
-        )
-        .limit(limit)
-        .offset(offset)
-        .order(position: :asc, id: :asc)
-        .load
-    rescue ActiveRecord::StatementInvalid => e
-      if PG::UndefinedTable === e.cause
-        raise NotReadyError.new(I18n.t("errors.leaderboard_positions_not_ready"))
+      if mview_exists?(period)
+        User
+          .where(*user_filter_condition)
+          .joins("INNER JOIN #{mview_name(period)} p ON  p.user_id = users.id")
+          .select(
+            "users.id, users.name, users.username, users.uploaded_avatar_id, p.total_score, p.position",
+          )
+          .limit(limit)
+          .offset(offset)
+          .order(position: :asc, id: :asc)
+          .load
       else
-        raise
+        raise NotReadyError.new(I18n.t("errors.leaderboard_positions_not_ready"))
       end
     end
 
