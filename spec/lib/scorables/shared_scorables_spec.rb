@@ -66,7 +66,7 @@ RSpec.shared_examples "No Score Value" do
     let!(:create_score_for_wiki) { class_action_fabricator_for_wiki }
     let!(:trigger_after_create_hook) { after_create_hook }
 
-    it "does not increase user gamficiation score" do
+    it "does not increase user gamification score" do
       DiscourseGamification::GamificationScore.calculate_scores(
         since_date: "2022-1-1",
         only_subclass: described_class,
@@ -85,7 +85,7 @@ RSpec.describe ::DiscourseGamification::LikeReceived do
       Post.all.each { |p| Fabricate(:post_action, post: p) }
     end
 
-    # ten likes recieved
+    # ten likes received
     let(:expected_score) { 10 }
   end
 

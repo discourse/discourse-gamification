@@ -8,7 +8,7 @@ describe Jobs::RefreshLeaderboardPositions do
 
   before { leaderboard_positions.create }
 
-  it "refereshes leaderboard positions" do
+  it "refreshes leaderboard positions" do
     Fabricate(:gamification_score, user_id: leaderboard.created_by_id, score: 10)
 
     expect(leaderboard_positions.scores).to be_empty

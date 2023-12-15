@@ -24,16 +24,16 @@
         </label>
         <div class="controls">
           <DatePickerPast
-            @class="date-input"
             @placeholder="yyyy-mm-dd"
             @value={{selectedLeaderboard.from_date}}
             @onSelect={{action (mut fromDate)}}
+            class="date-input"
           />
           <DatePicker
-            @class="date-input"
             @placeholder="yyyy-mm-dd"
             @value={{selectedLeaderboard.to_date}}
             @onSelect={{action (mut toDate)}}
+            class="date-input"
           />
           <div>{{i18n "gamification.leaderboard.date.helper"}}</div>
         </div>
