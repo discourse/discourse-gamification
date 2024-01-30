@@ -18,8 +18,11 @@ ja:
     flag_created_score_value: "ユーザーが投稿を通報し、その通報がスタッフユーザーに承認された時に付与される拍手の値"
     day_visited_score_value: "ユーザーがサイトにアクセスする日ごとに付与される拍手の値"
     scorable_categories: "アクションによって拍手が生成されるカテゴリのリスト。全カテゴリで拍手を有効にする場合は、空白のままにします。"
+    score_ranking_strategy: "リーダーボード順位のランク付け戦略"
   score: "拍手"
   default_leaderboard_name: "グローバルリーダーボード"
   rate_limiter:
     by_type:
       recalculate_scores_remaining: "スコアの再計算回数の上限に達しました。%{time_left}経ってから、もう一度お試しください。"
+  errors:
+    leaderboard_positions_not_ready: "リーダーボードを生成しています。数分後にもう一度お試しください。"
