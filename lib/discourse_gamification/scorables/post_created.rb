@@ -27,8 +27,12 @@ module ::DiscourseGamification
           #{category_filter}
         WHERE
           p.deleted_at IS NULL AND
+          t.deleted_at IS NULL AND
           t.archetype <> 'private_message' AND
+          p.post_number <> 1 AND
+          p.post_type = 1 AND
           p.wiki IS FALSE AND
+          p.hidden IS FALSE AND
           p.created_at >= :since
         GROUP BY
           1, 2
