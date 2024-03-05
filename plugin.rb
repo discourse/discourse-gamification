@@ -70,6 +70,24 @@ after_initialize do
     )
   end
 
+  add_to_serializer(
+    :admin_plugin,
+    :gamification_recalculate_scores_remaining,
+    include_condition: -> { self.name == "discourse-gamification" },
+  ) { DiscourseGamification::RecalculateScoresRateLimiter.remaining }
+
+  add_to_serializer(
+    :admin_plugin,
+    :gamification_leaderboards,
+    include_condition: -> { self.name == "discourse-gamification" },
+  ) { DiscourseGamification::GamificationLeaderboard.all }
+
+  add_to_serializer(
+    :admin_plugin,
+    :gamification_groups,
+    include_condition: -> { self.name == "discourse-gamification" },
+  ) { Group.all }
+
   add_to_serializer(:user_card, :gamification_score) { object.gamification_score }
   add_to_serializer(:site, :default_gamification_leaderboard_id) do
     DiscourseGamification::GamificationLeaderboard.first&.id

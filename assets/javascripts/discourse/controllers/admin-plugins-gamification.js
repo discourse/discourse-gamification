@@ -75,7 +75,7 @@ export default Controller.extend({
     if (!groupIds.length) {
       return [];
     }
-    const filteredGroups = this.model.groups.filter((group) =>
+    const filteredGroups = this.model.gamification_groups.filter((group) =>
       groupIds.includes(group.id)
     );
     return filteredGroups.mapBy("id");
