@@ -18,7 +18,7 @@
         {{#if this.siteSettings.prioritize_username_in_ux}}
           {{rank.username}}
         {{else}}
-          {{rank.name}}
+          {{or rank.name rank.username}}
         {{/if}}
       </span>
     {{/if}}
