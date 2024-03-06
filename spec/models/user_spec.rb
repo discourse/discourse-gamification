@@ -3,7 +3,7 @@
 require "rails_helper"
 
 describe User, type: :model do
-  fab!(:user) { Fabricate(:user) }
+  fab!(:user)
   fab!(:leaderboard) { Fabricate(:gamification_leaderboard) }
 
   before do
