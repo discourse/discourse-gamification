@@ -3,7 +3,7 @@
 require "rails_helper"
 
 describe Jobs::UpdateScoresForToday do
-  fab!(:user) { Fabricate(:user) }
+  fab!(:user)
   fab!(:user_2) { Fabricate(:user) }
   fab!(:post) { Fabricate(:post, user: user) }
   fab!(:gamification_score) { Fabricate(:gamification_score, user_id: user.id) }

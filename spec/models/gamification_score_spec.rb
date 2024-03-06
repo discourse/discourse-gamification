@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe DiscourseGamification::GamificationScore, type: :model do
-  fab!(:user) { Fabricate(:user) }
+  fab!(:user)
   fab!(:leaderboard) { Fabricate(:gamification_leaderboard) }
 
   before { DiscourseGamification::LeaderboardCachedView.create_all }
