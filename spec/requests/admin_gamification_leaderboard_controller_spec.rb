@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe DiscourseGamification::AdminGamificationLeaderboardController do
-  fab!(:admin) { Fabricate(:admin) }
+  fab!(:admin)
 
   before do
     SiteSetting.discourse_gamification_enabled = true

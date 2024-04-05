@@ -9,7 +9,7 @@ export default DiscourseRoute.extend({
     }
 
     return ajax("/admin/plugins/gamification.json").then((model) => {
-      model.leaderboards = model.leaderboards.map((leaderboard) =>
+      model.leaderboards = model.gamification_leaderboards.map((leaderboard) =>
         EmberObject.create(leaderboard)
       );
       return model;
