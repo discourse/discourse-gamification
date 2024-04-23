@@ -122,7 +122,7 @@
     </div>
 
   {{else}}
-    {{#if model.leaderboards}}
+    {{#if model.extras.gamification_leaderboards}}
       <DButton
         @label="gamification.leaderboard.new"
         @title="gamification.leaderboard.new"
@@ -141,7 +141,7 @@
   {{/if}}
 
   <div class="leaderboards">
-    {{#if model.leaderboards}}
+    {{#if model.extras.gamification_leaderboards}}
       <table>
         <thead>
           <th>{{i18n "gamification.admin.name"}}</th>
