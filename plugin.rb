@@ -30,10 +30,7 @@ end
 require_relative "lib/discourse_gamification/engine"
 
 after_initialize do
-  # route: /admin/plugins/gamification
-  #
-  # NOTE: Maybe we don't even need this thing anymore? Maybe we just assume
-  # the route is the same as the plugin name? IDK...
+  # route: /admin/plugins/discourse-gamification
   add_admin_route(
     "gamification.admin.title",
     "discourse-gamification",
