@@ -22,7 +22,7 @@ export default Controller.extend({
   includedGroupIds: [],
   excludedGroupIds: [],
 
-  @discourseComputed("model.extras.gamification_leaderboards.@each.updated_at")
+  @discourseComputed("model.leaderboards.@each.updated_at")
   sortedLeaderboards(leaderboards) {
     leaderboards.map((leaderboard) => {
       if (Number.isInteger(leaderboard.default_period)) {
@@ -43,10 +43,7 @@ export default Controller.extend({
     }
 
     id = parseInt(id, 10);
-    const leaderboard = this.model.extras.gamification_leaderboards.findBy(
-      "id",
-      id
-    );
+    const leaderboard = this.model.leaderboards.findBy("id", id);
 
     this.leaderboardChanged(leaderboard);
 
@@ -78,8 +75,8 @@ export default Controller.extend({
     if (!groupIds.length) {
       return [];
     }
-    const filteredGroups = this.model.extras.gamification_groups.filter(
-      (group) => groupIds.includes(group.id)
+    const filteredGroups = this.model.groups.filter((group) =>
+      groupIds.includes(group.id)
     );
     return filteredGroups.mapBy("id");
   },
@@ -108,8 +105,8 @@ export default Controller.extend({
       .then((leaderboard) => {
         const newLeaderboard = EmberObject.create(leaderboard);
         this.set(
-          "model.extras.gamification_leaderboards",
-          [newLeaderboard].concat(this.model.extras.gamification_leaderboards)
+          "model.leaderboards",
+          [newLeaderboard].concat(this.model.leaderboards)
         );
         this.resetNewLeaderboard();
         this.setProperties({
@@ -147,9 +144,7 @@ export default Controller.extend({
           }
         )
           .then(() => {
-            this.model.extras.gamification_leaderboards.removeObject(
-              leaderboard
-            );
+            this.model.leaderboards.removeObject(leaderboard);
             this.set("loading", false);
           })
           .catch(popupAjaxError);

@@ -12,11 +12,8 @@ export default class RecalculateScoresForm extends Component {
 
   @tracked updateRangeValue = 0;
   @tracked recalculateFromDate = "";
-  @tracked
-  haveAvailability =
-    this.args.model.extras.gamification_recalculate_scores_remaining > 0;
-  @tracked
-  remaining = this.args.model.extras.gamification_recalculate_scores_remaining;
+  @tracked haveAvailability = this.args.model.recalculate_scores_remaining > 0;
+  @tracked remaining = this.args.model.recalculate_scores_remaining;
   @tracked status = "initial";
 
   updateRange = [
@@ -58,8 +55,7 @@ export default class RecalculateScoresForm extends Component {
   onMessage(message) {
     if (message.success) {
       this.status = "complete";
-      this.args.model.extras.gamification_recalculate_scores_remaining =
-        message.remaining;
+      this.args.model.recalculate_scores_remaining = message.remaining;
       this.remaining = message.remaining;
     }
   }

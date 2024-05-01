@@ -10,10 +10,14 @@ export default class DiscourseGamificationLeaderboards extends DiscourseRoute {
       return { model: null };
     }
     const gamificationPlugin = this.adminPluginNavManager.currentPlugin;
-    gamificationPlugin.extras.gamification_leaderboards =
-      gamificationPlugin.extras.gamification_leaderboards.map((leaderboard) =>
-        EmberObject.create(leaderboard)
-      );
-    return gamificationPlugin;
+
+    return EmberObject.create({
+      leaderboards: gamificationPlugin.extras.gamification_leaderboards.map(
+        (leaderboard) => EmberObject.create(leaderboard)
+      ),
+      groups: gamificationPlugin.extras.gamification_groups,
+      recalculate_scores_remaining:
+        gamificationPlugin.extras.gamification_recalculate_scores_remaining,
+    });
   }
 }
