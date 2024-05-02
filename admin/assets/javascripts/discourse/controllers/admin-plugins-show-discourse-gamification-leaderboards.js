@@ -12,6 +12,7 @@ import RecalculateScoresForm from "discourse/plugins/discourse-gamification/disc
 export default Controller.extend({
   modal: service(),
   dialog: service(),
+  toasts: service(),
   loading: false,
   creatingNew: false,
   newLeaderboardName: "",
@@ -75,7 +76,7 @@ export default Controller.extend({
     if (!groupIds.length) {
       return [];
     }
-    const filteredGroups = this.model.gamification_groups.filter((group) =>
+    const filteredGroups = this.model.groups.filter((group) =>
       groupIds.includes(group.id)
     );
     return filteredGroups.mapBy("id");
@@ -103,6 +104,12 @@ export default Controller.extend({
       type: "POST",
     })
       .then((leaderboard) => {
+        this.toasts.success({
+          duration: 3000,
+          data: {
+            message: I18n.t("gamification.leaderboard.create_success"),
+          },
+        });
         const newLeaderboard = EmberObject.create(leaderboard);
         this.set(
           "model.leaderboards",
@@ -144,6 +151,12 @@ export default Controller.extend({
           }
         )
           .then(() => {
+            this.toasts.success({
+              duration: 3000,
+              data: {
+                message: I18n.t("gamification.leaderboard.delete_success"),
+              },
+            });
             this.model.leaderboards.removeObject(leaderboard);
             this.set("loading", false);
           })
@@ -174,6 +187,12 @@ export default Controller.extend({
     )
       .then(() => {
         this.selectedLeaderboard.set("updated_at", new Date());
+        this.toasts.success({
+          duration: 3000,
+          data: {
+            message: I18n.t("gamification.leaderboard.save_success"),
+          },
+        });
         if (this.visibleGroupIds) {
           this.selectedLeaderboard.set(
             "visible_to_groups_ids",

@@ -30,8 +30,12 @@ end
 require_relative "lib/discourse_gamification/engine"
 
 after_initialize do
-  # route: /admin/plugins/gamification
-  add_admin_route "gamification.admin.title", "gamification"
+  # route: /admin/plugins/discourse-gamification
+  add_admin_route(
+    "gamification.admin.title",
+    "discourse-gamification",
+    { use_new_show_route: true },
+  )
 
   require_relative "jobs/scheduled/update_scores_for_ten_days"
   require_relative "jobs/scheduled/update_scores_for_today"
@@ -72,21 +76,16 @@ after_initialize do
 
   add_to_serializer(
     :admin_plugin,
-    :gamification_recalculate_scores_remaining,
+    :extras,
     include_condition: -> { self.name == "discourse-gamification" },
-  ) { DiscourseGamification::RecalculateScoresRateLimiter.remaining }
-
-  add_to_serializer(
-    :admin_plugin,
-    :gamification_leaderboards,
-    include_condition: -> { self.name == "discourse-gamification" },
-  ) { DiscourseGamification::GamificationLeaderboard.all }
-
-  add_to_serializer(
-    :admin_plugin,
-    :gamification_groups,
-    include_condition: -> { self.name == "discourse-gamification" },
-  ) { Group.all }
+  ) do
+    {
+      gamification_recalculate_scores_remaining:
+        DiscourseGamification::RecalculateScoresRateLimiter.remaining,
+      gamification_groups: Group.all,
+      gamification_leaderboards: DiscourseGamification::GamificationLeaderboard.all,
+    }
+  end
 
   add_to_serializer(:user_card, :gamification_score) { object.gamification_score }
   add_to_serializer(:site, :default_gamification_leaderboard_id) do
