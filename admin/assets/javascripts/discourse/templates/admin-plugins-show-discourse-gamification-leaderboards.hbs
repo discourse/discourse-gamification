@@ -157,7 +157,7 @@
 
         <tbody>
           {{#each sortedLeaderboards as |leaderboard|}}
-            <tr>
+            <tr id={{concat "leaderboard-admin__row-" leaderboard.id}}>
               <td>
                 <LinkTo
                   @route="gamificationLeaderboard.byName"
@@ -177,7 +177,7 @@
               </td>
               <td class="leaderboard-admin__listitem-action">
                 <DButton
-                  class="btn-flat"
+                  class="btn-flat leaderboard-admin__edit"
                   @icon="pencil-alt"
                   @title="gamification.edit"
                   @action={{action (mut selectedLeaderboardId) leaderboard.id}}
@@ -185,7 +185,7 @@
               </td>
               <td class="leaderboard-admin__listitem-action">
                 <DButton
-                  class="btn-flat"
+                  class="btn-flat leaderboard-admin__delete"
                   @icon="trash-alt"
                   @title="gamification.delete"
                   @action={{action "destroyLeaderboard" leaderboard}}
