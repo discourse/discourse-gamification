@@ -6,7 +6,7 @@
     @title="gamification.back"
     @action={{action (mut selectedLeaderboardId) null}}
   />
-  <form class="form-vertical">
+  <form class="leaderboard-edit form-vertical">
     <div class="control-group">
       <div class="control-group">
         <label class="control-label">
@@ -14,6 +14,7 @@
         </label>
         <Input
           @type="text"
+          class="leaderboard-edit__name"
           @value={{selectedLeaderboard.name}}
           placeholder={{i18n "gamification.leaderboard.name"}}
         />
@@ -27,13 +28,13 @@
             @placeholder="yyyy-mm-dd"
             @value={{selectedLeaderboard.from_date}}
             @onSelect={{action (mut fromDate)}}
-            class="date-input"
+            class="leaderboard-edit__from-date date-input"
           />
           <DatePicker
             @placeholder="yyyy-mm-dd"
             @value={{selectedLeaderboard.to_date}}
             @onSelect={{action (mut toDate)}}
-            class="date-input"
+            class="leaderboard-edit__to-date date-input"
           />
           <div>{{i18n "gamification.leaderboard.date.helper"}}</div>
         </div>
@@ -43,6 +44,7 @@
           {{i18n "gamification.leaderboard.included_groups"}}
         </label>
         <GroupChooser
+          @id="leaderboard-edit__included-groups"
           @content={{this.siteGroups}}
           @value={{includedGroupIds}}
           @labelProperty="name"
@@ -55,6 +57,7 @@
           {{i18n "gamification.leaderboard.excluded_groups"}}
         </label>
         <GroupChooser
+          @id="leaderboard-edit__excluded-groups"
           @content={{this.siteGroups}}
           @value={{excludedGroupIds}}
           @labelProperty="name"
@@ -67,6 +70,7 @@
           {{i18n "gamification.leaderboard.visible_to_groups"}}
         </label>
         <GroupChooser
+          @id="leaderboard-edit__visible-groups"
           @content={{this.siteGroups}}
           @value={{visibleGroupIds}}
           @labelProperty="name"
@@ -83,13 +87,13 @@
       </div>
     </div>
     <DButton
-      class="btn-primary"
+      class="leaderboard-edit__save btn-primary"
       @label="gamification.save"
       @action={{action "saveEdit"}}
       @disabled={{saveEditDisabled}}
     />
     <DButton
-      class="btn-secondary leaderboard-admin__btn-cancel-edit"
+      class="btn-secondary leaderboard-edit__cancel"
       @label="gamification.cancel"
       @action={{action (mut selectedLeaderboardId) null}}
     />
@@ -104,13 +108,14 @@
     <div class="new-leaderboard-container">
       <Input
         @type="text"
+        class="new-leaderboard__name"
         @value={{newLeaderboardName}}
         placeholder={{i18n "gamification.leaderboard.name_placeholder"}}
       />
       <DButton
         @label="gamification.create"
         @title="gamification.create"
-        class="btn-primary create-new-leaderboard-btn"
+        class="btn-primary new-leaderboard__create"
         @disabled={{not nameValid}}
         @action={{action "createNewLeaderboard"}}
       />
