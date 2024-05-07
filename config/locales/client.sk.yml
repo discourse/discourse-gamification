@@ -12,6 +12,7 @@ sk:
         link_to_settings: "Nastavenia"
         refresh: "Obnoviť"
         name: "Meno"
+        name_placeholder: "Názov..."
         period:
           all_time: "Za celú dobu"
           yearly: "Ročne"

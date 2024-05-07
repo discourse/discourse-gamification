@@ -19,7 +19,7 @@ hr:
           title: "Kako radi ploča s najboljim rezultatima?"
           text: "Bodovi se dodjeljuju za interakciju sa zajednicom, kao što su posjete, sviđanje i objavljivanje. Vaš rezultat se ažurira svakih nekoliko minuta. Zato budite od pomoći, aktivni i podržavajte i napredujte kroz činove!"
         name: "Ime"
-        name_placeholder: "ime..."
+        name_placeholder: "Ime..."
         confirm_destroy: "Jeste li sigurni da želite izbrisati ovu ploču s najboljim rezultatima?"
         date:
           range: "Od/do datumskog raspona"

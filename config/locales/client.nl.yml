@@ -24,7 +24,7 @@ nl:
           title: "Hoe werkt het klassement?"
           text: "Punten worden toegekend voor interactie met de community, zoals bezoeken, likes en berichten. Je score wordt om de paar minuten bijgewerkt. Dus wees behulpzaam, actief en ondersteunend en stijg in het klassement!"
         name: "Naam"
-        name_placeholder: "naam..."
+        name_placeholder: "Naam..."
         new: "Nieuwe toevoegen"
         cta: "Maak je eerste klassement"
         none: "Nog geen klassementen gemaakt."
