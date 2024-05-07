@@ -24,7 +24,7 @@ es:
           title: "¿Cómo funciona la clasificación?"
           text: "Recibirás puntos por participar en la comunidad. Por ejemplo, cuando la visitas, usas el botón de me gusta o publicas cosas. Tu puntuación se actualiza cada pocos minutos. Así que ya sabes, ¡participa, ayuda y sube de posición!"
         name: "Nombre"
-        name_placeholder: "nombre…"
+        name_placeholder: "Nombre..."
         new: "Añadir nueva"
         cta: "Crea la primera tabla de clasificación"
         none: "Todavía no hay ninguna tabla de clasificación."

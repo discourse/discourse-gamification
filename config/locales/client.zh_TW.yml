@@ -12,6 +12,7 @@ zh_TW:
         link_to_settings: "設定"
         refresh: "重新整理"
         name: "名字"
+        name_placeholder: "名字..."
         period:
           all_time: "所以時間"
           yearly: "年"
