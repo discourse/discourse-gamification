@@ -1,4 +1,6 @@
 import { tracked } from "@glimmer/tracking";
+import I18n from "I18n";
+import { LEADERBOARD_PERIODS } from "discourse/plugins/discourse-gamification/discourse/components/gamification-leaderboard";
 
 export default class GamificationLeaderboard {
   static create(args = {}) {
@@ -31,6 +33,15 @@ export default class GamificationLeaderboard {
     this.toDate = args.to_date;
     this.name = args.name;
     this.period = args.period;
-    this.defaultPeriod = args.defaultPeriod;
+
+    if (Number.isInteger(args.default_period)) {
+      this.defaultPeriod = I18n.t(
+        `gamification.leaderboard.period.${
+          LEADERBOARD_PERIODS[args.default_period]
+        }`
+      );
+    } else {
+      console.log(args);
+    }
   }
 }

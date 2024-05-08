@@ -25,7 +25,7 @@ export default class AdminEditLeaderboard extends Component {
   @tracked fromDate = "";
   @tracked toDate = "";
   @tracked includedGroupIds = [];
-  @tracked visibleToGroupIds = [];
+  @tracked visibleToGroupsIds = [];
   @tracked excludedGroupIds = [];
 
   get siteGroups() {
@@ -140,12 +140,13 @@ export default class AdminEditLeaderboard extends Component {
           <label class="control-label">
             {{i18n "gamification.leaderboard.visible_to_groups"}}
           </label>
+          <!-- WHY ISNT MUT WORKING -->
           <GroupChooser
             @id="leaderboard-edit__visible-groups"
             @content={{this.siteGroups}}
-            @value={{@leaderboard.visibleToGroupIds}}
+            @value={{@leaderboard.visibleToGroupsIds}}
             @labelProperty="name"
-            @onChange={{fn (mut this.visibleToGroupIds)}}
+            @onChange={{fn (mut this.visibleToGroupsIds)}}
           />
           <div>{{i18n "gamification.leaderboard.visible_to_groups_help"}}</div>
         </div>

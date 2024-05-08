@@ -6,7 +6,6 @@ import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import discourseComputed from "discourse-common/utils/decorators";
 import I18n from "I18n";
-import { LEADERBOARD_PERIODS } from "discourse/plugins/discourse-gamification/discourse/components/gamification-leaderboard";
 import RecalculateScoresForm from "discourse/plugins/discourse-gamification/discourse/components/modal/recalculate-scores-form";
 
 export default Controller.extend({
@@ -25,15 +24,6 @@ export default Controller.extend({
 
   @discourseComputed("model.leaderboards.@each.updatedAt")
   sortedLeaderboards(leaderboards) {
-    leaderboards.map((leaderboard) => {
-      if (Number.isInteger(leaderboard.default_period)) {
-        leaderboard.default_period = I18n.t(
-          `gamification.leaderboard.period.${
-            LEADERBOARD_PERIODS[leaderboard.default_period]
-          }`
-        );
-      }
-    });
     return leaderboards?.sortBy("updatedAt").reverse() || [];
   },
 

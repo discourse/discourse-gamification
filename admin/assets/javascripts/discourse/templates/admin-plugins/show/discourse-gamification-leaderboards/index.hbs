@@ -46,12 +46,12 @@
                 </LinkTo>
               </td>
               <td>
-                {{#if leaderboard.from_date}}
-                  {{format-date leaderboard.from_date}}
+                {{#if leaderboard.fromDate}}
+                  {{format-date leaderboard.fromDate}}
                   -
-                  {{format-date leaderboard.to_date}}
+                  {{format-date leaderboard.toDate}}
                 {{else}}
-                  {{leaderboard.default_period}}
+                  {{leaderboard.defaultPeriod}}
                 {{/if}}
               </td>
               <td class="leaderboard-admin__listitem-action">
