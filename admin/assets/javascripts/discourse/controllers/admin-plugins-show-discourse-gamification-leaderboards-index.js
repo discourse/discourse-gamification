@@ -1,5 +1,5 @@
 import Controller from "@ember/controller";
-import EmberObject, { action } from "@ember/object";
+import { action } from "@ember/object";
 import { and } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
@@ -23,7 +23,7 @@ export default Controller.extend({
   includedGroupIds: [],
   excludedGroupIds: [],
 
-  @discourseComputed("model.leaderboards.@each.updated_at")
+  @discourseComputed("model.leaderboards.@each.updatedAt")
   sortedLeaderboards(leaderboards) {
     leaderboards.map((leaderboard) => {
       if (Number.isInteger(leaderboard.default_period)) {
@@ -34,7 +34,7 @@ export default Controller.extend({
         );
       }
     });
-    return leaderboards?.sortBy("updated_at").reverse() || [];
+    return leaderboards?.sortBy("updatedAt").reverse() || [];
   },
 
   @discourseComputed("selectedLeaderboardId")
@@ -82,54 +82,10 @@ export default Controller.extend({
     return filteredGroups.mapBy("id");
   },
 
-  @discourseComputed("selectedLeaderboard.name")
-  saveEditDisabled(name) {
-    return !name;
-  },
-
-  @action
-  createNewLeaderboard() {
-    if (this.loading) {
-      return;
-    }
-
-    this.set("loading", true);
-    const data = {
-      name: this.newLeaderboardName,
-      created_by_id: this.currentUser.id,
-    };
-
-    return ajax("/admin/plugins/gamification/leaderboard", {
-      data,
-      type: "POST",
-    })
-      .then((leaderboard) => {
-        this.toasts.success({
-          duration: 3000,
-          data: {
-            message: I18n.t("gamification.leaderboard.create_success"),
-          },
-        });
-        const newLeaderboard = EmberObject.create(leaderboard);
-        this.set(
-          "model.leaderboards",
-          [newLeaderboard].concat(this.model.leaderboards)
-        );
-        this.resetNewLeaderboard();
-        this.setProperties({
-          loading: false,
-          selectedLeaderboardId: leaderboard.id,
-        });
-      })
-      .catch(popupAjaxError);
-  },
-
   @action
   resetNewLeaderboard() {
     this.setProperties({
       creatingNew: false,
-      newLeaderboardName: "",
-      newLeaderboardId: null,
       toDate: "",
       fromDate: "",
       visibleGroupIds: [],
@@ -163,66 +119,6 @@ export default Controller.extend({
           .catch(popupAjaxError);
       },
     });
-  },
-
-  @action
-  saveEdit() {
-    this.set("loading", true);
-    const data = {
-      name: this.selectedLeaderboard.name,
-      to_date: this.toDate || this.selectedLeaderboard.to_date,
-      from_date: this.fromDate || this.selectedLeaderboard.from_date,
-      visible_to_groups_ids: this.visibleGroupIds,
-      included_groups_ids: this.includedGroupIds,
-      excluded_groups_ids: this.excludedGroupIds,
-      default_period: this.selectedLeaderboard.default_period,
-    };
-
-    return ajax(
-      `/admin/plugins/gamification/leaderboard/${this.selectedLeaderboard.id}`,
-      {
-        data,
-        type: "PUT",
-      }
-    )
-      .then(() => {
-        this.selectedLeaderboard.set("updated_at", new Date());
-        this.toasts.success({
-          duration: 3000,
-          data: {
-            message: I18n.t("gamification.leaderboard.save_success"),
-          },
-        });
-        if (this.visibleGroupIds) {
-          this.selectedLeaderboard.set(
-            "visible_to_groups_ids",
-            this.visibleGroupIds
-          );
-        }
-        if (this.includedGroupIds) {
-          this.selectedLeaderboard.set(
-            "included_groups_ids",
-            this.includedGroupIds
-          );
-        }
-        if (this.excludedGroupIds) {
-          this.selectedLeaderboard.set(
-            "excluded_groups_ids",
-            this.excludedGroupIds
-          );
-        }
-        this.setProperties({
-          loading: false,
-          selectedLeaderboardId: null,
-          toDate: "",
-          fromDate: "",
-          visibleGroupIds: [],
-          includedGroupIds: [],
-          excludedGroupIds: [],
-          default_period: "0",
-        });
-      })
-      .catch(popupAjaxError);
   },
 
   @action

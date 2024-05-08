@@ -4,6 +4,12 @@ export default {
   path: "/plugins",
 
   map() {
-    this.route("discourse-gamification-leaderboards", { path: "leaderboards" });
+    this.route(
+      "discourse-gamification-leaderboards",
+      { path: "leaderboards" },
+      function () {
+        this.route("show", { path: "/:id" });
+      }
+    );
   },
 };
