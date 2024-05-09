@@ -2,7 +2,6 @@ import Component from "@glimmer/component";
 import { Input } from "@ember/component";
 import { fn } from "@ember/helper";
 import { action } from "@ember/object";
-import { LinkTo } from "@ember/routing";
 import { inject as service } from "@ember/service";
 import BackButton from "discourse/components/back-button";
 import DButton from "discourse/components/d-button";
