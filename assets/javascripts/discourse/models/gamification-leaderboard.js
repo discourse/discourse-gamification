@@ -40,8 +40,6 @@ export default class GamificationLeaderboard {
           LEADERBOARD_PERIODS[args.default_period]
         }`
       );
-    } else {
-      console.log(args);
     }
   }
 }

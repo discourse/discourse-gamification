@@ -1,5 +1,4 @@
 import Component from "@glimmer/component";
-import { tracked } from "@glimmer/tracking";
 import { Input } from "@ember/component";
 import { fn } from "@ember/helper";
 import { action } from "@ember/object";
@@ -22,12 +21,6 @@ export default class AdminEditLeaderboard extends Component {
   @service toasts;
   @service router;
 
-  @tracked fromDate = "";
-  @tracked toDate = "";
-  @tracked includedGroupIds = [];
-  @tracked visibleToGroupsIds = [];
-  @tracked excludedGroupIds = [];
-
   get siteGroups() {
     return this.site.groups.rejectBy("id", AUTO_GROUPS.everyone.id);
   }
@@ -40,11 +33,11 @@ export default class AdminEditLeaderboard extends Component {
   saveEdit() {
     const data = {
       name: this.args.leaderboard.name,
-      to_date: this.toDate || this.args.leaderboard.toDate,
-      from_date: this.fromDate || this.args.leaderboard.fromDate,
-      visible_to_groups_ids: this.visibleGroupIds,
-      included_groups_ids: this.includedGroupIds,
-      excluded_groups_ids: this.excludedGroupIds,
+      to_date: this.args.leaderboard.toDate,
+      from_date: this.args.leaderboard.fromDate,
+      visible_to_groups_ids: this.args.leaderboard.visibleToGroupsIds,
+      included_groups_ids: this.args.leaderboard.includedGroupsIds,
+      excluded_groups_ids: this.args.leaderboard.excludedGroupsIds,
       default_period: this.args.leaderboard.defaultPeriod,
     };
 
@@ -95,14 +88,14 @@ export default class AdminEditLeaderboard extends Component {
             <DatePickerPast
               @placeholder="yyyy-mm-dd"
               @value={{@leaderboard.fromDate}}
-              @onSelect={{fn (mut this.fromDate)}}
+              @onSelect={{fn (mut @leaderboard.fromDate)}}
               class="leaderboard-edit__from-date date-input"
               class="date-input"
             />
             <DatePicker
               @placeholder="yyyy-mm-dd"
               @value={{@leaderboard.toDate}}
-              @onSelect={{fn (mut this.toDate)}}
+              @onSelect={{fn (mut @leaderboard.toDate)}}
               class="leaderboard-edit__to-date date-input"
               class="date-input"
             />
@@ -117,9 +110,9 @@ export default class AdminEditLeaderboard extends Component {
           <GroupChooser
             @id="leaderboard-edit__included-groups"
             @content={{this.siteGroups}}
-            @value={{@leaderboard.includedGroupIds}}
+            @value={{@leaderboard.includedGroupsIds}}
             @labelProperty="name"
-            @onChange={{fn (mut this.includedGroupIds)}}
+            @onChange={{fn (mut @leaderboard.includedGroupsIds)}}
           />
           <div>{{i18n "gamification.leaderboard.included_groups_help"}}</div>
         </div>
@@ -130,9 +123,9 @@ export default class AdminEditLeaderboard extends Component {
           <GroupChooser
             @id="leaderboard-edit__excluded-groups"
             @content={{this.siteGroups}}
-            @value={{@leaderboard.excludedGroupIds}}
+            @value={{@leaderboard.excludedGroupsIds}}
             @labelProperty="name"
-            @onChange={{fn (mut this.excludedGroupIds)}}
+            @onChange={{fn (mut @leaderboard.excludedGroupsIds)}}
           />
           <div>{{i18n "gamification.leaderboard.excluded_groups_help"}}</div>
         </div>
@@ -140,13 +133,12 @@ export default class AdminEditLeaderboard extends Component {
           <label class="control-label">
             {{i18n "gamification.leaderboard.visible_to_groups"}}
           </label>
-          <!-- WHY ISNT MUT WORKING -->
           <GroupChooser
             @id="leaderboard-edit__visible-groups"
             @content={{this.siteGroups}}
             @value={{@leaderboard.visibleToGroupsIds}}
             @labelProperty="name"
-            @onChange={{fn (mut this.visibleToGroupsIds)}}
+            @onChange={{fn (mut @leaderboard.visibleToGroupsIds)}}
           />
           <div>{{i18n "gamification.leaderboard.visible_to_groups_help"}}</div>
         </div>

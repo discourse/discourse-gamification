@@ -58,13 +58,13 @@
                 <LinkTo
                   @route="adminPlugins.show.discourse-gamification-leaderboards.show"
                   @model={{leaderboard}}
-                  class="btn btn-flat leaderboard-admin__edit btn-text btn-small"
+                  class="btn leaderboard-admin__edit btn-text btn-small"
                 >{{i18n "gamification.edit"}} </LinkTo>
               </td>
               <td class="leaderboard-admin__listitem-action">
                 <DButton
-                  class="btn-flat leaderboard-admin__delete"
-                  @icon="trash-alt"
+                  class="btn-danger btn-small leaderboard-admin__delete"
+                  @label="gamification.delete"
                   @title="gamification.delete"
                   @action={{action "destroyLeaderboard" leaderboard}}
                 />
