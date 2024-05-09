@@ -74,7 +74,7 @@
         </tbody>
       </table>
     {{else}}
-      {{#if (not creatingNew)}}
+      {{#unless creatingNew}}
         <div class="admin-plugin-config-area__empty-list">
           {{i18n "gamification.leaderboard.none"}}
           <DButton

@@ -90,14 +90,12 @@ export default class AdminEditLeaderboard extends Component {
               @value={{@leaderboard.fromDate}}
               @onSelect={{fn (mut @leaderboard.fromDate)}}
               class="leaderboard-edit__from-date date-input"
-              class="date-input"
             />
             <DatePicker
               @placeholder="yyyy-mm-dd"
               @value={{@leaderboard.toDate}}
               @onSelect={{fn (mut @leaderboard.toDate)}}
               class="leaderboard-edit__to-date date-input"
-              class="date-input"
             />
             <div>{{i18n "gamification.leaderboard.date.helper"}}</div>
           </div>
@@ -106,7 +104,6 @@ export default class AdminEditLeaderboard extends Component {
           <label class="control-label">
             {{i18n "gamification.leaderboard.included_groups"}}
           </label>
-          {{log @leaderboard}}
           <GroupChooser
             @id="leaderboard-edit__included-groups"
             @content={{this.siteGroups}}
@@ -158,7 +155,7 @@ export default class AdminEditLeaderboard extends Component {
       />
       <LinkTo
         class="btn-secondary leaderboard-edit__cancel"
-        @label="gamification.cancel"
+        @title="gamification.cancel"
         @route="adminPlugins.show.discourse-gamification-leaderboards"
       />
     </form>
