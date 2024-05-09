@@ -153,11 +153,6 @@ export default class AdminEditLeaderboard extends Component {
         @action={{this.saveEdit}}
         @disabled={{this.saveEditDisabled}}
       />
-      <LinkTo
-        class="btn-secondary leaderboard-edit__cancel"
-        @title="gamification.cancel"
-        @route="adminPlugins.show.discourse-gamification-leaderboards"
-      />
     </form>
   </template>
 }
