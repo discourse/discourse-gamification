@@ -23,8 +23,11 @@
   }
 
   &__listitem-action {
-    width: 50px;
     text-align: right;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    justify-content: flex-end;
   }
 }
 

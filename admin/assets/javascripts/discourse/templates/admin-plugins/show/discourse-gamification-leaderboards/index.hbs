@@ -31,7 +31,6 @@
           <th>{{i18n "gamification.admin.name"}}</th>
           <th>{{i18n "gamification.admin.period"}}</th>
           <th></th>
-          <th></th>
         </thead>
 
         <tbody>
@@ -54,20 +53,21 @@
                   {{leaderboard.defaultPeriod}}
                 {{/if}}
               </td>
-              <td class="leaderboard-admin__listitem-action">
-                <LinkTo
-                  @route="adminPlugins.show.discourse-gamification-leaderboards.show"
-                  @model={{leaderboard}}
-                  class="btn leaderboard-admin__edit btn-text btn-small"
-                >{{i18n "gamification.edit"}} </LinkTo>
-              </td>
-              <td class="leaderboard-admin__listitem-action">
-                <DButton
-                  class="btn-danger btn-small leaderboard-admin__delete"
-                  @label="gamification.delete"
-                  @title="gamification.delete"
-                  @action={{action "destroyLeaderboard" leaderboard}}
-                />
+              <td style="width: 120px">
+                <div class="leaderboard-admin__listitem-action">
+                  <LinkTo
+                    @route="adminPlugins.show.discourse-gamification-leaderboards.show"
+                    @model={{leaderboard}}
+                    class="btn leaderboard-admin__edit btn-text btn-small"
+                  >{{i18n "gamification.edit"}} </LinkTo>
+
+                  <DButton
+                    class="btn-small leaderboard-admin__delete"
+                    @icon="trash-alt"
+                    @title="gamification.delete"
+                    @action={{action "destroyLeaderboard" leaderboard}}
+                  />
+                </div>
               </td>
             </tr>
           {{/each}}
