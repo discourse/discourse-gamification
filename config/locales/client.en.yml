@@ -20,7 +20,7 @@ en:
           text: "Points are awarded for engaging with the community, such as visiting, liking, and posting. Your score is updated every few minutes. So go be helpful, active, and supportive, and rise through the ranks!"
         name: "Name"
         name_placeholder: "Name..."
-        new: "Add new"
+        new: "New Leaderboard"
         create_success: "Leaderboard created"
         delete_success: "Leaderboard deleted"
         save_success: "Leaderboard saved"

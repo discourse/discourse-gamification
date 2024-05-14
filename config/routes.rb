@@ -10,6 +10,7 @@ Discourse::Application.routes.draw do
 
   scope "/admin/plugins/discourse-gamification", constraints: StaffConstraint.new do
     get "/leaderboards" => "discourse_gamification/admin_gamification_leaderboard#index"
+    get "/leaderboards/:id" => "discourse_gamification/admin_gamification_leaderboard#show"
   end
 
   get "/admin/plugins/gamification" =>

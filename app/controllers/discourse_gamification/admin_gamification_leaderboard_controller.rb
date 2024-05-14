@@ -11,6 +11,13 @@ class DiscourseGamification::AdminGamificationLeaderboardController < Admin::Adm
     )
   end
 
+  def show
+    render json:
+             LeaderboardSerializer.new(
+               DiscourseGamification::GamificationLeaderboard.find(params[:id]),
+             )
+  end
+
   def create
     params.require(%i[name created_by_id])
 
