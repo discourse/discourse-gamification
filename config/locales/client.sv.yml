@@ -20,7 +20,6 @@ sv:
           text: "Poäng delas ut för att du engagerar dig i gemenskapen, till exempel genom att besöka, gilla och publicera. Dina poäng uppdateras med några minuters mellanrum. Var hjälpsam, aktiv och stödjande och stig sedan i graderna!"
         name: "Namn"
         name_placeholder: "Namn..."
-        new: "Lägg till ny"
         cta: "Skapa din första topplista"
         none: "Inga topplistor har skapats ännu."
         confirm_destroy: "Är du säker på att du vill ta bort denna topplista?"

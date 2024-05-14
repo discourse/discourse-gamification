@@ -25,7 +25,7 @@ es:
           text: "Recibirás puntos por participar en la comunidad. Por ejemplo, cuando la visitas, usas el botón de me gusta o publicas cosas. Tu puntuación se actualiza cada pocos minutos. Así que ya sabes, ¡participa, ayuda y sube de posición!"
         name: "Nombre"
         name_placeholder: "Nombre..."
-        new: "Añadir nueva"
+        new: "Nueva tabla de clasificación"
         cta: "Crea la primera tabla de clasificación"
         none: "Todavía no hay ninguna tabla de clasificación."
         confirm_destroy: "¿Estás seguro de que quieres eliminar esta tabla de clasificación?"

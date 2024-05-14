@@ -25,7 +25,6 @@ tr_TR:
           text: "Ziyaret etme, beğenme ve gönderme gibi toplulukla etkileşim için puan verilir. Puanınız birkaç dakikada bir güncellenir. Bu yüzden yardımsever, aktif ve destekleyici olun ve sıralamada yükselin!"
         name: "Ad"
         name_placeholder: "Ad..."
-        new: "Yeni ekle"
         cta: "İlk liderlik tablonuzu oluşturun"
         none: "Henüz liderlik tablosu oluşturulmadı."
         confirm_destroy: "Bu liderlik tablosunu silmek istediğinizden emin misiniz?"
