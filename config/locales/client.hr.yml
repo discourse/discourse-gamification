@@ -20,6 +20,7 @@ hr:
           text: "Bodovi se dodjeljuju za interakciju sa zajednicom, kao što su posjete, sviđanje i objavljivanje. Vaš rezultat se ažurira svakih nekoliko minuta. Zato budite od pomoći, aktivni i podržavajte i napredujte kroz činove!"
         name: "Ime"
         name_placeholder: "Ime..."
+        new: "Nova ploča s najboljim rezultatima"
         confirm_destroy: "Jeste li sigurni da želite izbrisati ovu ploču s najboljim rezultatima?"
         date:
           range: "Od/do datumskog raspona"

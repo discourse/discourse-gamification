@@ -25,7 +25,6 @@ fi:
           text: "Pisteitä annetaan vuorovaikutuksesta yhteisön kanssa, kuten vierailusta, tykkäämisestä ja viestien lähettämisestä. Tuloksesi päivitetään muutaman minuutin välein. Ole siis avulias, aktiivinen ja tukea antava ja nouse sijoituksissa!"
         name: "Nimi"
         name_placeholder: "Nimi..."
-        new: "Lisää uusi"
         cta: "Tee ensimmäinen tulostaulukkosi"
         none: "Tulostaulukoita ei ole vielä luotu."
         confirm_destroy: "Oletko varma, että haluat poistaa tämän tulostaulukon?"

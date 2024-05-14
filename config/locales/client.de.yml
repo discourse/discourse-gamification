@@ -25,7 +25,7 @@ de:
           text: "Punkte werden für die Interaktion mit der Community vergeben, z. B. für Besuche, „Gefällt mir“ und Posten. Deine Punktzahl wird alle paar Minuten aktualisiert. Sei also hilfsbereit, aktiv sowie solidarisch und steige auf!"
         name: "Name"
         name_placeholder: "Name …"
-        new: "Neu hinzufügen"
+        new: "Neue Rangliste"
         create_success: "Rangliste erstellt"
         delete_success: "Rangliste gelöscht"
         save_success: "Rangliste gespeichert"

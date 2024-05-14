@@ -25,7 +25,6 @@ fr:
           text: "Des points sont attribués pour l'engagement auprès de la communauté, par exemple pour les visites, les mentions J'aime et les publications. Votre score est mis à jour toutes les quelques minutes. Veillez donc à être aimable, actif(ve) et solidaire, et gravissez les échelons !"
         name: "Nom"
         name_placeholder: "Nom…"
-        new: "Ajouter"
         cta: "Créez votre premier classement"
         none: "Aucun classement n'a encore été créé."
         confirm_destroy: "Voulez-vous vraiment supprimer ce classement ?"

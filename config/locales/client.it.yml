@@ -25,7 +25,6 @@ it:
           text: "I punti vengono assegnati per il coinvolgimento con la community, ad esempio in base al numero di visite, Mi piace e pubblicazioni. Il tuo punteggio viene aggiornato ogni pochi minuti. Quindi cerca di essere propositivo, attivo e di supporto per scalare le classifiche!"
         name: "Nome"
         name_placeholder: "Nome..."
-        new: "Aggiungi nuova"
         cta: "Crea la tua prima classifica"
         none: "Nessuna classifica ancora creata."
         confirm_destroy: "Vuoi cancellare questa classifica?"
