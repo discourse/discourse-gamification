@@ -1,1 +1,9 @@
+<DBreadcrumbsItem as |linkClass|>
+  <LinkTo
+    @route="adminPlugins.show.discourse-gamification-leaderboards.index"
+    class={{linkClass}}
+  >
+    {{i18n "gamification.leaderboard.title"}}
+  </LinkTo>
+</DBreadcrumbsItem>
 <AdminEditLeaderboard @leaderboard={{@model}} />
