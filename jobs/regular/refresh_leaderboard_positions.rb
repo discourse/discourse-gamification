@@ -4,7 +4,7 @@ module Jobs
   class RefreshLeaderboardPositions < ::Jobs::Base
     def execute(args)
       leaderboard_id = args[:leaderboard_id]
-      raise Discourse::InvalidParameters.new(:leaderboard_id) unless leaderboard_id.present?
+      raise Discourse::InvalidParameters.new(:leaderboard_id) if leaderboard_id.blank?
 
       leaderboard = DiscourseGamification::GamificationLeaderboard.find_by(id: leaderboard_id)
       return unless leaderboard
