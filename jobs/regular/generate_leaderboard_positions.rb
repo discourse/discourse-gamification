@@ -4,7 +4,7 @@ module Jobs
   class GenerateLeaderboardPositions < ::Jobs::Base
     def execute(args)
       leaderboard_id = args[:leaderboard_id]
-      raise Discourse::InvalidParameters.new(:leaderboard_id) unless leaderboard_id.present?
+      raise Discourse::InvalidParameters.new(:leaderboard_id) if leaderboard_id.blank?
 
       DistributedMutex.synchronize(
         "gamification_generate_leaderboard_positions_#{leaderboard_id}",
