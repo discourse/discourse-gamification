@@ -14,6 +14,7 @@ id:
         name: "Nama"
         period:
           all_time: "Sepanjang Waktu"
+      create: "Buat"
       cancel: "Batal"
       close: "Tutup"
       delete: "Hapus"

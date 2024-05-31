@@ -14,6 +14,12 @@ te:
         name: "పేరు"
         period:
           all_time: "ఆల్ టైమ్"
+          yearly: "వార్షిక"
+          quarterly: "త్రైమాసిక"
+          monthly: "నెలవారీ"
+          weekly: "వారానికోసారి"
+          daily: "రోజువారీ"
+      create: "సృష్టించండి"
       cancel: "రద్దుచేయి"
       close: "మూసివేయి"
       delete: "తొలగించు"
@@ -23,5 +29,6 @@ te:
       apply: "ఆపాదించు"
       update_range:
         all_time: "ఆల్ టైమ్"
+      custom_range_from: "నుండి"
       admin:
         name: "పేరు"

@@ -29,6 +29,9 @@ sk:
       save: "Uložiť"
       apply: "Použi"
       update_range:
+        last_10_days: "Posledných 10 dní"
+        last_30_days: "Posledných 30 dní"
+        last_90_days: "Posledných 90 dní"
         all_time: "Za celú dobu"
       custom_range_from: "Od"
       admin:

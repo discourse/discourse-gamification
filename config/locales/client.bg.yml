@@ -19,6 +19,7 @@ bg:
           monthly: "Месечно"
           weekly: "Седмично"
           daily: "Дневно"
+      create: "Създай"
       cancel: "Прекрати"
       close: "Затвори"
       delete: "Изтрий"
