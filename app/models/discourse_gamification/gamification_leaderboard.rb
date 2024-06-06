@@ -5,8 +5,10 @@ module ::DiscourseGamification
     PAGE_SIZE = 100
 
     self.table_name = "gamification_leaderboards"
+
     validates :name, exclusion: { in: %w[new], message: "%{value} is reserved." }
 
+    attribute :period, :integer
     enum :period, { all_time: 0, yearly: 1, quarterly: 2, monthly: 3, weekly: 4, daily: 5 }
 
     def resolve_period(given_period)

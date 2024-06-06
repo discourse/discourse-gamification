@@ -42,14 +42,9 @@ describe Jobs::UpdateScoresForToday do
         expect { leaderboard_1_positions.scores }.to raise_error(
           DiscourseGamification::LeaderboardCachedView::NotReadyError,
         )
-
-        DB.active_record_connection.current_transaction.rollback
-
         expect { leaderboard_2_positions.scores }.to raise_error(
           DiscourseGamification::LeaderboardCachedView::NotReadyError,
         )
-
-        DB.active_record_connection.current_transaction.rollback
       end
 
       run_job
