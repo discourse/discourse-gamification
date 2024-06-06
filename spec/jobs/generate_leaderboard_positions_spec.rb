@@ -12,8 +12,6 @@ describe Jobs::GenerateLeaderboardPositions do
       DiscourseGamification::LeaderboardCachedView::NotReadyError,
     )
 
-    DB.active_record_connection.current_transaction.rollback
-
     described_class.new.execute(leaderboard_id: leaderboard.id)
 
     expect(leaderboard_positions.scores.length).to eq(1)
