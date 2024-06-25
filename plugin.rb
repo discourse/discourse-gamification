@@ -82,8 +82,12 @@ after_initialize do
     {
       gamification_recalculate_scores_remaining:
         DiscourseGamification::RecalculateScoresRateLimiter.remaining,
-      gamification_groups: Group.all,
-      gamification_leaderboards: DiscourseGamification::GamificationLeaderboard.all,
+      gamification_groups:
+        Group.all.map { |g| BasicGroupSerializer.new(g, root: false, scope: self.scope).as_json },
+      gamification_leaderboards:
+        DiscourseGamification::GamificationLeaderboard.all.map do |l|
+          LeaderboardSerializer.new(l, root: false).as_json
+        end,
     }
   end
 
