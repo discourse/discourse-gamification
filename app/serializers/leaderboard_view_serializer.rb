@@ -29,6 +29,6 @@ class LeaderboardViewSerializer < ApplicationSerializer
         period: object[:period],
       ).take
 
-    { user: user_score, position: user_score.try(:position) }
+    { user: UserScoreSerializer.new(user_score, root: false), position: user_score.try(:position) }
   end
 end
