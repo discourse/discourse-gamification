@@ -37,7 +37,7 @@ describe ::DiscourseGamification do
   end
 end
 
-describe "when merging users" do
+context "when merging users" do
   fab!(:user_1) { Fabricate(:user) }
   fab!(:user_2) { Fabricate(:user) }
   fab!(:leaderboard) { Fabricate(:gamification_leaderboard) }
