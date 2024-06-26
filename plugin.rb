@@ -113,4 +113,8 @@ after_initialize do
 
     Jobs.enqueue(::Jobs::RegenerateLeaderboardPositions)
   end
+
+  on(:merging_users) do |source_user, target_user|
+    DiscourseGamification::GamificationScore.merge_scores(source_user, target_user)
+  end
 end
