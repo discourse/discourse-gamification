@@ -160,15 +160,37 @@ end
 
 RSpec.describe ::DiscourseGamification::PostCreated do
   it_behaves_like "Scorable Type" do
-    before { Fabricate.times(10, :post, user: current_user) }
+    before do
+      Fabricate.times(2, :post, user: current_user, post_number: 2)
 
-    # ten posts created
-    let(:expected_score) { 20 }
+      # OP is not counted
+      Fabricate(:post, user: current_user, post_number: 1)
+
+      # small action are not counted
+      Fabricate(:post, post_type: Post.types[:moderator_action], user: current_user, post_number: 2)
+
+      # hidden posts are not counted
+      Fabricate(
+        :post,
+        user: current_user,
+        hidden: true,
+        hidden_at: 5.minutes.ago,
+        hidden_reason_id: Post.hidden_reasons[:flagged_by_tl3_user],
+        post_number: 2,
+      )
+
+      # deleted topics are not counted
+      deleted_topic = Fabricate(:topic)
+      Fabricate(:post, user: current_user, post_number: 2, topic: deleted_topic)
+      deleted_topic.destroy!
+    end
+
+    let(:expected_score) { 4 }
   end
 
   it_behaves_like "Category Scoped Scorable Type" do
     let(:topic) { Fabricate(:topic, user: user, category: category_allowed) }
-    let(:class_action_fabricator) { Fabricate(:post, topic: topic, user: user) }
+    let(:class_action_fabricator) { Fabricate(:post, topic: topic, user: user, post_number: 2) }
 
     let(:expected_score) { 2 }
   end
