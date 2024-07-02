@@ -163,8 +163,26 @@ RSpec.describe ::DiscourseGamification::PostCreated do
     before do
       Fabricate.times(2, :post, user: current_user, post_number: 2)
 
-      # OP should not be counted
-      Fabricate.times(1, :post, user: current_user, post_number: 1)
+      # OP is not counted
+      Fabricate(:post, user: current_user, post_number: 1)
+
+      # small action are not counted
+      Fabricate(:post, post_type: Post.types[:moderator_action], user: current_user, post_number: 2)
+
+      # hidden posts are not counted
+      Fabricate(
+        :post,
+        user: current_user,
+        hidden: true,
+        hidden_at: 5.minutes.ago,
+        hidden_reason_id: Post.hidden_reasons[:flagged_by_tl3_user],
+        post_number: 2,
+      )
+
+      # deleted topics are not counted
+      deleted_topic = Fabricate(:topic)
+      Fabricate(:post, user: current_user, post_number: 2, topic: deleted_topic)
+      deleted_topic.destroy!
     end
 
     let(:expected_score) { 4 }
