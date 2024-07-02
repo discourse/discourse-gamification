@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 # name: discourse-gamification
-# about: Award users with a score for accomplishments
+# about: Allows admins to create and customize community scoring contests for user accomplishments with leaderboards.
+# meta_topic_id: 225916
 # version: 0.0.1
 # authors: Discourse
 # url: https://github.com/discourse/discourse-gamification
 # required_version: 2.7.0
-# transpile_js: true
 
 enabled_site_setting :discourse_gamification_enabled
 
@@ -30,12 +30,21 @@ end
 require_relative "lib/discourse_gamification/engine"
 
 after_initialize do
-  # route: /admin/plugins/gamification
-  add_admin_route "gamification.admin.title", "gamification"
+  # route: /admin/plugins/discourse-gamification
+  add_admin_route(
+    "gamification.admin.title",
+    "discourse-gamification",
+    { use_new_show_route: true },
+  )
 
   require_relative "jobs/scheduled/update_scores_for_ten_days"
   require_relative "jobs/scheduled/update_scores_for_today"
   require_relative "jobs/regular/recalculate_scores"
+  require_relative "jobs/regular/generate_leaderboard_positions"
+  require_relative "jobs/regular/refresh_leaderboard_positions"
+  require_relative "jobs/regular/delete_leaderboard_positions"
+  require_relative "jobs/regular/update_stale_leaderboard_positions"
+  require_relative "jobs/regular/regenerate_leaderboard_positions"
   require_relative "lib/discourse_gamification/directory_integration"
   require_relative "lib/discourse_gamification/guardian_extension"
   require_relative "lib/discourse_gamification/scorables/scorable"
@@ -51,9 +60,10 @@ after_initialize do
   require_relative "lib/discourse_gamification/scorables/user_invited"
   require_relative "lib/discourse_gamification/user_extension"
   require_relative "lib/discourse_gamification/recalculate_scores_rate_limiter"
+  require_relative "lib/discourse_gamification/leaderboard_cached_view"
 
   reloadable_patch do |plugin|
-    User.class_eval { prepend DiscourseGamification::UserExtension }
+    User.prepend(DiscourseGamification::UserExtension)
     Guardian.include(DiscourseGamification::GuardianExtension)
   end
 
@@ -62,6 +72,23 @@ after_initialize do
       "gamification_score",
       query: DiscourseGamification::DirectoryIntegration.query,
     )
+  end
+
+  add_to_serializer(
+    :admin_plugin,
+    :extras,
+    include_condition: -> { self.name == "discourse-gamification" },
+  ) do
+    {
+      gamification_recalculate_scores_remaining:
+        DiscourseGamification::RecalculateScoresRateLimiter.remaining,
+      gamification_groups:
+        Group.all.map { |g| BasicGroupSerializer.new(g, root: false, scope: self.scope).as_json },
+      gamification_leaderboards:
+        DiscourseGamification::GamificationLeaderboard.all.map do |l|
+          LeaderboardSerializer.new(l, root: false).as_json
+        end,
+    }
   end
 
   add_to_serializer(:user_card, :gamification_score) { object.gamification_score }
@@ -73,4 +100,21 @@ after_initialize do
     .root
     .join("plugins", "discourse-gamification", "db", "fixtures")
     .to_s
+
+  begin
+    # Purge and replace all stale leaderboard positions
+    Jobs.enqueue(::Jobs::UpdateStaleLeaderboardPositions)
+  rescue PG::ConnectionBad, ActiveRecord::NoDatabaseError
+    # Ignore PG failures if we don't have a schema set up.
+  end
+
+  on(:site_setting_changed) do |name|
+    next if name != :score_ranking_strategy
+
+    Jobs.enqueue(::Jobs::RegenerateLeaderboardPositions)
+  end
+
+  on(:merging_users) do |source_user, target_user|
+    DiscourseGamification::GamificationScore.merge_scores(source_user, target_user)
+  end
 end

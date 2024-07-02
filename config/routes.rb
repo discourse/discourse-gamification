@@ -7,6 +7,12 @@ end
 
 Discourse::Application.routes.draw do
   mount ::DiscourseGamification::Engine, at: "/leaderboard"
+
+  scope "/admin/plugins/discourse-gamification", constraints: StaffConstraint.new do
+    get "/leaderboards" => "discourse_gamification/admin_gamification_leaderboard#index"
+    get "/leaderboards/:id" => "discourse_gamification/admin_gamification_leaderboard#show"
+  end
+
   get "/admin/plugins/gamification" =>
         "discourse_gamification/admin_gamification_leaderboard#index",
       :constraints => StaffConstraint.new

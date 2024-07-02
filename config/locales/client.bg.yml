@@ -10,6 +10,7 @@ bg:
       you: "Вие"
       leaderboard:
         link_to_settings: "Настройки"
+        refresh: "Обнови"
         name: "Име"
         period:
           all_time: "От началото"
@@ -18,6 +19,7 @@ bg:
           monthly: "Месечно"
           weekly: "Седмично"
           daily: "Дневно"
+      create: "Създай"
       cancel: "Прекрати"
       close: "Затвори"
       delete: "Изтрий"

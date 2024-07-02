@@ -10,6 +10,7 @@ sr:
       you: "Ti"
       leaderboard:
         link_to_settings: "Podešavanja"
+        refresh: "Osveži"
         name: "Ime foruma"
         period:
           all_time: "Oduvek"

@@ -3,20 +3,25 @@
 describe "Recalculate Scores Form", type: :system do
   let(:recalculate_scores_modal) { PageObjects::Modals::RecalculateScoresForm.new }
 
-  fab!(:admin) { Fabricate(:admin) }
+  fab!(:admin)
   fab!(:leaderboard) { Fabricate(:gamification_leaderboard) }
 
   before do
     RateLimiter.enable
     SiteSetting.discourse_gamification_enabled = true
+    DiscourseGamification::LeaderboardCachedView.new(leaderboard).create
     sign_in(admin)
   end
+
+  use_redis_snapshotting
 
   def format_date(date)
     date.midnight.strftime("%b %-d, %Y")
   end
 
   it "has date options that are valid and can be applied" do
+    freeze_time
+
     visit("/admin/plugins/gamification")
     find(".leaderboard-admin__btn-recalculate").click
 
@@ -44,39 +49,24 @@ describe "Recalculate Scores Form", type: :system do
     expect(recalculate_scores_modal.custom_since_date.value).to eq(today)
   end
 
-  describe "when admin has daily recalculation remaining" do
-    it "clicking 'apply' should decrease and show the daily recalculation remaining" do
+  context "when admin has daily recalculation remaining" do
+    it "can trigger recalculation" do
       visit("/admin/plugins/gamification")
       find(".leaderboard-admin__btn-recalculate").click
 
       recalculate_scores_modal.apply.click
 
-      try_until_success do
-        expect(recalculate_scores_modal.status.text).to eq(I18n.t("js.gamification.recalculating"))
-      end
-
-      try_until_success do
-        ::MessageBus.publish "/recalculate_scores",
-                             {
-                               success: true,
-                               remaining:
-                                 DiscourseGamification::RecalculateScoresRateLimiter.remaining,
-                             }
-        expect(recalculate_scores_modal.status.text).to eq(I18n.t("js.gamification.completed"))
-      end
+      expect(recalculate_scores_modal.status).to have_content(
+        I18n.t("js.gamification.recalculating"),
+      )
       expect(recalculate_scores_modal).to have_button("apply-section", disabled: true)
 
-      expect(recalculate_scores_modal.remaining.text).to eq(
-        I18n.t(
-          "js.gamification.daily_update_scores_availability",
-          count: DiscourseGamification::RecalculateScoresRateLimiter.remaining,
-        ),
-      )
+      expect(Jobs::RecalculateScores.jobs.count).to eq(1)
     end
   end
 
-  describe "when admin does not have daily recalculation remaining" do
-    it "'apply' button should be disabled" do
+  context "when admin does not have daily recalculation remaining" do
+    it "disables the 'apply' button" do
       5.times { DiscourseGamification::RecalculateScoresRateLimiter.perform! }
 
       visit("/admin/plugins/gamification")

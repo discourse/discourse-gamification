@@ -10,6 +10,7 @@ lt:
       you: "Jūs"
       leaderboard:
         link_to_settings: "Nustatymai"
+        refresh: "Atnaujinti"
         name: "Vardas"
         period:
           all_time: "Per visą laiką"

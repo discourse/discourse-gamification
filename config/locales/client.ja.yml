@@ -5,6 +5,11 @@
 # https://translate.discourse.org/
 
 ja:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          discourse_gamification: "Discourse ゲーミフィケーション"
   js:
     gamification_score: "拍手"
     gamification:
@@ -14,12 +19,12 @@ ja:
         title: "リーダーボード"
         info: "仕組みは？"
         link_to_settings: "設定"
+        refresh: "更新"
         modal:
           title: "リーダーボードの仕組みは？"
           text: "アクセス、「いいね！」、投稿など、コミュニティーでのアクションに対してポイントが付与されます。スコアは数分ごとに更新されます。活発な協力を通じて、ランクを上げましょう！"
         name: "名前"
         name_placeholder: "名前..."
-        new: "新規追加"
         cta: "最初のリーダーボードを作成しよう"
         none: "リーダーボードはまだ作成されていません。"
         confirm_destroy: "このリーダーボードを削除してもよろしいですか？"

@@ -7,7 +7,7 @@ describe Jobs::RecalculateScores do
 
   before { RateLimiter.enable }
 
-  it "publishs MessageBus and executes job" do
+  it "publishes MessageBus and executes job" do
     since = 10.days.ago
     DiscourseGamification::GamificationScore.expects(:calculate_scores).with(since_date: since)
 
@@ -15,6 +15,6 @@ describe Jobs::RecalculateScores do
       .expects(:publish)
       .with("/recalculate_scores", { success: true, remaining: 5, user_id: [current_user.id] })
       .once
-    Jobs::RecalculateScores.new.execute(since: since, user_id: current_user.id)
+    Jobs::RecalculateScores.new.execute({ since: since, user_id: current_user.id })
   end
 end

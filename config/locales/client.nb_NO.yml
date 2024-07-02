@@ -10,6 +10,7 @@ nb_NO:
       you: "Du"
       leaderboard:
         link_to_settings: "Instillinger"
+        refresh: "Last inn siden på nytt"
         name: "Navn"
         period:
           all_time: "Totalt"

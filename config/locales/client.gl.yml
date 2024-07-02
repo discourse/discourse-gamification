@@ -10,6 +10,7 @@ gl:
       you: "Vostede"
       leaderboard:
         link_to_settings: "Configuración"
+        refresh: "Actualizar"
         name: "Nome"
         period:
           all_time: "Desde o principio"

@@ -5,6 +5,11 @@
 # https://translate.discourse.org/
 
 fr:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          discourse_gamification: "Gamification de Discourse"
   js:
     gamification_score: "Acclamations"
     gamification:
@@ -14,12 +19,12 @@ fr:
         title: "Classements"
         info: "Comment ça fonctionne ?"
         link_to_settings: "Paramètres"
+        refresh: "Actualiser"
         modal:
           title: "Comment fonctionne le classement ?"
           text: "Des points sont attribués pour l'engagement auprès de la communauté, par exemple pour les visites, les mentions J'aime et les publications. Votre score est mis à jour toutes les quelques minutes. Veillez donc à être aimable, actif(ve) et solidaire, et gravissez les échelons !"
         name: "Nom"
-        name_placeholder: "nom…"
-        new: "Ajouter"
+        name_placeholder: "Nom…"
         cta: "Créez votre premier classement"
         none: "Aucun classement n'a encore été créé."
         confirm_destroy: "Voulez-vous vraiment supprimer ce classement ?"

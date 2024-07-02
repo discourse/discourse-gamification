@@ -10,6 +10,7 @@ pt:
       you: "Você"
       leaderboard:
         link_to_settings: "Configurações"
+        refresh: "Atualizar"
         name: "Nome"
         period:
           all_time: "Desde Sempre"

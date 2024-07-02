@@ -10,6 +10,7 @@ th:
       you: "คุณ"
       leaderboard:
         link_to_settings: "การตั้งค่า"
+        refresh: "รีเฟรช"
         name: "ชื่อ"
         period:
           all_time: "ตลอดเวลา"

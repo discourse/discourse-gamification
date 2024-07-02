@@ -10,6 +10,7 @@ et:
       you: "Sina"
       leaderboard:
         link_to_settings: "Sätted"
+        refresh: "Värskenda"
         name: "Nimi"
         period:
           all_time: "Alates algusest"

@@ -10,6 +10,7 @@ hy:
       you: "Դուք "
       leaderboard:
         link_to_settings: "Կարգավորումներ"
+        refresh: "Թարմացնել"
         name: "Անուն"
         period:
           all_time: "Ամբողջ Ժամանակվա"

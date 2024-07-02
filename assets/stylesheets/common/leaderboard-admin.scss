@@ -22,12 +22,17 @@
     padding-left: 0;
   }
 
-  &__btn-cancel-edit {
-    margin-left: 1rem;
-  }
-
   &__listitem-action {
-    width: 50px;
     text-align: right;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    justify-content: flex-end;
+  }
+}
+
+.leaderboard-edit {
+  &__cancel {
+    margin-left: 1rem;
   }
 }

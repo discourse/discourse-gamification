@@ -4,12 +4,14 @@
 >
   <:body>
     {{#if (eq this.status "loading")}}
-      <div class="recalculate-modal__status"><em>{{i18n
-            "gamification.recalculating"
-          }}</em></div>
+      <div class="recalculate-modal__status">
+        <em>{{i18n "gamification.recalculating"}}</em>
+      </div>
     {{else if (eq this.status "complete")}}
-      <div class="status is-success">{{d-icon "check"}}
-        {{i18n "gamification.completed"}}</div>
+      <div class="recalculate-modal__status is-success">
+        {{d-icon "check"}}
+        {{i18n "gamification.completed"}}
+      </div>
     {{else}}
       <form class="form-horizontal">
         <div class="input-group">
@@ -21,15 +23,16 @@
             @value={{this.updateRangeValue}}
             @onChange={{action (mut this.updateRangeValue)}}
           />
+
           {{#if (eq this.updateRangeValue 5)}}
             <div class="input-group -custom-range">
               <label>{{i18n "gamification.custom_range_from"}}</label>
               <DatePickerPast
                 @id="custom-from-date"
-                @class="date-input"
                 @placeholder="yyyy-mm-dd"
                 @value={{recalculateFromDate}}
                 @onSelect={{action (mut recalculateFromDate)}}
+                class="date-input"
               />
             </div>
           {{else}}
@@ -41,26 +44,28 @@
       </form>
     {{/if}}
   </:body>
+
   <:footer>
     <DButton
-      @id="apply-section"
       @action={{action "apply"}}
-      @class="btn-primary"
       @label="gamification.apply"
       @ariaLabel="gamification.apply"
       @disabled={{applyDisabled}}
+      id="apply-section"
+      class="btn-primary"
     />
     <DButton
-      @id="cancel-section"
       @action={{@closeModal}}
-      @class="btn-secondary"
       @label={{if
         (eq status "complete")
         "gamification.close"
         "gamification.cancel"
       }}
       @ariaLabel="gamification.cancel"
+      id="cancel-section"
+      class="btn-secondary"
     />
+
     <div class="recalculate-modal__footer-text">{{remainingText}}</div>
   </:footer>
 </DModal>

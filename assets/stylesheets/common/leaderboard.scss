@@ -258,6 +258,15 @@
       color: var(--secondary);
     }
   }
+
+  &__not-ready {
+    display: flex;
+    align-items: center;
+
+    p {
+      margin-right: 0.5em;
+    }
+  }
 }
 
 .recalculate-scores-form-modal {
@@ -287,7 +296,7 @@
     }
   }
 
-  .status.is-success .d-icon-check {
+  .recalculate-modal__status.is-success .d-icon-check {
     color: $success;
   }
 }

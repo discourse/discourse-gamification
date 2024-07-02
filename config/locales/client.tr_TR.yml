@@ -5,6 +5,11 @@
 # https://translate.discourse.org/
 
 tr_TR:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          discourse_gamification: "Discourse Oyunlaştırma"
   js:
     gamification_score: "Tezahürat"
     gamification:
@@ -14,12 +19,12 @@ tr_TR:
         title: "Liderlik Tabloları"
         info: "Bu nasıl işler?"
         link_to_settings: "Ayarlar"
+        refresh: "Yenile"
         modal:
           title: "Liderlik tablosu nasıl işler?"
           text: "Ziyaret etme, beğenme ve gönderme gibi toplulukla etkileşim için puan verilir. Puanınız birkaç dakikada bir güncellenir. Bu yüzden yardımsever, aktif ve destekleyici olun ve sıralamada yükselin!"
         name: "Ad"
-        name_placeholder: "ad..."
-        new: "Yeni ekle"
+        name_placeholder: "Ad..."
         cta: "İlk liderlik tablonuzu oluşturun"
         none: "Henüz liderlik tablosu oluşturulmadı."
         confirm_destroy: "Bu liderlik tablosunu silmek istediğinizden emin misiniz?"

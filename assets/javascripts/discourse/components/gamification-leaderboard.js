@@ -1,10 +1,11 @@
 import Component from "@ember/component";
-import discourseComputed from "discourse-common/utils/decorators";
 import { action } from "@ember/object";
-import showModal from "discourse/lib/show-modal";
-import LoadMore from "discourse/mixins/load-more";
+import { inject as service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
+import LoadMore from "discourse/mixins/load-more";
+import discourseComputed from "discourse-common/utils/decorators";
+import LeaderboardInfo from "./modal/leaderboard-info";
 
 export const LEADERBOARD_PERIODS = [
   "all_time",
@@ -34,6 +35,9 @@ function periodString(periodValue) {
 }
 
 export default Component.extend(LoadMore, {
+  router: service(),
+  modal: service(),
+
   tagName: "",
   eyelineSelector: ".user",
   page: 1,
@@ -47,6 +51,11 @@ export default Component.extend(LoadMore, {
       this.model.leaderboard.default_period
     );
     this.set("period", default_leaderboard_period);
+  },
+
+  @discourseComputed("model.reason")
+  isNotReady(reason) {
+    return reason !== undefined;
   },
 
   @discourseComputed("model.users")
@@ -72,7 +81,7 @@ export default Component.extend(LoadMore, {
 
   @action
   showLeaderboardInfo() {
-    showModal("leaderboard-info");
+    this.modal.show(LeaderboardInfo);
   },
 
   @action
@@ -106,6 +115,7 @@ export default Component.extend(LoadMore, {
       .then((result) => {
         if (result.users.length === 0) {
           this.set("canLoadMore", false);
+          this.set("model.reason", result.reason);
         }
         this.set("page", 1);
         this.set("model.users", result.users);
@@ -113,5 +123,10 @@ export default Component.extend(LoadMore, {
       })
       .finally(() => this.set("loading", false))
       .catch(popupAjaxError);
+  },
+
+  @action
+  refresh() {
+    this.router.refresh();
   },
 });

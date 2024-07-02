@@ -5,6 +5,11 @@
 # https://translate.discourse.org/
 
 he:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          discourse_gamification: "Discourse משחוק"
   js:
     gamification_score: "תשועות"
     gamification:
@@ -14,12 +19,16 @@ he:
         title: "לוחות תוצאות"
         info: "איך זה עובד?"
         link_to_settings: "הגדרות"
+        refresh: "רענון"
         modal:
           title: "איך עובד לוח התוצאות?"
           text: "נקודות מוענקות על מעורבות בקהילה, כגון ביקור, סימוני לייק ופרסום. הניקוד שלך מתעדכן כל כמה דקות. לכן, מומלץ להביא תועלת, לקדם פעילות ולתמוך, ככה הניקוד הולך ועולה!"
         name: "שם"
         name_placeholder: "שם…"
-        new: "הוספת חדש"
+        new: "לוח תוצאות חדש"
+        create_success: "לוח תוצאות נוצר"
+        delete_success: "לוח תוצאות נמחק"
+        save_success: "לוח תוצאות נשמר"
         cta: "יצירת לוח התוצאות הראשון שלך"
         none: "לא נוצרו עדיין לוחות תוצאות."
         confirm_destroy: "למחוק את לוח התוצאות הזה?"
@@ -68,6 +77,6 @@ he:
         many: "נותרו %{count} חישובים מחדש יומיים"
         other: "נותרו %{count} חישובים מחדש יומיים"
       admin:
-        title: "משחקיות"
+        title: "משחוק"
         name: "שם"
         period: "פרק זמן"

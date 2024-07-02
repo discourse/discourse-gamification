@@ -5,6 +5,11 @@
 # https://translate.discourse.org/
 
 ar:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          discourse_gamification: "Discourse Gamification"
   js:
     gamification_score: "الهتافات"
     gamification:
@@ -14,12 +19,12 @@ ar:
         title: "لوحات المتصدرين"
         info: "كيف تسير الأمور؟"
         link_to_settings: "الإعدادات"
+        refresh: "تحديث"
         modal:
           title: "كيف تعمل لوحة المتصدرين؟"
           text: "يتم منح النقاط مقابل التفاعل مع المجتمع، مثل الزيارة والإعجاب والنشر. يتم تحديث درجاتك كل بضع دقائق. لذا كُن مفيدًا ونشطًا وداعمًا، وارتقِ في الترتيب!"
         name: "الاسم"
         name_placeholder: "الاسم..."
-        new: "إضافة جديد"
         cta: "اصنع لوحة المتصدرين الأولى لك"
         none: "لم يتم إنشاء أي لوحات متصدرين حتى الآن."
         confirm_destroy: "هل تريد بالتأكيد حذف لوحة المتصدرين هذه؟"

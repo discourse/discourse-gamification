@@ -4,25 +4,51 @@ module ::DiscourseGamification
   class DirectoryIntegration
     def self.query
       <<~SQL
-        WITH total_score AS (
+        WITH default_leaderboard AS (
+          SELECT
+            from_date,
+            to_date
+          FROM
+            gamification_leaderboards
+          ORDER BY
+            id ASC
+          LIMIT 1
+        ), total_score AS (
           SELECT
             user_id,
             SUM(score) AS score
           FROM
             gamification_scores
+          LEFT JOIN
+            default_leaderboard ON true
           WHERE
             date >= :since
+            AND
+            (
+              (
+                default_leaderboard.from_date IS NULL
+                OR
+                date >= default_leaderboard.from_date
+              )
+              AND
+              (
+                default_leaderboard.to_date IS NULL
+                OR
+                date <= default_leaderboard.to_date
+              )
+            )
           GROUP BY
             1
         ), scored_directory AS (
           SELECT
-            total_score.user_id,
+            directory_items.user_id,
             COALESCE(total_score.score, 0) AS score
           FROM
-            total_score
-          RIGHT JOIN
-            directory_items ON directory_items.period_type = :period_type AND
-            total_score.user_id = directory_items.user_id
+            directory_items
+          LEFT JOIN
+            total_score ON total_score.user_id = directory_items.user_id
+          WHERE
+            directory_items.period_type = :period_type
         )
         UPDATE
           directory_items

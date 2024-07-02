@@ -10,6 +10,7 @@ ca:
       you: "Vós"
       leaderboard:
         link_to_settings: "Configuració"
+        refresh: "Actualitza"
         name: "Nom"
         period:
           all_time: "Sempre"

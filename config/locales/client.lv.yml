@@ -10,6 +10,7 @@ lv:
       you: "Tu"
       leaderboard:
         link_to_settings: "Iestatījumi"
+        refresh: "Pārlādēt"
         name: "Vārds"
         period:
           all_time: "Vienmēr"
