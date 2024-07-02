@@ -160,15 +160,19 @@ end
 
 RSpec.describe ::DiscourseGamification::PostCreated do
   it_behaves_like "Scorable Type" do
-    before { Fabricate.times(10, :post, user: current_user) }
+    before do
+      Fabricate.times(2, :post, user: current_user, post_number: 2)
 
-    # ten posts created
-    let(:expected_score) { 20 }
+      # OP should not be counted
+      Fabricate.times(1, :post, user: current_user, post_number: 1)
+    end
+
+    let(:expected_score) { 4 }
   end
 
   it_behaves_like "Category Scoped Scorable Type" do
     let(:topic) { Fabricate(:topic, user: user, category: category_allowed) }
-    let(:class_action_fabricator) { Fabricate(:post, topic: topic, user: user) }
+    let(:class_action_fabricator) { Fabricate(:post, topic: topic, user: user, post_number: 2) }
 
     let(:expected_score) { 2 }
   end
