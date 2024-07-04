@@ -54,4 +54,11 @@ export default Controller.extend({
       model: this.model,
     });
   },
+
+  parseDate(date) {
+    if (date) {
+      // using the format YYYY-MM-DD returns the previous day for some timezones
+      return date.replace(/-/g, "/");
+    }
+  },
 });

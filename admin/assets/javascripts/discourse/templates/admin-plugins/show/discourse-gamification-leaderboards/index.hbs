@@ -46,9 +46,9 @@
               </td>
               <td>
                 {{#if leaderboard.fromDate}}
-                  {{format-date leaderboard.fromDate}}
+                  {{format-date (this.parseDate leaderboard.fromDate)}}
                   -
-                  {{format-date leaderboard.toDate}}
+                  {{format-date (this.parseDate leaderboard.toDate)}}
                 {{else}}
                   {{leaderboard.defaultPeriod}}
                 {{/if}}
