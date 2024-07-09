@@ -82,8 +82,12 @@ after_initialize do
     {
       gamification_recalculate_scores_remaining:
         DiscourseGamification::RecalculateScoresRateLimiter.remaining,
-      gamification_groups: Group.all,
-      gamification_leaderboards: DiscourseGamification::GamificationLeaderboard.all,
+      gamification_groups:
+        Group.all.map { |g| BasicGroupSerializer.new(g, root: false, scope: self.scope).as_json },
+      gamification_leaderboards:
+        DiscourseGamification::GamificationLeaderboard.all.map do |l|
+          LeaderboardSerializer.new(l, root: false).as_json
+        end,
     }
   end
 
@@ -108,5 +112,9 @@ after_initialize do
     next if name != :score_ranking_strategy
 
     Jobs.enqueue(::Jobs::RegenerateLeaderboardPositions)
+  end
+
+  on(:merging_users) do |source_user, target_user|
+    DiscourseGamification::GamificationScore.merge_scores(source_user, target_user)
   end
 end
