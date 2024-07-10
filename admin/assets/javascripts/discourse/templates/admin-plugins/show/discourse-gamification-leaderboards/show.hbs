@@ -1,5 +1,5 @@
 <DBreadcrumbsItem
-  @route="adminPlugins.show.discourse-gamification-leaderboards.index"
+  @path="/admin/plugins/{{this.adminPluginNavManager.currentPlugin.name}}/leaderboards"
   @label={{i18n "gamification.leaderboard.title"}}
 />
 <AdminEditLeaderboard @leaderboard={{@model}} />
