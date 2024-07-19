@@ -8,6 +8,7 @@ module PageObjects
       end
 
       def select_update_range(value: nil)
+        update_range_dropdown.expand
         update_range_dropdown.select_row_by_value(value)
       end
 
