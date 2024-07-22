@@ -21,6 +21,7 @@ acceptance(
 
     test("user card gamification score - score is present", async function (assert) {
       await visit("/t/internationalization-localization/280");
+      await click(".topic-map__users-trigger");
       await click('a[data-user-card="charlie"]');
 
       assert.ok(exists(".user-card .gamification-score"), "score is present");
