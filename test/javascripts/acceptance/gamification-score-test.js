@@ -2,11 +2,7 @@ import { click, visit } from "@ember/test-helpers";
 import { test } from "qunit";
 import userFixtures from "discourse/tests/fixtures/user-fixtures";
 import { fixturesByUrl } from "discourse/tests/helpers/create-pretender";
-import {
-  acceptance,
-  exists,
-  query,
-} from "discourse/tests/helpers/qunit-helpers";
+import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 import { cloneJSON } from "discourse-common/lib/object";
 
 acceptance(
@@ -24,11 +20,9 @@ acceptance(
       await click(".topic-map__users-trigger");
       await click('a[data-user-card="charlie"]');
 
-      assert.ok(exists(".user-card .gamification-score"), "score is present");
-      assert.ok(
-        query(".user-card .gamification-score").innerText.includes("10"),
-        "user card has gamification score"
-      );
+      assert
+        .dom(".user-card .gamification-score")
+        .hasText("Cheers 10", "user card has gamification score");
     });
   }
 );
@@ -47,16 +41,9 @@ acceptance(
     test("user profile gamification score - score is present", async function (assert) {
       await visit("/u/charlie/summary");
 
-      assert.ok(
-        exists(".user-profile-secondary-outlet.gamification-score"),
-        "score is present"
-      );
-      assert.ok(
-        query(
-          ".user-profile-secondary-outlet.gamification-score"
-        ).innerText.includes("10"),
-        "user metadata has gamification score"
-      );
+      assert
+        .dom(".details .secondary .gamification-score")
+        .hasText("10", "user metadata has gamification score");
     });
   }
 );
