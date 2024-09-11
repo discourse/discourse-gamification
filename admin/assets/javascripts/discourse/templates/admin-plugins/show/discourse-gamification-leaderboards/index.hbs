@@ -1,27 +1,31 @@
+<DBreadcrumbsItem
+  @path="/admin/plugins/{{this.adminPluginNavManager.currentPlugin.name}}/leaderboards"
+  @label={{i18n "gamification.leaderboard.title"}}
+/>
+
 <div class="discourse-gamification__leaderboards admin-detail">
-  <h3 class="leaderboard-admin__title">
-    {{i18n "gamification.leaderboard.title"}}
-  </h3>
+  <AdminPageSubheader @titleLabel="gamification.leaderboard.title">
+    <:actions as |actions|>
+      {{#if model.leaderboards}}
+        <actions.Primary
+          @label="gamification.leaderboard.new"
+          @title="gamification.leaderboard.new"
+          class="leaderboard-admin__btn-new"
+          @action={{action (mut creatingNew) true}}
+        />
+
+        <actions.Default
+          @label="gamification.recalculate"
+          @title="gamification.recalculate"
+          class="leaderboard-admin__btn-recalculate"
+          @action={{action "recalculateScores"}}
+        />
+      {{/if}}
+    </:actions>
+  </AdminPageSubheader>
 
   {{#if creatingNew}}
     <AdminCreateLeaderboard @onCancel={{action this.resetNewLeaderboard}} />
-  {{else}}
-    {{#if model.leaderboards}}
-      <DButton
-        @label="gamification.leaderboard.new"
-        @title="gamification.leaderboard.new"
-        @icon="plus"
-        class="btn-small btn-primary leaderboard-admin__btn-new"
-        @action={{action (mut creatingNew) true}}
-      />
-
-      <DButton
-        @label="gamification.recalculate"
-        @title="gamification.recalculate"
-        class="btn-small btn-secondary leaderboard-admin__btn-recalculate"
-        @action={{action "recalculateScores"}}
-      />
-    {{/if}}
   {{/if}}
 
   <div class="leaderboards">
@@ -62,7 +66,7 @@
                   >{{i18n "gamification.edit"}} </LinkTo>
 
                   <DButton
-                    class="btn-small leaderboard-admin__delete"
+                    class="btn-small leaderboard-admin__delete btn-danger"
                     @icon="trash-alt"
                     @title="gamification.delete"
                     @action={{action "destroyLeaderboard" leaderboard}}

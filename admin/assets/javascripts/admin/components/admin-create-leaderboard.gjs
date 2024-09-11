@@ -1,11 +1,10 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { Input } from "@ember/component";
 import { action } from "@ember/object";
 import { and } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
-import { not } from "truth-helpers";
 import DButton from "discourse/components/d-button";
+import Form from "discourse/components/form";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import i18n from "discourse-common/helpers/i18n";
@@ -20,62 +19,72 @@ export default class extends Component {
 
   @and("newLeaderboardName") nameValid;
 
+  get formData() {
+    return { name: "", created_by_id: this.currentUser.id };
+  }
+
   @action
-  createNewLeaderboard() {
+  async createNewLeaderboard(data) {
     if (this.loading) {
       return;
     }
 
     this.loading = true;
 
-    const data = {
-      name: this.newLeaderboardName,
-      created_by_id: this.currentUser.id,
-    };
-
-    return ajax("/admin/plugins/gamification/leaderboard", {
-      data,
-      type: "POST",
-    })
-      .then((leaderboard) => {
-        this.toasts.success({
-          duration: 3000,
-          data: {
-            message: i18n("gamification.leaderboard.create_success"),
-          },
-        });
-        this.router.transitionTo(
-          "adminPlugins.show.discourse-gamification-leaderboards.show",
-          leaderboard.id
-        );
-      })
-      .catch(popupAjaxError)
-      .finally(() => {
-        this.loading = false;
+    try {
+      const leaderboard = await ajax(
+        "/admin/plugins/gamification/leaderboard",
+        {
+          data,
+          type: "POST",
+        }
+      );
+      this.toasts.success({
+        duration: 3000,
+        data: {
+          message: i18n("gamification.leaderboard.create_success"),
+        },
       });
+      this.router.transitionTo(
+        "adminPlugins.show.discourse-gamification-leaderboards.show",
+        leaderboard.id
+      );
+    } catch (err) {
+      popupAjaxError(err);
+    } finally {
+      this.loading = false;
+    }
   }
 
   <template>
     <div class="new-leaderboard-container">
-      <Input
-        @type="text"
-        class="new-leaderboard__name"
-        @value={{this.newLeaderboardName}}
-        placeholder={{i18n "gamification.leaderboard.name_placeholder"}}
-      />
-      <DButton
-        @label="gamification.create"
-        @title="gamification.create"
-        class="btn-primary new-leaderboard__create"
-        @disabled={{not this.nameValid}}
-        @action={{this.createNewLeaderboard}}
-      />
-      <DButton
-        class="new-leaderboard__cancel"
-        @label="gamification.cancel"
-        @title="gamification.cancel"
-        @action={{@onCancel}}
-      />
+      <Form
+        @data={{this.formData}}
+        @onSubmit={{this.createNewLeaderboard}}
+        as |form|
+      >
+        <form.Row>
+          <form.Field
+            @name="name"
+            @title={{i18n "gamification.leaderboard.name"}}
+            @showTitle={{false}}
+            class="new-leaderboard__name"
+            @validation="required"
+            as |field|
+          >
+            <field.Input
+              placeholder={{i18n "gamification.leaderboard.name_placeholder"}}
+            />
+          </form.Field>
+          <form.Submit />&nbsp;
+          <DButton
+            class="new-leaderboard__cancel form-kit__button"
+            @label="gamification.cancel"
+            @title="gamification.cancel"
+            @action={{@onCancel}}
+          />
+        </form.Row>
+      </Form>
     </div>
   </template>
 }
