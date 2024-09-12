@@ -21,7 +21,7 @@ acceptance(
       await click('a[data-user-card="charlie"]');
 
       assert
-        .dom(".user-card .gamification-score")
+        .dom(".d-user-card .gamification-score")
         .hasText("Cheers 10", "user card has gamification score");
     });
   }
