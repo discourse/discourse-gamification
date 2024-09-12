@@ -3,13 +3,12 @@ import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { and } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
-import DButton from "discourse/components/d-button";
 import Form from "discourse/components/form";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import i18n from "discourse-common/helpers/i18n";
 
-export default class extends Component {
+export default class AdminCreateLeaderboard extends Component {
   @service currentUser;
   @service router;
   @service toasts;
@@ -45,6 +44,7 @@ export default class extends Component {
           message: i18n("gamification.leaderboard.create_success"),
         },
       });
+      this.args.onCancel();
       this.router.transitionTo(
         "adminPlugins.show.discourse-gamification-leaderboards.show",
         leaderboard.id
@@ -76,14 +76,18 @@ export default class extends Component {
               placeholder={{i18n "gamification.leaderboard.name_placeholder"}}
             />
           </form.Field>
-          <form.Submit />&nbsp;
-          <DButton
+
+        </form.Row>
+        <form.Actions>
+          <form.Submit />
+
+          <form.Button
+            @action={{@onCancel}}
             class="new-leaderboard__cancel form-kit__button"
             @label="gamification.cancel"
             @title="gamification.cancel"
-            @action={{@onCancel}}
           />
-        </form.Row>
+        </form.Actions>
       </Form>
     </div>
   </template>
