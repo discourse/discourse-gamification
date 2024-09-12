@@ -64,7 +64,12 @@ export default class AdminEditLeaderboard extends Component {
       @route="adminPlugins.show.discourse-gamification-leaderboards"
       @label="gamification.back"
     />
-    <Form @data={{this.formData}} @onSubmit={{this.save}} as |form|>
+    <Form
+      @data={{this.formData}}
+      @onSubmit={{this.save}}
+      class="edit-create-leaderboard-form"
+      as |form|
+    >
       <form.Field
         @name="name"
         @title={{i18n "gamification.leaderboard.name"}}

@@ -61,6 +61,7 @@ export default class AdminCreateLeaderboard extends Component {
       <Form
         @data={{this.formData}}
         @onSubmit={{this.createNewLeaderboard}}
+        class="new-leaderboard-form"
         as |form|
       >
         <form.Row>
