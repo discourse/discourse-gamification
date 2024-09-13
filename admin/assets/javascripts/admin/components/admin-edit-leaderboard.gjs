@@ -1,12 +1,8 @@
 import Component from "@glimmer/component";
-import { Input } from "@ember/component";
-import { fn } from "@ember/helper";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 import BackButton from "discourse/components/back-button";
-import DButton from "discourse/components/d-button";
-import DatePicker from "discourse/components/date-picker";
-import DatePickerPast from "discourse/components/date-picker-past";
+import Form from "discourse/components/form";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { AUTO_GROUPS } from "discourse/lib/constants";
@@ -24,41 +20,43 @@ export default class AdminEditLeaderboard extends Component {
     return this.site.groups.rejectBy("id", AUTO_GROUPS.everyone.id);
   }
 
-  get saveEditDisabled() {
-    return !this.args.leaderboard.name;
+  get formData() {
+    return {
+      name: this.args.leaderboard.name,
+      from_date: this.args.leaderboard.fromDate,
+      to_date: this.args.leaderboard.toDate,
+      included_groups_ids: this.args.leaderboard.includedGroupsIds,
+      excluded_groups_ids: this.args.leaderboard.excludedGroupsIds,
+      visible_to_groups_ids: this.args.leaderboard.visibleToGroupsIds,
+      default_period: this.args.leaderboard.defaultPeriod,
+    };
   }
 
   @action
-  saveEdit() {
-    const data = {
-      name: this.args.leaderboard.name,
-      to_date: this.args.leaderboard.toDate,
-      from_date: this.args.leaderboard.fromDate,
-      visible_to_groups_ids: this.args.leaderboard.visibleToGroupsIds,
-      included_groups_ids: this.args.leaderboard.includedGroupsIds,
-      excluded_groups_ids: this.args.leaderboard.excludedGroupsIds,
-      default_period: this.args.leaderboard.defaultPeriod,
-    };
+  async save(data) {
+    try {
+      await ajax(
+        `/admin/plugins/gamification/leaderboard/${this.args.leaderboard.id}`,
+        {
+          data,
+          type: "PUT",
+        }
+      );
+      this.toasts.success({
+        duration: 3000,
+        data: {
+          message: i18n("gamification.leaderboard.save_success"),
+        },
+      });
+      await this.router.transitionTo(
+        "adminPlugins.show.discourse-gamification-leaderboards.index"
+      );
 
-    return ajax(
-      `/admin/plugins/gamification/leaderboard/${this.args.leaderboard.id}`,
-      {
-        data,
-        type: "PUT",
-      }
-    )
-      .then(() => {
-        this.toasts.success({
-          duration: 3000,
-          data: {
-            message: i18n("gamification.leaderboard.save_success"),
-          },
-        });
-        this.router.transitionTo(
-          "adminPlugins.show.discourse-gamification-leaderboards.index"
-        );
-      })
-      .catch(popupAjaxError);
+      // To refresh the list of leaderboards in the index.
+      this.router.refresh();
+    } catch (err) {
+      popupAjaxError(err);
+    }
   }
 
   <template>
@@ -66,92 +64,102 @@ export default class AdminEditLeaderboard extends Component {
       @route="adminPlugins.show.discourse-gamification-leaderboards"
       @label="gamification.back"
     />
-    <form class="leaderboard-edit form-vertical">
-      <div class="control-group">
-        <div class="control-group">
-          <label class="control-label">
-            {{i18n "gamification.leaderboard.name"}}
-          </label>
-          <Input
-            @type="text"
-            class="leaderboard-edit__name"
-            @value={{@leaderboard.name}}
-            placeholder={{i18n "gamification.leaderboard.name"}}
-          />
-        </div>
-        <div class="control-group">
-          <label class="control-label">
-            {{i18n "gamification.leaderboard.date.range"}}
-          </label>
-          <div class="controls">
-            <DatePickerPast
-              @placeholder="yyyy-mm-dd"
-              @value={{@leaderboard.fromDate}}
-              @onSelect={{fn (mut @leaderboard.fromDate)}}
-              class="leaderboard-edit__from-date date-input"
-            />
-            <DatePicker
-              @placeholder="yyyy-mm-dd"
-              @value={{@leaderboard.toDate}}
-              @onSelect={{fn (mut @leaderboard.toDate)}}
-              class="leaderboard-edit__to-date date-input"
-            />
-            <div>{{i18n "gamification.leaderboard.date.helper"}}</div>
-          </div>
-        </div>
-        <div class="control-group">
-          <label class="control-label">
-            {{i18n "gamification.leaderboard.included_groups"}}
-          </label>
+    <Form
+      @data={{this.formData}}
+      @onSubmit={{this.save}}
+      class="edit-create-leaderboard-form"
+      as |form|
+    >
+      <form.Field
+        @name="name"
+        @title={{i18n "gamification.leaderboard.name"}}
+        @validation="required"
+        as |field|
+      >
+        <field.Input />
+      </form.Field>
+
+      <form.Row as |row|>
+        <row.Col @size={{6}}>
+          <form.Field
+            @name="from_date"
+            @title={{i18n "gamification.leaderboard.date.from"}}
+            as |field|
+          >
+            <field.Input @type="date" />
+          </form.Field>
+        </row.Col>
+
+        <row.Col @size={{6}}>
+          <form.Field
+            @name="to_date"
+            @title={{i18n "gamification.leaderboard.date.to"}}
+            as |field|
+          >
+            <field.Input @type="date" />
+          </form.Field>
+        </row.Col>
+      </form.Row>
+
+      <form.Field
+        @name="included_groups_ids"
+        @title={{i18n "gamification.leaderboard.included_groups"}}
+        as |field|
+      >
+        <field.Custom>
           <GroupChooser
             @id="leaderboard-edit__included-groups"
             @content={{this.siteGroups}}
-            @value={{@leaderboard.includedGroupsIds}}
+            @value={{field.value}}
             @labelProperty="name"
-            @onChange={{fn (mut @leaderboard.includedGroupsIds)}}
+            @onChange={{field.set}}
           />
-          <div>{{i18n "gamification.leaderboard.included_groups_help"}}</div>
-        </div>
-        <div class="control-group">
-          <label class="control-label">
-            {{i18n "gamification.leaderboard.excluded_groups"}}
-          </label>
+        </field.Custom>
+      </form.Field>
+
+      <form.Field
+        @name="excluded_groups_ids"
+        @title={{i18n "gamification.leaderboard.excluded_groups"}}
+        as |field|
+      >
+        <field.Custom>
           <GroupChooser
             @id="leaderboard-edit__excluded-groups"
             @content={{this.siteGroups}}
-            @value={{@leaderboard.excludedGroupsIds}}
+            @value={{field.value}}
             @labelProperty="name"
-            @onChange={{fn (mut @leaderboard.excludedGroupsIds)}}
+            @onChange={{field.set}}
           />
-          <div>{{i18n "gamification.leaderboard.excluded_groups_help"}}</div>
-        </div>
-        <div class="control-group">
-          <label class="control-label">
-            {{i18n "gamification.leaderboard.visible_to_groups"}}
-          </label>
+        </field.Custom>
+      </form.Field>
+
+      <form.Field
+        @name="visible_to_groups_ids"
+        @title={{i18n "gamification.leaderboard.visible_to_groups"}}
+        as |field|
+      >
+        <field.Custom>
           <GroupChooser
             @id="leaderboard-edit__visible-groups"
             @content={{this.siteGroups}}
-            @value={{@leaderboard.visibleToGroupsIds}}
+            @value={{field.value}}
             @labelProperty="name"
-            @onChange={{fn (mut @leaderboard.visibleToGroupsIds)}}
+            @onChange={{field.set}}
           />
-          <div>{{i18n "gamification.leaderboard.visible_to_groups_help"}}</div>
-        </div>
-        <div class="control-group">
-          <label class="control-label">
-            {{i18n "gamification.leaderboard.default_period"}}
-          </label>
-          <PeriodInput @value={{@leaderboard.defaultPeriod}} />
-          <div>{{i18n "gamification.leaderboard.default_period_help"}}</div>
-        </div>
-      </div>
-      <DButton
-        class="leaderboard-edit__save btn-primary"
-        @label="gamification.save"
-        @action={{this.saveEdit}}
-        @disabled={{this.saveEditDisabled}}
-      />
-    </form>
+        </field.Custom>
+      </form.Field>
+
+      <form.Field
+        @name="default_period"
+        @title={{i18n "gamification.leaderboard.default_period"}}
+        as |field|
+      >
+        <field.Custom>
+          <PeriodInput @value={{field.value}} @onChange={{field.set}} />
+        </field.Custom>
+      </form.Field>
+
+      <form.Submit />
+    </Form>
   </template>
 }
