@@ -25,7 +25,6 @@ es:
           text: "Recibirás puntos por participar en la comunidad. Por ejemplo, cuando la visitas, usas el botón de me gusta o publicas cosas. Tu puntuación se actualiza cada pocos minutos. Así que ya sabes, ¡participa, ayuda y sube de posición!"
         name: "Nombre"
         name_placeholder: "Nombre..."
-        new: "Nueva tabla de clasificación"
         create_success: "Tabla de clasificación creada"
         delete_success: "Tabla de clasificación eliminada"
         save_success: "Tabla de clasificación guardada"
@@ -59,8 +58,6 @@ es:
       back: "Volver"
       save: "Guardar"
       apply: "Aplicar"
-      recalculate: "Recalcular puntuaciones"
-      recalculating: "Recalculando puntuaciones..."
       completed: "¡Hecho! Las puntuaciones se han recalculado con éxito."
       update_scores_help: "Actualiza todas las puntuaciones de todas las tablas de clasificación desde"
       update_range:

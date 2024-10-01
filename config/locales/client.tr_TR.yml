@@ -25,7 +25,6 @@ tr_TR:
           text: "Ziyaret etme, beğenme ve gönderme gibi toplulukla etkileşim için puan verilir. Puanınız birkaç dakikada bir güncellenir. Bu yüzden yardımsever, aktif ve destekleyici olun ve sıralamada yükselin!"
         name: "Ad"
         name_placeholder: "Ad..."
-        new: "Yeni Liderlik Tablosu"
         create_success: "Liderlik tablosu oluşturuldu"
         delete_success: "Liderlik tablosu silindi"
         save_success: "Liderlik tablosu kaydedildi"
@@ -59,8 +58,6 @@ tr_TR:
       back: "Geri"
       save: "Kaydet"
       apply: "Uygula"
-      recalculate: "Puanları Yeniden Hesapla"
-      recalculating: "Puanlar Yeniden Hesaplanıyor..."
       completed: "Bitti! Puanlar başarıyla yeniden hesaplandı."
       update_scores_help: "Şuradan tüm skor tabloları için tüm puanları güncelleyin:"
       update_range:

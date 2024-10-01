@@ -25,7 +25,6 @@ nl:
           text: "Punten worden toegekend voor interactie met de community, zoals bezoeken, likes en berichten. Je score wordt om de paar minuten bijgewerkt. Dus wees behulpzaam, actief en ondersteunend en stijg in het klassement!"
         name: "Naam"
         name_placeholder: "Naam..."
-        new: "Nieuw klassement"
         create_success: "Klassement gemaakt"
         delete_success: "Klassement verwijderd"
         save_success: "Klassement opgeslagen"
@@ -59,8 +58,6 @@ nl:
       back: "Terug"
       save: "Opslaan"
       apply: "Toepassen"
-      recalculate: "Scores herberekenen"
-      recalculating: "Scores herberekenen..."
       completed: "Gereed! De scores zijn herberekend."
       update_scores_help: "Werk alle scores bij voor alle klassementen van"
       update_range:
