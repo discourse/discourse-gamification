@@ -25,7 +25,6 @@ de:
           text: "Punkte werden für die Interaktion mit der Community vergeben, z. B. für Besuche, „Gefällt mir“ und Posten. Deine Punktzahl wird alle paar Minuten aktualisiert. Sei also hilfsbereit, aktiv sowie solidarisch und steige auf!"
         name: "Name"
         name_placeholder: "Name …"
-        new: "Neue Rangliste"
         create_success: "Rangliste erstellt"
         delete_success: "Rangliste gelöscht"
         save_success: "Rangliste gespeichert"
@@ -59,8 +58,6 @@ de:
       back: "Zurück"
       save: "Speichern"
       apply: "Anwenden"
-      recalculate: "Scores neu berechnen"
-      recalculating: "Scores werden neu berechnet …"
       completed: "Fertig! Die Scores wurden erfolgreich neu berechnet."
       update_scores_help: "Alle Scores für sämtliche Ranglisten aktualisieren von"
       update_range:
