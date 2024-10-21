@@ -13,8 +13,6 @@ describe "Recalculate Scores Form", type: :system do
     sign_in(admin)
   end
 
-  use_redis_snapshotting
-
   def format_date(date)
     date.midnight.strftime("%b %-d, %Y")
   end
