@@ -1,4 +1,4 @@
-plugins:
+discourse_gamification:
   discourse_gamification_enabled:
     default: false
     client: true
@@ -31,3 +31,10 @@ plugins:
     default: 1
   chat_message_created_score_value:
     default: 1
+  score_ranking_strategy:
+    default: dense_rank
+    type: enum
+    choices:
+      - dense_rank
+      - rank
+      - row_number

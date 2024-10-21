@@ -18,6 +18,9 @@ module ::DiscourseGamification
       queries = only_subclass&.query || scorables_queries
 
       DB.exec(<<~SQL, since: since_date)
+        DELETE FROM gamification_scores
+        WHERE date >= :since;
+
         INSERT INTO gamification_scores (user_id, date, score)
         SELECT user_id, date, SUM(points) AS score
         FROM (
@@ -31,7 +34,27 @@ module ::DiscourseGamification
         WHERE user_id IS NOT NULL
         GROUP BY 1, 2
         ON CONFLICT (user_id, date) DO UPDATE
-        SET score = EXCLUDED.score
+        SET score = EXCLUDED.score;
+      SQL
+    end
+
+    def self.merge_scores(source_user, target_user)
+      DB.exec(<<~SQL, source_id: source_user.id, target_id: target_user.id)
+        WITH new_scores AS (
+          SELECT :target_id AS user_id, date, SUM(score) AS score
+          FROM gamification_scores
+          WHERE user_id IN (:source_id, :target_id)
+          GROUP BY 1, 2
+        ) INSERT INTO gamification_scores (user_id, date, score)
+          SELECT user_id, date, score AS score
+          FROM new_scores
+          ON CONFLICT (user_id, date) DO UPDATE
+          SET score = EXCLUDED.score;
+      SQL
+
+      DB.exec(<<~SQL, source_id: source_user.id)
+        DELETE FROM gamification_scores
+        WHERE user_id = :source_id;
       SQL
     end
   end

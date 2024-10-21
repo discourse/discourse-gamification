@@ -1,0 +1,27 @@
+<div
+  class="user {{if rank.currentUser 'user-highlight'}}"
+  id="leaderboard-user-{{rank.id}}"
+>
+  <div class="user__rank">{{rank.position}}</div>
+  <div
+    class="user__avatar clickable"
+    role="button"
+    data-user-card={{rank.username}}
+  >
+    {{avatar rank imageSize="large"}}
+    <span class="user__name">
+      {{#if this.siteSettings.prioritize_username_in_ux}}
+        {{rank.username}}
+      {{else}}
+        {{or rank.name rank.username}}
+      {{/if}}
+    </span>
+  </div>
+  <div class="user__score">
+    {{#if site.mobileView}}
+      {{number rank.total_score}}
+    {{else}}
+      {{fullnumber rank.total_score}}
+    {{/if}}
+  </div>
+</div>

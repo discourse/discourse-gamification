@@ -1,8 +1,8 @@
-import { setupRenderingTest } from "discourse/tests/helpers/component-test";
-import { query } from "discourse/tests/helpers/qunit-helpers";
+import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 import { module, test } from "qunit";
-import { render } from "@ember/test-helpers";
+import { setupRenderingTest } from "discourse/tests/helpers/component-test";
+import { query } from "discourse/tests/helpers/qunit-helpers";
 
 function displayName() {
   return query(".winner__name").innerText.trim();
@@ -30,6 +30,20 @@ module(
     test("Display name prioritizes username", async function (assert) {
       this.siteSettings.prioritize_username_in_ux = true;
       this.set("winner", { username: "id", name: "bob" });
+      this.set("model", {
+        leaderboard: "",
+        personal: "",
+        users: [this.winner],
+      });
+
+      await render(hbs`<GamificationLeaderboard @model={{this.model}} />`);
+
+      assert.strictEqual(displayName(), "id");
+    });
+
+    test("Display name prioritizes username when name is empty", async function (assert) {
+      this.siteSettings.prioritize_username_in_ux = false;
+      this.set("winner", { username: "id", name: "" });
       this.set("model", {
         leaderboard: "",
         personal: "",

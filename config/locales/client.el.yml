@@ -10,6 +10,7 @@ el:
       you: "Εσείς"
       leaderboard:
         link_to_settings: "Ρυθμίσεις"
+        refresh: "Ανανέωση"
         name: "Όνομα"
         period:
           all_time: "Από πάντα"
@@ -20,9 +21,17 @@ el:
           daily: "Ημερήσιες"
       create: "Δημιουργία"
       cancel: "Ακύρωση"
+      close: "Κλείσιμο"
       delete: "Σβήσιμο"
       edit: "Επεξεργασία"
       back: "Πίσω"
       save: "Αποθήκευση"
+      apply: "Εφαρμογή"
+      update_range:
+        last_10_days: "Τελευταίες 10 ημέρες"
+        last_30_days: "Τελευταίες 30 ημέρες"
+        last_90_days: "Τελευταίες 90 ημέρες"
+        all_time: "Από πάντα"
+      custom_range_from: "Από"
       admin:
         name: "Όνομα"

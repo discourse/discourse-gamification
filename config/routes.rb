@@ -5,8 +5,14 @@ DiscourseGamification::Engine.routes.draw do
   get "/:id" => "gamification_leaderboard#respond"
 end
 
-Discourse::Application.routes.append do
+Discourse::Application.routes.draw do
   mount ::DiscourseGamification::Engine, at: "/leaderboard"
+
+  scope "/admin/plugins/discourse-gamification", constraints: StaffConstraint.new do
+    get "/leaderboards" => "discourse_gamification/admin_gamification_leaderboard#index"
+    get "/leaderboards/:id" => "discourse_gamification/admin_gamification_leaderboard#show"
+  end
+
   get "/admin/plugins/gamification" =>
         "discourse_gamification/admin_gamification_leaderboard#index",
       :constraints => StaffConstraint.new
@@ -19,9 +25,13 @@ Discourse::Application.routes.append do
   delete "/admin/plugins/gamification/leaderboard/:id" =>
            "discourse_gamification/admin_gamification_leaderboard#destroy",
          :constraints => StaffConstraint.new
+  put "/admin/plugins/gamification/recalculate-scores" =>
+        "discourse_gamification/admin_gamification_leaderboard#recalculate_scores",
+      :constraints => StaffConstraint.new,
+      :as => :recalculate_scores
 end
 
-Discourse::Application.routes.append do
+Discourse::Application.routes.draw do
   get "/admin/plugins/gamification/score_events" =>
         "discourse_gamification/admin_gamification_score_event#show",
       :constraints => StaffConstraint.new

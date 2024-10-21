@@ -10,6 +10,7 @@ hu:
       you: "Ön"
       leaderboard:
         link_to_settings: "Beállítások"
+        refresh: "Újratöltés"
         name: "Név"
         period:
           all_time: "Bármikor"
@@ -20,9 +21,17 @@ hu:
           daily: "Napi"
       create: "Létrehozás"
       cancel: "Mégse"
+      close: "Lezárás"
       delete: "Törlés"
       edit: "Szerkesztés"
       back: "Vissza"
       save: "Mentés"
+      apply: "Alkalmaz"
+      update_range:
+        last_10_days: "Elmúlt 10 nap"
+        last_30_days: "Elmúlt 30 nap"
+        last_90_days: "Elmúlt 90 nap"
+        all_time: "Bármikor"
+      custom_range_from: "From"
       admin:
         name: "Név"

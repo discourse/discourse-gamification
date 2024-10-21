@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples "Scorable Type" do
+  fab!(:leaderboard) { Fabricate(:gamification_leaderboard) }
   let(:current_user) { Fabricate(:user) }
   let(:other_user) { Fabricate(:user) }
   let(:third_user) { Fabricate(:user) }
@@ -12,12 +13,15 @@ RSpec.shared_examples "Scorable Type" do
         since_date: "2022-1-1",
         only_subclass: described_class,
       )
+      DiscourseGamification::LeaderboardCachedView.create_all
+
       expect(current_user.gamification_score).to eq(expected_score)
     end
   end
 end
 
 RSpec.shared_examples "Category Scoped Scorable Type" do
+  fab!(:leaderboard) { Fabricate(:gamification_leaderboard) }
   let(:user) { Fabricate(:user) }
   let(:user_2) { Fabricate(:user) }
   let(:category_allowed) { Fabricate(:category) }
@@ -28,11 +32,13 @@ RSpec.shared_examples "Category Scoped Scorable Type" do
   describe "updates gamification score" do
     let!(:create_score) { class_action_fabricator }
     let!(:trigger_after_create_hook) { after_create_hook }
+    before { DiscourseGamification::LeaderboardCachedView.create_all }
 
     it "#{described_class} updates scores for action in the category configured" do
       expect(user.gamification_score).to eq(0)
       SiteSetting.scorable_categories = category_allowed.id.to_s
       DiscourseGamification::GamificationScore.calculate_scores(only_subclass: described_class)
+      DiscourseGamification::LeaderboardCachedView.refresh_all
       expect(user.gamification_score).to eq(expected_score)
     end
 
@@ -40,12 +46,14 @@ RSpec.shared_examples "Category Scoped Scorable Type" do
       expect(user_2.gamification_score).to eq(0)
       SiteSetting.scorable_categories = category_not_allowed.id.to_s
       DiscourseGamification::GamificationScore.calculate_scores(only_subclass: described_class)
+      DiscourseGamification::LeaderboardCachedView.refresh_all
       expect(user_2.gamification_score).to eq(0)
     end
   end
 end
 
 RSpec.shared_examples "No Score Value" do
+  fab!(:leaderboard) { Fabricate(:gamification_leaderboard) }
   let(:current_user) { Fabricate(:user) }
   let(:other_user) { Fabricate(:user) }
   let(:class_action_fabricator_for_pm) { nil }
@@ -61,11 +69,13 @@ RSpec.shared_examples "No Score Value" do
     let!(:create_score_for_themselves) { class_action_fabricator_for_themselves }
     let!(:trigger_after_create_hook) { after_create_hook }
 
-    it "does not increase user gamficiation score" do
+    it "does not increase user gamification score" do
       DiscourseGamification::GamificationScore.calculate_scores(
         since_date: "2022-1-1",
         only_subclass: described_class,
       )
+      DiscourseGamification::LeaderboardCachedView.create_all
+
       expect(current_user.gamification_score).to eq(0)
     end
   end
@@ -78,7 +88,7 @@ RSpec.describe ::DiscourseGamification::LikeReceived do
       Post.all.each { |p| Fabricate(:post_action, post: p) }
     end
 
-    # ten likes recieved
+    # ten likes received
     let(:expected_score) { 10 }
   end
 
@@ -153,15 +163,37 @@ end
 
 RSpec.describe ::DiscourseGamification::PostCreated do
   it_behaves_like "Scorable Type" do
-    before { Fabricate.times(10, :post, user: current_user) }
+    before do
+      Fabricate.times(2, :post, user: current_user, post_number: 2)
 
-    # ten posts created
-    let(:expected_score) { 20 }
+      # OP is not counted
+      Fabricate(:post, user: current_user, post_number: 1)
+
+      # small action are not counted
+      Fabricate(:post, post_type: Post.types[:moderator_action], user: current_user, post_number: 2)
+
+      # hidden posts are not counted
+      Fabricate(
+        :post,
+        user: current_user,
+        hidden: true,
+        hidden_at: 5.minutes.ago,
+        hidden_reason_id: Post.hidden_reasons[:flagged_by_tl3_user],
+        post_number: 2,
+      )
+
+      # deleted topics are not counted
+      deleted_topic = Fabricate(:topic)
+      Fabricate(:post, user: current_user, post_number: 2, topic: deleted_topic)
+      deleted_topic.destroy!
+    end
+
+    let(:expected_score) { 4 }
   end
 
   it_behaves_like "Category Scoped Scorable Type" do
     let(:topic) { Fabricate(:topic, user: user, category: category_allowed) }
-    let(:class_action_fabricator) { Fabricate(:post, topic: topic, user: user) }
+    let(:class_action_fabricator) { Fabricate(:post, topic: topic, user: user, post_number: 2) }
 
     let(:expected_score) { 2 }
   end

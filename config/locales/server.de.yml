@@ -18,5 +18,11 @@ de:
     flag_created_score_value: "Der Wert des Beifalls, der vergeben wird, wenn ein Benutzer einen Beitrag meldet und diese Meldung von einem Team-Benutzer akzeptiert wird"
     day_visited_score_value: "Der Wert des Beifalls, der für jeden Tag vergeben wird, an dem ein Benutzer die Website besucht"
     scorable_categories: "Liste der Kategorien, in denen Aktionen Beifall erzeugen. Leer lassen, um Beifall für alle Kategorien zu aktivieren"
+    score_ranking_strategy: "Strategie für die Ranglistenposition"
   score: "Beifall"
   default_leaderboard_name: "Globale Rangliste"
+  rate_limiter:
+    by_type:
+      recalculate_scores_remaining: "Du hast die maximale Anzahl an Score-Neuberechnungen erreicht. Bitte warte %{time_left}, bevor du es wieder versuchst."
+  errors:
+    leaderboard_positions_not_ready: "Wir generieren gerade deine Rangliste. Versuche es in ein paar Minuten noch einmal."
