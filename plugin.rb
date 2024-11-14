@@ -104,13 +104,6 @@ after_initialize do
     .join("plugins", "discourse-gamification", "db", "fixtures")
     .to_s
 
-  begin
-    # Purge and replace all stale leaderboard positions
-    Jobs.enqueue(::Jobs::UpdateStaleLeaderboardPositions)
-  rescue PG::ConnectionBad, ActiveRecord::NoDatabaseError
-    # Ignore PG failures if we don't have a schema set up.
-  end
-
   on(:site_setting_changed) do |name|
     next if name != :score_ranking_strategy
 
