@@ -1,5 +1,5 @@
 import EmberObject from "@ember/object";
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
 import DiscourseRoute from "discourse/routes/discourse";
 import GamificationLeaderboard from "discourse/plugins/discourse-gamification/discourse/models/gamification-leaderboard";
 

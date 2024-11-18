@@ -1,6 +1,6 @@
 import Component from "@glimmer/component";
 import { action } from "@ember/object";
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
 import BackButton from "discourse/components/back-button";
 import Form from "discourse/components/form";
 import { ajax } from "discourse/lib/ajax";
