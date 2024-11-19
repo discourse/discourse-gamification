@@ -1,8 +1,8 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
-import { and } from "@ember/object/computed";
-import { inject as service } from "@ember/service";
+import { readOnly } from "@ember/object/computed";
+import { service } from "@ember/service";
 import Form from "discourse/components/form";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
@@ -16,7 +16,7 @@ export default class AdminCreateLeaderboard extends Component {
   @tracked newLeaderboardName = "";
   @tracked loading = false;
 
-  @and("newLeaderboardName") nameValid;
+  @readOnly("newLeaderboardName") nameValid;
 
   get formData() {
     return { name: "", created_by_id: this.currentUser.id };
