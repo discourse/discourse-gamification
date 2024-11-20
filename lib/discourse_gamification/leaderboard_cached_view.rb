@@ -11,7 +11,7 @@ module ::DiscourseGamification
       row_number: "ROW_NUMBER()",
       rank: "RANK()",
       dense_rank: "DENSE_RANK()",
-    }
+    }.freeze
 
     attr_reader :leaderboard
 
@@ -79,13 +79,17 @@ module ::DiscourseGamification
     end
 
     def self.update_all
-      purge_all_stale
-      create_all
+      ActiveRecord::Base.transaction do
+        purge_all_stale
+        create_all
+      end
     end
 
     def self.regenerate_all
-      delete_all
-      create_all
+      ActiveRecord::Base.transaction do
+        delete_all
+        create_all
+      end
     end
 
     private
@@ -199,8 +203,10 @@ module ::DiscourseGamification
         CREATE UNIQUE INDEX IF NOT EXISTS user_id_#{leaderboard.id}_#{period}_#{QUERY_VERSION}_index ON #{name} (user_id)
       SQL
 
-      DB.exec(mview_query, leaderboard_id: leaderboard.id)
-      DB.exec(user_id_index_query)
+      ActiveRecord::Base.transaction do
+        DB.exec(mview_query, leaderboard_id: leaderboard.id)
+        DB.exec(user_id_index_query)
+      end
     end
 
     def ranking_function
