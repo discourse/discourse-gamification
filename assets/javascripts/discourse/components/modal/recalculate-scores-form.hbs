@@ -30,14 +30,14 @@
               <DatePickerPast
                 @id="custom-from-date"
                 @placeholder="yyyy-mm-dd"
-                @value={{recalculateFromDate}}
-                @onSelect={{action (mut recalculateFromDate)}}
+                @value={{this.recalculateFromDate}}
+                @onSelect={{action (mut this.recalculateFromDate)}}
                 class="date-input"
               />
             </div>
           {{else}}
             <div class="recalculate-modal__date-range">
-              {{dateRange}}
+              {{this.dateRange}}
             </div>
           {{/if}}
         </div>
@@ -50,14 +50,14 @@
       @action={{action "apply"}}
       @label="gamification.apply"
       @ariaLabel="gamification.apply"
-      @disabled={{applyDisabled}}
+      @disabled={{this.applyDisabled}}
       id="apply-section"
       class="btn-primary"
     />
     <DButton
       @action={{@closeModal}}
       @label={{if
-        (eq status "complete")
+        (eq this.status "complete")
         "gamification.close"
         "gamification.cancel"
       }}
@@ -66,6 +66,6 @@
       class="btn-secondary"
     />
 
-    <div class="recalculate-modal__footer-text">{{remainingText}}</div>
+    <div class="recalculate-modal__footer-text">{{this.remainingText}}</div>
   </:footer>
 </DModal>

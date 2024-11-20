@@ -6,12 +6,12 @@
 <div class="discourse-gamification__leaderboards admin-detail">
   <AdminPageSubheader @titleLabel="gamification.leaderboard.title">
     <:actions as |actions|>
-      {{#if model.leaderboards}}
+      {{#if this.model.leaderboards}}
         <actions.Primary
           @label="gamification.leaderboard.new"
           @title="gamification.leaderboard.new"
           class="leaderboard-admin__btn-new"
-          @action={{action (mut creatingNew) true}}
+          @action={{action (mut this.creatingNew) true}}
         />
 
         <actions.Default
@@ -24,12 +24,12 @@
     </:actions>
   </AdminPageSubheader>
 
-  {{#if creatingNew}}
+  {{#if this.creatingNew}}
     <AdminCreateLeaderboard @onCancel={{action this.resetNewLeaderboard}} />
   {{/if}}
 
   <div class="leaderboards">
-    {{#if model.leaderboards}}
+    {{#if this.model.leaderboards}}
       <table>
         <thead>
           <th>{{i18n "gamification.admin.name"}}</th>
@@ -38,7 +38,7 @@
         </thead>
 
         <tbody>
-          {{#each sortedLeaderboards as |leaderboard|}}
+          {{#each this.sortedLeaderboards as |leaderboard|}}
             <tr id={{concat "leaderboard-admin__row-" leaderboard.id}}>
               <td>
                 <LinkTo
@@ -78,13 +78,13 @@
         </tbody>
       </table>
     {{else}}
-      {{#unless creatingNew}}
+      {{#unless this.creatingNew}}
         <div class="admin-plugin-config-area__empty-list">
           {{i18n "gamification.leaderboard.none"}}
           <DButton
             @label="gamification.leaderboard.cta"
             class="btn-default btn-small leaderboard-admin__cta-new"
-            @action={{action (mut creatingNew) true}}
+            @action={{action (mut this.creatingNew) true}}
           />
         </div>
       {{/unless}}

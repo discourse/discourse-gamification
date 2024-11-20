@@ -5,7 +5,7 @@
       @action={{action "showLeaderboardInfo"}}
       class="-ghost"
       @icon="info-circle"
-      @label={{unless site.mobileView "gamification.leaderboard.info"}}
+      @label={{unless this.site.mobileView "gamification.leaderboard.info"}}
     />
   </div>
 
@@ -20,7 +20,7 @@
       <a href="/admin/plugins/gamification" class="leaderboard__settings">
         {{d-icon "cog"}}
         {{unless
-          site.mobileView
+          this.site.mobileView
           (i18n "gamification.leaderboard.link_to_settings")
         }}
       </a>
@@ -40,7 +40,7 @@
   {{else}}
     <div class="podium__wrapper">
       <div class="podium">
-        {{#each winners as |winner|}}
+        {{#each this.winners as |winner|}}
           <div class="winner -position{{winner.position}}">
             <div class="winner__crown">{{d-icon "crown"}}</div>
             <div
@@ -72,26 +72,26 @@
         <span>{{d-icon "award"}}{{i18n "gamification.score"}}</span>
       </div>
       <div class="ranking-col-names__sticky-border"></div>
-      {{#if currentUserRanking.user}}
+      {{#if this.currentUserRanking.user}}
         <div class="user -self">
-          <div class="user__rank">{{currentUserRanking.position}}</div>
+          <div class="user__rank">{{this.currentUserRanking.position}}</div>
           <div class="user__name">{{i18n "gamification.you"}}</div>
           <div class="user__score">
-            {{#if site.mobileView}}
-              {{number currentUserRanking.user.total_score}}
+            {{#if this.site.mobileView}}
+              {{number this.currentUserRanking.user.total_score}}
             {{else}}
-              {{fullnumber currentUserRanking.user.total_score}}
+              {{fullnumber this.currentUserRanking.user.total_score}}
             {{/if}}
           </div>
         </div>
       {{/if}}
 
       <LoadMore @selector=".user" @action={{action "loadMore"}}>
-        {{#each ranking as |rank index|}}
+        {{#each this.ranking as |rank index|}}
           <GamificationLeaderboardRow @rank={{rank}} @index={{index}} />
         {{/each}}
       </LoadMore>
-      <ConditionalLoadingSpinner @condition={{loading}} />
+      <ConditionalLoadingSpinner @condition={{this.loading}} />
     </div>
   {{/if}}
 </div>

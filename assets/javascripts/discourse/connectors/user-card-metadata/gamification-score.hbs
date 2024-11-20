@@ -1,4 +1,4 @@
-{{#if user.gamification_score}}
+{{#if this.user.gamification_score}}
   <span class="desc">{{i18n "gamification.score"}} </span>
-  <span>{{gamification-score model=user}}</span>
+  <span>{{gamification-score model=this.user}}</span>
 {{/if}}

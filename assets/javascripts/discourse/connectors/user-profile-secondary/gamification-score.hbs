@@ -1,10 +1,10 @@
-{{#if model.gamification_score}}
+{{#if this.model.gamification_score}}
   <div>
     <dt>
       {{i18n "gamification.score"}}
     </dt>
     <dd>
-      {{gamification-score model=model}}
+      {{gamification-score model=this.model}}
     </dd>
   </div>
 {{/if}}
