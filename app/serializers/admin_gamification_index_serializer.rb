@@ -1,14 +1,19 @@
 # frozen_string_literal: true
 
 class AdminGamificationIndexSerializer < ApplicationSerializer
-  has_many :leaderboards, serializer: LeaderboardSerializer, embed: :objects
-  has_many :groups, serializer: BasicGroupSerializer, embed: :object
+  attribute :gamification_recalculate_scores_remaining
+  has_many :gamification_leaderboards, serializer: LeaderboardSerializer, embed: :objects
+  has_many :gamification_groups, serializer: BasicGroupSerializer, embed: :object
 
-  def leaderboards
+  def gamification_leaderboards
     object[:leaderboards]
   end
 
-  def groups
+  def gamification_groups
     Group.all
+  end
+
+  def gamification_recalculate_scores_remaining
+    DiscourseGamification::RecalculateScoresRateLimiter.remaining
   end
 end

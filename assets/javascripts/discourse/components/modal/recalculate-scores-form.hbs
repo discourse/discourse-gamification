@@ -1,0 +1,71 @@
+<DModal
+  class="recalculate-scores-form-modal"
+  @title={{i18n "gamification.recalculate"}}
+>
+  <:body>
+    {{#if (eq this.status "loading")}}
+      <div class="recalculate-modal__status">
+        <em>{{i18n "gamification.recalculating"}}</em>
+      </div>
+    {{else if (eq this.status "complete")}}
+      <div class="recalculate-modal__status is-success">
+        {{d-icon "check"}}
+        {{i18n "gamification.completed"}}
+      </div>
+    {{else}}
+      <form class="form-horizontal">
+        <div class="input-group">
+          <label>{{i18n "gamification.update_scores_help"}}</label>
+          <ComboBox
+            @id="update-range"
+            @valueProperty="value"
+            @content={{this.updateRange}}
+            @value={{this.updateRangeValue}}
+            @onChange={{action (mut this.updateRangeValue)}}
+          />
+
+          {{#if (eq this.updateRangeValue 5)}}
+            <div class="input-group -custom-range">
+              <label>{{i18n "gamification.custom_range_from"}}</label>
+              <DatePickerPast
+                @id="custom-from-date"
+                @placeholder="yyyy-mm-dd"
+                @value={{this.recalculateFromDate}}
+                @onSelect={{action (mut this.recalculateFromDate)}}
+                class="date-input"
+              />
+            </div>
+          {{else}}
+            <div class="recalculate-modal__date-range">
+              {{this.dateRange}}
+            </div>
+          {{/if}}
+        </div>
+      </form>
+    {{/if}}
+  </:body>
+
+  <:footer>
+    <DButton
+      @action={{action "apply"}}
+      @label="gamification.apply"
+      @ariaLabel="gamification.apply"
+      @disabled={{this.applyDisabled}}
+      id="apply-section"
+      class="btn-primary"
+    />
+    <DButton
+      @action={{@closeModal}}
+      @label={{if
+        (eq this.status "complete")
+        "gamification.close"
+        "gamification.cancel"
+      }}
+      @ariaLabel="gamification.cancel"
+      id="cancel-section"
+      class="btn-secondary"
+    />
+
+    <div class="recalculate-modal__footer-text">{{this.remainingText}}</div>
+  </:footer>
+</DModal>

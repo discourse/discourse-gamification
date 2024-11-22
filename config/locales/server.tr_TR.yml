@@ -18,5 +18,11 @@ tr_TR:
     flag_created_score_value: "Bir kullanıcı bir gönderiye bayrak eklendiğinde ve bu bayrak bir personel kullanıcı tarafından kabul edildiğinde verilen tezahüratın değeri"
     day_visited_score_value: "Bir kullanıcının siteyi ziyaret ettiği her gün için verilen tezahüratın değeri"
     scorable_categories: "Eylemlerin tezahürat oluşturacağı kategorilerin listesi. Tüm kategorilerde tezahüratları etkinleştirmek için boş bırakın"
+    score_ranking_strategy: "Liderlik tablosu pozisyon sıralama stratejisi"
   score: "Tezahürat"
   default_leaderboard_name: "Küresel Liderlik Tablosu"
+  rate_limiter:
+    by_type:
+      recalculate_scores_remaining: "Maksimum puan yeniden hesaplama sayısına ulaştınız. Lütfen tekrar denemeden önce %{time_left} bekleyin."
+  errors:
+    leaderboard_positions_not_ready: "Liderlik tablonuzu oluşturuyoruz. Birkaç dakika içinde tekrar deneyin."

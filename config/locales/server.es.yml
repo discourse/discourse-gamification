@@ -18,5 +18,11 @@ es:
     flag_created_score_value: "Puntos otorgados a los usuarios por cada uno de sus reportes aceptados por el personal"
     day_visited_score_value: "Puntos otorgados por cada día que un usuario visita el sitio"
     scorable_categories: "Lista de categorías en las que repartir puntos. Dejar vacío para dar puntos en todas las categorías"
+    score_ranking_strategy: "Estrategia de clasificación por posiciones"
   score: "Puntos"
   default_leaderboard_name: "Clasificación global"
+  rate_limiter:
+    by_type:
+      recalculate_scores_remaining: "Ha alcanzado el número máximo de puntuaciones recalculables. Espere %{time_left} antes de intentarlo de nuevo."
+  errors:
+    leaderboard_positions_not_ready: "Estamos generando tu tabla de clasificación. Inténtalo de nuevo en unos minutos."

@@ -1,0 +1,97 @@
+<div class="leaderboard">
+  <div class="page__header">
+    <h1 class="page__title">{{this.model.leaderboard.name}}</h1>
+    <DButton
+      @action={{action "showLeaderboardInfo"}}
+      class="-ghost"
+      @icon="info-circle"
+      @label={{unless this.site.mobileView "gamification.leaderboard.info"}}
+    />
+  </div>
+
+  <div class="leaderboard__controls">
+    <PeriodChooser
+      @period={{this.period}}
+      @action={{action "changePeriod"}}
+      @fullDay={{false}}
+      class="leaderboard__period-chooser"
+    />
+    {{#if this.currentUser.staff}}
+      <a href="/admin/plugins/gamification" class="leaderboard__settings">
+        {{d-icon "cog"}}
+        {{unless
+          this.site.mobileView
+          (i18n "gamification.leaderboard.link_to_settings")
+        }}
+      </a>
+    {{/if}}
+  </div>
+
+  {{#if this.isNotReady}}
+    <div class="leaderboard__not-ready">
+      <p>{{this.model.reason}}</p>
+      <DButton
+        @icon="sync"
+        @label="gamification.leaderboard.refresh"
+        @action={{action "refresh"}}
+        class="btn-primary refresh"
+      />
+    </div>
+  {{else}}
+    <div class="podium__wrapper">
+      <div class="podium">
+        {{#each this.winners as |winner|}}
+          <div class="winner -position{{winner.position}}">
+            <div class="winner__crown">{{d-icon "crown"}}</div>
+            <div
+              class="winner__avatar clickable"
+              role="button"
+              data-user-card={{winner.username}}
+            >
+              {{avatar winner imageSize="huge"}}
+              <div class="winner__rank">
+                <span>{{winner.position}}</span>
+              </div>
+            </div>
+            <div class="winner__name">
+              {{#if this.siteSettings.prioritize_username_in_ux}}
+                {{winner.username}}
+              {{else}}
+                {{or winner.name winner.username}}
+              {{/if}}
+            </div>
+            <div class="winner__score">{{fullnumber winner.total_score}}</div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <div class="ranking">
+      <div class="ranking-col-names">
+        <span>{{i18n "gamification.leaderboard.rank"}}</span>
+        <span>{{d-icon "award"}}{{i18n "gamification.score"}}</span>
+      </div>
+      <div class="ranking-col-names__sticky-border"></div>
+      {{#if this.currentUserRanking.user}}
+        <div class="user -self">
+          <div class="user__rank">{{this.currentUserRanking.position}}</div>
+          <div class="user__name">{{i18n "gamification.you"}}</div>
+          <div class="user__score">
+            {{#if this.site.mobileView}}
+              {{number this.currentUserRanking.user.total_score}}
+            {{else}}
+              {{fullnumber this.currentUserRanking.user.total_score}}
+            {{/if}}
+          </div>
+        </div>
+      {{/if}}
+
+      <LoadMore @selector=".user" @action={{action "loadMore"}}>
+        {{#each this.ranking as |rank index|}}
+          <GamificationLeaderboardRow @rank={{rank}} @index={{index}} />
+        {{/each}}
+      </LoadMore>
+      <ConditionalLoadingSpinner @condition={{this.loading}} />
+    </div>
+  {{/if}}
+</div>

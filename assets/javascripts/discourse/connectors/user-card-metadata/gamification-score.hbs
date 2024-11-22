@@ -1,6 +1,4 @@
-{{#if user.gamification_score}}
-  <h3>
-    <span class="desc">{{i18n "gamification.score"}}</span>
-    {{fullnumber user.gamification_score}}
-  </h3>
+{{#if this.user.gamification_score}}
+  <span class="desc">{{i18n "gamification.score"}} </span>
+  <span>{{gamification-score model=this.user}}</span>
 {{/if}}

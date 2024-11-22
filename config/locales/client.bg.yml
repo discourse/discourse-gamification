@@ -10,6 +10,7 @@ bg:
       you: "Вие"
       leaderboard:
         link_to_settings: "Настройки"
+        refresh: "Обнови"
         name: "Име"
         period:
           all_time: "От началото"
@@ -18,10 +19,19 @@ bg:
           monthly: "Месечно"
           weekly: "Седмично"
           daily: "Дневно"
+      create: "Създай"
       cancel: "Прекрати"
+      close: "Затвори"
       delete: "Изтрий"
       edit: "Редактирай"
       back: "Назад"
       save: "Запази "
+      apply: "Приложи"
+      update_range:
+        last_10_days: "Последните 10 дни"
+        last_30_days: "Последните 30 дни"
+        last_90_days: "Последните 90 дни"
+        all_time: "От началото"
+      custom_range_from: "От"
       admin:
         name: "Име"

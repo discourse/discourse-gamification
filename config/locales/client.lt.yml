@@ -10,6 +10,7 @@ lt:
       you: "Jūs"
       leaderboard:
         link_to_settings: "Nustatymai"
+        refresh: "Atnaujinti"
         name: "Vardas"
         period:
           all_time: "Per visą laiką"
@@ -20,9 +21,17 @@ lt:
           daily: "Kasdien"
       create: "Sukurti"
       cancel: "Atšaukti"
+      close: "Uždaryti"
       delete: "Pašalinti"
       edit: "Redaguoti"
       back: "Atgal"
       save: "Išsaugoti"
+      apply: "Kandidatuoti"
+      update_range:
+        last_10_days: "Paskutinės 10 dienų"
+        last_30_days: "Paskutinės 30 dienų"
+        last_90_days: "Paskutinės 90 dienų"
+        all_time: "Per visą laiką"
+      custom_range_from: "Nuo"
       admin:
         name: "Vardas"

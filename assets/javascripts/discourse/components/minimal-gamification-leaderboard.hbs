@@ -1,0 +1,33 @@
+<div class="leaderboard -minimal">
+  <div class="page__header">
+    <LinkTo
+      @route="gamificationLeaderboard.byName"
+      @model={{this.model.leaderboard.id}}
+    >
+      <h3 class="page__title">{{this.model.leaderboard.name}}</h3>
+    </LinkTo>
+  </div>
+
+  <div class="ranking-col-names">
+    <span>{{i18n "gamification.leaderboard.rank"}}</span>
+    <span>{{d-icon "award"}}{{i18n "gamification.score"}}</span>
+  </div>
+  <div class="ranking-col-names__sticky-border"></div>
+  {{#if (and this.currentUserRanking.user this.notTopTen)}}
+    <div class="user -self">
+      <div class="user__rank">{{this.currentUserRanking.position}}</div>
+      <div class="user__name">{{i18n "gamification.you"}}</div>
+      <div class="user__score">
+        {{#if this.site.mobileView}}
+          {{number this.currentUserRanking.user.total_score}}
+        {{else}}
+          {{fullnumber this.currentUserRanking.user.total_score}}
+        {{/if}}
+      </div>
+    </div>
+  {{/if}}
+
+  {{#each this.ranking as |rank index|}}
+    <MinimalGamificationLeaderboardRow @rank={{rank}} @index={{index}} />
+  {{/each}}
+</div>

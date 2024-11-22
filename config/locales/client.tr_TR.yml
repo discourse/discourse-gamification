@@ -5,6 +5,11 @@
 # https://translate.discourse.org/
 
 tr_TR:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          discourse_gamification: "Discourse Oyunlaştırma"
   js:
     gamification_score: "Tezahürat"
     gamification:
@@ -14,12 +19,15 @@ tr_TR:
         title: "Liderlik Tabloları"
         info: "Bu nasıl işler?"
         link_to_settings: "Ayarlar"
+        refresh: "Yenile"
         modal:
           title: "Liderlik tablosu nasıl işler?"
           text: "Ziyaret etme, beğenme ve gönderme gibi toplulukla etkileşim için puan verilir. Puanınız birkaç dakikada bir güncellenir. Bu yüzden yardımsever, aktif ve destekleyici olun ve sıralamada yükselin!"
         name: "Ad"
-        name_placeholder: "ad..."
-        new: "Yeni ekle"
+        name_placeholder: "Ad..."
+        create_success: "Liderlik tablosu oluşturuldu"
+        delete_success: "Liderlik tablosu silindi"
+        save_success: "Liderlik tablosu kaydedildi"
         cta: "İlk liderlik tablonuzu oluşturun"
         none: "Henüz liderlik tablosu oluşturulmadı."
         confirm_destroy: "Bu liderlik tablosunu silmek istediğinizden emin misiniz?"
@@ -44,10 +52,25 @@ tr_TR:
         rank: "Sıra"
       create: "Oluştur"
       cancel: "İptal et"
+      close: "Kapat"
       delete: "Sil"
       edit: "Düzenle"
       back: "Geri"
       save: "Kaydet"
+      apply: "Uygula"
+      completed: "Bitti! Puanlar başarıyla yeniden hesaplandı."
+      update_scores_help: "Şuradan tüm skor tabloları için tüm puanları güncelleyin:"
+      update_range:
+        last_10_days: "Son 10 gün"
+        last_30_days: "Son 30 gün"
+        last_90_days: "Son 90 gün"
+        last_year: "Geçen yıl"
+        all_time: "Tüm Zamanlar"
+        custom_date_range: "Özel aralık"
+      custom_range_from: "Başlangıç:"
+      daily_update_scores_availability:
+        one: "%{count} günlük yeniden hesaplama kaldı"
+        other: "%{count} günlük yeniden hesaplama kaldı"
       admin:
         title: "Oyunlaştırma"
         name: "Ad"

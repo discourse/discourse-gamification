@@ -8,6 +8,11 @@
     margin-top: 1rem;
   }
 
+  &__btn-recalculate {
+    float: right;
+    margin-right: 1rem;
+  }
+
   &__btn-new {
     float: right;
   }
@@ -17,12 +22,23 @@
     padding-left: 0;
   }
 
-  &__btn-cancel-edit {
+  &__listitem-action {
+    text-align: right;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    justify-content: flex-end;
+  }
+}
+
+.leaderboard-edit {
+  &__cancel {
     margin-left: 1rem;
   }
+}
 
-  &__listitem-action {
-    width: 50px;
-    text-align: right;
+.new-leaderboard-container {
+  .form-kit__row {
+    padding-top: 0;
   }
 }

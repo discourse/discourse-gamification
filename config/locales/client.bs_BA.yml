@@ -10,6 +10,7 @@ bs_BA:
       you: "Vi"
       leaderboard:
         link_to_settings: "Postavke"
+        refresh: "Refresh"
         name: "Ime"
         period:
           all_time: "Oduvijek"
@@ -20,9 +21,14 @@ bs_BA:
           daily: "Dnevno"
       create: "napravi"
       cancel: "Odustani"
+      close: "Zatvori"
       delete: "Delete"
       edit: "Edit"
       back: "Prethodno"
       save: "Save"
+      apply: "Snimi"
+      update_range:
+        all_time: "Oduvijek"
+      custom_range_from: "Od"
       admin:
         name: "Ime"
