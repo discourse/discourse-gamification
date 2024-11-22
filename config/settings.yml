@@ -25,6 +25,10 @@ discourse_gamification:
     default: 10
   day_visited_score_value:
     default: 1
+  reaction_received_score_value:
+    default: 1
+  reaction_given_score_value:
+    default: 1
   chat_reaction_received_score_value:
     default: 1
   chat_reaction_given_score_value:

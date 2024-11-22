@@ -59,6 +59,8 @@ after_initialize do
   require_relative "lib/discourse_gamification/scorables/topic_created"
   require_relative "lib/discourse_gamification/scorables/user_invited"
   require_relative "lib/discourse_gamification/user_extension"
+  require_relative "lib/discourse_gamification/scorables/reaction_given"
+  require_relative "lib/discourse_gamification/scorables/reaction_received"
   require_relative "lib/discourse_gamification/scorables/chat_reaction_given"
   require_relative "lib/discourse_gamification/scorables/chat_reaction_received"
   require_relative "lib/discourse_gamification/scorables/chat_message_created"

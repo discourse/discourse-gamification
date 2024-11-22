@@ -12,6 +12,8 @@ en:
     flag_created_score_value: "The value of the cheer awarded when a user flags a post and that flag is accepted by a staff user"
     day_visited_score_value: "The value of the cheer awarded for every day a user visits the site"
     scorable_categories: "List of categories where actions will generate cheers. Leave empty to enable cheers on all categories"
+    reaction_received_score_value: "The value of the cheer awarded when a user receives a reaction"
+    reaction_given_score_value: "The value of the cheer awarded for every reaction a user gives"
     chat_reaction_received_score_value: "The value of the cheer awarded when a user receives a reaction to a chat message"
     chat_reaction_given_score_value: "The value of the cheer awarded for every reaction a user gives to a chat message"
     chat_message_created_score_value: "The value of the cheer awarded for every message a user sends in a chat"
