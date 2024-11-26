@@ -18,6 +18,8 @@ he:
     flag_created_score_value: "ערך התשועה שמוענק כאשר משתמש מסמן פוסט בדגל והדגל מתקבל על ידי משתמש צוות"
     day_visited_score_value: "ערך התשועה שמוענק עבור כל יום בו משתמש מבקר באתר"
     scorable_categories: "רשימת הקטגוריות בהן פעולות מייצרות תשועות. יש להשאיר ריק כדי להפעיל תשועות בכל הקטגוריות"
+    reaction_received_score_value: "ערך התשועה שמוענק כשמשתמש מקבל רגש"
+    reaction_given_score_value: "ערך התשועה שמוענק עבור כל רגש שמשתמש נותן"
     chat_reaction_received_score_value: "ערך התשועה שמוענק כשמשתמש מקבל תגובה להודעה בצ׳אט"
     chat_reaction_given_score_value: "ערך התשועה שמוענק עבור כל רגש שמשתמש הוסיף להודעת צ׳אט"
     chat_message_created_score_value: "ערך התשועה שמוענק עבור כל הודעה שמשתמש שולח בצ׳אט"
