@@ -2,8 +2,8 @@ import { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import DiscourseRoute from "discourse/routes/discourse";
 
-export default DiscourseRoute.extend({
-  router: service(),
+export default class GamificationLeaderboardIndex extends DiscourseRoute {
+  @service router;
 
   model() {
     return ajax(`/leaderboard`)
@@ -11,5 +11,5 @@ export default DiscourseRoute.extend({
         return response;
       })
       .catch(() => this.router.replaceWith("/404"));
-  },
-});
+  }
+}

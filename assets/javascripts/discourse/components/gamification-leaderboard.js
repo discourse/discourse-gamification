@@ -1,6 +1,7 @@
 import Component from "@ember/component";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
+import { tagName } from "@ember-decorators/component";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import LoadMore from "discourse/mixins/load-more";
@@ -34,40 +35,42 @@ function periodString(periodValue) {
   }
 }
 
-export default Component.extend(LoadMore, {
-  router: service(),
-  modal: service(),
+@tagName("")
+export default class GamificationLeaderboard extends Component.extend(
+  LoadMore
+) {
+  @service router;
+  @service modal;
 
-  tagName: "",
-  eyelineSelector: ".user",
-  page: 1,
-  loading: false,
-  canLoadMore: true,
-  period: "all",
+  eyelineSelector = ".user";
+  page = 1;
+  loading = false;
+  canLoadMore = true;
+  period = "all";
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     const default_leaderboard_period = periodString(
       this.model.leaderboard.default_period
     );
     this.set("period", default_leaderboard_period);
-  },
+  }
 
   @discourseComputed("model.reason")
   isNotReady(reason) {
     return reason !== undefined;
-  },
+  }
 
   @discourseComputed("model.users")
   currentUserRanking() {
     const user = this.model.personal;
     return user || null;
-  },
+  }
 
   @discourseComputed("model.users")
   winners(users) {
     return users.slice(0, 3);
-  },
+  }
 
   @discourseComputed("model.users.[]")
   ranking(users) {
@@ -77,12 +80,12 @@ export default Component.extend(LoadMore, {
       }
     });
     return users.slice(3);
-  },
+  }
 
   @action
   showLeaderboardInfo() {
     this.modal.show(LeaderboardInfo);
-  },
+  }
 
   @action
   loadMore() {
@@ -104,7 +107,7 @@ export default Component.extend(LoadMore, {
       })
       .finally(() => this.set("loading", false))
       .catch(popupAjaxError);
-  },
+  }
 
   @action
   changePeriod(period) {
@@ -123,10 +126,10 @@ export default Component.extend(LoadMore, {
       })
       .finally(() => this.set("loading", false))
       .catch(popupAjaxError);
-  },
+  }
 
   @action
   refresh() {
     this.router.refresh();
-  },
-});
+  }
+}
