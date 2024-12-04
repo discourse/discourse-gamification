@@ -25,6 +25,7 @@ zh_CN:
           text: "参与社区活动，如访问、点赞和发帖，都会获得积分。您的积分每几分钟就会更新一次。保持活跃，积极帮助并支持其他人来提高自己的排名！"
         name: "名称"
         name_placeholder: "名称…"
+        new: "新排行榜"
         create_success: "排行榜已创建"
         delete_success: "排行榜已删除"
         save_success: "排行榜已保存"
@@ -33,6 +34,8 @@ zh_CN:
         confirm_destroy: "确定要删除此排行榜吗？"
         date:
           range: "开始/结束日期范围"
+          from: "起始日期"
+          to: "截止日期"
           helper: "如果日期留空，排行榜将显示全部时间内获得的分数。"
         visible_to_groups: "对以下群组可见"
         visible_to_groups_help: "只有这些群组中的用户才能查看排行榜。留空以允许所有用户查看。"
@@ -58,6 +61,8 @@ zh_CN:
       back: "返回"
       save: "保存"
       apply: "应用"
+      recalculate: "重新计算分数"
+      recalculating: "正在重新计算分数…"
       completed: "完成！分数已成功重新计算。"
       update_scores_help: "更新以下时间范围内所有排行榜的所有分数："
       update_range:

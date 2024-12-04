@@ -25,6 +25,7 @@ de:
           text: "Punkte werden für die Interaktion mit der Community vergeben, z. B. für Besuche, „Gefällt mir“ und Posten. Deine Punktzahl wird alle paar Minuten aktualisiert. Sei also hilfsbereit, aktiv sowie solidarisch und steige auf!"
         name: "Name"
         name_placeholder: "Name …"
+        new: "Neue Rangliste"
         create_success: "Rangliste erstellt"
         delete_success: "Rangliste gelöscht"
         save_success: "Rangliste gespeichert"
@@ -33,6 +34,8 @@ de:
         confirm_destroy: "Bist du sicher, dass du diese Rangliste löschen möchtest?"
         date:
           range: "Datumsbereich von/bis"
+          from: "Ab Datum"
+          to: "Bis Datum"
           helper: "Wenn die Daten leer gelassen werden, zeigt die Rangliste die erzielten Punktzahlen ohne Zeitbeschränkungen."
         visible_to_groups: "Sichtbar für Gruppen"
         visible_to_groups_help: "Nur Benutzer in diesen Gruppen können die Rangliste sehen. Leer lassen, um dies allen zu ermöglichen."
@@ -58,6 +61,8 @@ de:
       back: "Zurück"
       save: "Speichern"
       apply: "Anwenden"
+      recalculate: "Scores neu berechnen"
+      recalculating: "Scores werden neu berechnet …"
       completed: "Fertig! Die Scores wurden erfolgreich neu berechnet."
       update_scores_help: "Alle Scores für sämtliche Ranglisten aktualisieren von"
       update_range:

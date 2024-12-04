@@ -25,6 +25,7 @@ fr:
           text: "Des points sont attribués pour l'engagement auprès de la communauté, par exemple pour les visites, les mentions J'aime et les publications. Votre score est mis à jour toutes les quelques minutes. Veillez donc à être aimable, actif(ve) et solidaire, et gravissez les échelons !"
         name: "Nom"
         name_placeholder: "Nom…"
+        new: "Nouveau classement"
         create_success: "Classement créé"
         delete_success: "Classement supprimé"
         save_success: "Classement enregistré"
@@ -33,6 +34,8 @@ fr:
         confirm_destroy: "Voulez-vous vraiment supprimer ce classement ?"
         date:
           range: "Plage de date du/au"
+          from: "Date de début"
+          to: "Date de fin"
           helper: "Si les dates sont laissées vides, le classement affichera les scores obtenus sans aucune restriction de temps."
         visible_to_groups: "Visible par les groupes"
         visible_to_groups_help: "Seuls les utilisateurs de ces groupes pourront voir le classement. Laissez le champ vide pour autoriser tout le monde."
@@ -58,6 +61,8 @@ fr:
       back: "Retour"
       save: "Enregistrer"
       apply: "Appliquer"
+      recalculate: "Recalculer les scores"
+      recalculating: "Recalcul des scores..."
       completed: "Terminé ! Les scores ont été recalculés avec succès."
       update_scores_help: "Mettre à jour tous les scores pour tous les classements de"
       update_range:
