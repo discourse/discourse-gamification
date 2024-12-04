@@ -25,6 +25,7 @@ it:
           text: "I punti vengono assegnati per il coinvolgimento con la community, ad esempio in base al numero di visite, Mi piace e pubblicazioni. Il tuo punteggio viene aggiornato ogni pochi minuti. Quindi cerca di essere propositivo, attivo e di supporto per scalare le classifiche!"
         name: "Nome"
         name_placeholder: "Nome..."
+        new: "Nuova classifica"
         create_success: "Classifica creata"
         delete_success: "Classifica eliminata"
         save_success: "Classifica salvata"
@@ -33,6 +34,8 @@ it:
         confirm_destroy: "Vuoi cancellare questa classifica?"
         date:
           range: "Intervallo di date dal/al"
+          from: "Dalla data"
+          to: "A oggi"
           helper: "Se le date vengono lasciate vuote, la classifica mostrerà i punteggi ottenuti senza alcun limite di tempo."
         visible_to_groups: "Visibile ai gruppi"
         visible_to_groups_help: "Solo gli utenti di questi gruppi potranno visualizzare la classifica. Lascia vuota l'opzione per consentire a tutti la visione."
@@ -58,6 +61,8 @@ it:
       back: "Indietro"
       save: "Salva"
       apply: "Applica"
+      recalculate: "Ricalcola i punteggi"
+      recalculating: "Ricalcolo dei punteggi..."
       completed: "Fatto! I punteggi sono stati ricalcolati correttamente."
       update_scores_help: "Aggiorna tutti i punteggi per tutte le classifiche da"
       update_range:

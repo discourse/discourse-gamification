@@ -25,6 +25,7 @@ tr_TR:
           text: "Ziyaret etme, beğenme ve gönderme gibi toplulukla etkileşim için puan verilir. Puanınız birkaç dakikada bir güncellenir. Bu yüzden yardımsever, aktif ve destekleyici olun ve sıralamada yükselin!"
         name: "Ad"
         name_placeholder: "Ad..."
+        new: "Yeni liderlik tablosu"
         create_success: "Liderlik tablosu oluşturuldu"
         delete_success: "Liderlik tablosu silindi"
         save_success: "Liderlik tablosu kaydedildi"
@@ -33,6 +34,8 @@ tr_TR:
         confirm_destroy: "Bu liderlik tablosunu silmek istediğinizden emin misiniz?"
         date:
           range: "Başlangıç / Bitiş Tarih Aralığı"
+          from: "Başlangıç tarihi"
+          to: "Bitiş tarihi"
           helper: "Tarihler boş bırakılırsa liderlik tablosu herhangi bir zaman kısıtlaması olmaksızın kazanılan puanları gösterir."
         visible_to_groups: "Gruplara görünür"
         visible_to_groups_help: "Sadece bu gruplardaki kullanıcılar liderlik tablosunu görüntüleyebilir. Herkese izin vermek için boş bırakın."
@@ -58,6 +61,8 @@ tr_TR:
       back: "Geri"
       save: "Kaydet"
       apply: "Uygula"
+      recalculate: "Puanları yeniden hesapla"
+      recalculating: "Puanlar yeniden hesaplanıyor..."
       completed: "Bitti! Puanlar başarıyla yeniden hesaplandı."
       update_scores_help: "Şuradan tüm skor tabloları için tüm puanları güncelleyin:"
       update_range:

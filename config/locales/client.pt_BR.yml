@@ -25,6 +25,7 @@ pt_BR:
           text: "Os pontos são concedidos por se envolver com a comunidade, como visitar, curtir e postar. Sua pontuação é atualizada dentro de poucos minutos. Então, seja útil, ativo(a) e solidário(a), e suba na hierarquia!"
         name: "Nome"
         name_placeholder: "Nome..."
+        new: "Nova tabela de classificação"
         create_success: "Tabela de classificação criada"
         delete_success: "Tabela de classificação excluída"
         save_success: "Tabela de classificação salva"
@@ -33,6 +34,8 @@ pt_BR:
         confirm_destroy: "Tem certeza de que deseja excluir essa tabela de classificação?"
         date:
           range: "Intervalo de datas De / Até"
+          from: "Data de início"
+          to: "Data final"
           helper: "Se as datas forem deixadas em branco, a tabela de classificação mostrará as pontuações obtidas sem restrições de tempo."
         visible_to_groups: "Visível para grupos"
         visible_to_groups_help: "Apenas os usuários desses grupos poderão visualizar a tabela de classificação. Deixe vazio para permitir que todos visualizem."
@@ -58,6 +61,8 @@ pt_BR:
       back: "Voltar"
       save: "Salvar"
       apply: "Aplicar"
+      recalculate: "Recalcular pontuação"
+      recalculating: "Recalculando pontuação..."
       completed: "Pronto! A pontuação foi recalculada com êxito."
       update_scores_help: "Atualizar a pontuação de todos os placares"
       update_range:
