@@ -4,7 +4,7 @@
     <DButton
       @action={{action "showLeaderboardInfo"}}
       class="-ghost"
-      @icon="info-circle"
+      @icon="circle-info"
       @label={{unless this.site.mobileView "gamification.leaderboard.info"}}
     />
   </div>
@@ -31,7 +31,7 @@
     <div class="leaderboard__not-ready">
       <p>{{this.model.reason}}</p>
       <DButton
-        @icon="sync"
+        @icon="arrows-rotate"
         @label="gamification.leaderboard.refresh"
         @action={{action "refresh"}}
         class="btn-primary refresh"
