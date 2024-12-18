@@ -4,7 +4,7 @@
 />
 
 <div class="discourse-gamification__leaderboards admin-detail">
-  <AdminPageSubheader @titleLabel="gamification.leaderboard.title">
+  <DPageSubheader @titleLabel={{i18n "gamification.leaderboard.title"}}>
     <:actions as |actions|>
       {{#if this.model.leaderboards}}
         <actions.Primary
@@ -22,7 +22,7 @@
         />
       {{/if}}
     </:actions>
-  </AdminPageSubheader>
+  </DPageSubheader>
 
   {{#if this.creatingNew}}
     <AdminCreateLeaderboard @onCancel={{action this.resetNewLeaderboard}} />
