@@ -112,153 +112,221 @@ describe DiscourseGamification::LeaderboardCachedView do
   end
 
   describe "#scores" do
-    before do
-      Fabricate(:gamification_score, user_id: user.id, score: 20)
-      Fabricate(:gamification_score, user_id: admin.id, score: 50)
-      Fabricate(:gamification_score, user_id: other_user.id, score: 20)
-      Fabricate(:gamification_score, user_id: moderator.id, score: 10)
-    end
-
     let(:leaderboard_positions) { described_class.new(leaderboard) }
 
-    context "with rank ranking strategy" do
-      before do
-        SiteSetting.score_ranking_strategy = "rank"
+    context "with leaderboard dates" do
+      let(:leaderboard_from) { Date.current - 45.days }
+      let(:leaderboard_to) { Date.current - 15.days }
 
-        described_class.new(leaderboard).create
+      before do
+        [
+          leaderboard_from - 15.days,
+          leaderboard_from - 5.days,
+          leaderboard_from - 1.day,
+          leaderboard_from,
+          leaderboard_from + 15.days,
+          leaderboard_to,
+          leaderboard_to + 1.day,
+          leaderboard_to + 15.days,
+          leaderboard_to + 30.days,
+        ].each { |date| Fabricate(:gamification_score, user_id: user.id, date: date, score: 10) }
       end
 
-      it "returns ranked scores skipping the next rank after duplicates" do
-        expect(leaderboard_positions.scores.map(&:attributes)).to eq(
-          [
-            {
-              "total_score" => 50,
-              "id" => admin.id,
-              "position" => 1,
-              "uploaded_avatar_id" => nil,
-              "username" => admin.username,
-              "name" => admin.name,
-            },
-            {
-              "total_score" => 20,
-              "id" => user.id,
-              "position" => 2,
-              "uploaded_avatar_id" => nil,
-              "username" => user.username,
-              "name" => user.name,
-            },
-            {
-              "total_score" => 20,
-              "id" => other_user.id,
-              "position" => 2,
-              "uploaded_avatar_id" => nil,
-              "username" => other_user.username,
-              "name" => other_user.name,
-            },
-            {
-              "total_score" => 10,
-              "id" => moderator.id,
-              "position" => 4,
-              "uploaded_avatar_id" => nil,
-              "username" => moderator.username,
-              "name" => moderator.name,
-            },
-          ],
-        )
+      it "filters scores for leaderboard with both 'from_date' and 'to_date' configured" do
+        leaderboard.update!(from_date: leaderboard_from, to_date: leaderboard_to)
+        leaderboard_positions.create
+
+        expect(leaderboard_positions.scores.first&.total_score).to eq(30)
+        expect(leaderboard_positions.scores(period: "yearly").first&.total_score).to eq(30)
+        expect(leaderboard_positions.scores(period: "quarterly").first&.total_score).to eq(30)
+        expect(leaderboard_positions.scores(period: "monthly").first&.total_score).to eq(20)
+        expect(leaderboard_positions.scores(period: "weekly").first&.total_score).to be_nil
+        expect(leaderboard_positions.scores(period: "daily").first&.total_score).to be_nil
+      end
+
+      it "filters scores for leaderboard with only 'from_date' configured" do
+        leaderboard.update!(from_date: leaderboard_from)
+        leaderboard_positions.create
+
+        expect(leaderboard_positions.scores.first&.total_score).to eq(50)
+        expect(leaderboard_positions.scores(period: "yearly").first&.total_score).to eq(50)
+        expect(leaderboard_positions.scores(period: "quarterly").first&.total_score).to eq(50)
+        expect(leaderboard_positions.scores(period: "monthly").first&.total_score).to eq(40)
+        expect(leaderboard_positions.scores(period: "weekly").first&.total_score).to eq(10)
+        expect(leaderboard_positions.scores(period: "daily").first&.total_score).to eq(10)
+      end
+
+      it "filters scores for leaderboard with only 'to_date' configured" do
+        leaderboard.update!(to_date: leaderboard_to)
+        leaderboard_positions.create
+
+        expect(leaderboard_positions.scores.first&.total_score).to eq(60)
+        expect(leaderboard_positions.scores(period: "yearly").first&.total_score).to eq(60)
+        expect(leaderboard_positions.scores(period: "quarterly").first&.total_score).to eq(60)
+        expect(leaderboard_positions.scores(period: "monthly").first&.total_score).to eq(20)
+        expect(leaderboard_positions.scores(period: "weekly").first&.total_score).to be_nil
+        expect(leaderboard_positions.scores(period: "daily").first&.total_score).to be_nil
+      end
+
+      it "filters scores for leaderboard with no dates configured" do
+        leaderboard_positions.create
+
+        expect(leaderboard_positions.scores.first&.total_score).to eq(80)
+        expect(leaderboard_positions.scores(period: "yearly").first&.total_score).to eq(80)
+        expect(leaderboard_positions.scores(period: "quarterly").first&.total_score).to eq(80)
+        expect(leaderboard_positions.scores(period: "monthly").first&.total_score).to eq(40)
+        expect(leaderboard_positions.scores(period: "weekly").first&.total_score).to eq(10)
+        expect(leaderboard_positions.scores(period: "daily").first&.total_score).to eq(10)
       end
     end
 
-    context "with dense_rank ranking strategy" do
+    context "with leaderboard ranking strategies" do
       before do
-        SiteSetting.score_ranking_strategy = "dense_rank"
-
-        described_class.new(leaderboard).create
+        Fabricate(:gamification_score, user_id: user.id, score: 20)
+        Fabricate(:gamification_score, user_id: admin.id, score: 50)
+        Fabricate(:gamification_score, user_id: other_user.id, score: 20)
+        Fabricate(:gamification_score, user_id: moderator.id, score: 10)
       end
 
-      it "returns ranked scores without skipping the next rank after duplicates" do
-        expect(leaderboard_positions.scores.map(&:attributes)).to eq(
-          [
-            {
-              "total_score" => 50,
-              "id" => admin.id,
-              "position" => 1,
-              "uploaded_avatar_id" => nil,
-              "username" => admin.username,
-              "name" => admin.name,
-            },
-            {
-              "total_score" => 20,
-              "id" => user.id,
-              "position" => 2,
-              "uploaded_avatar_id" => nil,
-              "username" => user.username,
-              "name" => user.name,
-            },
-            {
-              "total_score" => 20,
-              "id" => other_user.id,
-              "position" => 2,
-              "uploaded_avatar_id" => nil,
-              "username" => other_user.username,
-              "name" => other_user.name,
-            },
-            {
-              "total_score" => 10,
-              "id" => moderator.id,
-              "position" => 3,
-              "uploaded_avatar_id" => nil,
-              "username" => moderator.username,
-              "name" => moderator.name,
-            },
-          ],
-        )
+      context "with 'rank'" do
+        before do
+          SiteSetting.score_ranking_strategy = "rank"
+
+          described_class.new(leaderboard).create
+        end
+
+        it "returns ranked scores skipping the next rank after duplicates" do
+          expect(leaderboard_positions.scores.map(&:attributes)).to eq(
+            [
+              {
+                "total_score" => 50,
+                "id" => admin.id,
+                "position" => 1,
+                "uploaded_avatar_id" => nil,
+                "username" => admin.username,
+                "name" => admin.name,
+              },
+              {
+                "total_score" => 20,
+                "id" => user.id,
+                "position" => 2,
+                "uploaded_avatar_id" => nil,
+                "username" => user.username,
+                "name" => user.name,
+              },
+              {
+                "total_score" => 20,
+                "id" => other_user.id,
+                "position" => 2,
+                "uploaded_avatar_id" => nil,
+                "username" => other_user.username,
+                "name" => other_user.name,
+              },
+              {
+                "total_score" => 10,
+                "id" => moderator.id,
+                "position" => 4,
+                "uploaded_avatar_id" => nil,
+                "username" => moderator.username,
+                "name" => moderator.name,
+              },
+            ],
+          )
+        end
       end
-    end
 
-    context "with row_number ranking strategy" do
-      before do
-        SiteSetting.score_ranking_strategy = "row_number"
+      context "with 'dense_rank'" do
+        before do
+          SiteSetting.score_ranking_strategy = "dense_rank"
 
-        described_class.new(leaderboard).create
+          described_class.new(leaderboard).create
+        end
+
+        it "returns ranked scores without skipping the next rank after duplicates" do
+          expect(leaderboard_positions.scores.map(&:attributes)).to eq(
+            [
+              {
+                "total_score" => 50,
+                "id" => admin.id,
+                "position" => 1,
+                "uploaded_avatar_id" => nil,
+                "username" => admin.username,
+                "name" => admin.name,
+              },
+              {
+                "total_score" => 20,
+                "id" => user.id,
+                "position" => 2,
+                "uploaded_avatar_id" => nil,
+                "username" => user.username,
+                "name" => user.name,
+              },
+              {
+                "total_score" => 20,
+                "id" => other_user.id,
+                "position" => 2,
+                "uploaded_avatar_id" => nil,
+                "username" => other_user.username,
+                "name" => other_user.name,
+              },
+              {
+                "total_score" => 10,
+                "id" => moderator.id,
+                "position" => 3,
+                "uploaded_avatar_id" => nil,
+                "username" => moderator.username,
+                "name" => moderator.name,
+              },
+            ],
+          )
+        end
       end
 
-      it "returns ranked scores without distinguishing duplicates" do
-        expect(leaderboard_positions.scores.map(&:attributes)).to eq(
-          [
-            {
-              "total_score" => 50,
-              "id" => admin.id,
-              "position" => 1,
-              "uploaded_avatar_id" => nil,
-              "username" => admin.username,
-              "name" => admin.name,
-            },
-            {
-              "total_score" => 20,
-              "id" => user.id,
-              "position" => 2,
-              "uploaded_avatar_id" => nil,
-              "username" => user.username,
-              "name" => user.name,
-            },
-            {
-              "total_score" => 20,
-              "id" => other_user.id,
-              "position" => 3,
-              "uploaded_avatar_id" => nil,
-              "username" => other_user.username,
-              "name" => other_user.name,
-            },
-            {
-              "total_score" => 10,
-              "id" => moderator.id,
-              "position" => 4,
-              "uploaded_avatar_id" => nil,
-              "username" => moderator.username,
-              "name" => moderator.name,
-            },
-          ],
-        )
+      context "with 'row_number'" do
+        before do
+          SiteSetting.score_ranking_strategy = "row_number"
+
+          described_class.new(leaderboard).create
+        end
+
+        it "returns ranked scores without distinguishing duplicates" do
+          expect(leaderboard_positions.scores.map(&:attributes)).to eq(
+            [
+              {
+                "total_score" => 50,
+                "id" => admin.id,
+                "position" => 1,
+                "uploaded_avatar_id" => nil,
+                "username" => admin.username,
+                "name" => admin.name,
+              },
+              {
+                "total_score" => 20,
+                "id" => user.id,
+                "position" => 2,
+                "uploaded_avatar_id" => nil,
+                "username" => user.username,
+                "name" => user.name,
+              },
+              {
+                "total_score" => 20,
+                "id" => other_user.id,
+                "position" => 3,
+                "uploaded_avatar_id" => nil,
+                "username" => other_user.username,
+                "name" => other_user.name,
+              },
+              {
+                "total_score" => 10,
+                "id" => moderator.id,
+                "position" => 4,
+                "uploaded_avatar_id" => nil,
+                "username" => moderator.username,
+                "name" => moderator.name,
+              },
+            ],
+          )
+        end
       end
     end
   end
