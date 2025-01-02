@@ -14,6 +14,7 @@
       @period={{this.period}}
       @action={{action "changePeriod"}}
       @fullDay={{false}}
+      @options={{hash disabled=this.model.leaderboard.period_filter_disabled}}
       class="leaderboard__period-chooser"
     />
     {{#if this.currentUser.staff}}

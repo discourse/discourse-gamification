@@ -40,6 +40,7 @@ en:
         excluded_groups_help: "Remove users on those groups from being included in the leaderboard. Leave empty to list everyone."
         default_period: "Default period"
         default_period_help: "Set the default time period to display for this leaderboard."
+        period_filter_disabled: "Disable time period filter"
         period:
           all_time: "All Time"
           yearly: "Yearly"
