@@ -158,19 +158,19 @@ module ::DiscourseGamification
             (CASE
               -- Leaderboard with both "to_date" and "from_date" configured.
               -- Filter scores within the configured date range AND
-              -- the relative period window (e.g., last month, last year)
+              -- the relative period window
               WHEN lb.from_date IS NOT NULL AND lb.to_date IS NOT NULL THEN
                 gs.date BETWEEN GREATEST(lb.from_date, #{period_start_sql(period)}) AND lb.to_date
 
               -- Leaderboard with only "from_date" configured.
               -- Filter scores starting from the later of leaderboard's "from_date"
-              -- or the relative period start date
+              -- and the relative period start date
               WHEN lb.from_date IS NOT NULL AND lb.to_date IS NULL THEN
                 gs.date >= GREATEST(lb.from_date, #{period_start_sql(period)})
 
               -- Leaderboard with only "to_date" configured.
-              -- Filter scores up to leaderboard's to_date that fall within
-              -- the relative period window
+              -- Filter scores up to leaderboard's "to_date" starting from
+              -- the relative period start date
               WHEN lb.from_date IS NULL AND lb.to_date IS NOT NULL THEN
                 gs.date >= COALESCE(#{period_start_sql(period)}, gs.date) AND gs.date <= lb.to_date
 
@@ -179,7 +179,7 @@ module ::DiscourseGamification
               ELSE
                 gs.date >= COALESCE(#{period_start_sql(period)}, gs.date)
             END)
-            AND gs.date <= CURRENT_DATE -- Ensure scores are not in the future
+            AND gs.date <= CURRENT_DATE -- Ensure scores are not from the future
         )
 
         SELECT
