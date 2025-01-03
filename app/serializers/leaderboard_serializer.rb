@@ -10,5 +10,6 @@ class LeaderboardSerializer < ApplicationSerializer
              :included_groups_ids,
              :excluded_groups_ids,
              :default_period,
-             :updated_at
+             :updated_at,
+             :period_filter_disabled
 end

@@ -29,6 +29,7 @@ export default class AdminEditLeaderboard extends Component {
       excluded_groups_ids: this.args.leaderboard.excludedGroupsIds,
       visible_to_groups_ids: this.args.leaderboard.visibleToGroupsIds,
       default_period: this.args.leaderboard.defaultPeriod,
+      period_filter_disabled: this.args.leaderboard.periodFilterDisabled,
     };
   }
 
@@ -159,6 +160,14 @@ export default class AdminEditLeaderboard extends Component {
         </field.Custom>
       </form.Field>
 
+      <form.Field
+        @name="period_filter_disabled"
+        @title={{i18n "gamification.leaderboard.period_filter_disabled"}}
+        @showTitle={{false}}
+        as |field|
+      >
+        <field.Checkbox @value={{field.value}} />
+      </form.Field>
       <form.Submit />
     </Form>
   </template>

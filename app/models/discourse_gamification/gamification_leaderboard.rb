@@ -45,18 +45,19 @@ end
 #
 # Table name: gamification_leaderboards
 #
-#  id                    :bigint           not null, primary key
-#  name                  :string           not null
-#  from_date             :date
-#  to_date               :date
-#  for_category_id       :integer
-#  created_by_id         :integer          not null
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  visible_to_groups_ids :integer          default([]), not null, is an Array
-#  included_groups_ids   :integer          default([]), not null, is an Array
-#  excluded_groups_ids   :integer          default([]), not null, is an Array
-#  default_period        :integer          default(0)
+#  id                     :bigint           not null, primary key
+#  name                   :string           not null
+#  from_date              :date
+#  to_date                :date
+#  for_category_id        :integer
+#  created_by_id          :integer          not null
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  visible_to_groups_ids  :integer          default([]), not null, is an Array
+#  included_groups_ids    :integer          default([]), not null, is an Array
+#  excluded_groups_ids    :integer          default([]), not null, is an Array
+#  default_period         :integer          default(0)
+#  period_filter_disabled :boolean          default(FALSE), not null
 #
 # Indexes
 #

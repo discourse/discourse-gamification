@@ -19,6 +19,7 @@ export default class GamificationLeaderboard {
   @tracked toDate;
   @tracked name;
   @tracked period;
+  @tracked periodFilterDisabled;
 
   constructor(args = {}) {
     this.id = args.id;
@@ -33,6 +34,7 @@ export default class GamificationLeaderboard {
     this.toDate = args.to_date;
     this.name = args.name;
     this.period = args.period;
+    this.periodFilterDisabled = args.period_filter_disabled;
 
     if (Number.isInteger(args.default_period)) {
       this.defaultPeriod = I18n.t(
