@@ -6,11 +6,18 @@ module ::DiscourseGamification
     end
 
     # Bump up when materialized view query changes
-    QUERY_VERSION = 1
+    QUERY_VERSION = 2
     SCORE_RANKING_STRATEGY_MAP = {
       row_number: "ROW_NUMBER()",
       rank: "RANK()",
       dense_rank: "DENSE_RANK()",
+    }.freeze
+    PERIOD_INTERVALS = {
+      "yearly" => "CURRENT_DATE - INTERVAL '1 year'",
+      "quarterly" => "CURRENT_DATE - INTERVAL '3 months'",
+      "monthly" => "CURRENT_DATE - INTERVAL '1 month'",
+      "weekly" => "CURRENT_DATE - INTERVAL '1 week'",
+      "daily" => "CURRENT_DATE - INTERVAL '1 day'",
     }.freeze
 
     attr_reader :leaderboard
@@ -125,7 +132,7 @@ module ::DiscourseGamification
               NOT EXISTS(SELECT 1 FROM anonymous_users a WHERE a.user_id = u.id)
             )
           AND
-            -- Ensure user is a member of included_groups_ids if it's  not empty
+            -- Ensure user is a member of included_groups_ids if it's not empty
             (
               (COALESCE(array_length(lb.included_groups_ids, 1), 0) = 0)
               OR
@@ -148,35 +155,31 @@ module ::DiscourseGamification
           CROSS JOIN
             leaderboard lb
           WHERE
-            (
-              -- Leaderboard with both "to/from" dates
-              -- Only scores created between specified dates
-              (
-                lb.from_date IS NOT NULL
-                AND lb.to_date IS NOT NULL
-                AND gs.date BETWEEN lb.from_date AND lb.to_date
-              )
-              OR
-              -- Leaderboard without "from/to" dates. All scores
-              (lb.from_date IS NULL AND lb.to_date IS NULL)
-              OR
-              -- Leaderboard with just "from" date
-              -- Only scores created starting from the specified date
-              (
-                lb.from_date IS NOT NULL
-                AND lb.to_date IS NULL
-                AND gs.date >= lb.from_date
-              )
-              OR
-              -- Leaderboard with just "to" date
-              -- Only scores created up to the specified date
-              (
-                lb.to_date IS NOT NULL
-                AND lb.from_date IS NULL
-                AND gs.date <= lb.to_date
-              )
-            )
-          #{score_period_condtion(period)}
+            (CASE
+              -- Leaderboard with both "to_date" and "from_date" configured.
+              -- Filter scores within the configured date range AND
+              -- the relative period window
+              WHEN lb.from_date IS NOT NULL AND lb.to_date IS NOT NULL THEN
+                gs.date BETWEEN GREATEST(lb.from_date, #{period_start_sql(period)}) AND lb.to_date
+
+              -- Leaderboard with only "from_date" configured.
+              -- Filter scores starting from the later of leaderboard's "from_date"
+              -- and the relative period start date
+              WHEN lb.from_date IS NOT NULL AND lb.to_date IS NULL THEN
+                gs.date >= GREATEST(lb.from_date, #{period_start_sql(period)})
+
+              -- Leaderboard with only "to_date" configured.
+              -- Filter scores up to leaderboard's "to_date" starting from
+              -- the relative period start date
+              WHEN lb.from_date IS NULL AND lb.to_date IS NOT NULL THEN
+                gs.date >= COALESCE(#{period_start_sql(period)}, gs.date) AND gs.date <= lb.to_date
+
+              -- Leaderboard with no "from_date" and "to_date" configured.
+              -- Filter scores within the relative period window only
+              ELSE
+                gs.date >= COALESCE(#{period_start_sql(period)}, gs.date)
+            END)
+            AND gs.date <= CURRENT_DATE -- Ensure scores are not from the future
         )
 
         SELECT
@@ -264,24 +267,8 @@ module ::DiscourseGamification
       DB.query_single(stale_mviews_query)
     end
 
-    def score_period_condtion(period)
-      date =
-        case period
-        when "yearly"
-          "CURRENT_DATE - INTERVAL '1 year'"
-        when "monthly"
-          "CURRENT_DATE - INTERVAL '1 month'"
-        when "quarterly"
-          "CURRENT_DATE - INTERVAL '3 month'"
-        when "weekly"
-          "CURRENT_DATE - INTERVAL '1 week'"
-        when "daily"
-          "CURRENT_DATE - INTERVAL '1 day'"
-        else
-          nil
-        end
-
-      date ? "AND gs.date >= #{date}" : ""
+    def period_start_sql(period)
+      PERIOD_INTERVALS[period] || "NULL"
     end
   end
 end
