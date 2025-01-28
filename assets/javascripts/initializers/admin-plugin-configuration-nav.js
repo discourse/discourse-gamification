@@ -1,4 +1,3 @@
-import { PLUGIN_NAV_MODE_TOP } from "discourse/lib/admin-plugin-config-nav";
 import { withPluginApi } from "discourse/lib/plugin-api";
 
 export default {
@@ -11,16 +10,12 @@ export default {
     }
 
     withPluginApi("1.1.0", (api) => {
-      api.addAdminPluginConfigurationNav(
-        "discourse-gamification",
-        PLUGIN_NAV_MODE_TOP,
-        [
-          {
-            label: "gamification.leaderboard.title",
-            route: "adminPlugins.show.discourse-gamification-leaderboards",
-          },
-        ]
-      );
+      api.addAdminPluginConfigurationNav("discourse-gamification", [
+        {
+          label: "gamification.leaderboard.title",
+          route: "adminPlugins.show.discourse-gamification-leaderboards",
+        },
+      ]);
     });
   },
 };
