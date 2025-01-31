@@ -45,6 +45,7 @@ zh_CN:
         excluded_groups_help: "将这些群组中的用户从排行榜中移除。留空以让所有人都参与排行榜。"
         default_period: "默认时间段"
         default_period_help: "设置要为此排行榜显示的默认时间段。"
+        period_filter_disabled: "禁用时间段筛选器"
         period:
           all_time: "所有时间"
           yearly: "每年"

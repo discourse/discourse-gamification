@@ -45,6 +45,7 @@ es:
         excluded_groups_help: "Elimina a los usuarios de esos grupos para que no se incluyan en la tabla de clasificación. Déjalo vacío para que aparezcan todos."
         default_period: "Período predeterminado"
         default_period_help: "Establece el período de tiempo predeterminado que se mostrará en esta tabla de clasificación."
+        period_filter_disabled: "Desactivar el filtro de periodo de tiempo"
         period:
           all_time: "Siempre"
           yearly: "Anualmente"
