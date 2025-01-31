@@ -45,6 +45,7 @@ fi:
         excluded_groups_help: "Jätä näiden ryhmien käyttäjät pois tulostaulukosta. Listaa kaikki jättämällä tyhjäksi."
         default_period: "Oletusjakso"
         default_period_help: "Aseta näytettävä oletusaika tälle tulostaulukolle."
+        period_filter_disabled: "Poista ajanjaksosuodatin käytöstä"
         period:
           all_time: "Kaikilta ajoilta"
           yearly: "Vuosittainen"

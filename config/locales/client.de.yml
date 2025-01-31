@@ -45,6 +45,7 @@ de:
         excluded_groups_help: "Benutzer in diesen Gruppen von der Rangliste entfernen. Leer lassen, um alle aufzulisten."
         default_period: "Standard-Zeitraum"
         default_period_help: "Lege den Standard-Zeitraum fest, der für diese Rangliste angezeigt werden soll."
+        period_filter_disabled: "Zeitraumfilter deaktivieren"
         period:
           all_time: "Gesamt"
           yearly: "Jährlich"

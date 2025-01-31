@@ -45,6 +45,7 @@ tr_TR:
         excluded_groups_help: "Bu gruplardaki kullanıcıların liderlik tablosuna dahil edilmesini kaldırın. Herkesi listelemek için boş bırakın."
         default_period: "Varsayılan dönem"
         default_period_help: "Bu liderlik tablosu için gösterilecek varsayılan zaman aralığını ayarlayın."
+        period_filter_disabled: "Zaman aralığı filtresini devre dışı bırak"
         period:
           all_time: "Tüm Zamanlar"
           yearly: "Yıllık"

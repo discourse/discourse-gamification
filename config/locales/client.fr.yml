@@ -45,6 +45,7 @@ fr:
         excluded_groups_help: "Supprimez les utilisateurs de ces groupes afin qu'ils ne figurent pas dans le classement. Laissez ce champ vide pour lister tout le monde."
         default_period: "Période par défaut"
         default_period_help: "Définissez la période par défaut à afficher pour ce classement."
+        period_filter_disabled: "Désactiver le filtre de période"
         period:
           all_time: "Depuis toujours"
           yearly: "Annuel"

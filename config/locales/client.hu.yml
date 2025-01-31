@@ -45,6 +45,7 @@ hu:
         excluded_groups_help: "Távolítsa el a csoportok felhasználóit, hogy ne szerepeljenek a ranglistán. Hagyja üresen, hogy mindenkit felsoroljon."
         default_period: "Alapértelmezett időszak"
         default_period_help: "Állítsa be a ranglistán megjelenítendő alapértelmezett időtartamot."
+        period_filter_disabled: "Az időszakszűrő letiltása"
         period:
           all_time: "Bármikor"
           yearly: "Éves"

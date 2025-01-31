@@ -45,6 +45,7 @@ nl:
         excluded_groups_help: "Sluit gebruikers van die groepen uit van het klassement. Laat dit leeg om iedereen toe te staan."
         default_period: "Standaard periode"
         default_period_help: "Stel de standaard periode in die voor dit klassement moet worden weergegeven."
+        period_filter_disabled: "Tijdsperiodefilter uitschakelen"
         period:
           all_time: "Sinds het begin"
           yearly: "Jaarlijks"

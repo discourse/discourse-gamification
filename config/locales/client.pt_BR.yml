@@ -45,6 +45,7 @@ pt_BR:
         excluded_groups_help: "Impeça que os usuários desses grupos sejam incluídos na tabela de classificação. Deixe em branco para listar todos."
         default_period: "Período padrão"
         default_period_help: "Defina o período de tempo padrão a ser exibido para este placar."
+        period_filter_disabled: "Desativar filtro de período"
         period:
           all_time: "Desde o início"
           yearly: "Todo ano"

@@ -45,6 +45,7 @@ ja:
         excluded_groups_help: "これらのグループのユーザーは、リーダーボードに含まれません。全員を表示する場合は、空白のままにします。"
         default_period: "デフォルトの期間"
         default_period_help: "このリーダーボードに表示するデフォルトの期間を設定します。"
+        period_filter_disabled: "期間フィルタを無効化"
         period:
           all_time: "全期間"
           yearly: "年間"

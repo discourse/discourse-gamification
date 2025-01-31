@@ -45,6 +45,7 @@ it:
         excluded_groups_help: "Gli utenti di questi gruppi saranno esclusi dalla classifica. Lascia vuota l'opzione per elencare tutti."
         default_period: "Periodo predefinito"
         default_period_help: "Imposta il periodo di tempo predefinito per visualizzare questa classifica."
+        period_filter_disabled: "Disattiva il filtro del periodo di tempo"
         period:
           all_time: "Di Sempre"
           yearly: "Annuale"
