@@ -88,10 +88,13 @@ after_initialize do
       gamification_recalculate_scores_remaining:
         DiscourseGamification::RecalculateScoresRateLimiter.remaining,
       gamification_groups:
-        Group.all.map { |g| BasicGroupSerializer.new(g, root: false, scope: self.scope).as_json },
+        Group
+          .includes(:flair_upload)
+          .all
+          .map { |group| BasicGroupSerializer.new(group, root: false, scope: self.scope).as_json },
       gamification_leaderboards:
-        DiscourseGamification::GamificationLeaderboard.all.map do |l|
-          LeaderboardSerializer.new(l, root: false).as_json
+        DiscourseGamification::GamificationLeaderboard.all.map do |leaderboard|
+          LeaderboardSerializer.new(leaderboard, root: false).as_json
         end,
     }
   end
