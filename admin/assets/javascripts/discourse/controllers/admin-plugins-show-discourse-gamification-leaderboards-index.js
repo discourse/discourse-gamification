@@ -3,8 +3,8 @@ import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
-import discourseComputed from "discourse-common/utils/decorators";
-import I18n from "I18n";
+import discourseComputed from "discourse/lib/decorators";
+import { i18n } from "discourse-i18n";
 import RecalculateScoresForm from "discourse/plugins/discourse-gamification/discourse/components/modal/recalculate-scores-form";
 
 export default class AdminPluginsShowDiscourseGamificationLeaderboardsIndexController extends Controller {
@@ -27,7 +27,7 @@ export default class AdminPluginsShowDiscourseGamificationLeaderboardsIndexContr
   @action
   destroyLeaderboard(leaderboard) {
     this.dialog.deleteConfirm({
-      message: I18n.t("gamification.leaderboard.confirm_destroy"),
+      message: i18n("gamification.leaderboard.confirm_destroy"),
       didConfirm: () => {
         return ajax(
           `/admin/plugins/gamification/leaderboard/${leaderboard.id}`,
@@ -39,7 +39,7 @@ export default class AdminPluginsShowDiscourseGamificationLeaderboardsIndexContr
             this.toasts.success({
               duration: 3000,
               data: {
-                message: I18n.t("gamification.leaderboard.delete_success"),
+                message: i18n("gamification.leaderboard.delete_success"),
               },
             });
             this.model.leaderboards.removeObject(leaderboard);

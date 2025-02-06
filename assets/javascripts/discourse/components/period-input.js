@@ -1,6 +1,6 @@
 import { computed } from "@ember/object";
 import { classNames } from "@ember-decorators/component";
-import I18n from "I18n";
+import { i18n } from "discourse-i18n";
 import ComboBoxComponent from "select-kit/components/combo-box";
 import {
   pluginApiIdentifiers,
@@ -21,7 +21,7 @@ export default class PeriodInput extends ComboBoxComponent {
 
     periods = periods.concat(
       LEADERBOARD_PERIODS.map((period, index) => ({
-        name: I18n.t(`gamification.leaderboard.period.${period}`),
+        name: i18n(`gamification.leaderboard.period.${period}`),
         id: index,
       }))
     );

@@ -4,8 +4,8 @@ import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
-import { bind } from "discourse-common/utils/decorators";
-import I18n from "I18n";
+import { bind } from "discourse/lib/decorators";
+import { i18n } from "discourse-i18n";
 
 export default class RecalculateScoresForm extends Component {
   @service messageBus;
@@ -18,27 +18,27 @@ export default class RecalculateScoresForm extends Component {
 
   updateRange = [
     {
-      name: I18n.t("gamification.update_range.last_10_days"),
+      name: i18n("gamification.update_range.last_10_days"),
       value: 0,
       calculation: { count: 10, type: "days" },
     },
     {
-      name: I18n.t("gamification.update_range.last_30_days"),
+      name: i18n("gamification.update_range.last_30_days"),
       value: 1,
       calculation: { count: 30, type: "days" },
     },
     {
-      name: I18n.t("gamification.update_range.last_90_days"),
+      name: i18n("gamification.update_range.last_90_days"),
       value: 2,
       calculation: { count: 90, type: "days" },
     },
     {
-      name: I18n.t("gamification.update_range.last_year"),
+      name: i18n("gamification.update_range.last_year"),
       value: 3,
       calculation: { count: 1, type: "year" },
     },
-    { name: I18n.t("gamification.update_range.all_time"), value: 4 },
-    { name: I18n.t("gamification.update_range.custom_date_range"), value: 5 },
+    { name: i18n("gamification.update_range.all_time"), value: 4 },
+    { name: i18n("gamification.update_range.custom_date_range"), value: 5 },
   ];
 
   constructor() {
@@ -61,7 +61,7 @@ export default class RecalculateScoresForm extends Component {
   }
 
   get remainingText() {
-    return I18n.t("gamification.daily_update_scores_availability", {
+    return i18n("gamification.daily_update_scores_availability", {
       count: this.remaining,
     });
   }
@@ -87,7 +87,7 @@ export default class RecalculateScoresForm extends Component {
     let today = moment().locale("en").utc().endOf("day");
     let pastDate = this.dateRangeToDate(this.updateRangeValue);
     return `${pastDate} - ${today.format(
-      I18n.t("dates.long_with_year_no_time")
+      i18n("dates.long_with_year_no_time")
     )}`;
   }
 
@@ -109,7 +109,7 @@ export default class RecalculateScoresForm extends Component {
       .clone()
       .subtract(updateRange.calculation.count, updateRange.calculation.type);
 
-    return pastDate.format(I18n.t("dates.long_with_year_no_time"));
+    return pastDate.format(i18n("dates.long_with_year_no_time"));
   }
 
   @action
