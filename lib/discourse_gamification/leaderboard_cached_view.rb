@@ -5,8 +5,6 @@ module ::DiscourseGamification
     class NotReadyError < StandardError
     end
 
-    # Bump up when materialized view query changes
-    QUERY_VERSION = 2
     SCORE_RANKING_STRATEGY_MAP = {
       row_number: "ROW_NUMBER()",
       rank: "RANK()",
@@ -102,12 +100,29 @@ module ::DiscourseGamification
     private
 
     def create_mview(period)
-      # NOTE: Update QUERY_VERSION above on changing any of the queries here
       return if mview_exists?(period)
 
       name = mview_name(period)
+      select_query = total_scores_query(period)
 
-      total_scores_query = <<~SQL
+      mview_query = <<~SQL
+        CREATE MATERIALIZED VIEW IF NOT EXISTS #{name} AS
+        #{select_query}
+      SQL
+
+      user_id_index_query = <<~SQL
+        CREATE UNIQUE INDEX IF NOT EXISTS user_id_#{leaderboard.id}_#{period}_index ON #{name} (user_id)
+      SQL
+
+      ActiveRecord::Base.transaction do
+        DB.exec(mview_query, leaderboard_id: leaderboard.id)
+        DB.exec(user_id_index_query)
+        DB.exec("COMMENT ON MATERIALIZED VIEW #{name} IS '#{query_signature(select_query)}'")
+      end
+    end
+
+    def total_scores_query(period)
+      <<~SQL
         WITH leaderboard AS (
           SELECT * FROM gamification_leaderboards WHERE id = :leaderboard_id
         ),
@@ -196,20 +211,6 @@ module ::DiscourseGamification
           position ASC,
           user_id ASC
       SQL
-
-      mview_query = <<~SQL
-        CREATE MATERIALIZED VIEW IF NOT EXISTS #{name} AS
-        #{total_scores_query}
-      SQL
-
-      user_id_index_query = <<~SQL
-        CREATE UNIQUE INDEX IF NOT EXISTS user_id_#{leaderboard.id}_#{period}_#{QUERY_VERSION}_index ON #{name} (user_id)
-      SQL
-
-      ActiveRecord::Base.transaction do
-        DB.exec(mview_query, leaderboard_id: leaderboard.id)
-        DB.exec(user_id_index_query)
-      end
     end
 
     def ranking_function
@@ -223,19 +224,11 @@ module ::DiscourseGamification
     end
 
     def mview_exists?(period)
-      query = <<~SQL
-        SELECT
-          1
-        FROM
-          pg_class cls
-        INNER JOIN pg_namespace  ns ON ns.oid = cls.relnamespace
-        WHERE
-          cls.relname = '#{mview_name(period)}'
-          AND cls.relkind = 'm'
-          AND ns.nspname = 'public'
+      DB.query_single(<<~SQL).first
+        SELECT EXISTS (
+          SELECT 1 FROM pg_matviews WHERE matviewname = '#{mview_name(period)}'
+        )
       SQL
-
-      DB.exec(query) == 1
     end
 
     def delete_mview(period)
@@ -243,7 +236,7 @@ module ::DiscourseGamification
     end
 
     def mview_name(period)
-      "gamification_leaderboard_cache_#{leaderboard.id}_#{period}_#{QUERY_VERSION}"
+      "gamification_leaderboard_cache_#{leaderboard.id}_#{period}"
     end
 
     def periods
@@ -251,20 +244,27 @@ module ::DiscourseGamification
     end
 
     def stale_mviews
-      stale_mviews_query = <<~SQL
-        SELECT
-          cls.relname
-        FROM
-          pg_class cls
-        INNER JOIN pg_namespace  ns ON ns.oid = cls.relnamespace
-        WHERE
-          cls.relname LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%'
-          AND cls.relkind = 'm'
-          AND cls.relname NOT LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%_#{QUERY_VERSION}'
-          AND ns.nspname = 'public'
+      return [] if periods.none? { |period| stale_mview?(period) }
+
+      # There shouldn't be case where only some of the mviews are stale
+      periods.map { |period| mview_name(period) }
+    end
+
+    def stale_mview?(period)
+      return false unless mview_exists?(period)
+
+      current_signature = DB.query_single(<<~SQL).first
+        SELECT obj_description('#{mview_name(period)}'::regclass::oid, 'pg_class')
       SQL
 
-      DB.query_single(stale_mviews_query)
+      # If for some reason there is no signature, assume it's stale
+      return true if current_signature.nil?
+
+      current_signature != query_signature(total_scores_query(period))
+    end
+
+    def query_signature(query)
+      Digest::SHA256.hexdigest(query.strip.gsub(/\s+/, " "))
     end
 
     def period_start_sql(period)

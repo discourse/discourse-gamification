@@ -12,7 +12,7 @@ describe DiscourseGamification::LeaderboardCachedView do
 
   let(:mviews) do
     DiscourseGamification::GamificationLeaderboard.periods.map do |period, _|
-      "gamification_leaderboard_cache_#{leaderboard.id}_#{period}_#{DiscourseGamification::LeaderboardCachedView::QUERY_VERSION}"
+      "gamification_leaderboard_cache_#{leaderboard.id}_#{period}"
     end
   end
 
@@ -20,20 +20,18 @@ describe DiscourseGamification::LeaderboardCachedView do
       SELECT
         count(*)
       FROM
-        pg_class
+        pg_matviews
       WHERE
-        relname LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%'
-      AND relkind = 'm'
+        matviewname LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%'
     SQL
 
   let(:mview_names_query) { <<~SQL }
       SELECT
-        relname
+        matviewname
       FROM
-        pg_class
+        pg_matviews
       WHERE
-        relname LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%'
-      AND relkind = 'm'
+        matviewname LIKE 'gamification_leaderboard_cache_#{leaderboard.id}_%'
     SQL
 
   describe "#create" do
@@ -83,23 +81,24 @@ describe DiscourseGamification::LeaderboardCachedView do
 
   describe "#purge_stale" do
     it "removes all stale materialized views for leaderboard" do
-      stub_const(DiscourseGamification::LeaderboardCachedView, "QUERY_VERSION", 1) do
-        described_class.new(leaderboard).create
-        expect(DB.query_single(mview_count_query).first).to eq(6)
+      leaderboard_cache = described_class.new(leaderboard)
+
+      leaderboard_cache.create
+      expect(DB.query_single(mview_count_query).first).to eq(6)
+
+      leaderboard_cache.purge_stale
+      expect(DB.query_single(mview_count_query).first).to eq(6)
+
+      # Update query to make existing materialized views stale
+      allow(leaderboard_cache).to receive(
+        :total_scores_query,
+      ).and_wrap_original do |original_method, period|
+        "#{original_method.call(period)} \n-- This is a new comment"
       end
 
-      stub_const(DiscourseGamification::LeaderboardCachedView, "QUERY_VERSION", 2) do
-        described_class.new(leaderboard).create
-        expect(DB.query_single(mview_count_query).first).to eq(12)
-      end
-
-      stub_const(DiscourseGamification::LeaderboardCachedView, "QUERY_VERSION", 3) do
-        described_class.new(leaderboard).create
-        expect(DB.query_single(mview_count_query).first).to eq(18)
-
-        described_class.new(leaderboard).purge_stale
-        expect(DB.query_single(mview_names_query)).to contain_exactly(*mviews)
-      end
+      leaderboard_cache.purge_stale
+      # Query changed, all existing stale materialized views removed
+      expect(DB.query_single(mview_count_query).first).to eq(0)
     end
 
     it "does nothing if no stale materialized view exist for leaderboard" do
