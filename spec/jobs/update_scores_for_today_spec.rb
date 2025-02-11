@@ -119,37 +119,42 @@ describe Jobs::UpdateScoresForToday do
     end
 
     it "purges stale leaderboard positions" do
-      stub_const(DiscourseGamification::LeaderboardCachedView, "QUERY_VERSION", 1) do
-        DiscourseGamification::LeaderboardCachedView.create_all
+      DiscourseGamification::LeaderboardCachedView.create_all
+
+      # Update query to make existing materialized views stale
+      allow_any_instance_of(DiscourseGamification::LeaderboardCachedView).to receive(
+        :total_scores_query,
+      ).and_wrap_original do |original_method, period|
+        "#{original_method.call(period)} \n-- This is a new comment"
       end
 
-      stub_const(DiscourseGamification::LeaderboardCachedView, "QUERY_VERSION", 2) do
-        expect(leaderboard_1_positions.stale?).to eq(true)
-        expect(leaderboard_2_positions.stale?).to eq(true)
-        run_job
-        expect(leaderboard_1_positions.stale?).to eq(false)
-        expect(leaderboard_2_positions.stale?).to eq(false)
+      expect(leaderboard_1_positions.stale?).to eq(true)
+      expect(leaderboard_2_positions.stale?).to eq(true)
 
-        expect(leaderboard_1_positions.scores.length).to eq(2)
-        expect(leaderboard_1_positions.scores.map(&:attributes)).to include(
-          {
-            "id" => user.id,
-            "total_score" => 12,
-            "position" => 1,
-            "uploaded_avatar_id" => nil,
-            "username" => user.username,
-            "name" => user.name,
-          },
-          {
-            "id" => user_2.id,
-            "total_score" => 0,
-            "position" => 2,
-            "uploaded_avatar_id" => nil,
-            "username" => user_2.username,
-            "name" => user_2.name,
-          },
-        )
-      end
+      run_job
+
+      expect(leaderboard_1_positions.stale?).to eq(false)
+      expect(leaderboard_2_positions.stale?).to eq(false)
+
+      expect(leaderboard_1_positions.scores.length).to eq(2)
+      expect(leaderboard_1_positions.scores.map(&:attributes)).to include(
+        {
+          "id" => user.id,
+          "total_score" => 12,
+          "position" => 1,
+          "uploaded_avatar_id" => nil,
+          "username" => user.username,
+          "name" => user.name,
+        },
+        {
+          "id" => user_2.id,
+          "total_score" => 0,
+          "position" => 2,
+          "uploaded_avatar_id" => nil,
+          "username" => user_2.username,
+          "name" => user_2.name,
+        },
+      )
     end
   end
 end

@@ -8,45 +8,30 @@ describe Jobs::UpdateStaleLeaderboardPositions do
   let(:leaderboard_positions) { DiscourseGamification::LeaderboardCachedView.new(leaderboard) }
 
   it "it updates all stale leaderboard positions" do
-    stub_const(DiscourseGamification::LeaderboardCachedView, "QUERY_VERSION", 1) do
-      DiscourseGamification::LeaderboardCachedView.new(leaderboard).create
+    DiscourseGamification::LeaderboardCachedView.new(leaderboard).create
 
-      expect(leaderboard_positions.scores.length).to eq(1)
-      expect(leaderboard_positions.scores.first.attributes).to include(
-        "id" => leaderboard.created_by_id,
-        "total_score" => 0,
-        "position" => 1,
-      )
+    expect(leaderboard_positions.scores.length).to eq(1)
+    expect(leaderboard_positions.scores.first.attributes).to include(
+      "id" => leaderboard.created_by_id,
+      "total_score" => 0,
+      "position" => 1,
+    )
+
+    allow_any_instance_of(DiscourseGamification::LeaderboardCachedView).to receive(
+      :total_scores_query,
+    ).and_wrap_original do |original_method, period|
+      "#{original_method.call(period)} \n-- This is a new comment"
     end
 
-    stub_const(DiscourseGamification::LeaderboardCachedView, "QUERY_VERSION", 2) do
-      DiscourseGamification::LeaderboardCachedView.new(leaderboard).create
+    expect(leaderboard_positions.stale?).to eq(true)
 
-      expect(leaderboard_positions.scores.length).to eq(1)
-      expect(leaderboard_positions.scores.first.attributes).to include(
-        "id" => leaderboard.created_by_id,
-        "total_score" => 0,
-      )
-    end
+    described_class.new.execute
 
-    stub_const(DiscourseGamification::LeaderboardCachedView, "QUERY_VERSION", 3) do
-      # Leaderboard positions exist only for past`QUERY_VERSION`s
-      expect(leaderboard_positions.stale?).to eq(true)
-
-      ActiveRecord::Base.transaction do
-        expect { leaderboard_positions.scores }.to raise_error(
-          DiscourseGamification::LeaderboardCachedView::NotReadyError,
-        )
-      end
-
-      described_class.new.execute
-
-      expect(leaderboard_positions.stale?).to eq(false)
-      expect(leaderboard_positions.scores.length).to eq(1)
-      expect(leaderboard_positions.scores.first.attributes).to include(
-        "id" => leaderboard.created_by_id,
-        "total_score" => 0,
-      )
-    end
+    expect(leaderboard_positions.stale?).to eq(false)
+    expect(leaderboard_positions.scores.length).to eq(1)
+    expect(leaderboard_positions.scores.first.attributes).to include(
+      "id" => leaderboard.created_by_id,
+      "total_score" => 0,
+    )
   end
 end
