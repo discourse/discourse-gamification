@@ -1,37 +1,78 @@
-# WARNING: Never edit this file.
-# It will be overwritten when translations are pulled from Crowdin.
-#
-# To work with us on translations, join this project:
-# https://translate.discourse.org/
-
-pl_PL:
+pl:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          discourse_gamification: "Discourse Gamifikacja"
   js:
+    # obejście dla kolumny katalogu
+    gamification_score: "Punkty"
     gamification:
+      score: "Punkty"
       you: "Ty"
       leaderboard:
+        title: "Rankingi"
+        info: "Jak to działa?"
         link_to_settings: "Ustawienia"
         refresh: "Odśwież"
+        modal:
+          title: "Jak działa ranking?"
+          text: "Punkty są przyznawane za angażowanie się w społeczność, takie jak odwiedzanie, polubienia i publikowanie postów. Twój wynik jest aktualizowany co kilka minut. Bądź więc pomocny, aktywny i wspierający, a awansujesz w rankingu!"
         name: "Nazwa"
+        name_placeholder: "Nazwa..."
+        new: "Nowy ranking"
+        create_success: "Ranking utworzony"
+        delete_success: "Ranking usunięty"
+        save_success: "Ranking zapisany"
+        cta: "Utwórz swój pierwszy ranking"
+        none: "Nie utworzono jeszcze żadnych rankingów."
+        confirm_destroy: "Czy na pewno chcesz usunąć ten ranking?"
+        date:
+          range: "Zakres dat Od / Do"
+          from: "Data początkowa"
+          to: "Data końcowa"
+          helper: "Jeśli daty pozostaną puste, ranking pokaże wyniki bez ograniczeń czasowych."
+        visible_to_groups: "Widoczne dla grup"
+        visible_to_groups_help: "Tylko użytkownicy z tych grup będą mogli zobaczyć ranking. Pozostaw puste, aby udostępnić wszystkim."
+        included_groups: "Uwzględnione grupy"
+        included_groups_help: "Tylko użytkownicy z tych grup zostaną uwzględnieni w rankingu. Pozostaw puste, aby uwzględnić wszystkich."
+        excluded_groups: "Wykluczone grupy"
+        excluded_groups_help: "Usuń użytkowników należących do tych grup z rankingu. Pozostaw puste, aby uwzględnić wszystkich."
+        default_period: "Domyślny okres"
+        default_period_help: "Ustaw domyślny okres czasu wyświetlany w tym rankingu."
+        period_filter_disabled: "Wyłącz filtr okresu czasu"
         period:
-          all_time: "Przez cały czas"
+          all_time: "Cały czas"
           yearly: "Rocznie"
           quarterly: "Kwartalnie"
           monthly: "Miesięcznie"
           weekly: "Tygodniowo"
-          daily: "Dziennie"
+          daily: "Codziennie"
+        rank: "Pozycja"
       create: "Utwórz"
       cancel: "Anuluj"
       close: "Zamknij"
       delete: "Usuń"
       edit: "Edytuj"
-      back: "Poprzednia"
+      back: "Wstecz"
       save: "Zapisz"
       apply: "Zastosuj"
+      recalculate: "Przelicz ponownie wyniki"
+      recalculating: "Przeliczanie wyników..."
+      completed: "Gotowe! Wyniki zostały pomyślnie przeliczone."
+      update_scores_help: "Zaktualizuj wszystkie wyniki dla wszystkich rankingów od"
       update_range:
         last_10_days: "Ostatnie 10 dni"
         last_30_days: "Ostatnie 30 dni"
         last_90_days: "Ostatnie 90 dni"
-        all_time: "Przez cały czas"
+        last_year: "Ostatni rok"
+        all_time: "Cały czas"
+        custom_date_range: "Niestandardowy zakres"
       custom_range_from: "Od"
+      daily_update_scores_availability:
+        one: "%{count} dzienne przeliczenie pozostało"
+        other: "%{count} dziennych przeliczeń pozostało"
       admin:
-        name: "Imię"
+        title: "Gamifikacja"
+        name: "Nazwa"
+        period: "Okres"
