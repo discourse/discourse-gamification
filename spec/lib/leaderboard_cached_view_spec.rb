@@ -123,7 +123,7 @@ describe DiscourseGamification::LeaderboardCachedView do
           leaderboard_from - 5.days,
           leaderboard_from - 1.day,
           leaderboard_from,
-          leaderboard_from + 15.days,
+          Date.current - 1.month,
           leaderboard_to,
           leaderboard_to + 1.day,
           leaderboard_to + 15.days,
