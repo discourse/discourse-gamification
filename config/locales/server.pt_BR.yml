@@ -1,10 +1,4 @@
-# WARNING: Never edit this file.
-# It will be overwritten when translations are pulled from Crowdin.
-#
-# To work with us on translations, join this project:
-# https://translate.discourse.org/
-
-pt_BR:
+pt:
   site_settings:
     discourse_gamification_enabled: "Habilite o Plugin de Gamificação do Discourse"
     like_received_score_value: "O valor da saudação concedida quando um usuário recebe uma curtida"

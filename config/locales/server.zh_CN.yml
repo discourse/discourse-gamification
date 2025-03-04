@@ -1,10 +1,4 @@
-# WARNING: Never edit this file.
-# It will be overwritten when translations are pulled from Crowdin.
-#
-# To work with us on translations, join this project:
-# https://translate.discourse.org/
-
-zh_CN:
+zh-CN:
   site_settings:
     discourse_gamification_enabled: "启用 Discourse 游戏化插件"
     like_received_score_value: "当用户收到点赞时所获得的点数"
