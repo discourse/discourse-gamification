@@ -71,7 +71,7 @@
   }
 
   .winner {
-    overflow: hidden; //best worst solution in case the username is very long, better to cut it than have it wrap mid-name or overflow
+    overflow: hidden; // best worst solution in case the username is very long, better to cut it than have it wrap mid-name or overflow
 
     &__crown {
       display: none;
@@ -163,7 +163,7 @@
 
       .winner__avatar img {
         border-color: $bronze;
-        background-color: #dca570; //in case avatar has a transparent bg
+        background-color: #dca570; // in case avatar has a transparent bg
       }
 
       .winner__rank {
