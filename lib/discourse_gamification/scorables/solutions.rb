@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 module ::DiscourseGamification
   class Solutions < Scorable
+    def self.enabled?
+      defined?(DiscourseSolved) && SiteSetting.solved_enabled && super
+    end
+
     def self.score_multiplier
       SiteSetting.solution_score_value
     end

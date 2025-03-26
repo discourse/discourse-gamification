@@ -41,4 +41,16 @@ RSpec.describe DiscourseGamification::Solutions do
       expect(query_results).to be_empty
     end
   end
+
+  it "is disabled when solved plugin is disabled" do
+    SiteSetting.solved_enabled = false
+    expect(described_class).not_to be_enabled
+
+    SiteSetting.solved_enabled = true
+    SiteSetting.solution_score_value = 0
+    expect(described_class).not_to be_enabled
+
+    SiteSetting.solution_score_value = 1
+    expect(described_class).to be_enabled
+  end
 end
