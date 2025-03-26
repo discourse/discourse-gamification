@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe DiscourseGamification::Solutions do
-  fab!(:category) { Fabricate(:category) }
+  fab!(:category)
   fab!(:topic) { Fabricate(:topic, category: category) }
   fab!(:question_user) { Fabricate(:user) }
   fab!(:answer_user) { Fabricate(:user) }
