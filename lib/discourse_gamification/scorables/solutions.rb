@@ -17,22 +17,21 @@ module ::DiscourseGamification
       <<~SQL
         SELECT
           posts.user_id AS user_id,
-          date_trunc('day', topic_custom_fields.updated_at) AS date,
-          COUNT(topic_custom_fields.topic_id) * #{score_multiplier} AS points
+          date_trunc('day', dsst.updated_at) AS date,
+          COUNT(dsst.topic_id) * #{score_multiplier} AS points
         FROM
-          topic_custom_fields
+          discourse_solved_solved_topics dsst
         INNER JOIN topics
-          ON topic_custom_fields.topic_id = topics.id
+          ON dsst.topic_id = topics.id
           #{category_filter}
         INNER JOIN posts
-          ON posts.id = topic_custom_fields.value::INTEGER
+          ON posts.id = dsst.answer_post_id
         WHERE
           posts.deleted_at IS NULL AND
           topics.deleted_at IS NULL AND
-          topic_custom_fields.name = 'accepted_answer_post_id' AND
           topics.archetype <> 'private_message' AND
           posts.user_id != topics.user_id AND
-          topic_custom_fields.updated_at >= :since
+          dsst.updated_at >= :since
         GROUP BY
           1, 2
       SQL
