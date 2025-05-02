@@ -5,7 +5,6 @@ import { tagName } from "@ember-decorators/component";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import discourseComputed from "discourse/lib/decorators";
-import LoadMore from "discourse/mixins/load-more";
 import LeaderboardInfo from "./modal/leaderboard-info";
 
 export const LEADERBOARD_PERIODS = [
@@ -36,9 +35,7 @@ function periodString(periodValue) {
 }
 
 @tagName("")
-export default class GamificationLeaderboard extends Component.extend(
-  LoadMore
-) {
+export default class GamificationLeaderboard extends Component {
   @service router;
   @service modal;
 

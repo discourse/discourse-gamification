@@ -87,7 +87,7 @@
         </div>
       {{/if}}
 
-      <LoadMore @selector=".user" @action={{action "loadMore"}}>
+      <LoadMore @action={{action "loadMore"}}>
         {{#each this.ranking as |rank index|}}
           <GamificationLeaderboardRow @rank={{rank}} @index={{index}} />
         {{/each}}
