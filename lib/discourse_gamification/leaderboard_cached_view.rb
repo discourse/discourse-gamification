@@ -226,7 +226,8 @@ module ::DiscourseGamification
     def mview_exists?(period)
       DB.query_single(<<~SQL).first
         SELECT EXISTS (
-          SELECT 1 FROM pg_matviews WHERE matviewname = '#{mview_name(period)}'
+          SELECT 1 FROM pg_matviews
+          WHERE schemaname = current_schema() AND matviewname = '#{mview_name(period)}'
         )
       SQL
     end

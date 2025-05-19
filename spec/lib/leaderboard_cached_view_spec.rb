@@ -112,6 +112,25 @@ describe DiscourseGamification::LeaderboardCachedView do
 
   describe "#scores" do
     let(:leaderboard_positions) { described_class.new(leaderboard) }
+    let(:all_time_view_name) { "gamification_leaderboard_cache_#{leaderboard.id}_all_time" }
+
+    context "when the materialized view exists in another schema" do
+      before do
+        DB.exec("CREATE SCHEMA IF NOT EXISTS test_backup")
+        DB.exec(<<~SQL)
+          CREATE MATERIALIZED VIEW test_backup.#{all_time_view_name} AS
+          SELECT 1 AS user_id, 100 AS total_score, 1 AS position
+        SQL
+      end
+
+      after { DB.exec("DROP SCHEMA IF EXISTS test_backup CASCADE") }
+
+      it "raises NotReadyError" do
+        expect { leaderboard_positions.scores(period: "all_time") }.to raise_error(
+          DiscourseGamification::LeaderboardCachedView::NotReadyError,
+        )
+      end
+    end
 
     context "with leaderboard dates" do
       let(:leaderboard_from) { Date.current - 45.days }
