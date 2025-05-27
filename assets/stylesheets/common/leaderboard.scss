@@ -64,7 +64,7 @@
     padding-bottom: 5rem;
 
     &__wrapper {
-      background: rgba(var(--tertiary-rgb), 0.1);
+      background: rgb(var(--tertiary-rgb), 0.1);
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
     }
@@ -202,7 +202,7 @@
     align-items: center;
     margin-bottom: 1.25rem;
     padding: 0.5rem 1.5rem;
-    background-color: rgba(var(--primary-rgb), 0.075);
+    background-color: rgb(var(--primary-rgb), 0.075);
     border-radius: 20px;
 
     &__rank {
