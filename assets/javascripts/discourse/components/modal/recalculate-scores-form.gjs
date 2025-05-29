@@ -181,7 +181,7 @@ export default class RecalculateScoresForm extends Component {
 
       <:footer>
         <DButton
-          @action={{action "apply"}}
+          @action={{this.apply}}
           @label="gamification.apply"
           @ariaLabel="gamification.apply"
           @disabled={{this.applyDisabled}}

@@ -147,7 +147,7 @@ export default class GamificationLeaderboard extends Component {
       <div class="page__header">
         <h1 class="page__title">{{this.model.leaderboard.name}}</h1>
         <DButton
-          @action={{action "showLeaderboardInfo"}}
+          @action={{this.showLeaderboardInfo}}
           class="-ghost"
           @icon="circle-info"
           @label={{unless this.site.mobileView "gamification.leaderboard.info"}}
@@ -157,7 +157,7 @@ export default class GamificationLeaderboard extends Component {
       <div class="leaderboard__controls">
         <PeriodChooser
           @period={{this.period}}
-          @action={{action "changePeriod"}}
+          @action={{this.changePeriod}}
           @fullDay={{false}}
           @options={{hash
             disabled=this.model.leaderboard.period_filter_disabled
@@ -181,7 +181,7 @@ export default class GamificationLeaderboard extends Component {
           <DButton
             @icon="arrows-rotate"
             @label="gamification.leaderboard.refresh"
-            @action={{action "refresh"}}
+            @action={{this.refresh}}
             class="btn-primary refresh"
           />
         </div>
@@ -236,7 +236,7 @@ export default class GamificationLeaderboard extends Component {
             </div>
           {{/if}}
 
-          <LoadMore @action={{action "loadMore"}}>
+          <LoadMore @action={{this.loadMore}}>
             {{#each this.ranking as |rank index|}}
               <GamificationLeaderboardRow @rank={{rank}} @index={{index}} />
             {{/each}}
