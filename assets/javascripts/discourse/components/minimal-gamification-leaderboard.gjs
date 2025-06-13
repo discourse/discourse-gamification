@@ -1,7 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { LinkTo } from "@ember/routing";
-import { and } from "truth-helpers";
+import { service } from "@ember/service";
 import icon from "discourse/helpers/d-icon";
 import number from "discourse/helpers/number";
 import { ajax } from "discourse/lib/ajax";
@@ -10,47 +10,37 @@ import fullnumber from "../helpers/fullnumber";
 import MinimalGamificationLeaderboardRow from "./minimal-gamification-leaderboard-row";
 
 export default class extends Component {
-  @tracked notTop10 = true;
-  @tracked model = null;
+  @service site;
+
+  @tracked model;
 
   constructor() {
     super(...arguments);
 
-    const count = this.args.count || 10;
-
-    const data = {
-      user_limit: count,
-    };
-
-    // used in the right sidebar blocks theme component
-    const leaderboardId = this.args.id || null;
-    const endpoint = leaderboardId
-      ? `/leaderboard/${leaderboardId}`
+    // id is used by discourse-right-sidebar-blocks theme component
+    const endpoint = this.args.id
+      ? `/leaderboard/${this.args.id}`
       : "/leaderboard";
 
-    ajax(endpoint, { data }).then((model) => {
-      this.model = model;
-    });
+    ajax(endpoint, { data: { user_limit: this.args.count || 10 } }).then(
+      (model) => {
+        for (const user of model.users) {
+          if (user.id === model.personal?.user?.id) {
+            user.isCurrentUser = "true";
+          }
+        }
+
+        if (model.users[0]) {
+          model.users[0].topRanked = true;
+        }
+
+        this.model = model;
+      }
+    );
   }
 
-  get currentUserRanking() {
-    const user = this.model?.personal;
-    if (user) {
-      this.notTop10 = user.position > 10;
-    }
-    return user || null;
-  }
-
-  get ranking() {
-    this.model?.users?.forEach((user) => {
-      if (user.id === this.model.personal?.user?.id) {
-        user.isCurrentUser = "true";
-      }
-      if (this.model.users.indexOf(user) === 0) {
-        user.topRanked = true;
-      }
-    });
-    return this.model?.users;
+  get notTop10() {
+    return this.model?.personal?.position > 10;
   }
 
   <template>
@@ -68,22 +58,24 @@ export default class extends Component {
         <span>{{i18n "gamification.leaderboard.rank"}}</span>
         <span>{{icon "award"}}{{i18n "gamification.score"}}</span>
       </div>
+
       <div class="ranking-col-names__sticky-border"></div>
-      {{#if (and this.currentUserRanking.user this.notTopTen)}}
+
+      {{#if this.notTopTen}}
         <div class="user -self">
-          <div class="user__rank">{{this.currentUserRanking.position}}</div>
+          <div class="user__rank">{{this.model.personal.position}}</div>
           <div class="user__name">{{i18n "gamification.you"}}</div>
           <div class="user__score">
             {{#if this.site.mobileView}}
-              {{number this.currentUserRanking.user.total_score}}
+              {{number this.model.personal.user.total_score}}
             {{else}}
-              {{fullnumber this.currentUserRanking.user.total_score}}
+              {{fullnumber this.model.personal.user.total_score}}
             {{/if}}
           </div>
         </div>
       {{/if}}
 
-      {{#each this.ranking as |rank index|}}
+      {{#each this.model.users as |rank index|}}
         <MinimalGamificationLeaderboardRow @rank={{rank}} @index={{index}} />
       {{/each}}
     </div>
