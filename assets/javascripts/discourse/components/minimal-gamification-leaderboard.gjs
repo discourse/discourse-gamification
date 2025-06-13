@@ -16,14 +16,14 @@ export default class extends Component {
   constructor() {
     super(...arguments);
 
-    const count = this.args?.params?.count || 10;
+    const count = this.args.count || 10;
 
     const data = {
       user_limit: count,
     };
 
     // used in the right sidebar blocks theme component
-    const leaderboardId = this.args?.params?.id || null;
+    const leaderboardId = this.args.id || null;
     const endpoint = leaderboardId
       ? `/leaderboard/${leaderboardId}`
       : "/leaderboard";
