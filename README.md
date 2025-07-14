@@ -1,5 +1,8 @@
 # **Discourse Gamification** Plugin
 
+> [!IMPORTANT]
+> This plugin has now been bundled into Discourse core. See: https://meta.discourse.org/t/bundling-more-popular-plugins-with-discourse-core/373574
+
 # User Card
 <img width="585" alt="Screen Shot 2022-03-18 at 9 33 24 AM" src="https://user-images.githubusercontent.com/50783505/159036553-b162f5b7-5acd-4134-ba5f-fa8dbb7f8f8f.png">
 
